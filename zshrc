@@ -1,10 +1,17 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 ZSH=$HOME/.oh-my-zsh
 
 # You can change the theme with another one from https://github.com/robbyrussell/oh-my-zsh/wiki/themes
 ZSH_THEME="robbyrussell"
 
-# Useful oh-my-zsh plugins for Le Wagon bootcamps
-plugins=(git gitfast last-working-dir common-aliases zsh-syntax-highlighting history-substring-search)
+# Basic oh-my-zsh plugins
+plugins=(git gitfast last-working-dir common-aliases zsh-syntax-highlighting history-substring-search zsh-autosuggestions)
 
 # (macOS-only) Prevent Homebrew from reporting - https://github.com/Homebrew/brew/blob/master/docs/Analytics.md
 export HOMEBREW_NO_ANALYTICS=1
@@ -53,6 +60,10 @@ load-nvmrc() {
 type -a nvm > /dev/null && add-zsh-hook chpwd load-nvmrc
 type -a nvm > /dev/null && load-nvmrc
 
+# Ruby: Spring sucks
+export DISABLE_SPRING=true
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+
 # Rails and Ruby uses the local `bin` folder to store binstubs.
 # So instead of running `bin/rails` like the doc says, just run `rails`
 # Same for `./node_modules/.bin` and nodejs
@@ -70,3 +81,32 @@ export EDITOR=code
 
 # Set ipdb as the default Python debugger
 export PYTHONBREAKPOINT=ipdb.set_trace
+export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
+export RUBYOPT="-r$HOME/.rubyopenssl_default_store.rb $RUBYOPT"
+export PATH="/usr/local/texlive/2025/bin/universal-darwin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+HISTFILE=$HOME/.zhistory
+SAVEHIST=1000
+HISTSIZE=999
+setopt share_history
+setopt hist_expire_dups_first
+setopt hist_ignore_dups
+setopt hist_verify
+
+bindkey '^[[A' history-search-backward
+bindkey '^[[B' history-search-forward
+
+alias ls="eza --icons=always"
+
+eval "$(zoxide init zsh)"
+
+alias cd="z"
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+
+# Load local environment variables (secrets, tokens, etc.) - not tracked in git
+[[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"

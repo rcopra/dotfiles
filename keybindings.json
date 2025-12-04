@@ -1,13 +1,22 @@
-// Place your key bindings in this file to override the defaults
 [
+  // Disable the popup menu behavior
   {
-    "key": "ctrl+shift+v",
-    "command": "pasteAndIndent.action",
-    "when": "editorTextFocus && !editorReadonly"
+    "key": "ctrl+tab",
+    "command": "-workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup",
+    "when": "!activeEditorGroupEmpty"
   },
   {
-    "key": "cmd+shift+v",
-    "command": "pasteAndIndent.action",
-    "when": "editorTextFocus && !editorReadonly"
+    "key": "ctrl+shift+tab",
+    "command": "-workbench.action.quickOpenLeastRecentlyUsedEditorInGroup",
+    "when": "!activeEditorGroupEmpty"
+  },
+  // Enable simple sequential tab cycling
+  {
+    "key": "ctrl+tab",
+    "command": "workbench.action.nextEditor"
+  },
+  {
+    "key": "ctrl+shift+tab",
+    "command": "workbench.action.previousEditor"
   }
 ]
