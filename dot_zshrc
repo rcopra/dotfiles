@@ -1,0 +1,143 @@
+# ==============================================================================
+# Environment Variables
+# ==============================================================================
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export EDITOR=code
+export BUNDLER_EDITOR=code
+export HOMEBREW_NO_ANALYTICS=1
+
+# Ruby
+export DISABLE_SPRING=true
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+export RUBYOPT="-r$HOME/.rubyopenssl_default_store.rb $RUBYOPT"
+
+# Python
+export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+export PYTHONBREAKPOINT=ipdb.set_trace
+
+# Node
+export NVM_DIR="$HOME/.nvm"
+
+# ==============================================================================
+# PATH Configuration
+# ==============================================================================
+# Homebrew
+export PATH="/opt/homebrew/bin:${PATH}"
+export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
+
+# Local binaries
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="${HOME}/.rbenv/bin:${PATH}"
+
+# Project-local binaries (Rails binstubs, node_modules)
+export PATH="./bin:./node_modules/.bin:${PATH}:/usr/local/sbin"
+
+# ==============================================================================
+# Zsh Options & Completions
+# ==============================================================================
+autoload -Uz compinit && compinit
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+
+# ==============================================================================
+# Version Managers
+# ==============================================================================
+# rbenv (Ruby)
+type -a rbenv > /dev/null && eval "$(rbenv init -)"
+
+# pyenv (Python)
+type -a pyenv > /dev/null && eval "$(pyenv init -)" && eval "$(pyenv virtualenv-init - 2>/dev/null)"
+
+# nvm (Node)
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+
+# Auto-switch node version when entering directory with .nvmrc
+autoload -U add-zsh-hook
+load-nvmrc() {
+  if nvm -v &> /dev/null; then
+    local node_version="$(nvm version)"
+    local nvmrc_path="$(nvm_find_nvmrc)"
+
+    if [ -n "$nvmrc_path" ]; then
+      local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+      if [ "$nvmrc_node_version" = "N/A" ]; then
+        nvm install
+      elif [ "$nvmrc_node_version" != "$node_version" ]; then
+        nvm use --silent
+      fi
+    elif [ "$node_version" != "$(nvm version default)" ]; then
+      nvm use default --silent
+    fi
+  fi
+}
+type -a nvm > /dev/null && add-zsh-hook chpwd load-nvmrc
+type -a nvm > /dev/null && load-nvmrc
+
+# ==============================================================================
+# History
+# ==============================================================================
+HISTFILE=$HOME/.zhistory
+HISTSIZE=10000
+SAVEHIST=10000
+setopt share_history
+setopt hist_expire_dups_first
+setopt hist_ignore_dups
+setopt hist_ignore_space
+setopt hist_verify
+
+# ==============================================================================
+# Zinit Plugin Manager
+# ==============================================================================
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+
+# Install zinit if not present
+if [[ ! -d "$ZINIT_HOME" ]]; then
+  mkdir -p "$(dirname $ZINIT_HOME)"
+  git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
+
+source "${ZINIT_HOME}/zinit.zsh"
+
+# OMZ plugins
+zinit snippet OMZP::git
+
+# Zsh plugins (turbo mode for faster startup)
+zinit light zsh-users/zsh-autosuggestions
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-history-substring-search
+
+# ==============================================================================
+# Key Bindings
+# ==============================================================================
+# History substring search (up/down arrows)
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+# ==============================================================================
+# Modern CLI Tools
+# ==============================================================================
+# eza (modern ls)
+alias ls="eza --icons=always"
+
+# zoxide (smarter cd)
+eval "$(zoxide init zsh)"
+alias cd="z"
+
+# ==============================================================================
+# Prompt (Oh My Posh)
+# ==============================================================================
+if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
+  eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/config.toml)"
+fi
+
+# ==============================================================================
+# Aliases & Local Config
+# ==============================================================================
+# Custom aliases
+[[ -f "$HOME/.aliases" ]] && source "$HOME/.aliases"
+
+# Local environment variables (secrets, tokens, etc.) - not tracked in git
+[[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"

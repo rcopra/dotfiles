@@ -1,0 +1,8 @@
+Host trident.local
+  HostName trident.local
+  User rick
+
+Host *
+  UseKeychain yes
+  AddKeysToAgent yes
+  IdentityFile ~/.ssh/id_ed25519
