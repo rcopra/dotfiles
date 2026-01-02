@@ -3,8 +3,8 @@
 # ==============================================================================
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
-export EDITOR=code
-export BUNDLER_EDITOR=code
+export EDITOR={{ if lookPath "code" }}code{{ else }}nvim{{ end }}
+export BUNDLER_EDITOR={{ if lookPath "code" }}code{{ else }}nvim{{ end }}
 export HOMEBREW_NO_ANALYTICS=1
 
 # Ruby
@@ -22,9 +22,20 @@ export NVM_DIR="$HOME/.nvm"
 # ==============================================================================
 # PATH Configuration
 # ==============================================================================
-# Homebrew
+{{- if eq .chezmoi.os "darwin" }}
+# Homebrew (Apple Silicon)
 export PATH="/opt/homebrew/bin:${PATH}"
 export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
+{{- else if eq .chezmoi.os "linux" }}
+# Linux Homebrew (if installed)
+if [ -d "/home/linuxbrew/.linuxbrew" ]; then
+    export PATH="/home/linuxbrew/.linuxbrew/bin:${PATH}"
+fi
+# Standard PostgreSQL paths for Linux
+if [ -d "/usr/lib/postgresql/16/bin" ]; then
+    export PATH="/usr/lib/postgresql/16/bin:$PATH"
+fi
+{{- end }}
 
 # Local binaries
 export PATH="$HOME/.local/bin:$PATH"
@@ -120,18 +131,22 @@ bindkey '^[[B' history-substring-search-down
 # Modern CLI Tools
 # ==============================================================================
 # eza (modern ls)
-alias ls="eza --icons=always"
+command -v eza > /dev/null && alias ls="eza --icons=always"
 
 # zoxide (smarter cd)
-eval "$(zoxide init zsh)"
-alias cd="z"
+command -v zoxide > /dev/null && eval "$(zoxide init zsh)" && alias cd="z"
 
 # ==============================================================================
 # Prompt (Oh My Posh)
 # ==============================================================================
+{{- if eq .chezmoi.os "darwin" }}
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
-  eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/config.toml)"
+  command -v oh-my-posh > /dev/null && eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/config.toml)"
 fi
+{{- else }}
+# Linux - always use Oh My Posh if available
+command -v oh-my-posh > /dev/null && eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/config.toml)"
+{{- end }}
 
 # ==============================================================================
 # Aliases & Local Config

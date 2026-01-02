@@ -1,0 +1,81 @@
+version = 4
+final_space = true
+console_title_template = '{{ .Folder }}'
+
+# First line - path, git, fill, hostname, time
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+
+  [[blocks.segments]]
+    type = 'os'
+    style = 'plain'
+    foreground = '#C8C093'
+    template = '{{ .Icon }}'
+
+  [[blocks.segments]]
+    type = 'text'
+    style = 'plain'
+    foreground = '#54546D'
+    template = '─'
+
+  [[blocks.segments]]
+    type = 'path'
+    style = 'plain'
+    foreground = '#7FB4CA'
+    template = ' {{ .Path }}'
+    [blocks.segments.properties]
+      style = 'full'
+
+  [[blocks.segments]]
+    type = 'git'
+    style = 'plain'
+    foreground = '#98BB6C'
+    template = ' {{ .HEAD }}{{ if or .Working.Changed .Staging.Changed .Working.Untracked }} {{ end }}{{ if .Working.Changed }}<#FFA066>!{{ .Working.Changed }}</>{{ end }}{{ if .Working.Untracked }}<#FFA066>?{{ .Working.Untracked }}</>{{ end }}{{ if .Staging.Changed }}<#76946A>+{{ .Staging.Changed }}</>{{ end }}{{ if gt .StashCount 0 }}<#957FB8>*{{ .StashCount }}</>{{ end }}'
+    [blocks.segments.properties]
+      fetch_status = true
+      branch_icon = ''
+
+[[blocks]]
+  type = 'prompt'
+  alignment = 'right'
+
+  [[blocks.segments]]
+    type = 'executiontime'
+    style = 'plain'
+    foreground = '#E6C384'
+    template = ' {{ .FormattedMs }}'
+    [blocks.segments.properties]
+      threshold = 500
+      style = 'roundrock'
+
+  [[blocks.segments]]
+    type = 'time'
+    style = 'plain'
+    foreground = '#C8C093'
+    template = ' {{ .CurrentDate | date "15:04:05" }}'
+
+# Second line - prompt character
+[[blocks]]
+  type = 'prompt'
+  alignment = 'left'
+  newline = true
+
+  [[blocks.segments]]
+    type = 'text'
+    style = 'plain'
+    foreground = '#54546D'
+    template = '╰─'
+
+  [[blocks.segments]]
+    type = 'status'
+    style = 'plain'
+    foreground = '#E6C384'
+    foreground_templates = ['{{ if gt .Code 0 }}#E82424{{ end }}']
+    template = '❯ '
+
+# Transient prompt for cleaner history
+[transient_prompt]
+  foreground = '#E6C384'
+  foreground_templates = ['{{ if gt .Code 0 }}#E82424{{ end }}']
+  template = '❯ '

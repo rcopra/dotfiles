@@ -1,0 +1,10 @@
+{{- /* Chezmoi config template - prompts for machine-specific data during init */ -}}
+
+{{- $email := promptStringOnce . "email" "Git email address" -}}
+{{- $name := promptStringOnce . "name" "Git user name" -}}
+{{- $machineType := promptChoiceOnce . "machineType" "Machine type" (list "personal" "work" "server") -}}
+
+[data]
+    email = {{ $email | quote }}
+    name = {{ $name | quote }}
+    machineType = {{ $machineType | quote }}

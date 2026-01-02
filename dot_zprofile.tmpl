@@ -1,0 +1,19 @@
+# Setup the PATH for pyenv binaries and shims
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+
+{{- if eq .chezmoi.os "darwin" }}
+# macOS Homebrew (Apple Silicon)
+eval "$(/opt/homebrew/bin/brew shellenv 2> /dev/null)"
+{{- else if eq .chezmoi.os "linux" }}
+# Linux Homebrew (Linuxbrew) - optional
+if [ -d "/home/linuxbrew/.linuxbrew" ]; then
+    eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+fi
+{{- end }}
+
+type -a pyenv > /dev/null && eval "$(pyenv init --path)"
+
+{{- if eq .chezmoi.os "darwin" }}
+eval "$(/opt/homebrew/bin/brew shellenv)"
+{{- end }}

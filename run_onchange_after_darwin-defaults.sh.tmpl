@@ -1,0 +1,32 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/bin/bash
+# vim: set ft=bash:
+
+set -euo pipefail
+
+echo "==> Configuring macOS defaults..."
+
+# Keyboard - faster key repeat
+defaults write -g KeyRepeat -int 2
+defaults write -g InitialKeyRepeat -int 15
+defaults write -g ApplePressAndHoldEnabled -bool false
+
+# Finder
+defaults write com.apple.finder ShowPathbar -bool true
+defaults write com.apple.finder ShowStatusBar -bool true
+defaults write com.apple.finder AppleShowAllFiles -bool true
+
+# Dock
+defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock autohide-delay -float 0
+defaults write com.apple.dock show-recents -bool false
+
+# Screenshots
+defaults write com.apple.screencapture location -string "$HOME/Desktop"
+defaults write com.apple.screencapture type -string "png"
+
+# Disable "Are you sure you want to open this application?" dialog
+defaults write com.apple.LaunchServices LSQuarantine -bool false
+
+echo "==> macOS defaults configured. Some changes may require logout."
+{{- end }}

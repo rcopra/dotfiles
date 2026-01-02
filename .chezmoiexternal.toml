@@ -1,0 +1,17 @@
+# ==============================================================================
+# External Git Repositories
+# ==============================================================================
+
+# Neovim Kickstart configuration
+[".config/nvim"]
+    type = "git-repo"
+    url = "git@github.com:rcopra/kickstart.nvim.git"
+    refreshPeriod = "168h"
+    clone.args = ["--depth", "1"]
+
+# TPM (Tmux Plugin Manager)
+[".tmux/plugins/tpm"]
+    type = "git-repo"
+    url = "https://github.com/tmux-plugins/tpm.git"
+    refreshPeriod = "168h"
+    clone.args = ["--depth", "1"]

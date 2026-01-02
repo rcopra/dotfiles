@@ -1,0 +1,36 @@
+# Documentation
+README.md
+LICENSE
+
+# ==============================================================================
+# macOS-only files - exclude on Linux
+# ==============================================================================
+{{ if ne .chezmoi.os "darwin" }}
+# AeroSpace window manager (macOS only)
+.aerospace.toml
+
+# Karabiner keyboard remapper (macOS only)
+.config/karabiner
+.config/karabiner/**
+
+# VS Code settings (macOS Library path)
+Library
+Library/**
+{{ end }}
+
+# ==============================================================================
+# Server/headless machines - exclude GUI apps
+# ==============================================================================
+{{ if eq (index . "machineType" | default "personal") "server" }}
+# Window managers
+.aerospace.toml
+.config/karabiner
+.config/karabiner/**
+
+# Terminal emulator config (use default terminal on servers)
+.wezterm.lua
+
+# VS Code (not installed on servers)
+Library
+Library/**
+{{ end }}
