@@ -86,3 +86,4 @@ chezmoi cd                  # Jump to source directory
 chezmoi cd
 git add -A && git commit -m "message" && git push
 ```
+# test

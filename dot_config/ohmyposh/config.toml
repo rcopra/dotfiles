@@ -74,8 +74,8 @@ console_title_template = '{{ .Folder }}'
     foreground_templates = ['{{ if gt .Code 0 }}#E82424{{ end }}']
     template = '❯ '
 
-# Transient prompt disabled - can interfere with interactive menus
-# [transient_prompt]
-#   foreground = '#E6C384'
-#   foreground_templates = ['{{ if gt .Code 0 }}#E82424{{ end }}']
-#   template = '❯ '
+# Transient prompt for cleaner history
+[transient_prompt]
+  foreground = '#E6C384'
+  foreground_templates = ['{{ if gt .Code 0 }}#E82424{{ end }}']
+  template = '❯ '

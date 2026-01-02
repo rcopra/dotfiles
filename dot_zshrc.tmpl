@@ -88,16 +88,12 @@ type -a nvm > /dev/null && add-zsh-hook chpwd load-nvmrc
 type -a nvm > /dev/null && load-nvmrc
 
 # ==============================================================================
-# History
+# History (configured by OMZ lib/history.zsh)
 # ==============================================================================
+# OMZ handles this, but we override a few settings
 HISTFILE=$HOME/.zhistory
 HISTSIZE=10000
 SAVEHIST=10000
-setopt share_history
-setopt hist_expire_dups_first
-setopt hist_ignore_dups
-setopt hist_ignore_space
-setopt hist_verify
 
 # ==============================================================================
 # Zinit Plugin Manager
@@ -112,6 +108,12 @@ fi
 
 source "${ZINIT_HOME}/zinit.zsh"
 
+# Load OMZ library components (provides key bindings, completions, etc.)
+zinit snippet OMZL::key-bindings.zsh
+zinit snippet OMZL::completion.zsh
+zinit snippet OMZL::history.zsh
+zinit snippet OMZL::directories.zsh
+
 # OMZ plugins
 zinit snippet OMZP::git
 
@@ -121,9 +123,9 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-history-substring-search
 
 # ==============================================================================
-# Key Bindings
+# Key Bindings (OMZ lib/key-bindings.zsh handles basics)
 # ==============================================================================
-# History substring search (up/down arrows)
+# History substring search (up/down arrows) - bind after plugin loads
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 

@@ -2,13 +2,6 @@ local wezterm = require("wezterm")
 local act = wezterm.action
 local config = wezterm.config_builder()
 
--- Set proper terminal type for better compatibility
-config.term = "xterm-256color"
-
--- Enable better compatibility with CLI applications
-config.enable_kitty_keyboard = false
-config.enable_csi_u_key_encoding = false
-
 config.font = wezterm.font("MesloLGS Nerd Font Mono")
 config.font_size = 17
 
