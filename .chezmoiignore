@@ -3,6 +3,14 @@ README.md
 LICENSE
 
 # ==============================================================================
+# VS Code settings (managed via symlinks, not direct copies)
+# ==============================================================================
+# These source files live in the repo root and are symlinked to Library/
+# This prevents chezmoi from trying to copy them to the home directory
+vscode_settings.json
+vscode_keybindings.json
+
+# ==============================================================================
 # macOS-only files - exclude on Linux
 # ==============================================================================
 {{ if ne .chezmoi.os "darwin" }}
