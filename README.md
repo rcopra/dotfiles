@@ -22,20 +22,13 @@ nvim                        # Let lazy.nvim install plugins
 
 ## Migrating from Old Dotfiles
 
-If you have the old symlink-based dotfiles installed:
+If you have symlink-based dotfiles from another manager, chezmoi will replace them automatically:
 
 ```bash
-# 1. Remove old symlinks (they point to the old repo)
-rm ~/.zshrc ~/.zprofile ~/.aliases ~/.gitconfig ~/.tmux.conf ~/.fzf.zsh
-rm ~/.wezterm.lua ~/.irbrc ~/.pryrc ~/.rspec
-rm ~/.config/karabiner/karabiner.json
-rm ~/.ssh/config
-rm ~/Library/Application\ Support/Code/User/settings.json
-rm ~/Library/Application\ Support/Code/User/keybindings.json
-
-# 2. Install chezmoi and apply
 sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply git@github.com:rcopra/chez-dotfiles.git
 ```
+
+See [chezmoi's migration guide](https://www.chezmoi.io/migrating-from-another-dotfile-manager/) for details.
 
 ## Daily Usage
 
