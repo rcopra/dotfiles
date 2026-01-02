@@ -16,8 +16,7 @@ export RUBYOPT="-r$HOME/.rubyopenssl_default_store.rb $RUBYOPT"
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 export PYTHONBREAKPOINT=ipdb.set_trace
 
-# Node
-export NVM_DIR="$HOME/.nvm"
+# Node (fnm - Fast Node Manager)
 
 # ==============================================================================
 # PATH Configuration
@@ -47,45 +46,48 @@ export PATH="./bin:./node_modules/.bin:${PATH}:/usr/local/sbin"
 # ==============================================================================
 # Zsh Options & Completions
 # ==============================================================================
-autoload -Uz compinit && compinit
+autoload -Uz compinit
+# Only regenerate completion cache once per day
+if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
+  compinit
+else
+  compinit -C
+fi
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
 # ==============================================================================
-# Version Managers
+# Version Managers (lazy-loaded for fast startup)
 # ==============================================================================
-# rbenv (Ruby)
-type -a rbenv > /dev/null && eval "$(rbenv init -)"
+# rbenv (Ruby) - lazy-load on first use
+if type -a rbenv > /dev/null; then
+  _init_rbenv() {
+    unfunction _init_rbenv rbenv ruby gem bundle rake rails 2>/dev/null
+    eval "$(command rbenv init -)"
+  }
+  rbenv() { _init_rbenv; rbenv "$@" }
+  ruby() { _init_rbenv; ruby "$@" }
+  gem() { _init_rbenv; gem "$@" }
+  bundle() { _init_rbenv; bundle "$@" }
+  rake() { _init_rbenv; rake "$@" }
+  rails() { _init_rbenv; rails "$@" }
+fi
 
-# pyenv (Python)
-type -a pyenv > /dev/null && eval "$(pyenv init -)" && eval "$(pyenv virtualenv-init - 2>/dev/null)"
+# pyenv (Python) - lazy-load on first use
+if type -a pyenv > /dev/null; then
+  _init_pyenv() {
+    unfunction _init_pyenv pyenv python python3 pip pip3 2>/dev/null
+    eval "$(command pyenv init -)"
+  }
+  pyenv() { _init_pyenv; pyenv "$@" }
+  python() { _init_pyenv; python "$@" }
+  python3() { _init_pyenv; python3 "$@" }
+  pip() { _init_pyenv; pip "$@" }
+  pip3() { _init_pyenv; pip3 "$@" }
+fi
 
-# nvm (Node)
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-
-# Auto-switch node version when entering directory with .nvmrc
-autoload -U add-zsh-hook
-load-nvmrc() {
-  if nvm -v &> /dev/null; then
-    local node_version="$(nvm version)"
-    local nvmrc_path="$(nvm_find_nvmrc)"
-
-    if [ -n "$nvmrc_path" ]; then
-      local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
-
-      if [ "$nvmrc_node_version" = "N/A" ]; then
-        nvm install
-      elif [ "$nvmrc_node_version" != "$node_version" ]; then
-        nvm use --silent
-      fi
-    elif [ "$node_version" != "$(nvm version default)" ]; then
-      nvm use default --silent
-    fi
-  fi
-}
-type -a nvm > /dev/null && add-zsh-hook chpwd load-nvmrc
-type -a nvm > /dev/null && load-nvmrc
+# fnm (Fast Node Manager) - auto-switches on .nvmrc/.node-version
+command -v fnm > /dev/null && eval "$(fnm env --use-on-cd)"
 
 # ==============================================================================
 # History (configured by OMZ lib/history.zsh)
@@ -117,10 +119,11 @@ zinit snippet OMZL::directories.zsh
 # OMZ plugins
 zinit snippet OMZP::git
 
-# Zsh plugins (turbo mode for faster startup)
-zinit light zsh-users/zsh-autosuggestions
-zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-history-substring-search
+# Zsh plugins (turbo mode - load after prompt renders)
+zinit wait lucid for \
+  zsh-users/zsh-autosuggestions \
+  zsh-users/zsh-history-substring-search \
+  zsh-users/zsh-syntax-highlighting
 
 # ==============================================================================
 # Key Bindings (OMZ lib/key-bindings.zsh handles basics)

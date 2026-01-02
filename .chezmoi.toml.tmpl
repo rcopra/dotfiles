@@ -1,10 +1,25 @@
 {{- /* Chezmoi config template - prompts for machine-specific data during init */ -}}
 
-{{- $email := promptStringOnce . "email" "Git email address" -}}
-{{- $name := promptStringOnce . "name" "Git user name" -}}
-{{- $machineType := promptChoiceOnce . "machineType" "Machine type" (list "personal" "work" "server") -}}
+{{- $email := promptStringOnce . "email" "Git email" "137560494+rcopra@users.noreply.github.com" -}}
+{{- $name := promptStringOnce . "name" "Git user name" "rcopra" -}}
+{{- $machineType := promptChoiceOnce . "machineType" "Machine type (use arrow keys to select, Enter to confirm)" (list "personal" "work" "server") -}}
+
+{{- /* Editor selection - servers only get terminal editors, others can choose GUI editors too */ -}}
+{{- $editor := "nvim" -}}
+{{- if eq $machineType "server" -}}
+{{-   $editor = promptChoiceOnce . "editor" "Preferred editor" (list "nvim" "vim") -}}
+{{- else -}}
+{{-   $editor = promptChoiceOnce . "editor" "Preferred editor" (list "nvim" "code" "vim") -}}
+{{- end -}}
+
+[edit]
+    command = {{ $editor | quote }}
+{{- if eq $editor "code" }}
+    args = ["--wait"]
+{{- end }}
 
 [data]
     email = {{ $email | quote }}
     name = {{ $name | quote }}
     machineType = {{ $machineType | quote }}
+    editor = {{ $editor | quote }}

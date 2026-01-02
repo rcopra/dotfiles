@@ -36,7 +36,7 @@ echo "==> Installing version managers..."
 brew install rbenv pyenv nvm
 
 echo "==> Installing applications..."
-brew install --cask wezterm
+brew install --cask wezterm aerospace
 
 # Fonts
 echo "==> Installing fonts..."
@@ -119,6 +119,15 @@ elif command -v pacman &> /dev/null; then
             echo "==> WARNING: No AUR helper found. Install oh-my-posh manually."
         fi
     fi
+fi
+
+# ==============================================================================
+# Set zsh as default shell
+# ==============================================================================
+
+if command -v zsh &> /dev/null && [ "$SHELL" != "$(which zsh)" ]; then
+    echo "==> Setting zsh as default shell..."
+    chsh -s "$(which zsh)"
 fi
 
 # ==============================================================================
