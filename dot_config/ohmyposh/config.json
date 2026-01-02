@@ -1,0 +1,151 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "version": 4,
+  "final_space": true,
+  "console_title_template": "{{ .Shell }} in {{ .Folder }}",
+  "blocks": [
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "segments": [
+        {
+          "type": "os",
+          "style": "plain",
+          "foreground": "#C8C093",
+          "template": "{{ .Icon }} "
+        },
+        {
+          "type": "path",
+          "style": "plain",
+          "foreground": "#7FB4CA",
+          "template": "\uf07c {{ .Path }}",
+          "properties": {
+            "style": "full",
+            "folder_icon": "\uf07c",
+            "home_icon": "~"
+          }
+        },
+        {
+          "type": "git",
+          "style": "plain",
+          "foreground": "#98BB6C",
+          "template": " \uf126 {{ .UpstreamIcon }}{{ .HEAD }}{{ if .Working.Changed }} <#FFA066>\uf044 {{ .Working.String }}</>{{ end }}{{ if .Staging.Changed }}<#76946A> \uf046 {{ .Staging.String }}</>{{ end }}{{ if gt .StashCount 0 }}<#957FB8> \ueb4b {{ .StashCount }}</>{{ end }}",
+          "properties": {
+            "branch_icon": "\uf126 ",
+            "fetch_status": true,
+            "fetch_upstream_icon": true
+          }
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "right",
+      "segments": [
+        {
+          "type": "node",
+          "style": "plain",
+          "foreground": "#98BB6C",
+          "template": " \ue718 {{ .Full }}",
+          "properties": {
+            "display_mode": "files",
+            "fetch_version": true
+          }
+        },
+        {
+          "type": "python",
+          "style": "plain",
+          "foreground": "#E6C384",
+          "template": " \ue235 {{ .Full }}",
+          "properties": {
+            "display_mode": "files",
+            "fetch_version": true
+          }
+        },
+        {
+          "type": "ruby",
+          "style": "plain",
+          "foreground": "#E82424",
+          "template": " \ue791 {{ .Full }}",
+          "properties": {
+            "display_mode": "files",
+            "fetch_version": true
+          }
+        },
+        {
+          "type": "go",
+          "style": "plain",
+          "foreground": "#7FB4CA",
+          "template": " \ue627 {{ .Full }}",
+          "properties": {
+            "display_mode": "files",
+            "fetch_version": true
+          }
+        },
+        {
+          "type": "php",
+          "style": "plain",
+          "foreground": "#957FB8",
+          "template": " \ue73d {{ .Full }}",
+          "properties": {
+            "display_mode": "files",
+            "fetch_version": true
+          }
+        },
+        {
+          "type": "julia",
+          "style": "plain",
+          "foreground": "#957FB8",
+          "template": " \ue624 {{ .Full }}",
+          "properties": {
+            "display_mode": "files",
+            "fetch_version": true
+          }
+        },
+        {
+          "type": "executiontime",
+          "style": "plain",
+          "foreground": "#54546D",
+          "template": " {{ .FormattedMs }}",
+          "properties": {
+            "threshold": 0,
+            "style": "austin",
+            "always_enabled": true
+          }
+        },
+        {
+          "type": "time",
+          "style": "plain",
+          "foreground": "#C8C093",
+          "template": " \uf017 {{ .CurrentDate | date \"03:04:05 PM\" }}"
+        }
+      ]
+    },
+    {
+      "type": "prompt",
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "type": "status",
+          "style": "plain",
+          "foreground": "#98BB6C",
+          "foreground_templates": [
+            "{{ if gt .Code 0 }}#E82424{{ end }}"
+          ],
+          "template": "\u276f ",
+          "properties": {
+            "always_enabled": true
+          }
+        }
+      ]
+    }
+  ],
+  "transient_prompt": {
+    "foreground": "#98BB6C",
+    "foreground_templates": [
+      "{{ if gt .Code 0 }}#E82424{{ end }}"
+    ],
+    "template": "\u276f "
+  }
+}

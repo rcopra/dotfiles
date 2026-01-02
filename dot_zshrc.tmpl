@@ -57,33 +57,21 @@ zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
 # ==============================================================================
-# Version Managers (lazy-loaded for fast startup)
+# Version Managers
 # ==============================================================================
-# rbenv (Ruby) - lazy-load on first use
+# rbenv (Ruby)
 if type -a rbenv > /dev/null; then
-  _init_rbenv() {
-    unfunction _init_rbenv rbenv ruby gem bundle rake rails 2>/dev/null
-    eval "$(command rbenv init -)"
-  }
-  rbenv() { _init_rbenv; rbenv "$@" }
-  ruby() { _init_rbenv; ruby "$@" }
-  gem() { _init_rbenv; gem "$@" }
-  bundle() { _init_rbenv; bundle "$@" }
-  rake() { _init_rbenv; rake "$@" }
-  rails() { _init_rbenv; rails "$@" }
+  eval "$(rbenv init - zsh)"
 fi
 
-# pyenv (Python) - lazy-load on first use
+# pyenv (Python) - shell integration
 if type -a pyenv > /dev/null; then
-  _init_pyenv() {
-    unfunction _init_pyenv pyenv python python3 pip pip3 2>/dev/null
-    eval "$(command pyenv init -)"
-  }
-  pyenv() { _init_pyenv; pyenv "$@" }
-  python() { _init_pyenv; python "$@" }
-  python3() { _init_pyenv; python3 "$@" }
-  pip() { _init_pyenv; pip "$@" }
-  pip3() { _init_pyenv; pip3 "$@" }
+  eval "$(pyenv init - zsh)"
+fi
+
+# pyenv-virtualenv (optional - auto-activates virtualenvs)
+if type -a pyenv-virtualenv-init > /dev/null 2>&1; then
+  eval "$(pyenv virtualenv-init - zsh)"
 fi
 
 # fnm (Fast Node Manager) - auto-switches on .nvmrc/.node-version
@@ -146,11 +134,11 @@ command -v zoxide > /dev/null && eval "$(zoxide init zsh)" && alias cd="z"
 # ==============================================================================
 {{- if eq .chezmoi.os "darwin" }}
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
-  command -v oh-my-posh > /dev/null && eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/config.toml)"
+  command -v oh-my-posh > /dev/null && eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/config.json)"
 fi
 {{- else }}
 # Linux - always use Oh My Posh if available
-command -v oh-my-posh > /dev/null && eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/config.toml)"
+command -v oh-my-posh > /dev/null && eval "$(oh-my-posh init zsh --config ~/.config/ohmyposh/config.json)"
 {{- end }}
 
 # ==============================================================================
