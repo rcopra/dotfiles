@@ -1,6 +1,9 @@
-# Documentation
+# Documentation and planning (repo-only, not applied to home)
 README.md
 LICENSE
+CLAUDE.md
+docs
+docs/**
 
 # ==============================================================================
 # macOS-only files - exclude on Linux

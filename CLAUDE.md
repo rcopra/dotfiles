@@ -45,3 +45,21 @@ Defined in `.chezmoi.toml.tmpl` and available in all `.tmpl` files:
 - **Platform conditionals** (`.chezmoiignore`): macOS-only files (aerospace, karabiner, VS Code settings) are ignored on Linux; GUI apps are ignored on "server" machines
 - **Package installation** (`run_onchange_install-packages.sh.tmpl`): Installs Homebrew packages on macOS, apt/pacman packages on Linux
 - **Version managers**: rbenv, pyenv, nvm are installed and configured in zshrc
+
+## Machine Context
+
+- **macOS**: Personal & work MacBooks (Aerospace WM, Karabiner)
+- **Linux**: Omarchy (Arch) desktop, headless Pis (server machineType)
+- **Keyboard**: Custom split keyboard with ZMK firmware ([zmk-config](https://github.com/rcopra/zmk-config))
+
+Goal: Consistent experience across all devices with minimal context-switching friction.
+
+## Planning Config Changes
+
+For detailed planning sessions (keyboard layouts, window management, cross-platform consistency), reference files in `docs/` are available:
+- `docs/keyboard-planning.md` - ZMK keymap design, layer notes
+- `docs/aerospace-config.md` - macOS window management
+- `docs/omarchy-notes.md` - Arch/Omarchy customization
+- `docs/cross-platform-goals.md` - What should be consistent
+
+These are only loaded on-demand to save tokens. Ask Claude to read them when planning.
