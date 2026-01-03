@@ -24,13 +24,13 @@ bind -r m resize-pane -Z
 bind M-c attach-session -c "#{pane_current_path}"
 
 # Tmux sessionizer - ThePrimeagen style
-bind-key -r f run-shell "tmux neww ~/.local/bin/tmux-sessionizer"
+bind-key -r f run-shell "tmux neww ~/bin/tmux-sessionizer"
 
 # Quick directory shortcuts
-bind-key -r C-d run-shell "~/.local/bin/tmux-sessionizer ~/.local/share/chezmoi"
-bind-key -r C-n run-shell "~/.local/bin/tmux-sessionizer ~/.config/nvim"
-bind-key -r C-w run-shell "~/.local/bin/tmux-sessionizer ~/work"
-bind-key -r C-p run-shell "~/.local/bin/tmux-sessionizer ~/personal"
+bind-key -r C-d run-shell "~/bin/tmux-sessionizer ~/.local/share/chezmoi"
+bind-key -r C-n run-shell "~/bin/tmux-sessionizer ~/.config/nvim"
+bind-key -r C-w run-shell "~/bin/tmux-sessionizer ~/work"
+bind-key -r C-p run-shell "~/bin/tmux-sessionizer ~/personal"
 
 set -g mouse on
 

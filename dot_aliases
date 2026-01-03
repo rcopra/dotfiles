@@ -9,7 +9,7 @@ alias serve='ruby -run -e httpd . -p 8000' # Or python -m SimpleHTTPServer :)
 alias stt="echo 'Launching VS Code instead of Sublime Text... (cf ~/.aliases)' && code ."
 
 # Tmux sessionizer shortcuts
-alias tms="~/.local/bin/tmux-sessionizer"
-alias tmd="~/.local/bin/tmux-sessionizer ~/.local/share/chezmoi"
-alias tmw="~/.local/bin/tmux-sessionizer ~/work"
-alias tmp="~/.local/bin/tmux-sessionizer ~/personal"
+alias tms="~/bin/tmux-sessionizer"
+alias tmd="~/bin/tmux-sessionizer ~/.local/share/chezmoi"
+alias tmw="~/bin/tmux-sessionizer ~/work"
+alias tmp="~/bin/tmux-sessionizer ~/personal"
