@@ -9,18 +9,25 @@
       "alignment": "left",
       "segments": [
         {
+          "type": "text",
+          "style": "plain",
+          "foreground": "#54546D",
+          "template": "\u2500"
+        },
+        {
           "type": "os",
           "style": "plain",
           "foreground": "#C8C093",
-          "template": "{{ .Icon }} "
+          "template": " {{ .Icon }} "
         },
         {
           "type": "session",
           "style": "plain",
-          "foreground": "#E82424",
-          "template": "{{ if .SSHSession }}\uf817 SSH {{ end }}",
+          "foreground": "#7FB4CA",
+          "template": "{{ .HostName }} ",
           "properties": {
-            "display_host": false
+            "display_host": true,
+            "display_user": false
           }
         },
         {
@@ -43,6 +50,15 @@
             "branch_icon": "\uf126 ",
             "fetch_status": true,
             "fetch_upstream_icon": true
+          }
+        },
+        {
+          "type": "fill",
+          "style": "plain",
+          "foreground": "#54546D",
+          "template": "\u00b7",
+          "properties": {
+            "filler": "\u00b7"
           }
         }
       ]
@@ -135,6 +151,12 @@
       "alignment": "left",
       "newline": true,
       "segments": [
+        {
+          "type": "text",
+          "style": "plain",
+          "foreground": "#54546D",
+          "template": "\u2570\u2500"
+        },
         {
           "type": "status",
           "style": "plain",
