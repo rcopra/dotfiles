@@ -51,21 +51,13 @@
             "fetch_status": true,
             "fetch_upstream_icon": true
           }
-        },
-        {
-          "type": "fill",
-          "style": "plain",
-          "foreground": "#54546D",
-          "template": "\u00b7",
-          "properties": {
-            "filler": "\u00b7"
-          }
         }
       ]
     },
     {
       "type": "prompt",
       "alignment": "right",
+      "filler": "<#54546D>\u00b7</>",
       "segments": [
         {
           "type": "node",
