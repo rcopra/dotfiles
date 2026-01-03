@@ -142,6 +142,12 @@ command -v oh-my-posh > /dev/null && eval "$(oh-my-posh init zsh --config ~/.con
 {{- end }}
 
 # ==============================================================================
+# Tmux Sessionizer
+# ==============================================================================
+# Bind Ctrl+f to tmux-sessionizer for quick project navigation
+bindkey -s '^f' '~/.local/bin/tmux-sessionizer\n'
+
+# ==============================================================================
 # Aliases & Local Config
 # ==============================================================================
 # Custom aliases
