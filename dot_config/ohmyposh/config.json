@@ -15,6 +15,15 @@
           "template": "{{ .Icon }} "
         },
         {
+          "type": "session",
+          "style": "plain",
+          "foreground": "#E82424",
+          "template": "{{ if .SSHSession }}\uf817 SSH {{ end }}",
+          "properties": {
+            "display_host": false
+          }
+        },
+        {
           "type": "path",
           "style": "plain",
           "foreground": "#7FB4CA",
@@ -29,7 +38,7 @@
           "type": "git",
           "style": "plain",
           "foreground": "#98BB6C",
-          "template": " \uf126 {{ .UpstreamIcon }}{{ .HEAD }}{{ if .Working.Changed }} <#FFA066>\uf044 {{ .Working.String }}</>{{ end }}{{ if .Staging.Changed }}<#76946A> \uf046 {{ .Staging.String }}</>{{ end }}{{ if gt .StashCount 0 }}<#957FB8> \ueb4b {{ .StashCount }}</>{{ end }}",
+          "template": " {{ .UpstreamIcon }}{{ .HEAD }}{{ if .Working.Changed }} <#FFA066>{{ .Working.String }}</>{{ end }}{{ if .Staging.Changed }}<#76946A> {{ .Staging.String }}</>{{ end }}{{ if gt .StashCount 0 }}<#957FB8> {{ .StashCount }}</>{{ end }}",
           "properties": {
             "branch_icon": "\uf126 ",
             "fetch_status": true,
@@ -140,12 +149,5 @@
         }
       ]
     }
-  ],
-  "transient_prompt": {
-    "foreground": "#98BB6C",
-    "foreground_templates": [
-      "{{ if gt .Code 0 }}#E82424{{ end }}"
-    ],
-    "template": "\u276f "
-  }
+  ]
 }
