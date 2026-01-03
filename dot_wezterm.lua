@@ -5,6 +5,9 @@ local config = wezterm.config_builder()
 config.font = wezterm.font("MesloLGS Nerd Font Mono")
 config.font_size = 17
 
+-- Enable Kitty graphics protocol for image rendering
+config.enable_kitty_graphics = true
+
 -- Allow SHIFT to bypass mouse reporting (for tmux/vim)
 config.bypass_mouse_reporting_modifiers = "SHIFT"
 

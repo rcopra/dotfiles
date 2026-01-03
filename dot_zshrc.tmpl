@@ -155,3 +155,8 @@ bindkey -s '^f' '~/.local/bin/tmux-sessionizer\n'
 
 # Local environment variables (secrets, tokens, etc.) - not tracked in git
 [[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
+
+# ==============================================================================
+# Try - Ephemeral workspace manager
+# ==============================================================================
+eval "$(ruby ~/.local/try.rb init ~/src/tries)"
