@@ -26,6 +26,9 @@ bind M-c attach-session -c "#{pane_current_path}"
 # Tmux sessionizer - ThePrimeagen style
 bind-key -r f run-shell "tmux neww ~/bin/tmux-sessionizer"
 
+# Quick session switchers
+bind-key -r C-s run-shell "tmux switch-client -t SSH || tmux new-session -d -s SSH && tmux switch-client -t SSH"
+
 # Quick directory shortcuts
 bind-key -r C-d run-shell "~/bin/tmux-sessionizer ~/.local/share/chezmoi"
 bind-key -r C-n run-shell "~/bin/tmux-sessionizer ~/.config/nvim"
@@ -39,23 +42,13 @@ set-window-option -g mode-keys vi
 bind-key -T copy-mode-vi 'v' send -X begin-selection
 
 # ==============================================================================
-# Clipboard Integration
+# Clipboard Integration (OSC 52 - works over SSH)
 # ==============================================================================
-{{- if eq .chezmoi.os "darwin" }}
-# macOS - copy to system clipboard using pbcopy
-bind-key -T copy-mode-vi 'y' send -X copy-pipe-and-cancel "pbcopy"
-bind-key -T copy-mode-vi MouseDragEnd1Pane send -X copy-pipe-and-cancel "pbcopy"
-bind-key -T copy-mode-vi MouseUp1Pane send -X copy-pipe-and-cancel "pbcopy"
-bind-key -T copy-mode-vi Enter send -X copy-pipe-and-cancel "pbcopy"
-bind-key p run "pbpaste | tmux load-buffer - && tmux paste-buffer"
-{{- else }}
-# Linux - copy to system clipboard using xclip
-bind-key -T copy-mode-vi 'y' send -X copy-pipe-and-cancel "xclip -selection clipboard"
-bind-key -T copy-mode-vi MouseDragEnd1Pane send -X copy-pipe-and-cancel "xclip -selection clipboard"
-bind-key -T copy-mode-vi MouseUp1Pane send -X copy-pipe-and-cancel "xclip -selection clipboard"
-bind-key -T copy-mode-vi Enter send -X copy-pipe-and-cancel "xclip -selection clipboard"
-bind-key p run "xclip -selection clipboard -o | tmux load-buffer - && tmux paste-buffer"
-{{- end }}
+# Use tmux's built-in OSC 52 support (set-clipboard on below handles this)
+# This works on macOS, Linux, and over SSH with modern terminals
+bind-key -T copy-mode-vi 'y' send -X copy-selection-and-cancel
+bind-key -T copy-mode-vi MouseDragEnd1Pane send -X copy-selection-and-cancel
+bind-key -T copy-mode-vi Enter send -X copy-selection-and-cancel
 
 unbind -T copy-mode-vi MouseDragEnd1Pane # don't exit copy mode when dragging with mouse
 
@@ -76,6 +69,10 @@ set -g @continuum-restore 'on'
 # Fix mouse click behavior
 bind-key -T root MouseDown1Pane select-pane -t = \; send-keys -M
 
+# Enable focus events so applications can detect when you switch panes
+set -g focus-events on
+
+# Enable clipboard passthrough and OSC 52 support
 set -g allow-passthrough on
 set -g set-clipboard on
 
