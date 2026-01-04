@@ -5,7 +5,7 @@ Cross-platform dotfiles managed with [chezmoi](https://chezmoi.io).
 ## Import dotfiles
 
 ```bash
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply git@github.com:rcopra/chez-dotfiles.git
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply git@github.com:rcopra/dotfiles.git
 ```
 
 After setup:
