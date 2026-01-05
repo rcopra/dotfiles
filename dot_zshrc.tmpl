@@ -75,7 +75,7 @@ if type -a pyenv-virtualenv-init > /dev/null 2>&1; then
 fi
 
 # fnm (Fast Node Manager) - auto-switches on .nvmrc/.node-version
-command -v fnm > /dev/null && eval "$(fnm env --use-on-cd)"
+command -v fnm > /dev/null && eval "$(fnm env --use-on-cd --log-level=quiet)"
 
 # ==============================================================================
 # History (configured by OMZ lib/history.zsh)
