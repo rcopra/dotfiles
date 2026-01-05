@@ -148,7 +148,7 @@ command -v oh-my-posh > /dev/null && eval "$(oh-my-posh init zsh --config ~/.con
 bindkey -s '^f' '~/bin/tmux-sessionizer\n'
 
 # Bind Ctrl+s to create/switch to SSH session (handles being inside tmux)
-bindkey -s '^s' '[[ -n $TMUX ]] && { tmux switch-client -t SSH 2>/dev/null || (tmux new-session -d -s SSH && tmux switch-client -t SSH); } || tmux new-session -A -s SSH\n'
+bindkey -s '^s' '[[ -n $TMUX ]] && { tmux switch-client -t SSH 2>/dev/null || (tmux new-session -d -s SSH -c ~ && tmux switch-client -t SSH); } || tmux new-session -A -s SSH -c ~\n'
 
 # ==============================================================================
 # Aliases & Local Config
