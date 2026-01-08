@@ -1,5 +1,9 @@
 set -g default-terminal "tmux-256color"
-set -ag terminal-overrides ",xterm-256color:RGB"
+set -ag terminal-overrides ",*:RGB"
+
+# Use terminal's default background (fixes grey overlay)
+set -g window-style 'bg=default'
+set -g window-active-style 'bg=default'
 
 set -g prefix C-a
 unbind C-b
@@ -58,7 +62,14 @@ set -sg escape-time 10
 set -g @plugin 'tmux-plugins/tpm'
 
 # list of tmux plugins
-set -g @plugin 'Nybkox/tmux-kanagawa'
+set -g @plugin 'christoomey/vim-tmux-navigator'
+
+# vim-tmux-navigator: use Ctrl+Arrow for pane navigation
+set -g @vim_navigator_mapping_left "C-Left"
+set -g @vim_navigator_mapping_right "C-Right"
+set -g @vim_navigator_mapping_up "C-Up"
+set -g @vim_navigator_mapping_down "C-Down"
+
 set -g @plugin 'tmux-plugins/tmux-resurrect' # persist tmux sessions after computer restart
 set -g @plugin 'tmux-plugins/tmux-continuum' # automatically saves sessions for you every 15 minutes
 
