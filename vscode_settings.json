@@ -90,5 +90,6 @@
       "suppressGitDisabledWarning": true,
       "suppressGitMissingWarning": true
     },
-    "claudeCode.preferredLocation": "panel"
+    "claudeCode.preferredLocation": "panel",
+    "github.copilot.nextEditSuggestions.enabled": true
 }
