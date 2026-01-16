@@ -1,4 +1,4 @@
-# AeroSpace configuration - Alt as primary modifier (matches Omarchy/Hyprland)
+# AeroSpace configuration - Alt as primary modifier 
 # See: https://nikitabobko.github.io/AeroSpace/guide
 
 config-version = 2
@@ -66,10 +66,11 @@ outer.right = 5
 [mode.main.binding]
 
 # --- Window Focus (alt + arrows) ---
-alt-left = 'focus left'
+alt-left = 'focus --boundaries all-monitors-outer-frame left'
 alt-down = 'focus down'
 alt-up = 'focus up'
-alt-right = 'focus right'
+alt-right = 'focus --boundaries all-monitors-outer-frame right'
+
 
 # --- Move Window (alt + shift + arrows) ---
 alt-shift-left = 'move left'
