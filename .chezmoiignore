@@ -45,3 +45,36 @@ Library/**
 Library
 Library/**
 {{ end }}
+
+# ==============================================================================
+# Claude Code runtime/state (keep local to each machine)
+# ==============================================================================
+.claude/cache
+.claude/cache/**
+.claude/debug
+.claude/debug/**
+.claude/downloads
+.claude/downloads/**
+.claude/file-history
+.claude/file-history/**
+.claude/history.jsonl
+.claude/paste-cache
+.claude/paste-cache/**
+.claude/plans
+.claude/plans/**
+.claude/plugins
+.claude/plugins/**
+.claude/projects
+.claude/projects/**
+.claude/session-env
+.claude/session-env/**
+.claude/shell-snapshots
+.claude/shell-snapshots/**
+.claude/stats-cache.json
+.claude/statsig
+.claude/statsig/**
+.claude/telemetry
+.claude/telemetry/**
+.claude/todos
+.claude/todos/**
+.claude/settings.local.json

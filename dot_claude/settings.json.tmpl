@@ -1,0 +1,4 @@
+{
+  "model": "{{ if eq (index . "machineType" | default "personal") "work" }}opus{{ else }}sonnet{{ end }}",
+  "output-style": "Learning"
+}
