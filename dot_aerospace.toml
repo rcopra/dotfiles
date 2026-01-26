@@ -6,25 +6,19 @@ config-version = 2
 after-startup-command = []
 start-at-login = true
 
-# Normalizations
 enable-normalization-flatten-containers = true
 enable-normalization-opposite-orientation-for-nested-containers = true
 
-# Layout settings
 accordion-padding = 30
 default-root-container-layout = 'tiles'
 default-root-container-orientation = 'auto'
 
-# Mouse follows focus when focused monitor changes
 on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 
-# Unhide hidden apps (disable cmd-h behavior)
 automatically-unhide-macos-hidden-apps = true
 
-# Persistent workspaces
 persistent-workspaces = ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
-# App-to-workspace assignments
 [[on-window-detected]]
 if.app-id = 'com.tinyspeck.slackmacgap'
 run = 'move-node-to-workspace 5'
@@ -34,7 +28,6 @@ if.app-id = 'com.hnc.Discord'
 run = 'move-node-to-workspace 4'
 
 
-# Monitor assignments
 [workspace-to-monitor-force-assignment]
 1 = 'main'
 2 = 'main'
@@ -51,7 +44,6 @@ on-mode-changed = []
 [key-mapping]
 preset = 'qwerty'
 
-# Gaps for visual parity with Hyprland
 [gaps]
 inner.horizontal = 5
 inner.vertical = 5
@@ -60,25 +52,19 @@ outer.bottom = 5
 outer.top = 5
 outer.right = 5
 
-# =============================================================================
-# Main bindings - Alt as primary modifier (matches Omarchy/Hyprland)
-# =============================================================================
 [mode.main.binding]
 
-# --- Window Focus (alt + arrows) ---
 alt-left = 'focus --boundaries all-monitors-outer-frame left'
 alt-down = 'focus down'
 alt-up = 'focus up'
 alt-right = 'focus --boundaries all-monitors-outer-frame right'
 
 
-# --- Move Window (alt + shift + arrows) ---
 alt-shift-left = 'move left'
 alt-shift-down = 'move down'
 alt-shift-up = 'move up'
 alt-shift-right = 'move right'
 
-# --- Workspace Switching (alt + number) ---
 cmd-1 = 'workspace 1'
 cmd-2 = 'workspace 2'
 cmd-3 = 'workspace 3'
@@ -89,41 +75,34 @@ cmd-7 = 'workspace 7'
 cmd-8 = 'workspace 8'
 cmd-9 = 'workspace 9'
 
-# --- Move to Workspace AND Follow (alt + shift + number) ---
-# Matches Omarchy default behavior
-alt-shift-1 = ['move-node-to-workspace 1', 'workspace 1']
-alt-shift-2 = ['move-node-to-workspace 2', 'workspace 2']
-alt-shift-3 = ['move-node-to-workspace 3', 'workspace 3']
-alt-shift-4 = ['move-node-to-workspace 4', 'workspace 4']
-alt-shift-5 = ['move-node-to-workspace 5', 'workspace 5']
-alt-shift-6 = ['move-node-to-workspace 6', 'workspace 6']
-alt-shift-7 = ['move-node-to-workspace 7', 'workspace 7']
-alt-shift-8 = ['move-node-to-workspace 8', 'workspace 8']
-alt-shift-9 = ['move-node-to-workspace 9', 'workspace 9']
+cmd-shift-1 = ['move-node-to-workspace 1', 'workspace 1']
+cmd-shift-2 = ['move-node-to-workspace 2', 'workspace 2']
+cmd-shift-3 = ['move-node-to-workspace 3', 'workspace 3']
+cmd-shift-4 = ['move-node-to-workspace 4', 'workspace 4']
+cmd-shift-5 = ['move-node-to-workspace 5', 'workspace 5']
+cmd-shift-6 = ['move-node-to-workspace 6', 'workspace 6']
+cmd-shift-7 = ['move-node-to-workspace 7', 'workspace 7']
+cmd-shift-8 = ['move-node-to-workspace 8', 'workspace 8']
+cmd-shift-9 = ['move-node-to-workspace 9', 'workspace 9']
 
-# --- Move to Workspace Silently (alt + shift + cmd + number) ---
-# Matches Omarchy's SUPER+SHIFT+ALT behavior
-alt-shift-cmd-1 = 'move-node-to-workspace 1'
-alt-shift-cmd-2 = 'move-node-to-workspace 2'
-alt-shift-cmd-3 = 'move-node-to-workspace 3'
-alt-shift-cmd-4 = 'move-node-to-workspace 4'
-alt-shift-cmd-5 = 'move-node-to-workspace 5'
-alt-shift-cmd-6 = 'move-node-to-workspace 6'
-alt-shift-cmd-7 = 'move-node-to-workspace 7'
-alt-shift-cmd-8 = 'move-node-to-workspace 8'
-alt-shift-cmd-9 = 'move-node-to-workspace 9'
+cmd-shift-cmd-1 = 'move-node-to-workspace 1'
+cmd-shift-cmd-2 = 'move-node-to-workspace 2'
+cmd-shift-cmd-3 = 'move-node-to-workspace 3'
+cmd-shift-cmd-4 = 'move-node-to-workspace 4'
+cmd-shift-cmd-5 = 'move-node-to-workspace 5'
+cmd-shift-cmd-6 = 'move-node-to-workspace 6'
+cmd-shift-cmd-7 = 'move-node-to-workspace 7'
+cmd-shift-cmd-8 = 'move-node-to-workspace 8'
+cmd-shift-cmd-9 = 'move-node-to-workspace 9'
 
-# --- Window Cycling & Workspace Navigation ---
 alt-tab = 'focus --boundaries workspace --boundaries-action wrap-around-the-workspace dfs-next'
 alt-shift-tab = 'focus --boundaries workspace --boundaries-action wrap-around-the-workspace dfs-prev'
 alt-backtick = 'workspace-back-and-forth'
 
-# --- Monitor Navigation ---
 alt-m = 'focus-monitor --wrap-around next'
 alt-shift-m = 'move-node-to-monitor --wrap-around next'
 alt-ctrl-m = 'move-workspace-to-monitor --wrap-around next'
 
-# --- Terminal & App Launchers (alt + enter, alt + shift + key) ---
 alt-enter = 'exec-and-forget open -na WezTerm'
 alt-shift-b = 'exec-and-forget /Applications/Firefox.app/Contents/MacOS/firefox --new-window'
 alt-ctrl-b = 'exec-and-forget /Applications/Firefox.app/Contents/MacOS/firefox --private-window'
@@ -132,16 +111,11 @@ alt-shift-g = 'exec-and-forget open -a Discord'
 alt-shift-o = 'exec-and-forget open -a Obsidian'
 alt-shift-s = 'exec-and-forget open -a Slack'
 
-# --- Layout Controls (moved to cmd since alt is now primary) ---
 cmd-slash = 'layout tiles horizontal vertical'
 cmd-comma = 'layout accordion horizontal vertical'
 
-# --- Service Mode ---
 cmd-shift-slash = 'mode service'
 
-# =============================================================================
-# Service Mode
-# =============================================================================
 [mode.service.binding]
 esc = ['reload-config', 'mode main']
 r = ['flatten-workspace-tree', 'mode main']
@@ -153,7 +127,6 @@ alt-shift-j = ['join-with down', 'mode main']
 alt-shift-k = ['join-with up', 'mode main']
 alt-shift-l = ['join-with right', 'mode main']
 
-# Resize with arrows in service mode (press multiple times, then Enter/Esc to exit)
 left = 'resize width -50'
 right = 'resize width +50'
 down = 'resize height +50'
