@@ -85,15 +85,15 @@ cmd-shift-7 = ['move-node-to-workspace 7', 'workspace 7']
 cmd-shift-8 = ['move-node-to-workspace 8', 'workspace 8']
 cmd-shift-9 = ['move-node-to-workspace 9', 'workspace 9']
 
-cmd-shift-cmd-1 = 'move-node-to-workspace 1'
-cmd-shift-cmd-2 = 'move-node-to-workspace 2'
-cmd-shift-cmd-3 = 'move-node-to-workspace 3'
-cmd-shift-cmd-4 = 'move-node-to-workspace 4'
-cmd-shift-cmd-5 = 'move-node-to-workspace 5'
-cmd-shift-cmd-6 = 'move-node-to-workspace 6'
-cmd-shift-cmd-7 = 'move-node-to-workspace 7'
-cmd-shift-cmd-8 = 'move-node-to-workspace 8'
-cmd-shift-cmd-9 = 'move-node-to-workspace 9'
+cmd-shift-alt-1 = 'move-node-to-workspace 1'
+cmd-shift-alt-2 = 'move-node-to-workspace 2'
+cmd-shift-alt-3 = 'move-node-to-workspace 3'
+cmd-shift-alt-4 = 'move-node-to-workspace 4'
+cmd-shift-alt-5 = 'move-node-to-workspace 5'
+cmd-shift-alt-6 = 'move-node-to-workspace 6'
+cmd-shift-alt-7 = 'move-node-to-workspace 7'
+cmd-shift-alt-8 = 'move-node-to-workspace 8'
+cmd-shift-alt-9 = 'move-node-to-workspace 9'
 
 alt-tab = 'focus --boundaries workspace --boundaries-action wrap-around-the-workspace dfs-next'
 alt-shift-tab = 'focus --boundaries workspace --boundaries-action wrap-around-the-workspace dfs-prev'
