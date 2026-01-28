@@ -106,6 +106,9 @@ zinit snippet OMZL::directories.zsh
 # OMZ plugins
 zinit snippet OMZP::git
 
+# Forgit: use delta without side-by-side in narrow preview
+export FORGIT_DIFF_PAGER="delta --no-gitconfig --dark"
+
 # Zsh plugins (turbo mode - load after prompt renders)
 zinit wait lucid for \
   zsh-users/zsh-autosuggestions \
