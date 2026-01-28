@@ -129,6 +129,9 @@ command -v eza > /dev/null && alias ls="eza --icons=always"
 # zoxide (smarter cd)
 command -v zoxide > /dev/null && eval "$(zoxide init zsh)" && alias cd="z"
 
+# direnv (directory-specific environment variables)
+command -v direnv > /dev/null && eval "$(direnv hook zsh)"
+
 # ==============================================================================
 # Prompt (Oh My Posh)
 # ==============================================================================

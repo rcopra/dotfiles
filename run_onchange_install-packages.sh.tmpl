@@ -31,7 +31,9 @@ brew install \
     bat \
     jq \
     oh-my-posh \
-    tmux-mem-cpu-load
+    tmux-mem-cpu-load \
+    direnv \
+    rainfrog
 
 echo "==> Installing version managers..."
 brew install rbenv pyenv nvm
@@ -67,7 +69,8 @@ if command -v apt &> /dev/null; then
         curl \
         wget \
         build-essential \
-        xclip
+        xclip \
+        direnv
 
     # Install eza (not in default repos)
     if ! command -v eza &> /dev/null; then
@@ -108,7 +111,8 @@ elif command -v pacman &> /dev/null; then
         jq \
         zsh \
         xclip \
-        base-devel
+        base-devel \
+        direnv
 
     # Install oh-my-posh from AUR
     if ! command -v oh-my-posh &> /dev/null; then
