@@ -10,8 +10,15 @@
   remote = yellow
 
 [core]
-  pager = less -FRSX
+  pager = delta 
   editor = {{ if lookPath "code" }}code --wait{{ else }}nvim{{ end }}
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true
+    dark = true
 
 [alias]
   co = checkout
@@ -51,6 +58,9 @@
 [push]
   default = simple
   autoSetupRemote = true
+
+[merge]
+    conflictStyle = zdiff3
 
 [branch "master"]
   mergeoptions = --no-edit
