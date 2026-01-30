@@ -77,7 +77,8 @@ defaults:
         hidden: true
   refetchIntervalMinutes: 30
 keybindings: {}
-repoPaths: {}
+repoPaths:
+  boundless-immigration/*: ~/Work/*
 theme:
   ui:
     sectionsShowCount: true
