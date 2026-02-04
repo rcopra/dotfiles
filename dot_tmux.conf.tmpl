@@ -1,7 +1,8 @@
 set -g default-terminal "tmux-256color"
 set -ag terminal-overrides ",*:RGB"
 
-# Use terminal's default background (fixes grey overlay)
+set -g history-limiit 50000
+
 set -g window-style 'bg=default'
 set -g window-active-style 'bg=default'
 

@@ -78,7 +78,8 @@ defaults:
   refetchIntervalMinutes: 30
 keybindings: {}
 repoPaths:
-  boundless-immigration/*: ~/Work/*
+  boundlesshq/localyze-backend: ~/Work/Backend
+  boundlesshq/*: ~/Work/*
 theme:
   ui:
     sectionsShowCount: true
