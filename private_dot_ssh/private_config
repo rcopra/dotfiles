@@ -1,0 +1,13 @@
+Host trident.local
+  HostName trident.local
+  User rick
+
+Host *
+  UseKeychain yes
+  AddKeysToAgent yes
+  IdentityFile ~/.ssh/id_ed25519
+Host pi.taildc8be7.ts.net    #Added by lazyssh
+    HostName pi.taildc8be7.ts.net
+    User pi
+    Port 22
+    IdentityFile ~/.ssh/id_ed25519
