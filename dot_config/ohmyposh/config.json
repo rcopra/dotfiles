@@ -24,7 +24,7 @@
           "type": "session",
           "style": "plain",
           "foreground": "#7FB4CA",
-          "template": "{{ .HostName }} ",
+          "template": "{{ (split \".\" .HostName)._0 }} ",
           "properties": {
             "display_host": true,
             "display_user": false
