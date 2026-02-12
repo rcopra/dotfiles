@@ -34,12 +34,6 @@ config.mouse_bindings = {
 		mods = "CMD",
 		action = act.OpenLinkAtMouseCursor,
 	},
-	-- Complete selection on regular click
-	{
-		event = { Up = { streak = 1, button = "Left" } },
-		mods = "NONE",
-		action = act.CompleteSelection("ClipboardAndPrimarySelection"),
-	},
 }
 
 config.window_decorations = "RESIZE"
