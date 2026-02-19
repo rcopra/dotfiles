@@ -28,6 +28,12 @@ config.keys = {
 config.hyperlink_rules = wezterm.default_hyperlink_rules()
 
 config.mouse_bindings = {
+	-- Copy selection to clipboard on mouse release
+	{
+		event = { Up = { streak = 1, button = "Left" } },
+		mods = "NONE",
+		action = act.CompleteSelection("ClipboardAndPrimarySelection"),
+	},
 	-- Open URLs with Cmd+Click
 	{
 		event = { Up = { streak = 1, button = "Left" } },
