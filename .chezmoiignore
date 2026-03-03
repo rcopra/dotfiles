@@ -47,7 +47,8 @@ Library/**
 {{ end }}
 
 # ==============================================================================
-# Claude Code (keep local to each machine)
+# Claude Code (keep local except skills)
 # ==============================================================================
-.claude
-.claude/**
+.claude/*
+!.claude/skills
+!.claude/skills/**
