@@ -1,7 +1,0 @@
-#!/bin/bash
-# Reload tmux config when theme changes
-# Hash: {{ index .themes .theme "accent" }}
-
-if command -v tmux &>/dev/null && tmux list-sessions &>/dev/null; then
-  tmux source-file ~/.tmux.conf 2>/dev/null
-fi
