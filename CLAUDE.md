@@ -70,5 +70,5 @@ These are only loaded on-demand to save tokens. Ask Claude to read them when pla
 
 ## Gotchas
 
-- **oh-my-posh configs use `{{ }}` for their own templates** — do NOT make them `.tmpl` files, chezmoi will try to evaluate oh-my-posh expressions and fail. Colors are hardcoded hex values, updated via find/replace.
+- **oh-my-posh `.tmpl` files use custom delimiters `(( ))`** — chezmoi directive `chezmoi:template:left-delimiter=(( right-delimiter=))` avoids conflict with OMP's own `{{ }}` template syntax. OMP expressions pass through untouched; chezmoi expressions use `(( ))`.
 - **`~/.config/chezmoi/chezmoi.toml` is the live config** — edit directly with Edit tool, never use sed/Bash (sed has corrupted this file before)

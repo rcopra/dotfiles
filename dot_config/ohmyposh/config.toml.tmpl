@@ -1,6 +1,18 @@
+# chezmoi:template:left-delimiter=(( right-delimiter=))
 version = 4
 final_space = true
 console_title_template = '{{ .Folder }}'
+
+[palette]
+  fg     = '(( index .themes .theme "fg" ))'
+  muted  = '(( index .themes .theme "muted" ))'
+  accent = '(( index .themes .theme "accent" ))'
+  green  = '(( index .themes .theme "green" ))'
+  red    = '(( index .themes .theme "red" ))'
+  yellow = '(( index .themes .theme "yellow" ))'
+  orange = '(( index .themes .theme "orange" ))'
+  purple = '(( index .themes .theme "purple" ))'
+  teal   = '(( index .themes .theme "teal" ))'
 
 # First line - path, git, fill, hostname, time
 [[blocks]]
@@ -10,19 +22,19 @@ console_title_template = '{{ .Folder }}'
   [[blocks.segments]]
     type = 'os'
     style = 'plain'
-    foreground = '#F8F8F2'
+    foreground = 'p:fg'
     template = '{{ .Icon }}'
 
   [[blocks.segments]]
     type = 'text'
     style = 'plain'
-    foreground = '#6272A4'
+    foreground = 'p:muted'
     template = '─'
 
   [[blocks.segments]]
     type = 'path'
     style = 'plain'
-    foreground = '#BD93F9'
+    foreground = 'p:accent'
     template = ' {{ .Path }}'
     [blocks.segments.properties]
       style = 'full'
@@ -30,8 +42,8 @@ console_title_template = '{{ .Folder }}'
   [[blocks.segments]]
     type = 'git'
     style = 'plain'
-    foreground = '#FFB86C'
-    template = ' {{ .HEAD }}{{ if or .Working.Changed .Staging.Changed .Working.Untracked }} {{ end }}{{ if .Working.Changed }}<#FF5555>!{{ .Working.Changed }}</>{{ end }}{{ if .Working.Untracked }}<#FF5555>?{{ .Working.Untracked }}</>{{ end }}{{ if .Staging.Changed }}<#50FA7B>+{{ .Staging.Changed }}</>{{ end }}{{ if gt .StashCount 0 }}<#BD93F9>*{{ .StashCount }}</>{{ end }}'
+    foreground = 'p:orange'
+    template = ' {{ .HEAD }}{{ if or .Working.Changed .Staging.Changed .Working.Untracked }} {{ end }}{{ if .Working.Changed }}<p:red>!{{ .Working.Changed }}</>{{ end }}{{ if .Working.Untracked }}<p:red>?{{ .Working.Untracked }}</>{{ end }}{{ if .Staging.Changed }}<p:green>+{{ .Staging.Changed }}</>{{ end }}{{ if gt .StashCount 0 }}<p:purple>*{{ .StashCount }}</>{{ end }}'
     [blocks.segments.properties]
       fetch_status = true
       branch_icon = ''
@@ -43,7 +55,7 @@ console_title_template = '{{ .Folder }}'
   [[blocks.segments]]
     type = 'executiontime'
     style = 'plain'
-    foreground = '#6272A4'
+    foreground = 'p:muted'
     template = ' {{ .FormattedMs }}'
     [blocks.segments.properties]
       threshold = 500
@@ -52,7 +64,7 @@ console_title_template = '{{ .Folder }}'
   [[blocks.segments]]
     type = 'time'
     style = 'plain'
-    foreground = '#FF79C6'
+    foreground = 'p:purple'
     template = ' {{ .CurrentDate | date "15:04:05" }}'
 
 # Second line - prompt character
@@ -64,18 +76,18 @@ console_title_template = '{{ .Folder }}'
   [[blocks.segments]]
     type = 'text'
     style = 'plain'
-    foreground = '#6272A4'
+    foreground = 'p:muted'
     template = '╰─'
 
   [[blocks.segments]]
     type = 'status'
     style = 'plain'
-    foreground = '#FF79C6'
-    foreground_templates = ['{{ if gt .Code 0 }}#FF5555{{ end }}']
+    foreground = 'p:accent'
+    foreground_templates = ['{{ if gt .Code 0 }}p:red{{ end }}']
     template = '❯ '
 
 # Transient prompt for cleaner history
 [transient_prompt]
-  foreground = '#FF79C6'
-  foreground_templates = ['{{ if gt .Code 0 }}#FF5555{{ end }}']
+  foreground = 'p:accent'
+  foreground_templates = ['{{ if gt .Code 0 }}p:red{{ end }}']
   template = '❯ '

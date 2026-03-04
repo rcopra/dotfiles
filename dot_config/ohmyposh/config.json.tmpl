@@ -1,8 +1,20 @@
+{{- /* chezmoi:template:left-delimiter=(( right-delimiter=)) */ -}}
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
   "version": 4,
   "final_space": true,
   "console_title_template": "{{ .Shell }} in {{ .Folder }}",
+  "palette": {
+    "fg":     "(( index .themes .theme "fg" ))",
+    "muted":  "(( index .themes .theme "muted" ))",
+    "accent": "(( index .themes .theme "accent" ))",
+    "green":  "(( index .themes .theme "green" ))",
+    "red":    "(( index .themes .theme "red" ))",
+    "yellow": "(( index .themes .theme "yellow" ))",
+    "orange": "(( index .themes .theme "orange" ))",
+    "purple": "(( index .themes .theme "purple" ))",
+    "teal":   "(( index .themes .theme "teal" ))"
+  },
   "blocks": [
     {
       "type": "prompt",
@@ -11,19 +23,19 @@
         {
           "type": "text",
           "style": "plain",
-          "foreground": "#6272A4",
-          "template": "\u2500"
+          "foreground": "p:muted",
+          "template": "─"
         },
         {
           "type": "os",
           "style": "plain",
-          "foreground": "#F8F8F2",
+          "foreground": "p:fg",
           "template": " {{ .Icon }} "
         },
         {
           "type": "session",
           "style": "plain",
-          "foreground": "#6272A4",
+          "foreground": "p:muted",
           "template": "{{ (split \".\" .HostName)._0 }} ",
           "properties": {
             "display_host": true,
@@ -33,7 +45,7 @@
         {
           "type": "path",
           "style": "plain",
-          "foreground": "#BD93F9",
+          "foreground": "p:accent",
           "template": "\uf07c {{ .Path }}",
           "properties": {
             "style": "full",
@@ -44,8 +56,8 @@
         {
           "type": "git",
           "style": "plain",
-          "foreground": "#FFB86C",
-          "template": " {{ .UpstreamIcon }}{{ .HEAD }}{{ if .Working.Changed }} <#FF5555>{{ .Working.String }}</>{{ end }}{{ if .Staging.Changed }}<#50FA7B> {{ .Staging.String }}</>{{ end }}{{ if gt .StashCount 0 }}<#BD93F9> {{ .StashCount }}</>{{ end }}",
+          "foreground": "p:orange",
+          "template": " {{ .UpstreamIcon }}{{ .HEAD }}{{ if .Working.Changed }} <p:red>{{ .Working.String }}</>{{ end }}{{ if .Staging.Changed }}<p:green> {{ .Staging.String }}</>{{ end }}{{ if gt .StashCount 0 }}<p:purple> {{ .StashCount }}</>{{ end }}",
           "properties": {
             "branch_icon": "\uf126 ",
             "fetch_status": true,
@@ -57,12 +69,12 @@
     {
       "type": "prompt",
       "alignment": "right",
-      "filler": "<#6272A4>\u00b7</>",
+      "filler": "<p:muted>·</>",
       "segments": [
         {
           "type": "node",
           "style": "plain",
-          "foreground": "#8BE9FD",
+          "foreground": "p:teal",
           "template": " \ue718 {{ .Full }}",
           "properties": {
             "display_mode": "files",
@@ -72,7 +84,7 @@
         {
           "type": "python",
           "style": "plain",
-          "foreground": "#F1FA8C",
+          "foreground": "p:yellow",
           "template": " \ue235 {{ .Full }}",
           "properties": {
             "display_mode": "files",
@@ -82,7 +94,7 @@
         {
           "type": "ruby",
           "style": "plain",
-          "foreground": "#FF5555",
+          "foreground": "p:red",
           "template": " \ue791 {{ .Full }}",
           "properties": {
             "display_mode": "files",
@@ -92,7 +104,7 @@
         {
           "type": "go",
           "style": "plain",
-          "foreground": "#8BE9FD",
+          "foreground": "p:teal",
           "template": " \ue627 {{ .Full }}",
           "properties": {
             "display_mode": "files",
@@ -102,7 +114,7 @@
         {
           "type": "php",
           "style": "plain",
-          "foreground": "#BD93F9",
+          "foreground": "p:purple",
           "template": " \ue73d {{ .Full }}",
           "properties": {
             "display_mode": "files",
@@ -112,7 +124,7 @@
         {
           "type": "julia",
           "style": "plain",
-          "foreground": "#BD93F9",
+          "foreground": "p:purple",
           "template": " \ue624 {{ .Full }}",
           "properties": {
             "display_mode": "files",
@@ -122,7 +134,7 @@
         {
           "type": "executiontime",
           "style": "plain",
-          "foreground": "#6272A4",
+          "foreground": "p:muted",
           "template": " {{ .FormattedMs }}",
           "properties": {
             "threshold": 0,
@@ -133,7 +145,7 @@
         {
           "type": "time",
           "style": "plain",
-          "foreground": "#FF79C6",
+          "foreground": "p:purple",
           "template": " \uf017 {{ .CurrentDate | date \"03:04:05 PM\" }}"
         }
       ]
@@ -146,17 +158,17 @@
         {
           "type": "text",
           "style": "plain",
-          "foreground": "#6272A4",
-          "template": "\u2570\u2500"
+          "foreground": "p:muted",
+          "template": "╰─"
         },
         {
           "type": "status",
           "style": "plain",
-          "foreground": "#50FA7B",
+          "foreground": "p:green",
           "foreground_templates": [
-            "{{ if gt .Code 0 }}#FF5555{{ end }}"
+            "{{ if gt .Code 0 }}p:red{{ end }}"
           ],
-          "template": "\u276f ",
+          "template": "❯ ",
           "properties": {
             "always_enabled": true
           }

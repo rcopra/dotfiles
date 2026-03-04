@@ -27,59 +27,37 @@ You are editing a chezmoi-managed dotfiles repo at `~/.local/share/chezmoi/`.
 
 ## Theme System
 
-Colors are centralized in `.chezmoidata/themes.toml`. Three themes available: `kanagawa`, `catppuccin-mocha`, `tokyo-night`.
+Colors are centralized in `.chezmoidata/themes.toml`. 23 themes available. Dark: `kanagawa`, `catppuccin-mocha`, `tokyo-night`, `gruvbox-dark`, `rose-pine`, `nord`, `dracula`, `ethereal`, `everforest`, `miasma`, `hackerman`, `osaka-jade`, `ristretto`, `matte-black`, `vantablack`, `flexoki-dark`, `solarized-dark`, `one-dark-pro`, `monokai`, `eldritch`. Light: `flexoki-light`, `catppuccin-latte`, `white`.
 
 ### How themes work
 
 - **Active theme**: `.theme` in `~/.config/chezmoi/chezmoi.toml` under `[data]`
-- **Theme palettes**: `.chezmoidata/themes.toml` — semantic color keys per theme: bg, fg, muted, accent, green, red, yellow, orange, purple, teal, git_clean, git_dirty, git_staged, git_stash, wezterm_scheme, delta_theme
+- **Theme palettes**: `.chezmoidata/themes.toml` — semantic color keys per theme: bg, fg, muted, accent, green, red, yellow, orange, purple, teal, wezterm_scheme, delta_theme
 - **Template syntax**: `{{ index .themes .theme "accent" }}` resolves to the hex color for the active theme
+- **All configs are templated** — every themed config updates automatically with `chezmoi apply`
 
 ### Templated configs (auto-update on theme switch)
 
-These use chezmoi templates — colors update automatically with `chezmoi apply`:
+- **oh-my-posh JSON** (`dot_config/ohmyposh/config.json.tmpl`) — uses OMP `palette` with `p:name` refs, chezmoi `(( ))` delimiters
+- **oh-my-posh TOML** (`dot_config/ohmyposh/config.toml.tmpl`) — same approach, TOML format
 - **WezTerm** (`dot_wezterm.lua.tmpl`) — `wezterm_scheme` key
 - **tmux** (`dot_tmux.conf.tmpl`) — status bar, pane borders, message style
 - **FZF** (`dot_fzf.zsh.tmpl`) — `FZF_DEFAULT_OPTS` colors
 
-### Non-templated configs (manual color replacement needed)
-
-These have hardcoded hex values. When switching themes, replace old palette colors with new ones:
-- **oh-my-posh** (`dot_config/ohmyposh/config.json`) — JSON prompt config
-- **oh-my-posh** (`dot_config/ohmyposh/config.toml`) — TOML prompt config (alternate)
-
 ### Switching themes — step by step
 
-1. **Read** `.chezmoidata/themes.toml` to get both the OLD theme palette and NEW theme palette
-2. **Read** `~/.config/chezmoi/chezmoi.toml` to confirm current theme
-3. **Edit** `~/.config/chezmoi/chezmoi.toml` — change `theme = "..."` to the new theme (use Edit tool!)
-4. **Run** `chezmoi apply` — this updates all templated configs (WezTerm, tmux, FZF)
-5. **Update oh-my-posh** — for BOTH `config.json` and `config.toml`:
-   - Read the file, then use Edit with `replace_all: true` for each color mapping
-   - Map: old muted→new muted, old fg→new fg, old accent→new accent, etc.
-   - Use the semantic keys from themes.toml to build the mapping
-   - **Important**: also replace colors inside oh-my-posh template strings (like `<#FFA066>`) not just `"foreground"` values
-6. **Run** `chezmoi apply` again to deploy oh-my-posh changes
-7. **Update Neovim colorscheme** — edit `~/.config/nvim/lua/custom/plugins/colorschemes.lua`:
+**Goal: minimize user interaction.** Everything is templated, so switching is just one config edit + apply.
+
+1. **Read in parallel**: `~/.config/chezmoi/chezmoi.toml` and `~/.config/nvim/lua/custom/plugins/colorschemes.lua`
+2. **Edit** `~/.config/chezmoi/chezmoi.toml` — change `theme = "..."` to the new theme (use Edit tool!)
+3. **Run** `chezmoi apply` — this updates ALL themed configs (WezTerm, tmux, FZF, oh-my-posh)
+4. **Update Neovim colorscheme** — edit `~/.config/nvim/lua/custom/plugins/colorschemes.lua`:
    - Change the colorscheme plugin and `vim.cmd.colorscheme` call to match the new theme
    - Commit in the nvim repo: `git -C ~/.config/nvim add -A && git -C ~/.config/nvim commit -m "switch colorscheme to <theme>"`
-8. **Tell user** to: restart WezTerm, `tmux source ~/.tmux.conf`, reopen neovim, open new shell for FZF/oh-my-posh
-
-### Oh-my-posh color mapping reference
-
-The oh-my-posh configs use these semantic roles (map old→new using themes.toml):
-
-| Role | Used in |
-|---|---|
-| muted | text separators, filler dots, execution time |
-| fg | OS icon, time display |
-| accent | session hostname, path, go language |
-| green / git_clean | git branch, node version, status prompt (success) |
-| yellow | python version, execution time (config.toml), prompt char (config.toml) |
-| red | ruby version, status prompt (error), error foreground_template |
-| orange / git_dirty | inline `<#hex>` in git template for dirty/untracked |
-| git_staged | inline `<#hex>` in git template for staged changes |
-| purple / git_stash | inline `<#hex>` in git template for stash, PHP, Julia |
+5. **Auto-refresh running sessions**:
+   - tmux: `tmux source-file ~/.tmux.conf` (works if inside tmux — always try it)
+   - FZF/oh-my-posh: `source ~/.zshrc` (reloads shell config)
+6. **Tell user** only manual steps: restart WezTerm, reopen Neovim (plugin installs on first launch if needed)
 
 ## Config File Map
 
@@ -91,8 +69,8 @@ The oh-my-posh configs use these semantic roles (map old→new using themes.toml
 | `dot_tmux.conf.tmpl` | `~/.tmux.conf` | Tmux config, plugins, keybinds, theme |
 | `dot_wezterm.lua.tmpl` | `~/.wezterm.lua` | WezTerm terminal config |
 | `dot_fzf.zsh.tmpl` | `~/.fzf.zsh` | FZF setup and theme colors |
-| `dot_config/ohmyposh/config.json` | `~/.config/ohmyposh/config.json` | Oh-my-posh prompt (JSON) |
-| `dot_config/ohmyposh/config.toml` | `~/.config/ohmyposh/config.toml` | Oh-my-posh prompt (TOML) |
+| `dot_config/ohmyposh/config.json.tmpl` | `~/.config/ohmyposh/config.json` | Oh-my-posh prompt (JSON) |
+| `dot_config/ohmyposh/config.toml.tmpl` | `~/.config/ohmyposh/config.toml` | Oh-my-posh prompt (TOML) |
 | `dot_aerospace.toml` | `~/.aerospace.toml` | macOS window manager |
 | `~/.config/nvim/` | `~/.config/nvim/` | Neovim config (separate git repo — rcopra/kickstart.nvim) |
 | `.chezmoiexternal.toml` | (chezmoi) | External repo declarations (nvim, TPM) |
