@@ -11,19 +11,19 @@
         {
           "type": "text",
           "style": "plain",
-          "foreground": "#565F89",
+          "foreground": "#6272A4",
           "template": "\u2500"
         },
         {
           "type": "os",
           "style": "plain",
-          "foreground": "#C0CAF5",
+          "foreground": "#F8F8F2",
           "template": " {{ .Icon }} "
         },
         {
           "type": "session",
           "style": "plain",
-          "foreground": "#7AA2F7",
+          "foreground": "#6272A4",
           "template": "{{ (split \".\" .HostName)._0 }} ",
           "properties": {
             "display_host": true,
@@ -33,7 +33,7 @@
         {
           "type": "path",
           "style": "plain",
-          "foreground": "#7AA2F7",
+          "foreground": "#BD93F9",
           "template": "\uf07c {{ .Path }}",
           "properties": {
             "style": "full",
@@ -44,8 +44,8 @@
         {
           "type": "git",
           "style": "plain",
-          "foreground": "#9ECE6A",
-          "template": " {{ .UpstreamIcon }}{{ .HEAD }}{{ if .Working.Changed }} <#FF9E64>{{ .Working.String }}</>{{ end }}{{ if .Staging.Changed }}<#7AA2F7> {{ .Staging.String }}</>{{ end }}{{ if gt .StashCount 0 }}<#BB9AF7> {{ .StashCount }}</>{{ end }}",
+          "foreground": "#FFB86C",
+          "template": " {{ .UpstreamIcon }}{{ .HEAD }}{{ if .Working.Changed }} <#FF5555>{{ .Working.String }}</>{{ end }}{{ if .Staging.Changed }}<#50FA7B> {{ .Staging.String }}</>{{ end }}{{ if gt .StashCount 0 }}<#BD93F9> {{ .StashCount }}</>{{ end }}",
           "properties": {
             "branch_icon": "\uf126 ",
             "fetch_status": true,
@@ -57,12 +57,12 @@
     {
       "type": "prompt",
       "alignment": "right",
-      "filler": "<#565F89>\u00b7</>",
+      "filler": "<#6272A4>\u00b7</>",
       "segments": [
         {
           "type": "node",
           "style": "plain",
-          "foreground": "#9ECE6A",
+          "foreground": "#8BE9FD",
           "template": " \ue718 {{ .Full }}",
           "properties": {
             "display_mode": "files",
@@ -72,7 +72,7 @@
         {
           "type": "python",
           "style": "plain",
-          "foreground": "#E0AF68",
+          "foreground": "#F1FA8C",
           "template": " \ue235 {{ .Full }}",
           "properties": {
             "display_mode": "files",
@@ -82,7 +82,7 @@
         {
           "type": "ruby",
           "style": "plain",
-          "foreground": "#F7768E",
+          "foreground": "#FF5555",
           "template": " \ue791 {{ .Full }}",
           "properties": {
             "display_mode": "files",
@@ -92,7 +92,7 @@
         {
           "type": "go",
           "style": "plain",
-          "foreground": "#7AA2F7",
+          "foreground": "#8BE9FD",
           "template": " \ue627 {{ .Full }}",
           "properties": {
             "display_mode": "files",
@@ -102,7 +102,7 @@
         {
           "type": "php",
           "style": "plain",
-          "foreground": "#BB9AF7",
+          "foreground": "#BD93F9",
           "template": " \ue73d {{ .Full }}",
           "properties": {
             "display_mode": "files",
@@ -112,7 +112,7 @@
         {
           "type": "julia",
           "style": "plain",
-          "foreground": "#BB9AF7",
+          "foreground": "#BD93F9",
           "template": " \ue624 {{ .Full }}",
           "properties": {
             "display_mode": "files",
@@ -122,7 +122,7 @@
         {
           "type": "executiontime",
           "style": "plain",
-          "foreground": "#565F89",
+          "foreground": "#6272A4",
           "template": " {{ .FormattedMs }}",
           "properties": {
             "threshold": 0,
@@ -133,7 +133,7 @@
         {
           "type": "time",
           "style": "plain",
-          "foreground": "#C0CAF5",
+          "foreground": "#FF79C6",
           "template": " \uf017 {{ .CurrentDate | date \"03:04:05 PM\" }}"
         }
       ]
@@ -146,15 +146,15 @@
         {
           "type": "text",
           "style": "plain",
-          "foreground": "#565F89",
+          "foreground": "#6272A4",
           "template": "\u2570\u2500"
         },
         {
           "type": "status",
           "style": "plain",
-          "foreground": "#9ECE6A",
+          "foreground": "#50FA7B",
           "foreground_templates": [
-            "{{ if gt .Code 0 }}#F7768E{{ end }}"
+            "{{ if gt .Code 0 }}#FF5555{{ end }}"
           ],
           "template": "\u276f ",
           "properties": {

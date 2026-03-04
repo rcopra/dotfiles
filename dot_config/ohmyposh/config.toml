@@ -10,19 +10,19 @@ console_title_template = '{{ .Folder }}'
   [[blocks.segments]]
     type = 'os'
     style = 'plain'
-    foreground = '#C0CAF5'
+    foreground = '#F8F8F2'
     template = '{{ .Icon }}'
 
   [[blocks.segments]]
     type = 'text'
     style = 'plain'
-    foreground = '#565F89'
+    foreground = '#6272A4'
     template = '─'
 
   [[blocks.segments]]
     type = 'path'
     style = 'plain'
-    foreground = '#7AA2F7'
+    foreground = '#BD93F9'
     template = ' {{ .Path }}'
     [blocks.segments.properties]
       style = 'full'
@@ -30,8 +30,8 @@ console_title_template = '{{ .Folder }}'
   [[blocks.segments]]
     type = 'git'
     style = 'plain'
-    foreground = '#9ECE6A'
-    template = ' {{ .HEAD }}{{ if or .Working.Changed .Staging.Changed .Working.Untracked }} {{ end }}{{ if .Working.Changed }}<#FF9E64>!{{ .Working.Changed }}</>{{ end }}{{ if .Working.Untracked }}<#FF9E64>?{{ .Working.Untracked }}</>{{ end }}{{ if .Staging.Changed }}<#7AA2F7>+{{ .Staging.Changed }}</>{{ end }}{{ if gt .StashCount 0 }}<#BB9AF7>*{{ .StashCount }}</>{{ end }}'
+    foreground = '#FFB86C'
+    template = ' {{ .HEAD }}{{ if or .Working.Changed .Staging.Changed .Working.Untracked }} {{ end }}{{ if .Working.Changed }}<#FF5555>!{{ .Working.Changed }}</>{{ end }}{{ if .Working.Untracked }}<#FF5555>?{{ .Working.Untracked }}</>{{ end }}{{ if .Staging.Changed }}<#50FA7B>+{{ .Staging.Changed }}</>{{ end }}{{ if gt .StashCount 0 }}<#BD93F9>*{{ .StashCount }}</>{{ end }}'
     [blocks.segments.properties]
       fetch_status = true
       branch_icon = ''
@@ -43,7 +43,7 @@ console_title_template = '{{ .Folder }}'
   [[blocks.segments]]
     type = 'executiontime'
     style = 'plain'
-    foreground = '#E0AF68'
+    foreground = '#6272A4'
     template = ' {{ .FormattedMs }}'
     [blocks.segments.properties]
       threshold = 500
@@ -52,7 +52,7 @@ console_title_template = '{{ .Folder }}'
   [[blocks.segments]]
     type = 'time'
     style = 'plain'
-    foreground = '#C0CAF5'
+    foreground = '#FF79C6'
     template = ' {{ .CurrentDate | date "15:04:05" }}'
 
 # Second line - prompt character
@@ -64,18 +64,18 @@ console_title_template = '{{ .Folder }}'
   [[blocks.segments]]
     type = 'text'
     style = 'plain'
-    foreground = '#565F89'
+    foreground = '#6272A4'
     template = '╰─'
 
   [[blocks.segments]]
     type = 'status'
     style = 'plain'
-    foreground = '#E0AF68'
-    foreground_templates = ['{{ if gt .Code 0 }}#F7768E{{ end }}']
+    foreground = '#FF79C6'
+    foreground_templates = ['{{ if gt .Code 0 }}#FF5555{{ end }}']
     template = '❯ '
 
 # Transient prompt for cleaner history
 [transient_prompt]
-  foreground = '#E0AF68'
-  foreground_templates = ['{{ if gt .Code 0 }}#F7768E{{ end }}']
+  foreground = '#FF79C6'
+  foreground_templates = ['{{ if gt .Code 0 }}#FF5555{{ end }}']
   template = '❯ '

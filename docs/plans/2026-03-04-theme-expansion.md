@@ -1,129 +1,25 @@
-[themes.kanagawa]
-bg             = "#1F1F28"
-fg             = "#C8C093"
-muted          = "#54546D"
-accent         = "#7FB4CA"
-green          = "#98BB6C"
-red            = "#E82424"
-yellow         = "#E6C384"
-orange         = "#FFA066"
-purple         = "#957FB8"
-teal           = "#6A9589"
-git_clean      = "#98BB6C"
-git_dirty      = "#FFA066"
-git_staged     = "#76946A"
-git_stash      = "#957FB8"
-wezterm_scheme = "Kanagawa (Gogh)"
-delta_theme    = "Monokai Extended"
+# Theme Expansion Implementation Plan
 
-[themes.catppuccin-mocha]
-bg             = "#1E1E2E"
-fg             = "#CDD6F4"
-muted          = "#585B70"
-accent         = "#89B4FA"
-green          = "#A6E3A1"
-red            = "#F38BA8"
-yellow         = "#F9E2AF"
-orange         = "#FAB387"
-purple         = "#CBA6F7"
-teal           = "#94E2D5"
-git_clean      = "#A6E3A1"
-git_dirty      = "#FAB387"
-git_staged     = "#74C7EC"
-git_stash      = "#CBA6F7"
-wezterm_scheme = "Catppuccin Mocha"
-delta_theme    = "Catppuccin Mocha"
+> **For Claude:** REQUIRED SUB-SKILL: Use superpowers:executing-plans to implement this plan task-by-task.
 
-[themes.tokyo-night]
-bg             = "#1A1B26"
-fg             = "#C0CAF5"
-muted          = "#565F89"
-accent         = "#7AA2F7"
-green          = "#9ECE6A"
-red            = "#F7768E"
-yellow         = "#E0AF68"
-orange         = "#FF9E64"
-purple         = "#BB9AF7"
-teal           = "#73DACA"
-git_clean      = "#9ECE6A"
-git_dirty      = "#FF9E64"
-git_staged     = "#7AA2F7"
-git_stash      = "#BB9AF7"
-wezterm_scheme = "Tokyo Night"
-delta_theme    = "Monokai Extended"
+**Goal:** Expand themes.toml from 7 to 23 themes, covering all Omarchy official themes plus popular extras.
 
-[themes.gruvbox-dark]
-bg             = "#282828"
-fg             = "#EBDBB2"
-muted          = "#665C54"
-accent         = "#83A598"
-green          = "#B8BB26"
-red            = "#FB4934"
-yellow         = "#FABD2F"
-orange         = "#FE8019"
-purple         = "#D3869B"
-teal           = "#8EC07C"
-git_clean      = "#B8BB26"
-git_dirty      = "#FE8019"
-git_staged     = "#83A598"
-git_stash      = "#D3869B"
-wezterm_scheme = "GruvboxDark"
-delta_theme    = "gruvbox-dark"
+**Architecture:** Add 16 new theme sections to `.chezmoidata/themes.toml` with consistent semantic color keys. Update CLAUDE.md and the dotfiles-config skill to reflect the new theme list.
 
-[themes.rose-pine]
-bg             = "#191724"
-fg             = "#E0DEF4"
-muted          = "#6E6A86"
-accent         = "#C4A7E7"
-green          = "#9CCFD8"
-red            = "#EB6F92"
-yellow         = "#F6C177"
-orange         = "#EA9A97"
-purple         = "#C4A7E7"
-teal           = "#9CCFD8"
-git_clean      = "#9CCFD8"
-git_dirty      = "#F6C177"
-git_staged     = "#31748F"
-git_stash      = "#C4A7E7"
-wezterm_scheme = "rose-pine"
-delta_theme    = "Monokai Extended"
+**Tech Stack:** Chezmoi data files (TOML), no code changes.
 
-[themes.nord]
-bg             = "#2E3440"
-fg             = "#ECEFF4"
-muted          = "#4C566A"
-accent         = "#88C0D0"
-green          = "#A3BE8C"
-red            = "#BF616A"
-yellow         = "#EBCB8B"
-orange         = "#D08770"
-purple         = "#B48EAD"
-teal           = "#8FBCBB"
-git_clean      = "#A3BE8C"
-git_dirty      = "#D08770"
-git_staged     = "#88C0D0"
-git_stash      = "#B48EAD"
-wezterm_scheme = "nord"
-delta_theme    = "Nord"
+---
 
-[themes.dracula]
-bg             = "#282A36"
-fg             = "#F8F8F2"
-muted          = "#6272A4"
-accent         = "#8BE9FD"
-green          = "#50FA7B"
-red            = "#FF5555"
-yellow         = "#F1FA8C"
-orange         = "#FFB86C"
-purple         = "#BD93F9"
-teal           = "#8BE9FD"
-git_clean      = "#50FA7B"
-git_dirty      = "#FFB86C"
-git_staged     = "#8BE9FD"
-git_stash      = "#BD93F9"
-wezterm_scheme = "Dracula (Official)"
-delta_theme    = "Dracula"
+### Task 1: Add Omarchy official dark themes (6 themes)
 
+**Files:**
+- Modify: `.chezmoidata/themes.toml` (append after dracula section, line 126)
+
+**Step 1: Add ethereal, everforest, miasma, hackerman, osaka-jade, ristretto**
+
+Append to `.chezmoidata/themes.toml`:
+
+```toml
 [themes.ethereal]
 bg             = "#060B1E"
 fg             = "#ffcead"
@@ -231,7 +127,32 @@ git_staged     = "#85dacc"
 git_stash      = "#a8a9eb"
 wezterm_scheme = "Monokai Remastered"
 delta_theme    = "Monokai Extended"
+```
 
+**Step 2: Verify with chezmoi**
+
+Run: `chezmoi data | grep -A1 ethereal`
+Expected: Shows the ethereal theme data.
+
+**Step 3: Commit**
+
+```bash
+git add .chezmoidata/themes.toml
+git commit -m "add omarchy official dark themes: ethereal, everforest, miasma, hackerman, osaka-jade, ristretto"
+```
+
+---
+
+### Task 2: Add monochrome/minimal themes (2 themes)
+
+**Files:**
+- Modify: `.chezmoidata/themes.toml` (append)
+
+**Step 1: Add matte-black, vantablack**
+
+Append to `.chezmoidata/themes.toml`:
+
+```toml
 [themes.matte-black]
 bg             = "#121212"
 fg             = "#bebebe"
@@ -267,7 +188,27 @@ git_staged     = "#cecece"
 git_stash      = "#9b9b9b"
 wezterm_scheme = "Grayscale (dark) (terminal.sexy)"
 delta_theme    = "Monokai Extended"
+```
 
+**Step 2: Commit**
+
+```bash
+git add .chezmoidata/themes.toml
+git commit -m "add monochrome themes: matte-black, vantablack"
+```
+
+---
+
+### Task 3: Add light themes (3 themes)
+
+**Files:**
+- Modify: `.chezmoidata/themes.toml` (append)
+
+**Step 1: Add flexoki-light, catppuccin-latte, white**
+
+Append to `.chezmoidata/themes.toml`:
+
+```toml
 [themes.flexoki-light]
 bg             = "#FFFCF0"
 fg             = "#100F0F"
@@ -321,7 +262,27 @@ git_staged     = "#1a1a1a"
 git_stash      = "#4a4a4a"
 wezterm_scheme = "Grayscale (light) (terminal.sexy)"
 delta_theme    = "GitHub"
+```
 
+**Step 2: Commit**
+
+```bash
+git add .chezmoidata/themes.toml
+git commit -m "add light themes: flexoki-light, catppuccin-latte, white"
+```
+
+---
+
+### Task 4: Add extras themes (5 themes)
+
+**Files:**
+- Modify: `.chezmoidata/themes.toml` (append)
+
+**Step 1: Add flexoki-dark, solarized-dark, one-dark-pro, monokai, eldritch**
+
+Append to `.chezmoidata/themes.toml`:
+
+```toml
 [themes.flexoki-dark]
 bg             = "#100F0F"
 fg             = "#CECDC3"
@@ -411,3 +372,55 @@ git_staged     = "#04D1F9"
 git_stash      = "#A48CF2"
 wezterm_scheme = "Eldritch"
 delta_theme    = "Monokai Extended"
+```
+
+**Step 2: Verify all 23 themes load**
+
+Run: `chezmoi data | grep 'themes\.' | wc -l`
+Expected: Should show entries for all 23 themes.
+
+**Step 3: Commit**
+
+```bash
+git add .chezmoidata/themes.toml
+git commit -m "add extras themes: flexoki-dark, solarized-dark, one-dark-pro, monokai, eldritch"
+```
+
+---
+
+### Task 5: Update documentation and skill
+
+**Files:**
+- Modify: `/Users/rickcopra/.local/share/chezmoi/CLAUDE.md` — update `.theme` variable docs
+- Modify: `/Users/rickcopra/.claude/skills/dotfiles-config/skill.md` — update available themes list
+
+**Step 1: Update CLAUDE.md**
+
+Find the `.theme` line and update with full theme list.
+
+**Step 2: Update dotfiles-config skill**
+
+Find the "Available themes" line and update with full theme list.
+
+**Step 3: Commit**
+
+```bash
+git add CLAUDE.md
+git commit -m "docs: update theme list to 23 themes"
+```
+
+---
+
+### Task 6: Smoke test a theme switch
+
+**Step 1: Switch to a new theme to verify**
+
+Pick one new theme (e.g., everforest) and run through the dotfiles-config skill's theme switch workflow:
+- Edit chezmoi.toml to set theme
+- Run chezmoi apply
+- Verify templated configs render with correct colors
+- Check oh-my-posh gets the right palette from the official theme
+
+**Step 2: Switch back to dracula**
+
+Restore the user's current theme.

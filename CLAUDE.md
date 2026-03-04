@@ -38,7 +38,7 @@ Defined in `.chezmoi.toml.tmpl` and available in all `.tmpl` files:
 - `.email` - Git email (prompted during init)
 - `.name` - Git name (prompted during init)
 - `.machineType` - "personal", "work", or "server" (controls which files are installed)
-- `.theme` - Color theme name (kanagawa, catppuccin-mocha, tokyo-night, gruvbox-dark, rose-pine, nord, dracula)
+- `.theme` - Color theme name. Dark: kanagawa, catppuccin-mocha, tokyo-night, gruvbox-dark, rose-pine, nord, dracula, ethereal, everforest, miasma, hackerman, osaka-jade, ristretto, matte-black, vantablack, flexoki-dark, solarized-dark, one-dark-pro, monokai, eldritch. Light: flexoki-light, catppuccin-latte, white.
 - `.themes` - Full color palettes per theme (defined in `.chezmoidata/themes.toml`)
 
 ## Architecture
