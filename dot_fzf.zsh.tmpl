@@ -11,5 +11,13 @@ if [[ ! "$PATH" == */.fzf/bin* ]] && [[ -d "$HOME/.fzf/bin" ]]; then
 fi
 {{- end }}
 
+# Theme colors
+export FZF_DEFAULT_OPTS="
+  --color=fg:{{ index .themes .theme "fg" }},bg:-1,hl:{{ index .themes .theme "accent" }}
+  --color=fg+:{{ index .themes .theme "fg" }},bg+:{{ index .themes .theme "bg" }},hl+:{{ index .themes .theme "accent" }}
+  --color=info:{{ index .themes .theme "green" }},prompt:{{ index .themes .theme "purple" }},pointer:{{ index .themes .theme "red" }}
+  --color=marker:{{ index .themes .theme "yellow" }},spinner:{{ index .themes .theme "purple" }},header:{{ index .themes .theme "muted" }}
+"
+
 # Use fzf shell integration
 command -v fzf > /dev/null && source <(fzf --zsh)

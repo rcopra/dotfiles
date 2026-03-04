@@ -87,10 +87,16 @@ set -g focus-events on
 set -g allow-passthrough on
 set -g set-clipboard on
 
+# Theme colors
+set -g status-style "bg=default,fg={{ index .themes .theme "fg" }}"
+set -g pane-border-style "fg={{ index .themes .theme "muted" }}"
+set -g pane-active-border-style "fg={{ index .themes .theme "accent" }}"
+set -g message-style "bg=default,fg={{ index .themes .theme "yellow" }}"
+
 # tmux-mem-cpu-load status bar
 set -g status-interval 2
 set -g status-right-length 80
-set -g status-right "#[fg=green]#(tmux-mem-cpu-load --colors --interval 2 --graph-lines 10)#[default] | %H:%M %d-%b-%y"
+set -g status-right "#[fg={{ index .themes .theme "green" }}]#(tmux-mem-cpu-load --colors --interval 2 --graph-lines 10)#[default] | %H:%M %d-%b-%y"
 
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run '~/.tmux/plugins/tpm/tpm'
