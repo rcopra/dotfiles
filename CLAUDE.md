@@ -38,10 +38,14 @@ Defined in `.chezmoi.toml.tmpl` and available in all `.tmpl` files:
 - `.email` - Git email (prompted during init)
 - `.name` - Git name (prompted during init)
 - `.machineType` - "personal", "work", or "server" (controls which files are installed)
+- `.theme` - Color theme name (kanagawa, catppuccin-mocha, tokyo-night, gruvbox-dark, rose-pine, nord, dracula)
+- `.themes` - Full color palettes per theme (defined in `.chezmoidata/themes.toml`)
 
 ## Architecture
 
 - **External repos** (`.chezmoiexternal.toml`): nvim config and TPM are cloned as external git repos
+  - Neovim config (`~/.config/nvim/`) is rcopra/kickstart.nvim — edit directly, commit separately with `git -C ~/.config/nvim`
+  - `chezmoi apply` will overwrite nvim changes — do NOT use chezmoi for nvim edits
 - **Platform conditionals** (`.chezmoiignore`): macOS-only files (aerospace, karabiner, VS Code settings) are ignored on Linux; GUI apps are ignored on "server" machines
 - **Package installation** (`run_onchange_install-packages.sh.tmpl`): Installs Homebrew packages on macOS, apt/pacman packages on Linux
 - **Version managers**: rbenv, pyenv, nvm are installed and configured in zshrc
@@ -63,3 +67,8 @@ For detailed planning sessions (keyboard layouts, window management, cross-platf
 - `docs/cross-platform-goals.md` - What should be consistent
 
 These are only loaded on-demand to save tokens. Ask Claude to read them when planning.
+
+## Gotchas
+
+- **oh-my-posh configs use `{{ }}` for their own templates** — do NOT make them `.tmpl` files, chezmoi will try to evaluate oh-my-posh expressions and fail. Colors are hardcoded hex values, updated via find/replace.
+- **`~/.config/chezmoi/chezmoi.toml` is the live config** — edit directly with Edit tool, never use sed/Bash (sed has corrupted this file before)
