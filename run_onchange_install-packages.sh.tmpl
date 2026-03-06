@@ -21,7 +21,6 @@ fi
 echo "==> Installing CLI tools..."
 brew install \
     git \
-    neovim \
     tmux \
     fzf \
     eza \
@@ -58,7 +57,6 @@ if command -v apt &> /dev/null; then
     sudo apt update
     sudo apt install -y \
         git \
-        neovim \
         tmux \
         fzf \
         ripgrep \
@@ -94,13 +92,24 @@ if command -v apt &> /dev/null; then
         curl -sS https://starship.rs/install.sh | sh -s -- -y
     fi
 
+    # Install Nerd Fonts (Hack)
+    if ! fc-list | grep -qi "Hack Nerd"; then
+        echo "==> Installing Hack Nerd Font..."
+        FONT_DIR="$HOME/.local/share/fonts"
+        mkdir -p "$FONT_DIR"
+        NERD_FONT_VERSION="v3.3.0"
+        curl -fsSL "https://github.com/ryanoasis/nerd-fonts/releases/download/${NERD_FONT_VERSION}/Hack.zip" -o /tmp/Hack.zip
+        unzip -o /tmp/Hack.zip -d "$FONT_DIR"
+        rm /tmp/Hack.zip
+        fc-cache -fv
+    fi
+
 elif command -v pacman &> /dev/null; then
     # Arch Linux (Omarchy)
     echo "==> Detected pacman (Arch-based)"
 
     sudo pacman -Syu --noconfirm \
         git \
-        neovim \
         tmux \
         fzf \
         eza \
@@ -117,6 +126,12 @@ elif command -v pacman &> /dev/null; then
     # Install starship (available in official repos)
     if ! command -v starship &> /dev/null; then
         sudo pacman -S --noconfirm starship
+    fi
+
+    # Install Nerd Fonts (Hack)
+    if ! pacman -Q ttf-hack-nerd &> /dev/null; then
+        echo "==> Installing Hack Nerd Font..."
+        sudo pacman -S --noconfirm ttf-hack-nerd
     fi
 fi
 
