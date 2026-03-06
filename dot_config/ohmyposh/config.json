@@ -1,19 +1,19 @@
-{{- /* chezmoi:template:left-delimiter=(( right-delimiter=)) */ -}}
 {
   "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
   "version": 4,
   "final_space": true,
   "console_title_template": "{{ .Shell }} in {{ .Folder }}",
   "palette": {
-    "fg":     "(( index .themes .theme "fg" ))",
-    "muted":  "(( index .themes .theme "muted" ))",
-    "accent": "(( index .themes .theme "accent" ))",
-    "green":  "(( index .themes .theme "green" ))",
-    "red":    "(( index .themes .theme "red" ))",
-    "yellow": "(( index .themes .theme "yellow" ))",
-    "orange": "(( index .themes .theme "orange" ))",
-    "purple": "(( index .themes .theme "purple" ))",
-    "teal":   "(( index .themes .theme "teal" ))"
+    "fg":      "#E0DEF4",
+    "muted":   "#6E6A86",
+    "primary": "#C4A7E7",
+    "accent":  "#EA9A97",
+    "green":   "#9CCFD8",
+    "red":     "#EB6F92",
+    "yellow":  "#F6C177",
+    "orange":  "#EA9A97",
+    "purple":  "#C4A7E7",
+    "teal":    "#3E8FB0"
   },
   "blocks": [
     {
@@ -45,7 +45,7 @@
         {
           "type": "path",
           "style": "plain",
-          "foreground": "p:accent",
+          "foreground": "p:primary",
           "template": "\uf07c {{ .Path }}",
           "properties": {
             "style": "full",
@@ -145,7 +145,7 @@
         {
           "type": "time",
           "style": "plain",
-          "foreground": "p:purple",
+          "foreground": "p:accent",
           "template": " \uf017 {{ .CurrentDate | date \"03:04:05 PM\" }}"
         }
       ]

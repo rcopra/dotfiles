@@ -1,18 +1,18 @@
-# chezmoi:template:left-delimiter=(( right-delimiter=))
 version = 4
 final_space = true
 console_title_template = '{{ .Folder }}'
 
 [palette]
-  fg     = '(( index .themes .theme "fg" ))'
-  muted  = '(( index .themes .theme "muted" ))'
-  accent = '(( index .themes .theme "accent" ))'
-  green  = '(( index .themes .theme "green" ))'
-  red    = '(( index .themes .theme "red" ))'
-  yellow = '(( index .themes .theme "yellow" ))'
-  orange = '(( index .themes .theme "orange" ))'
-  purple = '(( index .themes .theme "purple" ))'
-  teal   = '(( index .themes .theme "teal" ))'
+  fg      = '#E0DEF4'
+  muted   = '#6E6A86'
+  primary = '#C4A7E7'
+  accent  = '#EA9A97'
+  green   = '#9CCFD8'
+  red     = '#EB6F92'
+  yellow  = '#F6C177'
+  orange  = '#EA9A97'
+  purple  = '#C4A7E7'
+  teal    = '#3E8FB0'
 
 # First line - path, git, fill, hostname, time
 [[blocks]]
@@ -34,7 +34,7 @@ console_title_template = '{{ .Folder }}'
   [[blocks.segments]]
     type = 'path'
     style = 'plain'
-    foreground = 'p:accent'
+    foreground = 'p:primary'
     template = ' {{ .Path }}'
     [blocks.segments.properties]
       style = 'full'
@@ -64,7 +64,7 @@ console_title_template = '{{ .Folder }}'
   [[blocks.segments]]
     type = 'time'
     style = 'plain'
-    foreground = 'p:purple'
+    foreground = 'p:accent'
     template = ' {{ .CurrentDate | date "15:04:05" }}'
 
 # Second line - prompt character
@@ -82,12 +82,12 @@ console_title_template = '{{ .Folder }}'
   [[blocks.segments]]
     type = 'status'
     style = 'plain'
-    foreground = 'p:accent'
+    foreground = 'p:green'
     foreground_templates = ['{{ if gt .Code 0 }}p:red{{ end }}']
     template = '❯ '
 
 # Transient prompt for cleaner history
 [transient_prompt]
-  foreground = 'p:accent'
+  foreground = 'p:green'
   foreground_templates = ['{{ if gt .Code 0 }}p:red{{ end }}']
   template = '❯ '

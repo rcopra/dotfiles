@@ -11,12 +11,13 @@ if [[ ! "$PATH" == */.fzf/bin* ]] && [[ -d "$HOME/.fzf/bin" ]]; then
 fi
 {{- end }}
 
-# Theme colors
+# Rose Pine Moon colors (https://github.com/rose-pine/fzf)
 export FZF_DEFAULT_OPTS="
-  --color=fg:{{ index .themes .theme "fg" }},bg:-1,hl:{{ index .themes .theme "accent" }}
-  --color=fg+:{{ index .themes .theme "fg" }},bg+:{{ index .themes .theme "bg" }},hl+:{{ index .themes .theme "accent" }}
-  --color=info:{{ index .themes .theme "green" }},prompt:{{ index .themes .theme "purple" }},pointer:{{ index .themes .theme "red" }}
-  --color=marker:{{ index .themes .theme "yellow" }},spinner:{{ index .themes .theme "purple" }},header:{{ index .themes .theme "muted" }}
+  --color=fg:#908caa,bg:#232136,hl:#ea9a97
+  --color=fg+:#e0def4,bg+:#393552,hl+:#ea9a97
+  --color=border:#44415a,header:#3e8fb0,gutter:#232136
+  --color=spinner:#f6c177,info:#9ccfd8
+  --color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa
 "
 
 # Use fzf shell integration

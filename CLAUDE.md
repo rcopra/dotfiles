@@ -38,8 +38,10 @@ Defined in `.chezmoi.toml.tmpl` and available in all `.tmpl` files:
 - `.email` - Git email (prompted during init)
 - `.name` - Git name (prompted during init)
 - `.machineType` - "personal", "work", or "server" (controls which files are installed)
-- `.theme` - Color theme name. Dark: kanagawa, catppuccin-mocha, tokyo-night, gruvbox-dark, rose-pine, nord, dracula, ethereal, everforest, miasma, hackerman, osaka-jade, ristretto, matte-black, vantablack, flexoki-dark, solarized-dark, one-dark-pro, monokai, eldritch. Light: flexoki-light, catppuccin-latte, white.
-- `.themes` - Full color palettes per theme (defined in `.chezmoidata/themes.toml`)
+
+## Theme
+
+Rose Pine Moon is hardcoded across all tools. There is no theme switching system — each tool uses either a native theme selector or hardcoded hex values. To change themes, edit each config file individually.
 
 ## Architecture
 
@@ -70,5 +72,4 @@ These are only loaded on-demand to save tokens. Ask Claude to read them when pla
 
 ## Gotchas
 
-- **oh-my-posh `.tmpl` files use custom delimiters `(( ))`** — chezmoi directive `chezmoi:template:left-delimiter=(( right-delimiter=))` avoids conflict with OMP's own `{{ }}` template syntax. OMP expressions pass through untouched; chezmoi expressions use `(( ))`.
 - **`~/.config/chezmoi/chezmoi.toml` is the live config** — edit directly with Edit tool, never use sed/Bash (sed has corrupted this file before)
