@@ -19,6 +19,7 @@ $rust\
 $scala\
 $conda\
 $python\
+$ruby\
 $time\n  \
 [󱞪](fg:iris) \
 """
@@ -59,16 +60,16 @@ symbol = ""
 disabled = false
 style = "bg:overlay fg:love"
 format = '[](fg:overlay)([$all_status$ahead_behind]($style))[](fg:overlay) '
-up_to_date = '[ ✓ ](bg:overlay fg:iris)'
-untracked = '[?\($count\)](bg:overlay fg:gold)'
-stashed = '[\$](bg:overlay fg:iris)'
-modified = '[!\($count\)](bg:overlay fg:gold)'
-renamed = '[»\($count\)](bg:overlay fg:iris)'
-deleted = '[✘\($count\)](bg:overlay fg:love)'
-staged = '[++\($count\)](bg:overlay fg:gold)'
-ahead = '[⇡\(${count}\)](bg:overlay fg:foam)'
-diverged = '⇕[\[](bg:overlay fg:iris)[⇡\(${ahead_count}\)](bg:overlay fg:foam)[⇣\(${behind_count}\)](bg:overlay fg:rose)[\]](bg:overlay fg:iris)'
-behind = '[⇣\(${count}\)](bg:overlay fg:rose)'
+up_to_date = ''
+untracked = ''
+stashed = ''
+modified = '[ !\($count\) ](bg:overlay fg:gold)'
+renamed = ''
+deleted = ''
+staged = '[ +\($count\) ](bg:overlay fg:gold)'
+ahead = '[ ⇡${count} ](bg:overlay fg:foam)'
+diverged = ''
+behind = '[ ⇣${count} ](bg:overlay fg:rose)'
 
 [time]
 disabled = false
@@ -151,6 +152,12 @@ style = "bg:overlay fg:pine"
 format = " [](fg:overlay)[ $symbol$version ]($style)[](fg:overlay)"
 disabled = false
 symbol = " "
+
+[ruby]
+style = "bg:overlay fg:pine"
+format = " [](fg:overlay)[ $symbol$version ]($style)[](fg:overlay)"
+disabled = false
+symbol = " "
 
 [python]
 style = "bg:overlay fg:pine"
