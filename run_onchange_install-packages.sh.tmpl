@@ -30,7 +30,7 @@ brew install \
     fd \
     bat \
     jq \
-    oh-my-posh \
+    starship \
     tmux-mem-cpu-load \
     direnv \
     rainfrog
@@ -88,10 +88,10 @@ if command -v apt &> /dev/null; then
         curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
     fi
 
-    # Install oh-my-posh
-    if ! command -v oh-my-posh &> /dev/null; then
-        echo "==> Installing oh-my-posh..."
-        curl -s https://ohmyposh.dev/install.sh | bash -s
+    # Install starship
+    if ! command -v starship &> /dev/null; then
+        echo "==> Installing starship..."
+        curl -sS https://starship.rs/install.sh | sh -s -- -y
     fi
 
 elif command -v pacman &> /dev/null; then
@@ -114,15 +114,9 @@ elif command -v pacman &> /dev/null; then
         base-devel \
         direnv
 
-    # Install oh-my-posh from AUR
-    if ! command -v oh-my-posh &> /dev/null; then
-        if command -v yay &> /dev/null; then
-            yay -S --noconfirm oh-my-posh-bin
-        elif command -v paru &> /dev/null; then
-            paru -S --noconfirm oh-my-posh-bin
-        else
-            echo "==> WARNING: No AUR helper found. Install oh-my-posh manually."
-        fi
+    # Install starship (available in official repos)
+    if ! command -v starship &> /dev/null; then
+        sudo pacman -S --noconfirm starship
     fi
 fi
 

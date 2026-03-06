@@ -41,7 +41,7 @@ Defined in `.chezmoi.toml.tmpl` and available in all `.tmpl` files:
 
 ## Theme
 
-Rose Pine Moon is hardcoded across all tools. There is no theme switching system — each tool uses either a native theme selector or hardcoded hex values. To change themes, edit each config file individually.
+Rose Pine Moon is hardcoded across all tools. There is no theme switching system — each tool uses either a native theme selector or hardcoded hex values. Prompt is Starship with the official `rose-pine/starship` Moon preset. To change themes, edit each config file individually.
 
 ## Architecture
 

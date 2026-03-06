@@ -3,7 +3,7 @@ local act = wezterm.action
 local config = wezterm.config_builder()
 local rose_pine = wezterm.plugin.require("https://github.com/neapsix/wezterm").moon
 
-config.font = wezterm.font("MesloLGS Nerd Font Mono")
+config.font = wezterm.font("FiraCode Nerd Font")
 config.font_size = 17
 
 -- Enable Kitty graphics protocol for image rendering

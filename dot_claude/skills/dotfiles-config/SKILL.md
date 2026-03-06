@@ -34,7 +34,7 @@ Rose Pine Moon is hardcoded across all tools. There is no centralized theme swit
 - **WezTerm** (`dot_wezterm.lua`) — `neapsix/wezterm` plugin, moon variant
 - **tmux** (`dot_tmux.conf`) — `rose-pine/tmux` TPM plugin with `@rose_pine_variant 'moon'`
 - **FZF** (`dot_fzf.zsh.tmpl`) — official `rose-pine/fzf` hex values in `FZF_DEFAULT_OPTS`
-- **oh-my-posh** (`dot_config/ohmyposh/config.json`, `config.toml`) — hardcoded hex in `palette`
+- **Starship** (`dot_config/starship.toml`) — official `rose-pine/starship` Moon preset
 - **Neovim** (`~/.config/nvim/lua/custom/plugins/colorschemes.lua`) — `vim.cmd.colorscheme 'rose-pine-moon'`
 
 ### Switching themes (manual per-tool)
@@ -43,7 +43,7 @@ To change to a different theme, edit each config file individually:
 1. WezTerm: change `config.color_scheme`
 2. tmux: swap the rose-pine plugin or add manual color lines
 3. FZF: update hex values in `FZF_DEFAULT_OPTS`
-4. oh-my-posh: update hex values in `palette` section (both JSON and TOML)
+4. Starship: update `dot_config/starship.toml` (uses `rose-pine/starship` preset)
 5. Neovim: change `vim.cmd.colorscheme` (commit separately in nvim repo)
 
 ## Config File Map
@@ -55,8 +55,7 @@ To change to a different theme, edit each config file individually:
 | `dot_tmux.conf` | `~/.tmux.conf` | Tmux config, plugins, keybinds, theme |
 | `dot_wezterm.lua` | `~/.wezterm.lua` | WezTerm terminal config |
 | `dot_fzf.zsh.tmpl` | `~/.fzf.zsh` | FZF setup and theme colors |
-| `dot_config/ohmyposh/config.json` | `~/.config/ohmyposh/config.json` | Oh-my-posh prompt (JSON) |
-| `dot_config/ohmyposh/config.toml` | `~/.config/ohmyposh/config.toml` | Oh-my-posh prompt (TOML) |
+| `dot_config/starship.toml` | `~/.config/starship.toml` | Starship prompt (Rose Pine Moon) |
 | `dot_aerospace.toml` | `~/.aerospace.toml` | macOS window manager |
 | `~/.config/nvim/` | `~/.config/nvim/` | Neovim config (separate git repo — rcopra/kickstart.nvim) |
 | `.chezmoiexternal.toml` | (chezmoi) | External repo declarations (nvim, TPM) |
