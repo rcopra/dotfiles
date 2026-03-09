@@ -14,7 +14,7 @@ if command -v apt &> /dev/null; then
         fd-find \
         bat \
         jq \
-        zsh \
+        bash \
         curl \
         wget \
         build-essential \
@@ -63,7 +63,7 @@ elif command -v pacman &> /dev/null; then
         fd \
         bat \
         jq \
-        zsh \
+        bash \
         xclip \
         base-devel \
         direnv
@@ -80,12 +80,12 @@ elif command -v pacman &> /dev/null; then
 fi
 
 # ============================================================================== 
-# Set zsh as default shell
+# Set bash as default shell
 # ============================================================================== 
 
-if command -v zsh &> /dev/null && [ "$SHELL" != "$(which zsh)" ]; then
-    echo "==> Setting zsh as default shell..."
-    chsh -s "$(which zsh)"
+if command -v bash &> /dev/null && [ "$SHELL" != "$(command -v bash)" ]; then
+    echo "==> Setting bash as default shell..."
+    chsh -s "$(command -v bash)"
 fi
 
 # ============================================================================== 
