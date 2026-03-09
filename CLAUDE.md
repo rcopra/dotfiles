@@ -41,7 +41,7 @@ Defined in `.chezmoi.toml.tmpl` and available in all `.tmpl` files:
 
 ## Theme
 
-Rose Pine Moon is hardcoded across all tools. There is no theme switching system — each tool uses either a native theme selector or hardcoded hex values. Prompt is Starship with the official `rose-pine/starship` Moon preset. To change themes, edit each config file individually.
+Gruvbox Material Mix (Hard) (`sainnhe/gruvbox-material`) is hardcoded across all tools. There is no centralized theme switching system — each tool uses either a built-in theme, plugin, or hardcoded hex values from the mix(hard) palette. To change themes, edit each config file individually.
 
 ## Architecture
 
@@ -73,3 +73,6 @@ These are only loaded on-demand to save tokens. Ask Claude to read them when pla
 ## Gotchas
 
 - **`~/.config/chezmoi/chezmoi.toml` is the live config** — edit directly with Edit tool, never use sed/Bash (sed has corrupted this file before)
+- **Claude Code's Edit/Write tools strip powerline glyphs** (U+E0B0 , U+E0BC , etc.) — use Python to inject these characters, or use CLI tools (`starship preset`) that write them natively
+- **Starship preset**: Use `starship preset gruvbox-rainbow -o ~/.config/starship.toml` as the base, then update the palette. Don't manually write the TOML — the CLI preserves glyphs correctly. After editing, `chezmoi re-add ~/.config/starship.toml`
+- **tmux-gruvbox palette override**: The mix/hard palette lives at `~/.tmux/plugins/tmux-gruvbox/src/palette_gruvbox_dark.sh` — TPM updates will overwrite it

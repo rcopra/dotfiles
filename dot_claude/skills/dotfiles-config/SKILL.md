@@ -27,24 +27,24 @@ You are editing a chezmoi-managed dotfiles repo at `~/.local/share/chezmoi/`.
 
 ## Theme
 
-Rose Pine Moon is hardcoded across all tools. There is no centralized theme switching system.
+Gruvbox Material Mix (Hard) (`sainnhe/gruvbox-material`) is hardcoded across all tools. There is no centralized theme switching system.
 
 ### How themes are configured per tool
 
-- **WezTerm** (`dot_wezterm.lua`) — `neapsix/wezterm` plugin, moon variant
-- **tmux** (`dot_tmux.conf`) — `rose-pine/tmux` TPM plugin with `@rose_pine_variant 'moon'`
-- **FZF** (`dot_fzf.zsh.tmpl`) — official `rose-pine/fzf` hex values in `FZF_DEFAULT_OPTS`
-- **Starship** (`dot_config/starship.toml`) — official `rose-pine/starship` Moon preset
-- **Neovim** (`~/.config/nvim/lua/custom/plugins/colorschemes.lua`) — `vim.cmd.colorscheme 'rose-pine-moon'`
+- **WezTerm** (`dot_wezterm.lua`) — custom `config.colors` table with mix(hard) hex values
+- **tmux** (`dot_tmux.conf`) — sainnhe-style status line with manual hex values, diagonal powerline separators (E0BC/E0BA), plus `tmux-cpu`, `tmux-net-speed`, and `tmux-prefix-highlight` plugins
+- **FZF** (`dot_fzf.zsh.tmpl`) — gruvbox-material mix(hard) hex values in `FZF_DEFAULT_OPTS`
+- **Starship** (`dot_config/starship.toml`) — gruvbox-rainbow preset with mix(hard) palette overrides
+- **Neovim** (`~/.config/nvim/lua/custom/plugins/colorschemes.lua`) — `sainnhe/gruvbox-material` with `background='hard'`, `foreground='mix'`
 
 ### Switching themes (manual per-tool)
 
 To change to a different theme, edit each config file individually:
-1. WezTerm: change `config.color_scheme`
-2. tmux: swap the rose-pine plugin or add manual color lines
+1. WezTerm: update `config.colors` table hex values
+2. tmux: update hex values in the theme section
 3. FZF: update hex values in `FZF_DEFAULT_OPTS`
-4. Starship: update `dot_config/starship.toml` (uses `rose-pine/starship` preset)
-5. Neovim: change `vim.cmd.colorscheme` (commit separately in nvim repo)
+4. Starship: update palette in `dot_config/starship.toml`
+5. Neovim: change colorscheme plugin + `vim.cmd.colorscheme` (commit separately in nvim repo)
 
 ## Config File Map
 
@@ -55,7 +55,7 @@ To change to a different theme, edit each config file individually:
 | `dot_tmux.conf` | `~/.tmux.conf` | Tmux config, plugins, keybinds, theme |
 | `dot_wezterm.lua` | `~/.wezterm.lua` | WezTerm terminal config |
 | `dot_fzf.zsh.tmpl` | `~/.fzf.zsh` | FZF setup and theme colors |
-| `dot_config/starship.toml` | `~/.config/starship.toml` | Starship prompt (Rose Pine Moon) |
+| `dot_config/starship.toml` | `~/.config/starship.toml` | Starship prompt |
 | `dot_aerospace.toml` | `~/.aerospace.toml` | macOS window manager |
 | `~/.config/nvim/` | `~/.config/nvim/` | Neovim config (separate git repo — rcopra/kickstart.nvim) |
 | `.chezmoiexternal.toml` | (chezmoi) | External repo declarations (nvim, TPM) |
