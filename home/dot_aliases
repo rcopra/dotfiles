@@ -10,6 +10,6 @@ alias stt="echo 'Launching VS Code instead of Sublime Text... (cf ~/.aliases)' &
 
 # Tmux sessionizer shortcuts
 alias tms="~/bin/tmux-sessionizer"
-alias tmd="~/bin/tmux-sessionizer ~/.local/share/chezmoi"
+alias tmd="~/bin/tmux-sessionizer ~/.local/share/chezmoi/home"
 alias tmw="~/bin/tmux-sessionizer ~/work"
 alias tmp="~/bin/tmux-sessionizer ~/personal"

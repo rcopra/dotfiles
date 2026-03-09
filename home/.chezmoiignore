@@ -1,17 +1,10 @@
-# Documentation and planning (repo-only, not applied to home)
-README.md
-LICENSE
-CLAUDE.md
-docs
-docs/**
-
-# ==============================================================================
+# ============================================================================== 
 # VS Code settings (managed via symlinks, not direct copies)
-# ==============================================================================
-# These source files live in the repo root and are symlinked to Library/
-# This prevents chezmoi from trying to copy them to the home directory
-vscode_settings.json
-vscode_keybindings.json
+# ============================================================================== 
+# These source files live under home/vscode/ and are symlinked to Library/
+# Ignore the whole directory so chezmoi doesn't manage ~/vscode in targets
+vscode
+vscode/**
 
 # ==============================================================================
 # macOS-only files - exclude on Linux
@@ -46,6 +39,14 @@ Library
 Library/**
 {{ end }}
 
+# ============================================================================== 
+# Work-only configuration
+# ============================================================================== 
+{{ if ne (index . "machineType" | default "personal") "work" }}
+.config/gh-dash
+.config/gh-dash/**
+{{ end }}
+
 # ==============================================================================
 # SSH config (managed locally, not tracked in git)
 # ==============================================================================
@@ -58,3 +59,9 @@ Library/**
 .claude/*
 !.claude/skills
 !.claude/skills/**
+
+# ==============================================================================
+# Opencode (keep skills local, only manage config)
+# ==============================================================================
+.config/opencode/skills
+.config/opencode/skills/**

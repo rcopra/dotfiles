@@ -28,7 +28,7 @@ Keep responses short. If they ask a simple "how do I X", just answer it — don'
 ## Before Answering
 
 Always check the user's actual tmux config before responding. Their setup may differ from defaults:
-- Config: `~/.local/share/chezmoi/dot_tmux.conf.tmpl` (source of truth)
+- Config: `~/.local/share/chezmoi/home/dot_tmux.conf` (source of truth)
 - Cheatsheet: `~/docs/tmux-cheatsheet.md`
 - Sessionizer: `~/bin/tmux-sessionizer`
 

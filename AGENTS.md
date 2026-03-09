@@ -41,8 +41,7 @@ chezmoi apply
 ### Shell syntax checks
 Use for non-template scripts:
 ```bash
-bash -n run_once_install-zinit.sh
-bash -n run_once_install-tpm.sh
+bash -n home/.chezmoiscripts/run_once_install-zinit.sh
 ```
 
 ### Single-test equivalent (important)
@@ -55,7 +54,7 @@ bash -n path/to/script.sh
 
 2) Template shell script (`*.sh.tmpl`)
 ```bash
-chezmoi execute-template < run_onchange_install-packages.sh.tmpl > /tmp/install-packages.sh
+chezmoi execute-template < home/.chezmoiscripts/run_onchange_install-packages.sh.tmpl > /tmp/install-packages.sh
 bash -n /tmp/install-packages.sh
 ```
 
@@ -67,8 +66,8 @@ shellcheck /tmp/install-packages.sh
 ### Single template render check
 For one changed template (non-shell lint):
 ```bash
-chezmoi execute-template < dot_zshrc.tmpl > /tmp/zshrc.rendered
-chezmoi execute-template < dot_gitconfig.tmpl > /tmp/gitconfig.rendered
+chezmoi execute-template < home/dot_zshrc.tmpl > /tmp/zshrc.rendered
+chezmoi execute-template < home/dot_gitconfig.tmpl > /tmp/gitconfig.rendered
 ```
 
 ### Optional tooling

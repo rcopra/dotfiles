@@ -31,9 +31,9 @@ For quick questions, skip the framework and just answer.
 ## Before Answering
 
 Read the user's actual configs to ground your advice in reality:
-- **tmux:** `~/.local/share/chezmoi/dot_tmux.conf.tmpl`
-- **zsh:** `~/.local/share/chezmoi/dot_zshrc.tmpl`
-- **nvim:** `~/.config/nvim/` (external, check `~/.local/share/chezmoi/.chezmoiexternal.toml` for source)
+- **tmux:** `~/.local/share/chezmoi/home/dot_tmux.conf`
+- **zsh:** `~/.local/share/chezmoi/home/dot_zshrc.tmpl`
+- **nvim:** `~/.config/nvim/` (external, check `~/.local/share/chezmoi/home/.chezmoiexternal.toml` for source)
 - **tmux cheatsheet:** `~/docs/tmux-cheatsheet.md`
 - **sessionizer:** `~/bin/tmux-sessionizer`
 

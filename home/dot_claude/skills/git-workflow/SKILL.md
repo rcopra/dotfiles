@@ -36,8 +36,8 @@ Keep responses short. Don't dump reference tables unless asked.
 
 Check relevant configs when the question warrants it:
 - **Nvim git plugins:** `~/.config/nvim/lua/custom/plugins/fugitive.lua`, `~/.config/nvim/lua/custom/plugins/gitsigns.lua`
-- **Shell config:** `~/.local/share/chezmoi/dot_zshrc.tmpl` (forgit, OMZ git plugin)
-- **gh-dash config:** `~/.local/share/chezmoi/dot_config/gh-dash/config.yml`
+- **Shell config:** `~/.local/share/chezmoi/home/dot_zshrc.tmpl` (forgit, OMZ git plugin)
+- **gh-dash config:** `~/.local/share/chezmoi/home/dot_config/gh-dash/config.yml`
 
 Only read what's relevant. Don't read everything for a simple question.
 

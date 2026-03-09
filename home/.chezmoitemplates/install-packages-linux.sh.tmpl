@@ -1,58 +1,8 @@
-#!/bin/bash
-# vim: set ft=bash:
-# chezmoi:template:hash:{{ include "run_onchange_install-packages.sh.tmpl" | sha256sum }}
-
-set -euo pipefail
-
-echo "==> Installing packages for {{ .chezmoi.os }} ({{ .chezmoi.arch }})"
-
-{{ if eq .chezmoi.os "darwin" -}}
-# ==============================================================================
-# macOS Installation (Homebrew)
-# ==============================================================================
-
-# Install Homebrew if not present
-if ! command -v brew &> /dev/null; then
-    echo "==> Installing Homebrew..."
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-    eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
-
-echo "==> Installing CLI tools..."
-brew install \
-    git \
-    tmux \
-    fzf \
-    eza \
-    zoxide \
-    ripgrep \
-    fd \
-    bat \
-    jq \
-    starship \
-    tmux-mem-cpu-load \
-    direnv \
-    rainfrog
-
-echo "==> Installing version managers..."
-brew install rbenv pyenv nvm
-
-echo "==> Installing applications..."
-brew install --cask wezterm aerospace
-
-{{- $brewFontMap := dict "Hack" "font-hack-nerd-font" "JetBrainsMono" "font-jetbrains-mono-nerd-font" "FiraCode" "font-fira-code-nerd-font" "CascadiaCode" "font-caskaydia-cove-nerd-font" "Iosevka" "font-iosevka-nerd-font" "VictorMono" "font-victor-mono-nerd-font" "SourceCodePro" "font-sauce-code-pro-nerd-font" "UbuntuMono" "font-ubuntu-mono-nerd-font" "Meslo" "font-meslo-lg-nerd-font" }}
-# Fonts
-echo "==> Installing fonts..."
-brew install --cask {{ get $brewFontMap .nerdFont }}
-
-{{ else if eq .chezmoi.os "linux" -}}
-# ==============================================================================
+# ============================================================================== 
 # Linux Installation
-# ==============================================================================
+# ============================================================================== 
 
-# Detect package manager
 if command -v apt &> /dev/null; then
-    # Debian/Ubuntu/Raspberry Pi OS
     echo "==> Detected apt (Debian-based)"
 
     sudo apt update
@@ -71,7 +21,6 @@ if command -v apt &> /dev/null; then
         xclip \
         direnv
 
-    # Install eza (not in default repos)
     if ! command -v eza &> /dev/null; then
         echo "==> Installing eza..."
         sudo mkdir -p /etc/apt/keyrings
@@ -81,19 +30,16 @@ if command -v apt &> /dev/null; then
         sudo apt install -y eza
     fi
 
-    # Install zoxide
     if ! command -v zoxide &> /dev/null; then
         echo "==> Installing zoxide..."
         curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
     fi
 
-    # Install starship
     if ! command -v starship &> /dev/null; then
         echo "==> Installing starship..."
         curl -sS https://starship.rs/install.sh | sh -s -- -y
     fi
 
-    # Install Nerd Fonts ({{ .nerdFont }})
     if ! fc-list | grep -qi "{{ .nerdFont }}.*Nerd"; then
         echo "==> Installing {{ .nerdFont }} Nerd Font..."
         FONT_DIR="$HOME/.local/share/fonts"
@@ -104,9 +50,7 @@ if command -v apt &> /dev/null; then
         rm /tmp/NerdFont.zip
         fc-cache -fv
     fi
-
 elif command -v pacman &> /dev/null; then
-    # Arch Linux (Omarchy)
     echo "==> Detected pacman (Arch-based)"
 
     sudo pacman -Syu --noconfirm \
@@ -124,51 +68,42 @@ elif command -v pacman &> /dev/null; then
         base-devel \
         direnv
 
-    # Install starship (available in official repos)
     if ! command -v starship &> /dev/null; then
         sudo pacman -S --noconfirm starship
     fi
 
     {{- $pacmanFontMap := dict "Hack" "ttf-hack-nerd" "JetBrainsMono" "ttf-jetbrains-mono-nerd" "FiraCode" "ttf-firacode-nerd" "CascadiaCode" "ttf-cascadia-code-nerd" "Iosevka" "ttf-iosevka-nerd" "VictorMono" "ttf-victor-mono-nerd" "SourceCodePro" "ttf-sourcecodepro-nerd" "UbuntuMono" "ttf-ubuntu-mono-nerd" "Meslo" "ttf-meslo-nerd" }}
-    # Install Nerd Fonts ({{ .nerdFont }})
     if ! pacman -Q {{ get $pacmanFontMap .nerdFont }} &> /dev/null; then
         echo "==> Installing {{ .nerdFont }} Nerd Font..."
         sudo pacman -S --noconfirm {{ get $pacmanFontMap .nerdFont }}
     fi
 fi
 
-# ==============================================================================
+# ============================================================================== 
 # Set zsh as default shell
-# ==============================================================================
+# ============================================================================== 
 
 if command -v zsh &> /dev/null && [ "$SHELL" != "$(which zsh)" ]; then
     echo "==> Setting zsh as default shell..."
     chsh -s "$(which zsh)"
 fi
 
-# ==============================================================================
+# ============================================================================== 
 # Universal Linux: Version Managers
-# ==============================================================================
+# ============================================================================== 
 
-# rbenv
 if [ ! -d "$HOME/.rbenv" ]; then
     echo "==> Installing rbenv..."
     git clone https://github.com/rbenv/rbenv.git ~/.rbenv
     git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
 fi
 
-# pyenv
 if [ ! -d "$HOME/.pyenv" ]; then
     echo "==> Installing pyenv..."
     curl https://pyenv.run | bash
 fi
 
-# nvm
 if [ ! -d "$HOME/.nvm" ]; then
     echo "==> Installing nvm..."
     curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.0/install.sh | bash
 fi
-
-{{ end -}}
-
-echo "==> Package installation complete!"

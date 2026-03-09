@@ -1,0 +1,35 @@
+# ============================================================================== 
+# macOS Installation (Homebrew)
+# ============================================================================== 
+
+if ! command -v brew &> /dev/null; then
+    echo "==> Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+echo "==> Installing CLI tools..."
+brew install \
+    git \
+    tmux \
+    fzf \
+    eza \
+    zoxide \
+    ripgrep \
+    fd \
+    bat \
+    jq \
+    starship \
+    tmux-mem-cpu-load \
+    direnv \
+    rainfrog
+
+echo "==> Installing version managers..."
+brew install rbenv pyenv nvm
+
+echo "==> Installing applications..."
+brew install --cask wezterm aerospace
+
+{{- $brewFontMap := dict "Hack" "font-hack-nerd-font" "JetBrainsMono" "font-jetbrains-mono-nerd-font" "FiraCode" "font-fira-code-nerd-font" "CascadiaCode" "font-caskaydia-cove-nerd-font" "Iosevka" "font-iosevka-nerd-font" "VictorMono" "font-victor-mono-nerd-font" "SourceCodePro" "font-sauce-code-pro-nerd-font" "UbuntuMono" "font-ubuntu-mono-nerd-font" "Meslo" "font-meslo-lg-nerd-font" }}
+echo "==> Installing fonts..."
+brew install --cask {{ get $brewFontMap .nerdFont }}
