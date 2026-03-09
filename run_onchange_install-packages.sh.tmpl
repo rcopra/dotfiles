@@ -40,9 +40,10 @@ brew install rbenv pyenv nvm
 echo "==> Installing applications..."
 brew install --cask wezterm aerospace
 
+{{- $brewFontMap := dict "Hack" "font-hack-nerd-font" "JetBrainsMono" "font-jetbrains-mono-nerd-font" "FiraCode" "font-fira-code-nerd-font" "CascadiaCode" "font-caskaydia-cove-nerd-font" "Iosevka" "font-iosevka-nerd-font" "VictorMono" "font-victor-mono-nerd-font" "SourceCodePro" "font-sauce-code-pro-nerd-font" "UbuntuMono" "font-ubuntu-mono-nerd-font" "Meslo" "font-meslo-lg-nerd-font" }}
 # Fonts
 echo "==> Installing fonts..."
-brew install --cask font-hack-nerd-font
+brew install --cask {{ get $brewFontMap .nerdFont }}
 
 {{ else if eq .chezmoi.os "linux" -}}
 # ==============================================================================
@@ -92,15 +93,15 @@ if command -v apt &> /dev/null; then
         curl -sS https://starship.rs/install.sh | sh -s -- -y
     fi
 
-    # Install Nerd Fonts (Hack)
-    if ! fc-list | grep -qi "Hack Nerd"; then
-        echo "==> Installing Hack Nerd Font..."
+    # Install Nerd Fonts ({{ .nerdFont }})
+    if ! fc-list | grep -qi "{{ .nerdFont }}.*Nerd"; then
+        echo "==> Installing {{ .nerdFont }} Nerd Font..."
         FONT_DIR="$HOME/.local/share/fonts"
         mkdir -p "$FONT_DIR"
         NERD_FONT_VERSION="v3.3.0"
-        curl -fsSL "https://github.com/ryanoasis/nerd-fonts/releases/download/${NERD_FONT_VERSION}/Hack.zip" -o /tmp/Hack.zip
-        unzip -o /tmp/Hack.zip -d "$FONT_DIR"
-        rm /tmp/Hack.zip
+        curl -fsSL "https://github.com/ryanoasis/nerd-fonts/releases/download/${NERD_FONT_VERSION}/{{ .nerdFont }}.zip" -o /tmp/NerdFont.zip
+        unzip -o /tmp/NerdFont.zip -d "$FONT_DIR"
+        rm /tmp/NerdFont.zip
         fc-cache -fv
     fi
 
@@ -128,10 +129,11 @@ elif command -v pacman &> /dev/null; then
         sudo pacman -S --noconfirm starship
     fi
 
-    # Install Nerd Fonts (Hack)
-    if ! pacman -Q ttf-hack-nerd &> /dev/null; then
-        echo "==> Installing Hack Nerd Font..."
-        sudo pacman -S --noconfirm ttf-hack-nerd
+    {{- $pacmanFontMap := dict "Hack" "ttf-hack-nerd" "JetBrainsMono" "ttf-jetbrains-mono-nerd" "FiraCode" "ttf-firacode-nerd" "CascadiaCode" "ttf-cascadia-code-nerd" "Iosevka" "ttf-iosevka-nerd" "VictorMono" "ttf-victor-mono-nerd" "SourceCodePro" "ttf-sourcecodepro-nerd" "UbuntuMono" "ttf-ubuntu-mono-nerd" "Meslo" "ttf-meslo-nerd" }}
+    # Install Nerd Fonts ({{ .nerdFont }})
+    if ! pacman -Q {{ get $pacmanFontMap .nerdFont }} &> /dev/null; then
+        echo "==> Installing {{ .nerdFont }} Nerd Font..."
+        sudo pacman -S --noconfirm {{ get $pacmanFontMap .nerdFont }}
     fi
 fi
 

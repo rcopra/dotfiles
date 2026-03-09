@@ -32,19 +32,26 @@ Gruvbox Material Mix (Hard) (`sainnhe/gruvbox-material`) is hardcoded across all
 ### How themes are configured per tool
 
 - **WezTerm** (`dot_wezterm.lua`) — custom `config.colors` table with mix(hard) hex values
-- **tmux** (`dot_tmux.conf`) — sainnhe-style status line with manual hex values, diagonal powerline separators (E0BC/E0BA), plus `tmux-cpu`, `tmux-net-speed`, and `tmux-prefix-highlight` plugins
+- **tmux** (`dot_tmux.conf`) — `egel/tmux-gruvbox` plugin (`dark` variant) with mix(hard) palette override at `~/.tmux/plugins/tmux-gruvbox/src/palette_gruvbox_dark.sh`
 - **FZF** (`dot_fzf.zsh.tmpl`) — gruvbox-material mix(hard) hex values in `FZF_DEFAULT_OPTS`
-- **Starship** (`dot_config/starship.toml`) — gruvbox-rainbow preset with mix(hard) palette overrides
+- **Starship** (`dot_config/starship.toml`) — `starship preset gruvbox-rainbow` with mix(hard) palette overrides in `[palettes.gruvbox_material_mix]`
 - **Neovim** (`~/.config/nvim/lua/custom/plugins/colorschemes.lua`) — `sainnhe/gruvbox-material` with `background='hard'`, `foreground='mix'`
 
 ### Switching themes (manual per-tool)
 
 To change to a different theme, edit each config file individually:
 1. WezTerm: update `config.colors` table hex values
-2. tmux: update hex values in the theme section
+2. tmux: update palette file at `~/.tmux/plugins/tmux-gruvbox/src/palette_gruvbox_dark.sh`
 3. FZF: update hex values in `FZF_DEFAULT_OPTS`
-4. Starship: update palette in `dot_config/starship.toml`
+4. Starship: run `starship preset <name> -o ~/.config/starship.toml`, update palette, then `chezmoi re-add ~/.config/starship.toml`
 5. Neovim: change colorscheme plugin + `vim.cmd.colorscheme` (commit separately in nvim repo)
+
+### Powerline glyph gotcha
+
+Claude Code's Edit/Write tools silently strip powerline characters (U+E0B0, U+E0BC, etc.). When editing configs that contain these glyphs:
+- **Starship**: Use `starship preset` CLI to write the base config, then edit only the palette/non-glyph parts
+- **tmux**: Use a plugin like `egel/tmux-gruvbox` that handles glyphs in its own bash scripts
+- **If manual injection is needed**: Use Python (`open(path, 'w')`) to write the glyphs, not the Edit/Write tools
 
 ## Config File Map
 
