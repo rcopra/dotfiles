@@ -45,11 +45,6 @@ if command -v eza > /dev/null 2>&1; then
     alias ls="eza --icons=always"
 fi
 
-if command -v zoxide > /dev/null 2>&1; then
-    eval "$(zoxide init bash)"
-    alias cd="z"
-fi
-
 if command -v direnv > /dev/null 2>&1; then
     eval "$(direnv hook bash)"
 fi
@@ -68,4 +63,9 @@ fi
 
 if [ -f "$HOME/.bashrc.local" ]; then
     . "$HOME/.bashrc.local"
+fi
+
+# zoxide must be initialized last
+if command -v zoxide > /dev/null 2>&1; then
+    eval "$(zoxide init bash --cmd cd)"
 fi
