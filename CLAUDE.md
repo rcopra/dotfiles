@@ -45,12 +45,11 @@ Gruvbox Material Mix (Hard) (`sainnhe/gruvbox-material`) is hardcoded across all
 
 ## Architecture
 
-- **External repos** (`.chezmoiexternal.toml`): nvim config and TPM are cloned as external git repos
-  - Neovim config (`~/.config/nvim/`) is rcopra/kickstart.nvim — edit directly, commit separately with `git -C ~/.config/nvim`
-  - `chezmoi apply` will overwrite nvim changes — do NOT use chezmoi for nvim edits
-- **Platform conditionals** (`.chezmoiignore`): macOS-only files (aerospace, karabiner, VS Code settings) are ignored on Linux; GUI apps are ignored on "server" machines
-- **Package installation** (`run_onchange_install-packages.sh.tmpl`): Installs Homebrew packages on macOS, apt/pacman packages on Linux
-- **Version managers**: rbenv, pyenv, nvm are installed and configured in zshrc
+- **External repos** (`home/.chezmoiexternal.toml`): only TPM is cloned as an external git repo
+- **Neovim separation**: `~/.config/nvim` is intentionally unmanaged by chezmoi and is maintained as a separate kickstart clone
+- **Platform conditionals** (`home/.chezmoiignore`): Linux is intentionally scoped to shell + prompt + git config; macOS keeps the broader shared baseline
+- **Package installation** (`home/.chezmoiscripts/run_onchange_install-packages.sh.tmpl`): Uses darwin/linux templates for package setup
+- **Version managers**: rbenv, pyenv, nvm are installed and configured in shell configs
 
 ## Machine Context
 
@@ -73,6 +72,7 @@ These are only loaded on-demand to save tokens. Ask Claude to read them when pla
 ## Gotchas
 
 - **`~/.config/chezmoi/chezmoi.toml` is the live config** — edit directly with Edit tool, never use sed/Bash (sed has corrupted this file before)
+- **Local drift resolution**: if chezmoi reports `has changed since chezmoi last wrote it` and you want to keep local changes, run `chezmoi re-add <path>` (example: `chezmoi re-add ~/.config/opencode/opencode.json`)
 - **Claude Code's Edit/Write tools strip powerline glyphs** (U+E0B0 , U+E0BC , etc.) — use Python to inject these characters, or use CLI tools (`starship preset`) that write them natively
 - **Starship preset**: Use `starship preset gruvbox-rainbow -o ~/.config/starship.toml` as the base, then update the palette. Don't manually write the TOML — the CLI preserves glyphs correctly. After editing, `chezmoi re-add ~/.config/starship.toml`
 - **tmux-gruvbox palette override**: The mix/hard palette lives at `~/.tmux/plugins/tmux-gruvbox/src/palette_gruvbox_dark.sh` — TPM updates will overwrite it

@@ -82,6 +82,12 @@ chezmoi execute-template < home/dot_gitconfig.tmpl > /tmp/gitconfig.rendered
 5. Run `chezmoi apply` when safe in local context.
 6. Report what you validated and what you skipped.
 
+### Local drift handling
+- If chezmoi reports `<path> has changed since chezmoi last wrote it`, do not overwrite local changes by default.
+- When the user wants to keep local machine state, run `chezmoi re-add <path>` to adopt local content into source state.
+- Example: `chezmoi re-add ~/.config/opencode/opencode.json`
+- After re-adding, run `chezmoi diff` and verify the conflict is resolved.
+
 ## Code Style Rules
 
 ### General
