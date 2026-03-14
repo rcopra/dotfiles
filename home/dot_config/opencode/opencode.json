@@ -6,59 +6,65 @@
       "/Users/rick/.claude/skills"
     ]
   },
-  "plugin": [
-    "opencode-gemini-auth@latest"
-  ],
+  "permission": {
+    "websearch": "allow"
+  },
   "provider": {
-    "lmstudio": {
+    "byteplus": {
       "npm": "@ai-sdk/openai-compatible",
-      "name": "LM Studio (local)",
+      "name": "byteplus",
       "options": {
-        "baseURL": "http://127.0.0.1:1234/v1"
+        "baseURL": "https://ark.ap-southeast.bytepluses.com/api/coding/v3",
+        "apiKey": "{env:BYTEPLUS_API_KEY}"
       },
       "models": {
-        "dolphin3.0-llama3.1-8b": {
-          "name": "Dolphin 3.0 Llama 3.1 8B"
+        "ark-code-latest": {
+          "name": "ark-code-latest"
+        },
+        "bytedance-seed-code": {
+          "name": "bytedance-seed-code"
+        },
+        "glm-4.7": {
+          "name": "glm-4.7"
+        },
+        "gpt-oss-120b": {
+          "name": "gpt-oss-120b"
+        },
+        "kimi-k2.5": {
+          "name": "kimi-k2.5"
         }
       }
+    }
+  },
+  "agent": {
+    "plan": {
+      "mode": "primary",
+      "prompt": "{file:./prompts/plan.md}",
+      "model": "openrouter/openai/gpt-5.3-codex",
+      "description": "Architectural planner using GPT-5.3 Codex. Returns reasoning_content automatically. Delegates to @explore for research.",
+      "tools": {
+        "write": false,
+        "edit": false
+      },
+      "permission": {
+        "bash": "ask"
+      }
     },
-    "google": {
-      "name": "Google",
-      "models": {
-        "gemini-3-pro-preview": {
-          "name": "Gemini 3 Pro Preview",
-          "limit": {
-            "context": 1048576,
-            "output": 65535
-          },
-          "modalities": {
-            "input": ["text", "image", "pdf"],
-            "output": ["text"]
-          },
-          "options": {
-            "thinkingConfig": {
-              "thinkingLevel": "high",
-              "includeThoughts": true
-            }
-          }
-        },
-        "gemini-3-flash-preview": {
-          "name": "Gemini 3 Flash Preview",
-          "limit": {
-            "context": 1048576,
-            "output": 65535
-          },
-          "modalities": {
-            "input": ["text", "image", "pdf"],
-            "output": ["text"]
-          },
-          "options": {
-            "thinkingConfig": {
-              "thinkingLevel": "high",
-              "includeThoughts": true
-            }
-          }
-        }
+    "build": {
+      "mode": "primary",
+      "model": "byteplus/glm-4.7",
+      "description": "Primary agent for implementation. Delegates research to @explore."
+    },
+    "explore": {
+      "mode": "subagent",
+      "model": "openrouter/google/gemini-2.5-flash-lite",
+      "description": "Fast, free read-only agent for codebase exploration. Use for finding files, searching code, and understanding project structure.",
+      "tools": {
+        "write": false,
+        "edit": false
+      },
+      "permission": {
+        "bash": "ask"
       }
     }
   }
