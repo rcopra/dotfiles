@@ -22,9 +22,9 @@ $java\
 $kotlin\
 $haskell\
 $python\
-[](fg:color_blue bg:color_bg3)\
+[](fg:color_blue bg:color_purple)\
 $ruby\
-[](fg:color_purple bg:color_bg3)\
+[](fg:color_purple bg:color_bg3)\
 $docker_context\
 $conda\
 $pixi\
