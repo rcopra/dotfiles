@@ -20,20 +20,9 @@ export PYTHONBREAKPOINT=ipdb.set_trace
 # ==============================================================================
 # PATH Configuration
 # ==============================================================================
-{{- if eq .chezmoi.os "darwin" }}
 # Homebrew (Apple Silicon)
 export PATH="/opt/homebrew/bin:${PATH}"
 export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
-{{- else if eq .chezmoi.os "linux" }}
-# Linux Homebrew (if installed)
-if [ -d "/home/linuxbrew/.linuxbrew" ]; then
-    export PATH="/home/linuxbrew/.linuxbrew/bin:${PATH}"
-fi
-# Standard PostgreSQL paths for Linux
-if [ -d "/usr/lib/postgresql/16/bin" ]; then
-    export PATH="/usr/lib/postgresql/16/bin:$PATH"
-fi
-{{- end }}
 
 # Local binaries
 export PATH="$HOME/bin:$HOME/.local/bin:$PATH"

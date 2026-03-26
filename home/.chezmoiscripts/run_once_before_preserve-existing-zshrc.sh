@@ -4,11 +4,6 @@
 
 set -e
 
-if [[ "{{ .chezmoi.os }}" != "darwin" ]]; then
-    echo "Skipping zshrc preservation on non-macOS"
-    exit 0
-fi
-
 ZSHRC="$HOME/.zshrc"
 ZSHRC_LOCAL="$HOME/.zshrc.local"
 

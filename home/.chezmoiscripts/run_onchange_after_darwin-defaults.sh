@@ -1,4 +1,3 @@
-{{- if eq .chezmoi.os "darwin" -}}
 #!/bin/bash
 # vim: set ft=bash:
 
@@ -29,4 +28,3 @@ defaults write com.apple.screencapture type -string "png"
 defaults write com.apple.LaunchServices LSQuarantine -bool false
 
 echo "==> macOS defaults configured. Some changes may require logout."
-{{- end }}

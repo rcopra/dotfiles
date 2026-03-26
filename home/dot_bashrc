@@ -1,7 +1,7 @@
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
-export EDITOR={{ if lookPath "code" }}code{{ else }}nvim{{ end }}
-export BUNDLER_EDITOR={{ if lookPath "code" }}code{{ else }}nvim{{ end }}
+export EDITOR=nvim
+export BUNDLER_EDITOR=nvim
 export HOMEBREW_NO_ANALYTICS=1
 
 export DISABLE_SPRING=true
@@ -9,17 +9,8 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 export PYTHONBREAKPOINT=ipdb.set_trace
 
-{{- if eq .chezmoi.os "darwin" }}
 export PATH="/opt/homebrew/bin:${PATH}"
 export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
-{{- else if eq .chezmoi.os "linux" }}
-if [ -d "/home/linuxbrew/.linuxbrew" ]; then
-    export PATH="/home/linuxbrew/.linuxbrew/bin:${PATH}"
-fi
-if [ -d "/usr/lib/postgresql/16/bin" ]; then
-    export PATH="/usr/lib/postgresql/16/bin:$PATH"
-fi
-{{- end }}
 
 export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
 export PATH="${HOME}/.rbenv/bin:${PATH}"
@@ -43,10 +34,6 @@ fi
 
 if command -v eza > /dev/null 2>&1; then
     alias ls="eza --icons=always"
-fi
-
-if command -v batcat > /dev/null 2>&1 && ! command -v bat > /dev/null 2>&1; then
-    alias bat="batcat"
 fi
 
 if command -v direnv > /dev/null 2>&1; then

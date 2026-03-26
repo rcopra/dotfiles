@@ -1,15 +1,8 @@
 # Setup fzf
 # ---------
-{{- if eq .chezmoi.os "darwin" }}
 if [[ ! "$PATH" == */opt/homebrew/opt/fzf/bin* ]]; then
   PATH="${PATH:+${PATH}:}/opt/homebrew/opt/fzf/bin"
 fi
-{{- else if eq .chezmoi.os "linux" }}
-# Linux - fzf typically installed via package manager or ~/.fzf
-if [[ ! "$PATH" == */.fzf/bin* ]] && [[ -d "$HOME/.fzf/bin" ]]; then
-  PATH="${PATH:+${PATH}:}$HOME/.fzf/bin"
-fi
-{{- end }}
 
 # Gruvbox Material Mix (Hard) colors
 export FZF_DEFAULT_OPTS="

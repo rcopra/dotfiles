@@ -77,5 +77,5 @@
   defaultBranch = master
 
 [user]
-  email = {{ .email }}
-  name = {{ .name }}
+  email = 137560494+rcopra@users.noreply.github.com
+  name = rcopra

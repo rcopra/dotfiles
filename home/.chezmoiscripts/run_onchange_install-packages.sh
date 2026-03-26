@@ -1,6 +1,13 @@
-# ============================================================================== 
+#!/bin/bash
+# vim: set ft=bash:
+
+set -euo pipefail
+
+echo "==> Installing packages for macOS"
+
+# ==============================================================================
 # macOS Installation (Homebrew)
-# ============================================================================== 
+# ==============================================================================
 
 if ! command -v brew &> /dev/null; then
     echo "==> Installing Homebrew..."
@@ -30,6 +37,7 @@ brew install rbenv pyenv nvm
 echo "==> Installing applications..."
 brew install --cask wezterm aerospace
 
-{{- $brewFontMap := dict "Hack" "font-hack-nerd-font" "JetBrainsMono" "font-jetbrains-mono-nerd-font" "FiraCode" "font-fira-code-nerd-font" "CascadiaCode" "font-caskaydia-cove-nerd-font" "Iosevka" "font-iosevka-nerd-font" "VictorMono" "font-victor-mono-nerd-font" "SourceCodePro" "font-sauce-code-pro-nerd-font" "UbuntuMono" "font-ubuntu-mono-nerd-font" "Meslo" "font-meslo-lg-nerd-font" }}
 echo "==> Installing fonts..."
-brew install --cask {{ get $brewFontMap .nerdFont }}
+brew install --cask font-jetbrains-mono-nerd-font
+
+echo "==> Package installation complete!"
