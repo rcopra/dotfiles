@@ -1,7 +1,5 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
-command_timeout = 1000
-
 format = """
 [](color_orange)\
 $os\
@@ -22,9 +20,7 @@ $java\
 $kotlin\
 $haskell\
 $python\
-[](fg:color_blue bg:color_purple)\
-$ruby\
-[](fg:color_purple bg:color_bg3)\
+[](fg:color_blue bg:color_bg3)\
 $docker_context\
 $conda\
 $pixi\
@@ -107,9 +103,6 @@ format = '[[($all_status$ahead_behind )](fg:color_fg0 bg:color_aqua)]($style)'
 symbol = ""
 style = "bg:color_blue"
 format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
-detect_files = ['package.json', '.node-version', '.nvmrc']
-detect_folders = []
-detect_extensions = []
 
 [c]
 symbol = " "
@@ -155,11 +148,6 @@ format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
 symbol = ""
 style = "bg:color_blue"
 format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
-
-[ruby]
-symbol = ""
-style = "bg:color_purple"
-format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_purple)]($style)'
 
 [docker_context]
 symbol = ""
