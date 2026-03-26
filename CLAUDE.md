@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-Cross-platform dotfiles managed with [chezmoi](https://chezmoi.io). Supports macOS (Apple Silicon), Debian/Ubuntu, and Arch Linux.
+macOS dotfiles managed with [chezmoi](https://chezmoi.io). Targets Apple Silicon Macs only — no templates, no cross-platform conditionals.
 
 ## Chezmoi Commands
 
@@ -24,20 +24,13 @@ chezmoi apply              # Test changes locally
 ## File Naming Conventions
 
 Chezmoi uses special prefixes:
-- `dot_` → `.` (e.g., `dot_zshrc.tmpl` → `~/.zshrc`)
-- `.tmpl` suffix → Go template, processed with chezmoi data
+- `dot_` → `.` (e.g., `dot_zshrc` → `~/.zshrc`)
 - `private_` → 0600 permissions (e.g., `private_dot_ssh/`)
 - `run_once_` → Script runs once per machine
 - `run_onchange_` → Script re-runs when its content hash changes
+- `symlink_` → Creates a symlink (target path is the file content)
 
-## Template Variables
-
-Defined in `.chezmoi.toml.tmpl` and available in all `.tmpl` files:
-- `.chezmoi.os` - "darwin" or "linux"
-- `.chezmoi.arch` - "amd64" or "arm64"
-- `.email` - Git email (prompted during init)
-- `.name` - Git name (prompted during init)
-- `.machineType` - "personal", "work", or "server" (controls which files are installed)
+No `.tmpl` files are used — all configs are static with hardcoded values.
 
 ## Theme
 
@@ -47,17 +40,14 @@ Gruvbox Material Mix (Hard) (`sainnhe/gruvbox-material`) is hardcoded across all
 
 - **External repos** (`home/.chezmoiexternal.toml`): only TPM is cloned as an external git repo
 - **Neovim separation**: `~/.config/nvim` is intentionally unmanaged by chezmoi and is maintained as a separate kickstart clone
-- **Platform conditionals** (`home/.chezmoiignore`): Linux is intentionally scoped to shell + prompt + git config; macOS keeps the broader shared baseline
-- **Package installation** (`home/.chezmoiscripts/run_onchange_install-packages.sh.tmpl`): Uses darwin/linux templates for package setup
+- **Package installation** (`home/.chezmoiscripts/run_onchange_install-packages.sh`): Homebrew-based, runs on content change
+- **VS Code settings**: Symlinked from `~/Library/Application Support/Code/User/` to `home/vscode/` using relative paths
 - **Version managers**: rbenv, pyenv, nvm are installed and configured in shell configs
 
 ## Machine Context
 
 - **macOS**: Personal & work MacBooks (Aerospace WM, Karabiner)
-- **Linux**: Omarchy (Arch) desktop, headless Pis (server machineType)
 - **Keyboard**: Custom split keyboard with ZMK firmware ([zmk-config](https://github.com/rcopra/zmk-config))
-
-Goal: Consistent experience across all devices with minimal context-switching friction.
 
 ## Planning Config Changes
 
