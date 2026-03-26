@@ -2,10 +2,7 @@ local wezterm = require("wezterm")
 local act = wezterm.action
 local config = wezterm.config_builder()
 config.font = wezterm.font("JetBrains Mono", { weight = "Medium" })
-config.font_size = 17
-
--- Enable Kitty graphics protocol for image rendering
-config.enable_kitty_graphics = true
+config.font_size = 14
 
 -- Allow SHIFT to bypass mouse reporting (for tmux/vim)
 config.bypass_mouse_reporting_modifiers = "SHIFT"
@@ -35,9 +32,10 @@ config.mouse_bindings = {
 	},
 }
 
-config.window_decorations = "RESIZE"
+config.window_decorations = "NONE"
+config.enable_tab_bar = false
 
--- Catppuccin Mocha (built-in)
+-- Bamboo Theme
 config.color_scheme = "Bamboo"
 
 return config

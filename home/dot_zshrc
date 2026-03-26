@@ -117,7 +117,14 @@ bindkey '^[[B' history-substring-search-down
 # Modern CLI Tools
 # ==============================================================================
 # eza (modern ls)
-command -v eza > /dev/null && alias ls="eza --icons=always"
+if command -v eza > /dev/null; then
+    export EZA_COLORS=".*=38;5;242"
+    alias ls="eza --icons=always --group-directories-first"
+    alias la="eza --icons=always --group-directories-first -a"
+    alias ll="eza --icons=always --group-directories-first -l --header --git -h --time-style=long-iso"
+    alias lla="eza --icons=always --group-directories-first -la --header --git -h --time-style=long-iso --follow-symlinks"
+    alias lt="eza --icons=always --tree --level=2 --group-directories-first"
+fi
 
 # zoxide (smarter cd)
 command -v zoxide > /dev/null && eval "$(zoxide init zsh)" && alias cd="z"
