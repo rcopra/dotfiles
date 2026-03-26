@@ -32,7 +32,7 @@ config.mouse_bindings = {
 	},
 }
 
-config.window_decorations = "NONE"
+config.window_decorations = "RESIZE"
 config.enable_tab_bar = false
 
 -- Bamboo Theme
