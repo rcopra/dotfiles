@@ -5,12 +5,12 @@ if [[ ! "$PATH" == */opt/homebrew/opt/fzf/bin* ]]; then
 fi
 
 # Catppuccin Mocha colors
-export FZF_DEFAULT_OPTS="
-  --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8
-  --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc
-  --color=marker:#b4befe,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8
-  --color=selected-bg:#45475a
-"
+export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
+  --color=bg+:#2d312c,bg:#232923,spinner:#dc4f62,hl:#dc4f62 \
+  --color=fg:#ece1c0,header:#dc4f62,info:#88c1e9,pointer:#81af58 \
+  --color=marker:#81af58,fg+:#81af58,prompt:#81af58,hl+:#dc4f62 \
+  --color=selected-bg:#363b35 \
+  "
 
 # Use fzf shell integration
 command -v fzf > /dev/null && source <(fzf --zsh)

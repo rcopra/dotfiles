@@ -1,7 +1,7 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
 local config = wezterm.config_builder()
-config.font = wezterm.font("JetBrainsMono Nerd Font")
+config.font = wezterm.font("JetBrains Mono", { weight = "Medium" })
 config.font_size = 17
 
 -- Enable Kitty graphics protocol for image rendering
