@@ -36,6 +36,6 @@ config.window_decorations = "RESIZE"
 config.enable_tab_bar = false
 
 -- Bamboo Theme
-config.color_scheme = "Bamboo"
+config.color_scheme = "Bamboo Multiplex"
 
 return config
