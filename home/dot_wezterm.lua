@@ -35,7 +35,7 @@ config.mouse_bindings = {
 config.window_decorations = "RESIZE"
 config.enable_tab_bar = false
 
--- Bamboo Theme
-config.color_scheme = "Bamboo"
+-- Kanagawa Theme
+config.color_scheme = "kanagawabones"
 
 return config
