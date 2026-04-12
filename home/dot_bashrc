@@ -50,7 +50,7 @@ if command -v starship > /dev/null 2>&1; then
 fi
 
 if command -v fzf > /dev/null 2>&1; then
-    eval "$(fzf --bash)"
+    eval "$(fzf --bash 2>/dev/null)" || true
 fi
 
 if [ -f "$HOME/.aliases" ]; then

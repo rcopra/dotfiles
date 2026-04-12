@@ -49,7 +49,6 @@ Library
 Library/**
 
 # Tools not installed on minimal Linux
-.config/starship.toml
 .config/gh
 .config/gh/**
 .config/gh-dash
