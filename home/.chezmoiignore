@@ -30,3 +30,36 @@ vscode/**
 # ==============================================================================
 .config/opencode/skills
 .config/opencode/skills/**
+
+# ==============================================================================
+# Linux — minimal bash-only shell (no macOS apps, no zsh, no GUI tools)
+# ==============================================================================
+{{ if ne .chezmoi.os "darwin" }}
+# zsh (Linux uses bash)
+.zshrc
+.zprofile
+.fzf.zsh
+
+# macOS-only apps
+.aerospace.toml
+.wezterm.lua
+.config/karabiner
+.config/karabiner/**
+Library
+Library/**
+
+# Tools not installed on minimal Linux
+.config/starship.toml
+.config/gh
+.config/gh/**
+.config/gh-dash
+.config/gh-dash/**
+.config/opencode
+.config/opencode/**
+.claude
+.claude/**
+.tmux.conf
+.rspec
+bin
+bin/**
+{{ end }}

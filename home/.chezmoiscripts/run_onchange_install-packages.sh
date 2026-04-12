@@ -3,6 +3,11 @@
 
 set -euo pipefail
 
+if [[ "$(uname)" != "Darwin" ]]; then
+    echo "==> Skipping macOS package installation (not macOS)"
+    exit 0
+fi
+
 echo "==> Installing packages for macOS"
 
 # ==============================================================================

@@ -3,6 +3,11 @@
 
 set -euo pipefail
 
+if [[ "$(uname)" != "Darwin" ]]; then
+    echo "==> Skipping macOS defaults (not macOS)"
+    exit 0
+fi
+
 echo "==> Configuring macOS defaults..."
 
 # Keyboard - faster key repeat
