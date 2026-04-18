@@ -132,6 +132,9 @@ command -v zoxide > /dev/null && eval "$(zoxide init zsh)" && alias cd="z"
 # direnv (directory-specific environment variables)
 command -v direnv > /dev/null && eval "$(direnv hook zsh)"
 
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
+
 # ==============================================================================
 # Prompt (Starship)
 # ==============================================================================
