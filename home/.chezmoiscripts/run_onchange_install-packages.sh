@@ -44,5 +44,6 @@ brew install --cask wezterm aerospace
 
 echo "==> Installing fonts..."
 brew install --cask font-jetbrains-mono-nerd-font
+brew install --cask font-symbols-only-nerd-font
 
 echo "==> Package installation complete!"

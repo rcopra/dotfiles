@@ -1,7 +1,14 @@
 local wezterm = require("wezterm")
 local act = wezterm.action
 local config = wezterm.config_builder()
-config.font = wezterm.font("JetBrains Mono", { weight = "Light" })
+config.font = wezterm.font_with_fallback({
+	{
+		family = "Iosevka Term",
+		stretch = "Expanded",
+		weight = "Medium",
+	},
+	{ family = "Symbols Nerd Font Mono" },
+})
 config.font_size = 14
 
 -- Allow SHIFT to bypass mouse reporting (for tmux/vim)
@@ -35,7 +42,7 @@ config.mouse_bindings = {
 config.window_decorations = "RESIZE"
 config.enable_tab_bar = false
 
--- Kanagawa Theme
-config.color_scheme = "Catppuccin Mocha"
+-- Theme
+config.color_scheme = "Catppuccin Macchiato"
 
 return config
