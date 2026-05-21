@@ -6,6 +6,7 @@ export LC_ALL=en_US.UTF-8
 export EDITOR=nvim
 export BUNDLER_EDITOR=nvim
 export HOMEBREW_NO_ANALYTICS=1
+export MENUCONFIG_STYLE=monochrome
 
 # Ruby
 export DISABLE_SPRING=true
