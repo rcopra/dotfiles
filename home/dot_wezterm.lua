@@ -42,6 +42,11 @@ config.mouse_bindings = {
 config.window_decorations = "RESIZE"
 config.enable_tab_bar = false
 
+-- Rendering backend — Metal instead of OpenGL, big win on Retina/5K (faster glyph atlas re-upload on zoom)
+config.front_end = "WebGpu"
+config.webgpu_power_preference = "HighPerformance"
+config.max_fps = 70
+
 -- Theme
 config.color_scheme = "Catppuccin Macchiato"
 
