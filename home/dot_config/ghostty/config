@@ -3,3 +3,7 @@ macos-titlebar-style = hidden
 theme = Catppuccin frappe
 
 macos-option-as-alt = true
+
+# Drop Ghostty's default Option+Left/Right=word-motion so they send real Alt+arrow CSI for Zellij/nvim nav (must use `option+`, not `alt+`)
+keybind = option+left=unbind
+keybind = option+right=unbind
