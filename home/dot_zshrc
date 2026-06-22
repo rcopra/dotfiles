@@ -142,13 +142,13 @@ source <(fzf --zsh)
 command -v starship > /dev/null && eval "$(starship init zsh)"
 
 # ==============================================================================
-# Tmux Sessionizer
+# Zellij Sessionizer
 # ==============================================================================
-# Bind Ctrl+f to tmux-sessionizer for quick project navigation
-bindkey -s '^f' '~/bin/tmux-sessionizer\n'
+# Bind Ctrl+f to zellij-sessionizer for quick project navigation
+bindkey -s '^f' '~/bin/zellij-sessionizer\n'
 
-# Bind Ctrl+s to create/switch to SSH session (handles being inside tmux)
-bindkey -s '^s' '[[ -n $TMUX ]] && { tmux switch-client -t SSH 2>/dev/null || (tmux new-session -d -s SSH -c ~ && tmux switch-client -t SSH); } || tmux new-session -A -s SSH -c ~\n'
+# Bind Ctrl+s to create/switch to SSH session (handles being inside zellij)
+bindkey -s '^s' '[[ -n $ZELLIJ ]] && zellij action switch-session --cwd ~ SSH || { cd ~ && zellij attach --create SSH; }\n'
 
 # ==============================================================================
 # Aliases & Local Config

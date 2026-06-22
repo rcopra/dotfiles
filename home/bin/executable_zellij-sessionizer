@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+# Zellij Sessionizer - ThePrimeagen style, adapted for Zellij
+# Quickly switch to or create Zellij sessions for project directories
+
+if [[ $# -eq 1 ]]; then
+    selected=$1
+else
+    # Search in work and personal directories
+    selected=$(find ~/work ~/personal -mindepth 1 -maxdepth 1 -type d 2>/dev/null | fzf)
+fi
+
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+# Zellij session names can't contain dots
+selected_name=$(basename "$selected" | tr . _)
+
+# Inside a Zellij session: switch-session creates-or-switches in one step.
+# --cwd is only honored when the session is newly created; existing sessions
+# keep their own working directories.
+if [[ -n $ZELLIJ ]]; then
+    zellij action switch-session --cwd "$selected" "$selected_name"
+    exit 0
+fi
+
+# Outside Zellij: attach to the session, creating it if needed. A new session
+# inherits its cwd from the current directory, so cd there first.
+cd "$selected" || exit 1
+zellij attach --create "$selected_name"
