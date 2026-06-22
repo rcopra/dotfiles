@@ -54,16 +54,17 @@ outer.right = 8
 
 [mode.main.binding]
 
-alt-left = 'focus --boundaries all-monitors-outer-frame left'
-alt-down = 'focus down'
-alt-up = 'focus up'
-alt-right = 'focus --boundaries all-monitors-outer-frame right'
+# Window focus on ctrl-alt-arrows — alt-arrows is reserved for Zellij pane nav
+ctrl-alt-left = 'focus --boundaries all-monitors-outer-frame left'
+ctrl-alt-down = 'focus down'
+ctrl-alt-up = 'focus up'
+ctrl-alt-right = 'focus --boundaries all-monitors-outer-frame right'
 
 
-alt-shift-left = 'move left'
-alt-shift-down = 'move down'
-alt-shift-up = 'move up'
-alt-shift-right = 'move right'
+ctrl-alt-shift-left = 'move left'
+ctrl-alt-shift-down = 'move down'
+ctrl-alt-shift-up = 'move up'
+ctrl-alt-shift-right = 'move right'
 
 cmd-1 = 'workspace 1'
 cmd-2 = 'workspace 2'
