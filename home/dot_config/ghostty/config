@@ -1,3 +1,5 @@
 macos-titlebar-style = hidden
 
 theme = Catppuccin frappe
+
+macos-option-as-alt = true
