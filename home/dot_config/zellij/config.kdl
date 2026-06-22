@@ -5,6 +5,17 @@
 keybinds clear-defaults=true {
     locked {
         bind "Ctrl g" { SwitchToMode "normal"; }
+        bind "Alt n" { NewPane; }
+        bind "Alt z" {
+            MessagePlugin "autolock" { payload "disable"; }
+            SwitchToMode "normal"
+        }
+    }
+    normal {
+        bind "Enter" {
+            WriteChars "\u{000D}"
+            MessagePlugin "autolock"
+        }
     }
     pane {
         bind "left" { MoveFocus "left"; }
@@ -153,6 +164,9 @@ keybinds clear-defaults=true {
         }
     }
     shared {
+        bind "Alt Shift z" {
+            MessagePlugin "autolock" { payload "enable"; }
+        }
         bind "F1" {
             MessagePlugin "compact-bar" {
                 name "toggle_tooltip"
@@ -163,6 +177,10 @@ keybinds clear-defaults=true {
         }
     }
     shared_except "locked" {
+        bind "Alt z" {
+            MessagePlugin "autolock" { payload "disable"; }
+            SwitchToMode "locked"
+        }
         bind "Alt +" { Resize "Increase"; }
         bind "Alt -" { Resize "Decrease"; }
         bind "Alt =" { Resize "Increase"; }
@@ -278,6 +296,12 @@ keybinds clear-defaults=true {
 // Plugin aliases - can be used to change the implementation of Zellij
 // changing these requires a restart to take effect
 plugins {
+    autolock location="file:~/.config/zellij/plugins/zellij-autolock.wasm" {
+        is_enabled true
+        triggers "nvim|fzf"
+        reaction_seconds "0.3"
+        print_to_log false
+    }
     about location="zellij:about"
     compact-bar location="zellij:compact-bar" {
         tooltip "F1"
@@ -301,6 +325,7 @@ plugins {
 // eg. "https://example.com/my-plugin.wasm"
 load_plugins {
     zellij:link
+    autolock
 }
 web_client {
     font "monospace"
