@@ -2,11 +2,20 @@
 # Zellij Sessionizer - ThePrimeagen style, adapted for Zellij
 # Quickly switch to or create Zellij sessions for project directories
 
+# Standalone dirs that should always appear in the picker
+extra_dirs=(
+    ~/.config/nvim
+    ~/.local/share/chezmoi
+)
+
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
-    # Search in work and personal directories
-    selected=$(find ~/work ~/personal -mindepth 1 -maxdepth 1 -type d 2>/dev/null | fzf)
+    # Search in work and personal directories, plus pinned extras
+    selected=$({
+        find ~/work ~/personal -mindepth 1 -maxdepth 1 -type d 2>/dev/null
+        printf '%s\n' "${extra_dirs[@]}"
+    } | fzf)
 fi
 
 if [[ -z $selected ]]; then
