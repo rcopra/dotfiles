@@ -8,10 +8,3 @@
     url = "https://github.com/tmux-plugins/tpm.git"
     refreshPeriod = "168h"
     clone.args = ["--depth", "1"]
-
-# zellij-autolock: auto-locks Zellij when nvim/fzf is the focused pane so
-# Alt+arrow keys pass through to Neovim (smart-splits) instead of Zellij.
-[".config/zellij/plugins/zellij-autolock.wasm"]
-    type = "file"
-    url = "https://github.com/fresh2dev/zellij-autolock/releases/download/0.2.2/zellij-autolock.wasm"
-    refreshPeriod = "168h"
