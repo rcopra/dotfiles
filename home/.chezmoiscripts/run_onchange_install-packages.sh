@@ -24,6 +24,7 @@ echo "==> Installing CLI tools..."
 brew install \
     git \
     tmux \
+    zellij \
     fzf \
     eza \
     zoxide \
@@ -40,7 +41,11 @@ echo "==> Installing version managers..."
 brew install rbenv pyenv nvm
 
 echo "==> Installing applications..."
-brew install --cask wezterm aerospace
+# NOTE: Ghostty is installed manually (direct .app), not via brew
+# OmniWM (tiling WM) from its author's tap
+brew install --cask barutsrb/tap/omniwm
+# Karabiner: caps->Hyper-3, app launchers, workspace move+follow (installer needs sudo)
+brew install --cask karabiner-elements
 
 echo "==> Installing fonts..."
 brew install --cask font-jetbrains-mono-nerd-font
