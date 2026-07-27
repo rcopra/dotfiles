@@ -1,6 +1,6 @@
 # Dotfiles (chezmoi)
 
-Cross-platform dotfiles managed with [chezmoi](https://chezmoi.io).
+macOS dotfiles managed with [chezmoi](https://chezmoi.io). Apple Silicon Macs only.
 
 ## Import dotfiles
 
@@ -12,7 +12,6 @@ After setup:
 
 ```bash
 exec zsh                    # Reload shell
-tmux                        # Then prefix+I to install plugins
 ```
 
 Neovim is intentionally managed outside this repo (separate kickstart clone).

@@ -3,15 +3,14 @@
 Guidance for agentic coding assistants working in this chezmoi dotfiles repository.
 
 ## Repository Overview
-- Purpose: cross-platform developer environment configuration.
-- Targets: macOS (Apple Silicon), Debian/Ubuntu, Arch Linux.
-- Main file types: shell scripts, chezmoi templates, TOML configs, Lua configs.
+- Purpose: macOS developer environment configuration.
+- Targets: Apple Silicon Macs only — no Linux, no templates, no platform conditionals.
+- Main file types: shell scripts, TOML/KDL/JSON configs.
 - There is no application build pipeline in this repo.
 
 ## Primary References
 - Start with `CLAUDE.md` for architecture and machine context.
-- Follow chezmoi naming semantics and template behavior.
-- Preserve platform gates (`.chezmoi.os`) and machine gates (`.machineType`).
+- Follow chezmoi naming semantics.
 
 ## Cursor/Copilot Rules Status
 - `.cursorrules`: not found.
@@ -45,29 +44,10 @@ bash -n home/.chezmoiscripts/run_once_install-zinit.sh
 ```
 
 ### Single-test equivalent (important)
-When you need to validate one changed file only:
-
-1) Non-template shell script
+When you need to validate one changed shell script only:
 ```bash
 bash -n path/to/script.sh
-```
-
-2) Template shell script (`*.sh.tmpl`)
-```bash
-chezmoi execute-template < home/.chezmoiscripts/run_onchange_install-packages.sh.tmpl > /tmp/install-packages.sh
-bash -n /tmp/install-packages.sh
-```
-
-3) Optional stricter lint (if installed)
-```bash
-shellcheck /tmp/install-packages.sh
-```
-
-### Single template render check
-For one changed template (non-shell lint):
-```bash
-chezmoi execute-template < home/dot_zshrc.tmpl > /tmp/zshrc.rendered
-chezmoi execute-template < home/dot_gitconfig.tmpl > /tmp/gitconfig.rendered
+shellcheck path/to/script.sh   # optional, if installed
 ```
 
 ### Optional tooling
@@ -101,7 +81,7 @@ chezmoi execute-template < home/dot_gitconfig.tmpl > /tmp/gitconfig.rendered
 - `private_` prefix means stricter permissions.
 - `run_once_` scripts run once per machine.
 - `run_onchange_` scripts rerun when file hash changes.
-- `.tmpl` files are Go templates; preserve template delimiters and spacing.
+- No `.tmpl` files — all configs are static; do not introduce templates.
 - Use kebab-case action names for scripts.
 
 ### Shell style
@@ -126,9 +106,8 @@ chezmoi execute-template < home/dot_gitconfig.tmpl > /tmp/gitconfig.rendered
 - Preserve surrounding quote style unless there is a reason to normalize.
 
 ### Imports/dependencies/types
-- Lua: place `require(...)` calls at top of file.
 - Shell: avoid adding new dependencies without clear need.
-- If adding a dependency, update package install template for each supported platform.
+- If adding a dependency, add it to `home/.chezmoiscripts/run_onchange_install-packages.sh`.
 - This repo has no static type system; enforce "type safety" via explicit runtime checks.
 
 ### Config file conventions
@@ -137,9 +116,7 @@ chezmoi execute-template < home/dot_gitconfig.tmpl > /tmp/gitconfig.rendered
 - Do not reorder large sections unless required for correctness.
 
 ## Platform and Scope Guardrails
-- Keep darwin-specific settings behind darwin checks.
-- Keep server machine-type safe (no GUI assumptions).
-- Preserve Linux distro branching (`apt` vs `pacman`) behavior.
+- macOS only — do not add Linux/server support or platform conditionals.
 - Avoid breaking bootstrap on fresh machines.
 
 ## External Repos

@@ -21,9 +21,9 @@ ZMK config repo: https://github.com/rcopra/zmk-config (local: `~/personal/zmk-co
 
 WM tier = **⌃⌥⌘ ("Hyper-3")**, Shift excluded (Shift = move-variant modifier). Keyboard-independent by design:
 - **Laptop**: Caps Lock → hold ⌃⌥⌘ / tap Escape (Karabiner rule)
-- **Hillside D50**: lower-left raised key = plain `&kp LC(LA(LGUI))` — a modifier key, not a layer
+- **Hillside D50**: outer key of BOTH raised pairs = plain `&kp LC(LA(LGUI))` — mirrored so either hand holds while the other taps; a modifier key, not a layer
 - **Temper**: no dedicated key yet; A+R+S HRM hold produces the same chord
-- **OmniWM** binds ⌃⌥⌘+letters/digits; same chords portable to Hyprland later
+- **OmniWM** binds ⌃⌥⌘+letters; workspaces on ⌘1-9 (⌘⇧ move+follow, ⌘⇧⌥ silent — Karabiner synthesis)
 - **Focus/move = ⌃⌥⌘+N/E/U/I (+Shift), NOT arrows** — arrows would need NAV-layer hold on ZMK (left raised + left thumb, bad ergo). N/E/U/I = the NAV cluster positions, so mental map identical; ZMK = raised + one right-hand tap, laptop = caps + home row
 
 ### WM layer — SHELVED (2026-07-27)
@@ -35,14 +35,13 @@ Surviving design facts if revisited:
 - HRMs already produce any modifier chord today (e.g. A+R hold = Ctrl+Alt) — zero firmware change needed for chord-based WM bindings
 - Sticky-layer one-shots don't compose with held-Shift variants (shift keypress consumes the one-shot)
 
-## Cross-Platform Considerations
+## Laptop Fallback
 
-- WM layer chords are OS-agnostic: bind same Ctrl+Alt+Cmd combos in Hyprland (Omarchy) for 1:1 parity.
-- Laptop internal keyboard has no layers — fallback is OmniWM command palette (Ctrl+Option+Space).
+- Laptop internal keyboard has no layers — Caps-hyper covers WM chords; anything else via OmniWM command palette (Ctrl+Option+Space).
 
 ## Planned Changes
 
-- Temper WM-layer trigger (when Temper back in rotation)
-- Left raised tap slots → programming keys (`=`, `#`) — combos tiresome; not priority
-- Tmux prefix (`LH2`, Ctrl+A) stale — decide together with Zellij locked-mode topic
+- Temper hyper key (when Temper back in rotation; A+R+S HRM hold works meanwhile)
+- Programming keys (`=`, `#` — combos tiresome): raised keys are plain hyper now; would need hold-tap (hold=hyper, tap=symbol). Not priority
+- `TMUX_PRE` (`LH2` thumb + `F24`/upper-thumb slots, Ctrl+A) — fully dead now that tmux is removed from the stack; free keys for reassignment
 - Thumb-cluster rethink (strain) — separate topic, on hold
