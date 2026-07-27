@@ -8,14 +8,15 @@ description: >
 
 # Dotfiles Config Skill
 
-You are editing a chezmoi-managed dotfiles repo at `~/.local/share/chezmoi/`.
+You are editing a chezmoi-managed dotfiles repo at `~/.local/share/chezmoi/`. macOS only — no templates, no Linux support.
 
 ## Critical Rules
 
 - **NEVER use Bash/sed/awk to edit files.** Always use the Edit tool. sed has destroyed config files before.
 - **NEVER edit target files in `~/` directly** — always edit the chezmoi source in `~/.local/share/chezmoi/`
 - **Exception: `~/.config/chezmoi/chezmoi.toml`** — this IS the live config, edit it directly with the Edit tool
-- **Neovim config is a SEPARATE git repo** at `~/.config/nvim/` (rcopra/kickstart.nvim, cloned via `.chezmoiexternal.toml`). You CAN edit it directly, but treat it as its own project: edit files in `~/.config/nvim/`, commit there separately (`git -C ~/.config/nvim commit ...`), and do NOT use `chezmoi apply` for nvim changes — chezmoi would overwrite them.
+- **Exception: OmniWM** — the app rewrites `~/.config/omniwm/settings.toml` from its GUI. To edit: quit OmniWM, edit the LIVE file, relaunch, then `chezmoi re-add ~/.config/omniwm/settings.toml`
+- **Neovim config is a SEPARATE git repo** at `~/.config/nvim/` (rcopra/kickstart.nvim). Edit files there directly, commit there separately (`git -C ~/.config/nvim commit ...`), never `chezmoi apply` for nvim changes.
 
 ## Safe Editing Workflow
 
@@ -27,70 +28,50 @@ You are editing a chezmoi-managed dotfiles repo at `~/.local/share/chezmoi/`.
 
 ## Theme
 
-Gruvbox Material Mix (Hard) (`sainnhe/gruvbox-material`) is hardcoded across all tools. There is no centralized theme switching system.
+Gruvbox Material Mix (Hard) (`sainnhe/gruvbox-material`) hardcoded per tool, no central switcher:
 
-### How themes are configured per tool
-
-- **WezTerm** (`dot_wezterm.lua`) — custom `config.colors` table with mix(hard) hex values
-- **tmux** (`dot_tmux.conf`) — `egel/tmux-gruvbox` plugin (`dark` variant) with mix(hard) palette override at `~/.tmux/plugins/tmux-gruvbox/src/palette_gruvbox_dark.sh`
-- **FZF** (`dot_fzf.zsh.tmpl`) — gruvbox-material mix(hard) hex values in `FZF_DEFAULT_OPTS`
-- **Starship** (`dot_config/starship.toml`) — `starship preset gruvbox-rainbow` with mix(hard) palette overrides in `[palettes.gruvbox_material_mix]`
-- **Neovim** (`~/.config/nvim/lua/custom/plugins/colorschemes.lua`) — `sainnhe/gruvbox-material` with `background='hard'`, `foreground='mix'`
-
-### Switching themes (manual per-tool)
-
-To change to a different theme, edit each config file individually:
-1. WezTerm: update `config.colors` table hex values
-2. tmux: update palette file at `~/.tmux/plugins/tmux-gruvbox/src/palette_gruvbox_dark.sh`
-3. FZF: update hex values in `FZF_DEFAULT_OPTS`
-4. Starship: run `starship preset <name> -o ~/.config/starship.toml`, update palette, then `chezmoi re-add ~/.config/starship.toml`
-5. Neovim: change colorscheme plugin + `vim.cmd.colorscheme` (commit separately in nvim repo)
+- **Ghostty** (`dot_config/ghostty/config`) — theme/palette values
+- **FZF** (`dot_fzf.zsh`) — mix(hard) hex values in `FZF_DEFAULT_OPTS`
+- **Starship** (`dot_config/starship.toml`) — `starship preset gruvbox-rainbow` base with mix(hard) palette in `[palettes.gruvbox_material_mix]`
+- **Neovim** (`~/.config/nvim/lua/custom/plugins/colorschemes.lua`) — `sainnhe/gruvbox-material`, `background='hard'`, `foreground='mix'` (separate repo)
+- **Zellij** (`dot_config/zellij/config.kdl`) — `theme` setting (currently catppuccin-macchiato — not yet gruvboxed)
 
 ### Powerline glyph gotcha
 
-Claude Code's Edit/Write tools silently strip powerline characters (U+E0B0, U+E0BC, etc.). When editing configs that contain these glyphs:
-- **Starship**: Use `starship preset` CLI to write the base config, then edit only the palette/non-glyph parts
-- **tmux**: Use a plugin like `egel/tmux-gruvbox` that handles glyphs in its own bash scripts
-- **If manual injection is needed**: Use Python (`open(path, 'w')`) to write the glyphs, not the Edit/Write tools
+Claude Code's Edit/Write tools silently strip powerline characters (U+E0B0, U+E0BC, etc.):
+- **Starship**: use `starship preset <name> -o <path>` CLI for the base, edit only palette/non-glyph parts, then `chezmoi re-add`
+- **Manual injection**: use Python (`open(path, 'w')`), never Edit/Write
 
 ## Config File Map
 
 | Source path | Target | Purpose |
 |---|---|---|
-| `.chezmoi.toml.tmpl` | `~/.config/chezmoi/chezmoi.toml` | Chezmoi config |
-| `dot_zshrc.tmpl` | `~/.zshrc` | Shell config, aliases, PATH |
-| `dot_tmux.conf` | `~/.tmux.conf` | Tmux config, plugins, keybinds, theme |
-| `dot_wezterm.lua` | `~/.wezterm.lua` | WezTerm terminal config |
-| `dot_fzf.zsh.tmpl` | `~/.fzf.zsh` | FZF setup and theme colors |
-| `dot_config/starship.toml` | `~/.config/starship.toml` | Starship prompt |
-| `dot_aerospace.toml` | `~/.aerospace.toml` | macOS window manager |
-| `~/.config/nvim/` | `~/.config/nvim/` | Neovim config (separate git repo — rcopra/kickstart.nvim) |
-| `.chezmoiexternal.toml` | (chezmoi) | External repo declarations (nvim, TPM) |
-| `.chezmoiignore` | (chezmoi) | Platform-conditional file exclusions |
+| `dot_zshrc` | `~/.zshrc` | Shell config, aliases, PATH |
+| `dot_config/ghostty/config` | `~/.config/ghostty/config` | Terminal (option-as-alt + alt+arrow unbinds live here) |
+| `dot_config/zellij/config.kdl` | `~/.config/zellij/config.kdl` | Multiplexer; locked-by-default; vim-zellij-navigator on Alt+arrows |
+| `dot_config/omniwm/settings.toml` | `~/.config/omniwm/settings.toml` | Window manager (Hyper-3 hotkeys, workspaces, app rules) |
+| `dot_config/karabiner/karabiner.json` | `~/.config/karabiner/karabiner.json` | Caps→Hyper-3, launchers, move+follow synthesis |
+| `dot_config/starship.toml` | `~/.config/starship.toml` | Prompt |
+| `dot_fzf.zsh` | `~/.fzf.zsh` | FZF setup + theme |
+| `.chezmoiexternal.toml` | (chezmoi) | vim-zellij-navigator wasm |
+| `~/.config/nvim/` | `~/.config/nvim/` | Neovim (separate git repo) |
 
 ## Discovery Commands
 
 ```bash
 chezmoi managed          # List all managed files
-chezmoi data             # Show all template data (theme, machine type, etc.)
-chezmoi source-path      # Show source directory path
-chezmoi source-path ~/.tmux.conf   # Find source for a specific target
+chezmoi source-path ~/.zshrc   # Find source for a specific target
 chezmoi diff             # Preview pending changes
-chezmoi cat-config       # Show active chezmoi config
 ```
 
 ## Common Tasks
 
-### Add a tmux plugin
-1. Add `set -g @plugin 'author/plugin-name'` to `dot_tmux.conf` (above the TPM init line)
-2. Add any plugin config options
-3. `chezmoi apply` then `prefix + I` in tmux to install
-
 ### Add a zsh alias or function
-1. Edit `dot_zshrc.tmpl`
+1. Edit `dot_zshrc`
 2. `chezmoi diff` then `chezmoi apply`
 
 ### Modify keybinds
-- **tmux**: `dot_tmux.conf` — use `bind-key` / `bind`
-- **WezTerm**: `dot_wezterm.lua` — add to `config.keys` table
-- **Aerospace**: `dot_aerospace.toml` — uses TOML keybind format
+- **OmniWM**: quit app → edit live `~/.config/omniwm/settings.toml` (`[[hotkeys]]` binding strings like `"Control+Option+Command+N"`) → relaunch → `chezmoi re-add`
+- **Karabiner**: edit live `~/.config/karabiner/karabiner.json` (auto-reloads) → `chezmoi re-add`
+- **Zellij**: edit source `dot_config/zellij/config.kdl` → `chezmoi apply` (fresh session for plugin changes)
+- **Ghostty**: edit source → `chezmoi apply` → reload config in Ghostty (Cmd+Shift+,)

@@ -2,13 +2,6 @@
 # External Git Repositories
 # ==============================================================================
 
-# TPM (Tmux Plugin Manager)
-[".tmux/plugins/tpm"]
-    type = "git-repo"
-    url = "https://github.com/tmux-plugins/tpm.git"
-    refreshPeriod = "168h"
-    clone.args = ["--depth", "1"]
-
 # vim-zellij-navigator: per-keypress nvim detection for seamless Alt+arrow
 # pane nav (replaces the old zellij-autolock approach)
 [".config/zellij/plugins/vim-zellij-navigator.wasm"]

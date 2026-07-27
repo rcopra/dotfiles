@@ -23,7 +23,6 @@ fi
 echo "==> Installing CLI tools..."
 brew install \
     git \
-    tmux \
     zellij \
     fzf \
     eza \
@@ -33,7 +32,6 @@ brew install \
     bat \
     jq \
     starship \
-    tmux-mem-cpu-load \
     direnv \
     rainfrog
 
