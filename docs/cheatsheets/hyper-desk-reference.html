@@ -1,0 +1,239 @@
+<title>Hyper-3 · Desk Reference</title>
+<style>
+  :root {
+    --bg: #f9f5d7;
+    --surface: #f4eecb;
+    --line: #cbb98f;
+    --line-soft: #e2d5ac;
+    --fg: #504038;
+    --muted: #8a7860;
+    --orange: #b94c07;
+    --green: #64712a;
+    --blue: #3e6b75;
+    --red: #b0403f;
+    --yellow: #9a6215;
+    --key-bg: #fdf9e8;
+    --key-shadow: #c2ad83;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: #e8e2c4;
+    font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+    color: var(--fg);
+    font-size: 11.5px;
+    line-height: 1.45;
+    padding: 1.5rem 0.75rem;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .sheet {
+    background: var(--bg);
+    border: 1px solid var(--line);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 26px 30px 20px;
+    box-shadow: 0 2px 14px rgba(80, 64, 56, 0.18);
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    border-bottom: 2px solid var(--fg);
+    padding-bottom: 8px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  h1 { font-size: 17px; margin: 0; letter-spacing: -0.01em; }
+  h1 .dim { color: var(--muted); font-weight: 400; }
+  .tiers-inline { font-size: 10.5px; color: var(--muted); text-align: right; }
+  .tiers-inline b { color: var(--fg); }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px 18px;
+  }
+  @media (max-width: 860px) { .grid { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 580px) { .grid { grid-template-columns: 1fr; } }
+
+  section { break-inside: avoid; }
+  h2 {
+    font-size: 9.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    margin: 0 0 6px;
+    color: var(--orange);
+    display: flex; align-items: center; gap: 0.6em;
+  }
+  h2::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+  h2.blue  { color: var(--blue); }
+  h2.green { color: var(--green); }
+
+  kbd {
+    display: inline-block;
+    font-family: inherit;
+    font-size: 10px;
+    background: var(--key-bg);
+    border: 1px solid var(--line);
+    border-bottom: 2px solid var(--key-shadow);
+    border-radius: 4px;
+    padding: 0 5px;
+    line-height: 1.5;
+    white-space: nowrap;
+  }
+  kbd.hy { color: var(--orange); border-color: var(--orange); font-weight: 600; }
+  kbd.op { color: var(--blue); border-color: var(--blue); }
+
+  table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  td { padding: 2.5px 6px 2.5px 0; vertical-align: baseline; }
+  td.k { white-space: nowrap; width: 1%; padding-right: 12px; }
+  tr + tr td { border-top: 1px solid var(--line-soft); }
+  .note { color: var(--muted); font-size: 10px; }
+
+  .hyperbox {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 8px 10px;
+    margin-bottom: 10px;
+  }
+  .hyperbox table td { padding: 2px 6px 2px 0; }
+  .hyperbox tr td { border-top: none; }
+
+  footer {
+    margin-top: 14px;
+    padding-top: 7px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    color: var(--muted);
+    font-size: 9.5px;
+    flex-wrap: wrap;
+  }
+
+  @page { size: letter landscape; margin: 7mm; }
+  @media print {
+    /* B&W laser, no background printing: borders + weight carry everything */
+    :root {
+      --bg: #fff; --surface: transparent;
+      --line: #666; --line-soft: #bbb;
+      --fg: #000; --muted: #333;
+      --orange: #000; --green: #000; --blue: #000; --red: #000; --yellow: #000;
+      --key-bg: transparent; --key-shadow: #000;
+    }
+    html, body { height: auto; overflow: hidden; }
+    body { background: #fff; padding: 0; margin: 0; font-size: 10px; }
+    .sheet {
+      border: none; box-shadow: none; background: #fff;
+      max-width: 100%; width: 100%; padding: 0;
+      page-break-after: avoid; page-break-inside: avoid;
+    }
+    kbd { border-color: #000; background: transparent; }
+    kbd.hy { border-width: 1.5px; }
+    .hyperbox { border-color: #000; background: transparent; }
+    header { border-bottom-color: #000; margin-bottom: 10px; }
+    .grid { gap: 9px 16px; }
+    footer { margin-top: 10px; }
+  }
+</style>
+
+<div class="sheet">
+  <header>
+    <h1>HYPER-3 <span class="dim">⌃⌥⌘ · OmniWM window management</span></h1>
+    <div class="tiers-inline">
+      <b>⌃⌥⌘</b> windows &nbsp;·&nbsp; <b>⌘1-9</b> workspaces &nbsp;·&nbsp; <b>⌥</b>+arrows zellij/nvim panes &nbsp;·&nbsp; plain keys never stolen
+    </div>
+  </header>
+
+  <div class="hyperbox">
+    <table>
+      <tr>
+        <td class="k"><kbd class="hy">Hillside D50</kbd></td>
+        <td>outer key of <b>either raised pair</b> — mirrored both hands. Hold one, tap with the other hand.</td>
+        <td class="k"><kbd class="hy">MacBook</kbd></td>
+        <td>hold <b>Caps Lock</b> (tap = Esc)</td>
+        <td class="k"><kbd class="hy">Temper</kbd></td>
+        <td>hold <b>A+R+S</b> home-row mods</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="grid">
+
+    <section>
+      <h2>Focus &amp; move · hyper +</h2>
+      <table>
+        <tr><td class="k"><kbd>N</kbd> <kbd>E</kbd> <kbd>U</kbd> <kbd>I</kbd></td><td>focus ← ↓ ↑ →</td></tr>
+        <tr><td class="k"><kbd>⇧</kbd><kbd>N E U I</kbd></td><td>move window ← ↓ ↑ →</td></tr>
+        <tr><td class="k"><kbd>`</kbd></td><td>previous window</td></tr>
+        <tr><td class="k"><kbd>M</kbd></td><td>focus next monitor</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>Workspaces</h2>
+      <table>
+        <tr><td class="k"><kbd>⌘</kbd><kbd>1-9</kbd></td><td>switch <span class="note">1-5 main · 6-9 secondary</span></td></tr>
+        <tr><td class="k"><kbd>⌘⇧</kbd><kbd>1-9</kbd></td><td>move window to workspace</td></tr>
+        <tr><td class="k"><kbd class="hy">hyper</kbd>+<kbd>Tab</kbd></td><td>last workspace (back-and-forth)</td></tr>
+        <tr><td class="k"><kbd class="hy">hyper</kbd>+<kbd>O</kbd></td><td>overview (all windows)</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>Launch · hyper +</h2>
+      <table>
+        <tr><td class="k"><kbd class="op">⌥</kbd>+<kbd>Return</kbd> / <kbd>G</kbd></td><td>Ghostty (new window)</td></tr>
+        <tr><td class="k"><kbd>W</kbd></td><td>Safari</td></tr>
+        <tr><td class="k"><kbd>B</kbd></td><td>Firefox (new window)</td></tr>
+        <tr><td class="k"><kbd>S</kbd></td><td>Slack</td></tr>
+        <tr><td class="k"><kbd>D</kbd></td><td>Discord</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>Layout &amp; size · hyper +</h2>
+      <table>
+        <tr><td class="k"><kbd>F</kbd></td><td>fullscreen</td></tr>
+        <tr><td class="k"><kbd>L</kbd></td><td>niri ⇄ dwindle layout</td></tr>
+        <tr><td class="k"><kbd>T</kbd></td><td>tabbed column</td></tr>
+        <tr><td class="k"><kbd>⇧B</kbd></td><td>balance sizes</td></tr>
+        <tr><td class="k"><kbd>,</kbd> <kbd>.</kbd></td><td>cycle column width presets</td></tr>
+        <tr><td class="k"><kbd>-</kbd> <kbd>=</kbd></td><td>column −/+ 10% <span class="note">⇧: window height</span></td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2 class="blue">Terminal panes · ⌥</h2>
+      <table>
+        <tr><td class="k"><kbd class="op">⌥</kbd> + <kbd>arrows</kbd></td><td>zellij ⇄ neovim pane focus</td></tr>
+        <tr><td class="k"><kbd class="op">⌥</kbd> + <kbd>z</kbd></td><td>toggle autolock</td></tr>
+        <tr><td class="k"><kbd class="op">⌥</kbd> + <kbd>n</kbd></td><td>new pane (from locked)</td></tr>
+        <tr><td class="k"><kbd>⌃⌥</kbd> + <kbd>Space</kbd></td><td>OmniWM command palette</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2 class="green">Hand pairing (D50)</h2>
+      <table>
+        <tr><td class="k"><b>L hyper</b> →</td><td>focus <kbd>N E U I</kbd> · <kbd>O</kbd> <kbd>M</kbd> <kbd>Tab</kbd> <kbd>Return</kbd></td></tr>
+        <tr><td class="k"><b>R hyper</b> →</td><td>launch <kbd>G W B S D</kbd> · <kbd>F</kbd> <kbd>T</kbd> <kbd>⇧B</kbd></td></tr>
+        <tr><td class="k">digits</td><td>⌘ = hold <kbd>S</kbd> HRM + numword + digit <span class="note">laptop: plain ⌘1-9</span></td></tr>
+        <tr><td class="k">anything else</td><td><kbd>⌃⌥</kbd>+<kbd>Space</kbd> palette has every action</td></tr>
+      </table>
+    </section>
+
+  </div>
+
+  <footer>
+    <span>rcopra · gruvbox mix(hard) · OmniWM 0.5.9 · chezmoi <b>omniwm-migration</b></span>
+    <span>Slack→ws5 · Discord→ws4 via Settings › App Rules · keymap SVG: <b>just draw-d50</b></span>
+    <span>2026-07-27</span>
+  </footer>
+</div>

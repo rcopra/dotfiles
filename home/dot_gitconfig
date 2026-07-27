@@ -79,3 +79,5 @@
 [user]
   email = 137560494+rcopra@users.noreply.github.com
   name = rcopra
+[credential "https://git.heroku.com"]
+	helper = !heroku git:credentials

@@ -6,6 +6,40 @@ keybinds clear-defaults=true {
     locked {
         bind "Ctrl g" { SwitchToMode "normal"; }
         bind "Alt n" { NewPane; }
+        // vim-zellij-navigator: nvim pane -> forwards Alt+arrow to nvim (smart-splits),
+        // any other pane -> zellij MoveFocus. Config must be identical on every binding.
+        bind "Alt left" {
+            MessagePlugin "file:/Users/rickcopra/.config/zellij/plugins/vim-zellij-navigator.wasm" {
+                name "move_focus_or_tab"
+                payload "left"
+                move_mod "alt"
+                use_arrow_keys "true"
+            }
+        }
+        bind "Alt down" {
+            MessagePlugin "file:/Users/rickcopra/.config/zellij/plugins/vim-zellij-navigator.wasm" {
+                name "move_focus"
+                payload "down"
+                move_mod "alt"
+                use_arrow_keys "true"
+            }
+        }
+        bind "Alt up" {
+            MessagePlugin "file:/Users/rickcopra/.config/zellij/plugins/vim-zellij-navigator.wasm" {
+                name "move_focus"
+                payload "up"
+                move_mod "alt"
+                use_arrow_keys "true"
+            }
+        }
+        bind "Alt right" {
+            MessagePlugin "file:/Users/rickcopra/.config/zellij/plugins/vim-zellij-navigator.wasm" {
+                name "move_focus_or_tab"
+                payload "right"
+                move_mod "alt"
+                use_arrow_keys "true"
+            }
+        }
     }
     pane {
         bind "left" { MoveFocus "left"; }
@@ -185,10 +219,38 @@ keybinds clear-defaults=true {
         bind "Ctrl o" { SwitchToMode "session"; }
     }
     shared_except "locked" "scroll" {
-        bind "Alt left" { MoveFocusOrTab "left"; }
-        bind "Alt down" { MoveFocus "down"; }
-        bind "Alt up" { MoveFocus "up"; }
-        bind "Alt right" { MoveFocusOrTab "right"; }
+        bind "Alt left" {
+            MessagePlugin "file:/Users/rickcopra/.config/zellij/plugins/vim-zellij-navigator.wasm" {
+                name "move_focus_or_tab"
+                payload "left"
+                move_mod "alt"
+                use_arrow_keys "true"
+            }
+        }
+        bind "Alt down" {
+            MessagePlugin "file:/Users/rickcopra/.config/zellij/plugins/vim-zellij-navigator.wasm" {
+                name "move_focus"
+                payload "down"
+                move_mod "alt"
+                use_arrow_keys "true"
+            }
+        }
+        bind "Alt up" {
+            MessagePlugin "file:/Users/rickcopra/.config/zellij/plugins/vim-zellij-navigator.wasm" {
+                name "move_focus"
+                payload "up"
+                move_mod "alt"
+                use_arrow_keys "true"
+            }
+        }
+        bind "Alt right" {
+            MessagePlugin "file:/Users/rickcopra/.config/zellij/plugins/vim-zellij-navigator.wasm" {
+                name "move_focus_or_tab"
+                payload "right"
+                move_mod "alt"
+                use_arrow_keys "true"
+            }
+        }
         bind "Alt h" { MoveFocusOrTab "left"; }
         bind "Alt j" { MoveFocus "down"; }
         bind "Alt k" { MoveFocus "up"; }
