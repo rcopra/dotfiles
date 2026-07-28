@@ -4,6 +4,9 @@ theme = Catppuccin Macchiato
 
 macos-option-as-alt = true
 
+# Exiting the last shell quits the instance — no windowless zombie apps in dock/cmd-tab
+quit-after-last-window-closed = true
+
 # Drop Ghostty's default Option+Left/Right=word-motion so they send real Alt+arrow CSI for Zellij/nvim nav (must use `option+`, not `alt+`)
 keybind = option+left=unbind
 keybind = option+right=unbind
