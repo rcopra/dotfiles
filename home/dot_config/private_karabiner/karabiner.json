@@ -485,22 +485,6 @@
                             {
                                 "type": "basic",
                                 "from": {
-                                    "key_code": "return_or_enter",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "option"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "shell_command": "open -na Ghostty"
-                                    }
-                                ]
-                            },
-                            {
-                                "type": "basic",
-                                "from": {
                                     "key_code": "b",
                                     "modifiers": {
                                         "mandatory": [
