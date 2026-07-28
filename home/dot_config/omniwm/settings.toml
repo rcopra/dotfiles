@@ -121,7 +121,7 @@ red = 0.3
 [quakeTerminal]
 animationDuration = 0.2
 autoHide = false
-enabled = true
+enabled = false
 heightPercent = 100.0
 monitorMode = "focusedWindow"
 opacity = 1.0
@@ -817,7 +817,7 @@ binding = "Unassigned"
 id = "toggleHiddenBarPanel"
 
 [[hotkeys]]
-binding = "Option+Return"
+binding = "Unassigned"
 id = "toggleQuakeTerminal"
 
 [[hotkeys]]
