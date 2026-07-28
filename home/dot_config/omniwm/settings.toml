@@ -121,12 +121,12 @@ red = 0.3
 [quakeTerminal]
 animationDuration = 0.2
 autoHide = false
-enabled = false
-heightPercent = 50.0
+enabled = true
+heightPercent = 100.0
 monitorMode = "focusedWindow"
 opacity = 1.0
-position = "center"
-widthPercent = 50.0
+position = "right"
+widthPercent = 38.0
 
 [routing]
 mode = "macOS"
@@ -797,11 +797,11 @@ binding = "Control+Option+Command+V"
 id = "toggleFocusedWindowFloating"
 
 [[hotkeys]]
-binding = "Control+Option+Command+Shift+Return"
+binding = "Unassigned"
 id = "assignFocusedWindowToScratchpad"
 
 [[hotkeys]]
-binding = "Option+Return"
+binding = "Unassigned"
 id = "toggleScratchpadWindow"
 
 [[hotkeys]]
@@ -817,7 +817,7 @@ binding = "Unassigned"
 id = "toggleHiddenBarPanel"
 
 [[hotkeys]]
-binding = "Unassigned"
+binding = "Option+Return"
 id = "toggleQuakeTerminal"
 
 [[hotkeys]]
