@@ -449,11 +449,11 @@ binding = "Hyper+I"
 id = "move.right"
 
 [[hotkeys]]
-binding = "Unassigned"
+binding = "Control+Option+Command+Down Arrow"
 id = "moveWindowDown"
 
 [[hotkeys]]
-binding = "Unassigned"
+binding = "Control+Option+Command+Up Arrow"
 id = "moveWindowUp"
 
 [[hotkeys]]
@@ -465,11 +465,11 @@ binding = "Unassigned"
 id = "moveWindowUpOrToWorkspaceUp"
 
 [[hotkeys]]
-binding = "Unassigned"
+binding = "Control+Option+Command+Left Arrow"
 id = "consumeOrExpelWindowLeft"
 
 [[hotkeys]]
-binding = "Unassigned"
+binding = "Control+Option+Command+Right Arrow"
 id = "consumeOrExpelWindowRight"
 
 [[hotkeys]]
@@ -501,11 +501,11 @@ binding = "Unassigned"
 id = "toggleNativeFullscreen"
 
 [[hotkeys]]
-binding = "Control+Option+Shift+Left Arrow"
+binding = "Control+Option+Command+Left Bracket"
 id = "moveColumn.left"
 
 [[hotkeys]]
-binding = "Control+Option+Shift+Right Arrow"
+binding = "Control+Option+Command+Right Bracket"
 id = "moveColumn.right"
 
 [[hotkeys]]
@@ -834,7 +834,7 @@ id = "toggleSystemStats"
 
 [[workspaces]]
 id = "AD36F001-C57E-41A5-AC1D-DF5249D007F0"
-layoutType = "dwindle"
+layoutType = "niri"
 name = "1"
 
 [workspaces.monitorAssignment]
