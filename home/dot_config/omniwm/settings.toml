@@ -121,7 +121,7 @@ red = 0.3
 [quakeTerminal]
 animationDuration = 0.2
 autoHide = false
-enabled = true
+enabled = false
 heightPercent = 50.0
 monitorMode = "focusedWindow"
 opacity = 1.0
@@ -793,15 +793,15 @@ binding = "Unassigned"
 id = "rescueOffscreenWindows"
 
 [[hotkeys]]
-binding = "Unassigned"
+binding = "Control+Option+Command+V"
 id = "toggleFocusedWindowFloating"
 
 [[hotkeys]]
-binding = "Unassigned"
+binding = "Control+Option+Command+Shift+Return"
 id = "assignFocusedWindowToScratchpad"
 
 [[hotkeys]]
-binding = "Unassigned"
+binding = "Option+Return"
 id = "toggleScratchpadWindow"
 
 [[hotkeys]]
@@ -817,7 +817,7 @@ binding = "Unassigned"
 id = "toggleHiddenBarPanel"
 
 [[hotkeys]]
-binding = "Option+Return"
+binding = "Unassigned"
 id = "toggleQuakeTerminal"
 
 [[hotkeys]]
