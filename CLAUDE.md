@@ -34,14 +34,14 @@ No `.tmpl` files are used — all configs are static with hardcoded values.
 
 ## Theme
 
-Gruvbox Material Mix (Hard) (`sainnhe/gruvbox-material`) is hardcoded across all tools. There is no centralized theme switching system — each tool uses either a built-in theme, plugin, or hardcoded hex values from the mix(hard) palette. To change themes, edit each config file individually.
+Target theme is Gruvbox Material Mix (Hard) (`sainnhe/gruvbox-material`), but the migration is incomplete: Ghostty, Zellij, and Neovim currently run Catppuccin Macchiato. Only Starship uses a gruvbox palette (gruvbox-rainbow preset, `gruvbox_material_mix` colors). There is no centralized theme switching system — to change themes, edit each config file individually.
 
 ## Core Stack
 
 - **Terminal**: Ghostty (installed manually, not brew) — `dot_config/ghostty/config`
-- **Multiplexer**: Zellij, locked-by-default mode — `dot_config/zellij/config.kdl`; Alt+arrow pane nav via vim-zellij-navigator wasm plugin (works in locked mode, forwards into nvim)
+- **Multiplexer**: Zellij, locked-by-default mode — `dot_config/zellij/config.kdl`; Alt+arrow pane nav via vim-zellij-navigator wasm plugin (works in locked mode; nvim side is smart-splits.nvim)
 - **Window manager**: OmniWM (Niri-style columns) — `dot_config/omniwm/settings.toml`; all hotkeys on the Hyper-3 (⌃⌥⌘) tier, workspaces on ⌘1-9
-- **Karabiner**: Caps→Hyper-3, app launchers, ⌘⇧ move+follow synthesis — `dot_config/karabiner/karabiner.json`
+- **Karabiner**: Caps→Hyper-3, app launchers, ⌘⇧ move+follow synthesis — `dot_config/private_karabiner/karabiner.json`
 - **Editor**: Neovim — `~/.config/nvim` intentionally unmanaged (separate kickstart clone)
 - **Prompt**: Starship gruvbox-rainbow preset
 
@@ -50,7 +50,7 @@ Gruvbox Material Mix (Hard) (`sainnhe/gruvbox-material`) is hardcoded across all
 - **External files** (`home/.chezmoiexternal.toml`): vim-zellij-navigator wasm plugin
 - **Package installation** (`home/.chezmoiscripts/run_onchange_install-packages.sh`): Homebrew-based, runs on content change
 - **VS Code settings**: Symlinked from `~/Library/Application Support/Code/User/` to `home/vscode/` using relative paths
-- **Version managers**: rbenv, pyenv, nvm are installed and configured in shell configs
+- **Version managers**: rbenv, pyenv, fnm are installed and configured in shell configs
 
 ## Machine Context
 

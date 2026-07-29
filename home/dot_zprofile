@@ -6,3 +6,7 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(/opt/homebrew/bin/brew shellenv 2> /dev/null)"
 
 type -a pyenv > /dev/null && eval "$(pyenv init --path)"
+
+
+# Added by Antigravity CLI installer
+export PATH="/Users/rickcopra/.local/bin:$PATH"

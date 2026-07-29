@@ -59,7 +59,7 @@ systemHyperTrigger = "None"
 updateChecksEnabled = true
 
 [gestures]
-fingerCount = 3
+fingerCount = 4
 invertDirection = true
 mouseResizeModifierKey = "option"
 scrollEnabled = true
@@ -144,7 +144,7 @@ excludedBundleIDs = []
 height = 24.0
 hideEmptyWorkspaces = false
 notchActiveZoneWidth = 180.0
-notchMode = "moveBelowMenuBar"
+notchMode = "off"
 position = "overlappingMenuBar"
 reserveLayoutSpace = false
 revealHoldMilliseconds = 200.0
