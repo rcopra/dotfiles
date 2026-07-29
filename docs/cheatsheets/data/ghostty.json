@@ -1,0 +1,209 @@
+{
+  "tool": "ghostty",
+  "role": "Terminal emulator hosting Zellij; installed manually (not brew), deliberately keybind-thin so the multiplexer owns pane/tab keys",
+  "config_sources": [
+    "home/dot_config/ghostty/config"
+  ],
+  "hotkeys": [
+    {
+      "keys": "⌥ ←",
+      "keys_raw": "option+left",
+      "action": "Unbound (passes through)",
+      "description": "Ghostty's default `alt+arrow_left=esc:b` word-motion binding is removed so the key falls through to normal terminal encoding as Alt+Left, reaching Zellij / Neovim for pane navigation.",
+      "category": "navigation",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/ghostty/config:11",
+      "notes": "Requires macos-option-as-alt = true (config:5). `option+left` is an alias — Ghostty 1.3.1 normalizes it to `alt+arrow_left`; `alt+left`, `alt+arrow_left` and `option+arrow_left` unbind identically (verified via `ghostty +list-keybinds`). Consumed downstream by zellij's vim-zellij-navigator binding (home/dot_config/zellij/config.kdl:11).",
+      "scoring": {
+        "usefulness": 0.9,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-22",
+        "known": null,
+        "score": 0.63,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌥ →",
+      "keys_raw": "option+right",
+      "action": "Unbound (passes through)",
+      "description": "Same as Option+Left: drops the default `alt+arrow_right=esc:f` word-motion so Alt+Right reaches Zellij / Neovim.",
+      "category": "navigation",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/ghostty/config:12",
+      "notes": "Requires macos-option-as-alt = true (config:5). Pairs with zellij config.kdl:35.",
+      "scoring": {
+        "usefulness": 0.63,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-22",
+        "known": null,
+        "score": 0.441,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌘ N",
+      "keys_raw": "cmd+n",
+      "action": "New Ghostty window",
+      "category": "window-management",
+      "mode": "global",
+      "origin": "default",
+      "source": "default",
+      "notes": "Also reachable outside the terminal via Karabiner ⌥⏎ (`open -na Ghostty`) and Hyper-3 G (`open -a Ghostty`), see home/dot_config/private_karabiner/karabiner.json:497,533.",
+      "scoring": {
+        "usefulness": 0.637,
+        "novelty_auto": 0.1,
+        "line_date": "2026-06-22",
+        "known": null,
+        "score": 0.064,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌘ W",
+      "keys_raw": "cmd+w",
+      "action": "Close surface",
+      "category": "window-management",
+      "mode": "global",
+      "origin": "default",
+      "source": "default",
+      "notes": "With quit-after-last-window-closed = true (config:8), closing the last window quits Ghostty entirely — no windowless zombie in dock/⌘-Tab.",
+      "scoring": {
+        "usefulness": 0.637,
+        "novelty_auto": 0.1,
+        "line_date": "2026-06-22",
+        "known": null,
+        "score": 0.064,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌘ C",
+      "keys_raw": "cmd+c",
+      "action": "Copy selection",
+      "category": "editing",
+      "mode": "global",
+      "origin": "default",
+      "source": "default",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.488,
+        "novelty_auto": 0.1,
+        "line_date": "2026-06-22",
+        "known": null,
+        "score": 0.049,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌘ V",
+      "keys_raw": "cmd+v",
+      "action": "Paste from clipboard",
+      "category": "editing",
+      "mode": "global",
+      "origin": "default",
+      "source": "default",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.488,
+        "novelty_auto": 0.1,
+        "line_date": "2026-06-22",
+        "known": null,
+        "score": 0.049,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌘ K",
+      "keys_raw": "cmd+k",
+      "action": "Clear screen",
+      "category": "misc",
+      "mode": "global",
+      "origin": "default",
+      "source": "default",
+      "notes": "Action is `clear_screen` — clears the screen and scrollback of the focused Ghostty surface. Ghostty has no knowledge of Zellij panes, so when Zellij is running it owns the whole surface and ⌘K has little useful effect.",
+      "scoring": {
+        "usefulness": 0.3,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-22",
+        "known": null,
+        "score": 0.21,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌘ ⇧ ,",
+      "keys_raw": "cmd+shift+comma",
+      "action": "Reload config",
+      "category": "session",
+      "mode": "global",
+      "origin": "default",
+      "source": "default",
+      "notes": "Needed after `chezmoi apply` changes home/dot_config/ghostty/config.",
+      "scoring": {
+        "usefulness": 0.6,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-22",
+        "known": null,
+        "score": 0.42,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌘ ⏎",
+      "keys_raw": "cmd+enter",
+      "action": "Toggle fullscreen",
+      "category": "window-management",
+      "mode": "global",
+      "origin": "default",
+      "source": "default",
+      "notes": "Rarely used — OmniWM manages Ghostty window geometry (appRule in home/dot_config/omniwm/settings.toml:222).",
+      "scoring": {
+        "usefulness": 0.637,
+        "novelty_auto": 0.1,
+        "line_date": "2026-06-22",
+        "known": null,
+        "score": 0.064,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌘ T",
+      "keys_raw": "cmd+t",
+      "action": "New Ghostty tab",
+      "category": "tab-management",
+      "mode": "global",
+      "origin": "default",
+      "source": "default",
+      "notes": "Available but intentionally unused: Zellij owns tabs. Not unbound in config, so it remains a latent duplicate of Zellij's tab layer.",
+      "scoring": {
+        "usefulness": 0.562,
+        "novelty_auto": 0.1,
+        "line_date": "2026-06-22",
+        "known": null,
+        "score": 0.056,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌘ D",
+      "keys_raw": "cmd+d",
+      "action": "Split right",
+      "category": "pane-management",
+      "mode": "global",
+      "origin": "default",
+      "source": "default",
+      "notes": "Available but intentionally unused: Zellij owns splits (Alt+N / pane mode). Not unbound in config.",
+      "scoring": {
+        "usefulness": 0.637,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-22",
+        "known": null,
+        "score": 0.446,
+        "tier": 2
+      }
+    }
+  ]
+}

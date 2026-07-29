@@ -1,0 +1,827 @@
+{
+  "tool": "omniwm",
+  "role": "Niri-style scrollable-column window manager for macOS; owns workspaces, columns, floating and monitors",
+  "config_sources": [
+    "home/dot_config/omniwm/settings.toml"
+  ],
+  "hotkeys": [
+    {
+      "keys": "⌘ 1-9",
+      "keys_raw": "cmd+1..cmd+9",
+      "action": "Switch to workspace 1-9",
+      "category": "workspace",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:240-304",
+      "notes": "Shadows app-level ⌘1-9 tab switching in browsers/Slack — WM wins. All 9 digits verified bound (switchWorkspace.0-8, lines 240/248/256/264/272/280/288/296/304).",
+      "description": "Workspaces 1-5 pinned to the main monitor, 6-9 to the secondary monitor.",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.85,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌘⇧ 1-9",
+      "keys_raw": "cmd+shift+1..cmd+shift+9",
+      "action": "Move window to workspace 1-9",
+      "category": "workspace",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:244-308",
+      "notes": "All 9 digits verified bound (moveToWorkspace.0-8, lines 244/252/260/268/276/284/292/300/308). move+follow is Karabiner synthesis (home/dot_config/private_karabiner/karabiner.json, rule \"Workspace move: Cmd+Shift = move+follow, Cmd+Shift+Opt = move silently\", 18 manipulators = 9 digits x 2); ⌘⇧⌥ 1-9 = move silently.",
+      "description": "OmniWM's raw action only moves the window. Karabiner rewrites ⌘⇧N into ⌘⇧N then ⌘N so focus follows; ⌘⇧⌥N passes through unchanged for a silent move.",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.85,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌃⌥⌘ ⇥",
+      "keys_raw": "ctrl+alt+cmd+tab",
+      "action": "Workspace back and forth",
+      "category": "workspace",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:312",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.85,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌃⌥⌘ N",
+      "keys_raw": "ctrl+alt+cmd+n",
+      "action": "Focus left",
+      "category": "navigation",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:324",
+      "notes": "",
+      "description": "N/E/U/I = the ZMK NAV-layer arrow cluster, chosen over real arrows so the chord is one right-hand tap.",
+      "scoring": {
+        "usefulness": 0.9,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.9,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌃⌥⌘ E",
+      "keys_raw": "ctrl+alt+cmd+e",
+      "action": "Focus down",
+      "category": "navigation",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:328",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.9,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.9,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌃⌥⌘ U",
+      "keys_raw": "ctrl+alt+cmd+u",
+      "action": "Focus up",
+      "category": "navigation",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:332",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.9,
+        "novelty_auto": 0.6,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.54,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌃⌥⌘ I",
+      "keys_raw": "ctrl+alt+cmd+i",
+      "action": "Focus right",
+      "category": "navigation",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:336",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.9,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.9,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌃⌥⌘ `",
+      "keys_raw": "ctrl+alt+cmd+grave",
+      "action": "Focus previous window",
+      "category": "navigation",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:340",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.9,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.9,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌃⌥⌘⇧ N",
+      "keys_raw": "ctrl+alt+cmd+shift+n",
+      "action": "Move window left",
+      "category": "window-management",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:436",
+      "notes": "OmniWM writes this tier as the literal token \"Hyper\" = ⌃⌥⇧⌘ (Hyper-3 + Shift) — confirmed against the OmniWM README/docs; systemHyperTrigger = \"None\" here, so it must be typed as all four modifiers.",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.85,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌃⌥⌘⇧ E",
+      "keys_raw": "ctrl+alt+cmd+shift+e",
+      "action": "Move window down",
+      "category": "window-management",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:440",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.85,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌃⌥⌘⇧ U",
+      "keys_raw": "ctrl+alt+cmd+shift+u",
+      "action": "Move window up",
+      "category": "window-management",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:444",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 0.6,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.51,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌃⌥⌘⇧ I",
+      "keys_raw": "ctrl+alt+cmd+shift+i",
+      "action": "Move window right",
+      "category": "window-management",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:448",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.85,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌃⌥⌘ ←",
+      "keys_raw": "ctrl+alt+cmd+left",
+      "action": "Consume or expel window left",
+      "category": "window-management",
+      "mode": "niri",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:468",
+      "notes": "Action id is consumeOrExpelWindowLeft — one directional action, not a consume-only key. The separate consumeWindowIntoColumn / expelWindowFromColumn ids are Unassigned.",
+      "description": "Moves the focused window leftwards across a column boundary: expels it out of a multi-window column, or consumes it into the column to the left.",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-28",
+        "known": null,
+        "score": 0.85,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌃⌥⌘ →",
+      "keys_raw": "ctrl+alt+cmd+right",
+      "action": "Consume or expel window right",
+      "category": "window-management",
+      "mode": "niri",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:472",
+      "notes": "Mirror of ⌃⌥⌘ ← (consumeOrExpelWindowRight).",
+      "description": "Same behaviour rightwards: expels the focused window out of its column, or consumes it into the column to the right.",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-28",
+        "known": null,
+        "score": 0.85,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌃⌥⌘ ↑",
+      "keys_raw": "ctrl+alt+cmd+up",
+      "action": "Move window up",
+      "category": "window-management",
+      "mode": "niri",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:456",
+      "notes": "Action id moveWindowUp. Near-duplicate of ⌃⌥⌘⇧ U (move.up) — OmniWM docs do not document how the two differ; assumed to reorder within the column stack, UNVERIFIED.",
+      "scoring": {
+        "usefulness": 0.506,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-28",
+        "known": true,
+        "score": 0.076,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌃⌥⌘ ↓",
+      "keys_raw": "ctrl+alt+cmd+down",
+      "action": "Move window down",
+      "category": "window-management",
+      "mode": "niri",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:452",
+      "notes": "Action id moveWindowDown. Near-duplicate of ⌃⌥⌘⇧ E (move.down) — distinction UNVERIFIED (see ⌃⌥⌘ ↑).",
+      "scoring": {
+        "usefulness": 0.506,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-28",
+        "known": null,
+        "score": 0.506,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌃⌥⌘ [",
+      "keys_raw": "ctrl+alt+cmd+leftbracket",
+      "action": "Move column left",
+      "category": "window-management",
+      "mode": "niri",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:504",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-28",
+        "known": null,
+        "score": 0.85,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌃⌥⌘ ]",
+      "keys_raw": "ctrl+alt+cmd+rightbracket",
+      "action": "Move column right",
+      "category": "window-management",
+      "mode": "niri",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:508",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-28",
+        "known": null,
+        "score": 0.85,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌃⌥ ↖",
+      "keys_raw": "ctrl+alt+home",
+      "action": "Move column to first",
+      "category": "window-management",
+      "mode": "niri",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:520",
+      "notes": "⌃⌥ (Meh-minus-Shift) tier, not Hyper-3 — off-cheatsheet.",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.85,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌃⌥ ↘",
+      "keys_raw": "ctrl+alt+end",
+      "action": "Move column to last",
+      "category": "window-management",
+      "mode": "niri",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:524",
+      "notes": "⌃⌥ tier, not Hyper-3.",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.85,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌃⌥ 1-9",
+      "keys_raw": "ctrl+alt+1..ctrl+alt+9",
+      "action": "Focus column 1-9",
+      "category": "navigation",
+      "mode": "niri",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:540-572",
+      "notes": "⌃⌥ tier; complements ⌘ 1-9 workspaces. All 9 digits verified bound (focusColumn.0-8, lines 540-572 step 4).",
+      "scoring": {
+        "usefulness": 0.9,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.9,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌃⌥⇧ ↑",
+      "keys_raw": "ctrl+alt+shift+up",
+      "action": "Move window to workspace up",
+      "category": "workspace",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:384",
+      "notes": "⌃⌥⇧ tier; overlaps conceptually with ⌘⇧ 1-9 move.",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.85,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌃⌥⇧ ↓",
+      "keys_raw": "ctrl+alt+shift+down",
+      "action": "Move window to workspace down",
+      "category": "workspace",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:388",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.85,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌃⌥⇧ ⇞",
+      "keys_raw": "ctrl+alt+shift+pageup",
+      "action": "Move column to workspace up",
+      "category": "workspace",
+      "mode": "niri",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:392",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.85,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌃⌥⇧ ⇟",
+      "keys_raw": "ctrl+alt+shift+pagedown",
+      "action": "Move column to workspace down",
+      "category": "workspace",
+      "mode": "niri",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:396",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.85,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌃⌥⌘ M",
+      "keys_raw": "ctrl+alt+cmd+m",
+      "action": "Focus next monitor",
+      "category": "navigation",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:484",
+      "notes": "Collides mnemonically with ⌃⌥ M (menu anywhere).",
+      "scoring": {
+        "usefulness": 0.9,
+        "novelty_auto": 0.6,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.54,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌃⌘ `",
+      "keys_raw": "ctrl+cmd+grave",
+      "action": "Focus last monitor",
+      "category": "navigation",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:492",
+      "notes": "Odd tier (⌃⌘) — the only ⌃⌘ binding; mnemonic collision with ⌃⌥⌘ ` (focus previous window). Whether focusMonitorLast means last-focused monitor or last monitor in arrangement order is UNVERIFIED — OmniWM docs do not say; siblings focusMonitorNext/Previous are ordinal.",
+      "scoring": {
+        "usefulness": 0.765,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.765,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌃⌥⌘ F",
+      "keys_raw": "ctrl+alt+cmd+f",
+      "action": "Toggle fullscreen",
+      "category": "layout",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:496",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.6,
+        "novelty_auto": 0.6,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.36,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌃⌥⌘ T",
+      "keys_raw": "ctrl+alt+cmd+t",
+      "action": "Toggle tabbed column",
+      "category": "layout",
+      "mode": "niri",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:528",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.6,
+        "novelty_auto": 0.6,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.36,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌃⌥⌘ L",
+      "keys_raw": "ctrl+alt+cmd+l",
+      "action": "Toggle workspace layout",
+      "category": "layout",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:824",
+      "notes": "",
+      "description": "Flips the workspace between niri columns and dwindle tiling.",
+      "scoring": {
+        "usefulness": 0.6,
+        "novelty_auto": 0.6,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.36,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌃⌥⌘ O",
+      "keys_raw": "ctrl+alt+cmd+o",
+      "action": "Toggle overview",
+      "category": "misc",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:828",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.4,
+        "novelty_auto": 0.6,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.24,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌃⌥⌘ V",
+      "keys_raw": "ctrl+alt+cmd+v",
+      "action": "Toggle window floating",
+      "category": "window-management",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:796",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-28",
+        "known": null,
+        "score": 0.85,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌃⌥⌘ .",
+      "keys_raw": "ctrl+alt+cmd+period",
+      "action": "Cycle column width forward",
+      "category": "layout",
+      "mode": "niri",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:648",
+      "notes": "Presets are 1/3, 1/2, 2/3 (niri.containerPrimarySpanPresets).",
+      "scoring": {
+        "usefulness": 0.6,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.6,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌃⌥⌘ ,",
+      "keys_raw": "ctrl+alt+cmd+comma",
+      "action": "Cycle column width backward",
+      "category": "layout",
+      "mode": "niri",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:652",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.6,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.6,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌃⌥⌘ -",
+      "keys_raw": "ctrl+alt+cmd+minus",
+      "action": "Shrink column width 10%",
+      "category": "layout",
+      "mode": "niri",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:684",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.6,
+        "novelty_auto": 0.6,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.36,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌃⌥⌘ =",
+      "keys_raw": "ctrl+alt+cmd+equal",
+      "action": "Grow column width 10%",
+      "category": "layout",
+      "mode": "niri",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:688",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.6,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.6,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌃⌥⌘⇧ -",
+      "keys_raw": "ctrl+alt+cmd+shift+minus",
+      "action": "Shrink window height 10%",
+      "category": "layout",
+      "mode": "niri",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:700",
+      "notes": "Shift variant of the column resize — Shift = \"act on window, not column\".",
+      "scoring": {
+        "usefulness": 0.6,
+        "novelty_auto": 0.6,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.36,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌃⌥⌘⇧ =",
+      "keys_raw": "ctrl+alt+cmd+shift+equal",
+      "action": "Grow window height 10%",
+      "category": "layout",
+      "mode": "niri",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:704",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.6,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.6,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌃⌥⌘⇧ F",
+      "keys_raw": "ctrl+alt+cmd+shift+f",
+      "action": "Toggle column full width",
+      "category": "layout",
+      "mode": "niri",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:672",
+      "notes": "Action id toggleContainerFullPrimarySpan — a toggle back to the previous width, not a one-way expand (that is ⌃⌥ F).",
+      "scoring": {
+        "usefulness": 0.6,
+        "novelty_auto": 0.6,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.36,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌃⌥ F",
+      "keys_raw": "ctrl+alt+f",
+      "action": "Expand column to free space",
+      "category": "layout",
+      "mode": "niri",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:676",
+      "notes": "Third F binding (⌃⌥⌘ F, ⌃⌥⌘⇧ F, ⌃⌥ F) — easy to confuse.",
+      "scoring": {
+        "usefulness": 0.6,
+        "novelty_auto": 0.6,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.36,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌃⌥ R",
+      "keys_raw": "ctrl+alt+r",
+      "action": "Reset window height",
+      "category": "layout",
+      "mode": "niri",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:680",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.6,
+        "novelty_auto": 0.6,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.36,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌃⌥⌘⇧ B",
+      "keys_raw": "ctrl+alt+cmd+shift+b",
+      "action": "Balance window sizes",
+      "category": "layout",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:708",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.6,
+        "novelty_auto": 0.6,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.36,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌃⌥⌘⇧ R",
+      "keys_raw": "ctrl+alt+cmd+shift+r",
+      "action": "Raise all floating windows",
+      "category": "window-management",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:788",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 0.6,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.51,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌃⌥ ␣",
+      "keys_raw": "ctrl+alt+space",
+      "action": "Open command palette",
+      "category": "launcher",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:784",
+      "notes": "",
+      "description": "Fuzzy access to every OmniWM action — the documented escape hatch for anything unbound, especially on the laptop keyboard.",
+      "scoring": {
+        "usefulness": 0.8,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.8,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌃⌥ M",
+      "keys_raw": "ctrl+alt+m",
+      "action": "Open menu anywhere",
+      "category": "misc",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/omniwm/settings.toml:808",
+      "notes": "",
+      "description": "Searchable menu-bar-item picker for the focused app.",
+      "scoring": {
+        "usefulness": 0.4,
+        "novelty_auto": 0.6,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.24,
+        "tier": 3
+      }
+    }
+  ]
+}

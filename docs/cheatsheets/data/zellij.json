@@ -1,0 +1,3194 @@
+{
+  "tool": "zellij",
+  "role": "Terminal multiplexer inside Ghostty: panes, tabs and persistent sessions, running locked-by-default so the shell and Neovim keep almost every keystroke",
+  "config_sources": [
+    "home/dot_config/zellij/config.kdl",
+    "home/.chezmoiexternal.toml"
+  ],
+  "hotkeys": [
+    {
+      "keys": "⌃ G",
+      "keys_raw": "ctrl+g",
+      "action": "Unlock (enter normal mode)",
+      "category": "misc",
+      "mode": "locked",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:7",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out). Pressed again from any unlocked mode it re-locks (line 207).",
+      "description": "The load-bearing unlock key: zellij runs default_mode \"locked\", so every non-locked binding is behind this.",
+      "scoring": {
+        "usefulness": 0.3,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.21,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌥ N",
+      "keys_raw": "alt+n",
+      "action": "New pane",
+      "category": "pane-management",
+      "mode": "locked",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:8",
+      "notes": "Not a stock binding — stock locked mode binds nothing but Ctrl+G. Also bound in every unlocked mode (line 209).",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 0.42,
+        "line_date": "2026-06-22",
+        "known": null,
+        "score": 0.357,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌥ ←",
+      "keys_raw": "alt+left",
+      "action": "Focus pane left",
+      "category": "navigation",
+      "mode": "locked",
+      "origin": "plugin",
+      "source": "home/dot_config/zellij/config.kdl:11 (vim-zellij-navigator)",
+      "notes": "vim-zellij-navigator wasm plugin (hiasr 0.3.0, home/.chezmoiexternal.toml): if the focused pane runs nvim it forwards the keypress to nvim (smart-splits) using move_mod \"alt\" + use_arrow_keys \"true\", otherwise it performs the zellij move. macOS: Alt = Option (Ghostty sets macos-option-as-alt = true and unbinds option+left/right). Bound inside the locked block, so it works in locked mode — that placement is a local extension: the plugin README only documents shared_except \"locked\".",
+      "description": "Plugin command move_focus_or_tab: focus pane left, or previous tab at the screen edge",
+      "scoring": {
+        "usefulness": 0.81,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.81,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌥ ↓",
+      "keys_raw": "alt+down",
+      "action": "Focus pane down",
+      "category": "navigation",
+      "mode": "locked",
+      "origin": "plugin",
+      "source": "home/dot_config/zellij/config.kdl:19 (vim-zellij-navigator)",
+      "notes": "vim-zellij-navigator wasm plugin (hiasr 0.3.0, home/.chezmoiexternal.toml): if the focused pane runs nvim it forwards the keypress to nvim (smart-splits) using move_mod \"alt\" + use_arrow_keys \"true\", otherwise it performs the zellij move. macOS: Alt = Option (Ghostty sets macos-option-as-alt = true and unbinds option+left/right). Bound inside the locked block, so it works in locked mode — that placement is a local extension: the plugin README only documents shared_except \"locked\".",
+      "description": "Plugin command move_focus: focus pane down, no tab wrap",
+      "scoring": {
+        "usefulness": 0.81,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.81,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌥ ↑",
+      "keys_raw": "alt+up",
+      "action": "Focus pane up",
+      "category": "navigation",
+      "mode": "locked",
+      "origin": "plugin",
+      "source": "home/dot_config/zellij/config.kdl:27 (vim-zellij-navigator)",
+      "notes": "vim-zellij-navigator wasm plugin (hiasr 0.3.0, home/.chezmoiexternal.toml): if the focused pane runs nvim it forwards the keypress to nvim (smart-splits) using move_mod \"alt\" + use_arrow_keys \"true\", otherwise it performs the zellij move. macOS: Alt = Option (Ghostty sets macos-option-as-alt = true and unbinds option+left/right). Bound inside the locked block, so it works in locked mode — that placement is a local extension: the plugin README only documents shared_except \"locked\".",
+      "description": "Plugin command move_focus: focus pane up, no tab wrap",
+      "scoring": {
+        "usefulness": 0.81,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.81,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌥ →",
+      "keys_raw": "alt+right",
+      "action": "Focus pane right",
+      "category": "navigation",
+      "mode": "locked",
+      "origin": "plugin",
+      "source": "home/dot_config/zellij/config.kdl:35 (vim-zellij-navigator)",
+      "notes": "vim-zellij-navigator wasm plugin (hiasr 0.3.0, home/.chezmoiexternal.toml): if the focused pane runs nvim it forwards the keypress to nvim (smart-splits) using move_mod \"alt\" + use_arrow_keys \"true\", otherwise it performs the zellij move. macOS: Alt = Option (Ghostty sets macos-option-as-alt = true and unbinds option+left/right). Bound inside the locked block, so it works in locked mode — that placement is a local extension: the plugin README only documents shared_except \"locked\".",
+      "description": "Plugin command move_focus_or_tab: focus pane right, or next tab at the screen edge",
+      "scoring": {
+        "usefulness": 0.81,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.81,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "←",
+      "keys_raw": "left",
+      "action": "Focus pane left",
+      "category": "navigation",
+      "mode": "pane",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:45",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.283,
+        "novelty_auto": 0.1,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.028,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "↓",
+      "keys_raw": "down",
+      "action": "Focus pane down",
+      "category": "navigation",
+      "mode": "pane",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:46",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.283,
+        "novelty_auto": 0.1,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.028,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "↑",
+      "keys_raw": "up",
+      "action": "Focus pane up",
+      "category": "navigation",
+      "mode": "pane",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:47",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.283,
+        "novelty_auto": 0.1,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.028,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "→",
+      "keys_raw": "right",
+      "action": "Focus pane right",
+      "category": "navigation",
+      "mode": "pane",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:48",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.283,
+        "novelty_auto": 0.1,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.028,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "C",
+      "keys_raw": "c",
+      "action": "Rename pane",
+      "category": "pane-management",
+      "mode": "pane",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:49",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.383,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.268,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "D",
+      "keys_raw": "d",
+      "action": "New pane below",
+      "category": "pane-management",
+      "mode": "pane",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:50",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.51,
+        "novelty_auto": 0.7,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.357,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "E",
+      "keys_raw": "e",
+      "action": "Toggle embed / floating",
+      "category": "pane-management",
+      "mode": "pane",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:51",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.51,
+        "novelty_auto": 0.42,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.214,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "F",
+      "keys_raw": "f",
+      "action": "Toggle pane fullscreen",
+      "category": "pane-management",
+      "mode": "pane",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:52",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.51,
+        "novelty_auto": 0.42,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.214,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "H",
+      "keys_raw": "h",
+      "action": "Focus pane left",
+      "category": "navigation",
+      "mode": "pane",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:53",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.283,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.198,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "I",
+      "keys_raw": "i",
+      "action": "Toggle pane pinned",
+      "category": "pane-management",
+      "mode": "pane",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:54",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.51,
+        "novelty_auto": 0.7,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.357,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "J",
+      "keys_raw": "j",
+      "action": "Focus pane down",
+      "category": "navigation",
+      "mode": "pane",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:55",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.283,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.198,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "K",
+      "keys_raw": "k",
+      "action": "Focus pane up",
+      "category": "navigation",
+      "mode": "pane",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:56",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.283,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.198,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "L",
+      "keys_raw": "l",
+      "action": "Focus pane right",
+      "category": "navigation",
+      "mode": "pane",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:57",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.283,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.198,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "N",
+      "keys_raw": "n",
+      "action": "New pane",
+      "category": "pane-management",
+      "mode": "pane",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:58",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.357,
+        "novelty_auto": 0.42,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.15,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "P",
+      "keys_raw": "p",
+      "action": "Switch focus (next pane)",
+      "category": "navigation",
+      "mode": "pane",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:59",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out). Action semantics not confirmed against upstream docs.",
+      "description": "UNVERIFIED: SwitchFocus is absent from zellij's documented action reference; \"next pane\" is inferred.",
+      "scoring": {
+        "usefulness": 0.405,
+        "novelty_auto": 0.42,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.17,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌃ P",
+      "keys_raw": "ctrl+p",
+      "action": "Leave pane mode (to locked)",
+      "category": "misc",
+      "mode": "pane",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:60",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.24,
+        "novelty_auto": 0.42,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.101,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "R",
+      "keys_raw": "r",
+      "action": "New pane right",
+      "category": "pane-management",
+      "mode": "pane",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:61",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.51,
+        "novelty_auto": 0.42,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.214,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "S",
+      "keys_raw": "s",
+      "action": "New stacked pane",
+      "category": "pane-management",
+      "mode": "pane",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:62",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.51,
+        "novelty_auto": 0.42,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.214,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "W",
+      "keys_raw": "w",
+      "action": "Toggle floating panes",
+      "category": "pane-management",
+      "mode": "pane",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:63",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.357,
+        "novelty_auto": 0.7,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.25,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "Z",
+      "keys_raw": "z",
+      "action": "Toggle pane frames",
+      "category": "pane-management",
+      "mode": "pane",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:64",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.51,
+        "novelty_auto": 0.7,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.357,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "←",
+      "keys_raw": "left",
+      "action": "Previous tab",
+      "category": "tab-management",
+      "mode": "tab",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:67",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.236,
+        "novelty_auto": 0.1,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.024,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "↓",
+      "keys_raw": "down",
+      "action": "Next tab",
+      "category": "tab-management",
+      "mode": "tab",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:68",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.236,
+        "novelty_auto": 0.1,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.024,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "↑",
+      "keys_raw": "up",
+      "action": "Previous tab",
+      "category": "tab-management",
+      "mode": "tab",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:69",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.236,
+        "novelty_auto": 0.1,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.024,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "→",
+      "keys_raw": "right",
+      "action": "Next tab",
+      "category": "tab-management",
+      "mode": "tab",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:70",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.236,
+        "novelty_auto": 0.1,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.024,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "1",
+      "keys_raw": "1",
+      "action": "Go to tab 1",
+      "category": "tab-management",
+      "mode": "tab",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:71",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.45,
+        "novelty_auto": 0.7,
+        "line_date": "2026-07-11",
+        "known": true,
+        "score": 0.068,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "2",
+      "keys_raw": "2",
+      "action": "Go to tab 2",
+      "category": "tab-management",
+      "mode": "tab",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:72",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.45,
+        "novelty_auto": 0.7,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.315,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "3",
+      "keys_raw": "3",
+      "action": "Go to tab 3",
+      "category": "tab-management",
+      "mode": "tab",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:73",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.45,
+        "novelty_auto": 0.7,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.315,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "4",
+      "keys_raw": "4",
+      "action": "Go to tab 4",
+      "category": "tab-management",
+      "mode": "tab",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:74",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.45,
+        "novelty_auto": 0.7,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.315,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "5",
+      "keys_raw": "5",
+      "action": "Go to tab 5",
+      "category": "tab-management",
+      "mode": "tab",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:75",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.45,
+        "novelty_auto": 0.7,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.315,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "6",
+      "keys_raw": "6",
+      "action": "Go to tab 6",
+      "category": "tab-management",
+      "mode": "tab",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:76",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.45,
+        "novelty_auto": 0.7,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.315,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "7",
+      "keys_raw": "7",
+      "action": "Go to tab 7",
+      "category": "tab-management",
+      "mode": "tab",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:77",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.45,
+        "novelty_auto": 0.7,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.315,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "8",
+      "keys_raw": "8",
+      "action": "Go to tab 8",
+      "category": "tab-management",
+      "mode": "tab",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:78",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.45,
+        "novelty_auto": 0.7,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.315,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "9",
+      "keys_raw": "9",
+      "action": "Go to tab 9",
+      "category": "tab-management",
+      "mode": "tab",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:79",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.45,
+        "novelty_auto": 0.7,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.315,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "[",
+      "keys_raw": "[",
+      "action": "Break pane to tab left",
+      "category": "tab-management",
+      "mode": "tab",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:80",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.45,
+        "novelty_auto": 0.7,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.315,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "]",
+      "keys_raw": "]",
+      "action": "Break pane to tab right",
+      "category": "tab-management",
+      "mode": "tab",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:81",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.45,
+        "novelty_auto": 0.7,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.315,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "B",
+      "keys_raw": "b",
+      "action": "Break pane into new tab",
+      "category": "tab-management",
+      "mode": "tab",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:82",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.45,
+        "novelty_auto": 0.42,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.189,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "H",
+      "keys_raw": "h",
+      "action": "Previous tab",
+      "category": "tab-management",
+      "mode": "tab",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:83",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.337,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.236,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "J",
+      "keys_raw": "j",
+      "action": "Next tab",
+      "category": "tab-management",
+      "mode": "tab",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:84",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.337,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.236,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "K",
+      "keys_raw": "k",
+      "action": "Previous tab",
+      "category": "tab-management",
+      "mode": "tab",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:85",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.236,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.165,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "L",
+      "keys_raw": "l",
+      "action": "Next tab",
+      "category": "tab-management",
+      "mode": "tab",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:86",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.236,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.165,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "N",
+      "keys_raw": "n",
+      "action": "New tab",
+      "category": "tab-management",
+      "mode": "tab",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:87",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.45,
+        "novelty_auto": 0.42,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.189,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "R",
+      "keys_raw": "r",
+      "action": "Rename tab",
+      "category": "tab-management",
+      "mode": "tab",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:88",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.337,
+        "novelty_auto": 0.42,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.142,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "S",
+      "keys_raw": "s",
+      "action": "Toggle sync input to tab",
+      "category": "tab-management",
+      "mode": "tab",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:89",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.45,
+        "novelty_auto": 0.42,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.189,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌃ T",
+      "keys_raw": "ctrl+t",
+      "action": "Leave tab mode (to locked)",
+      "category": "misc",
+      "mode": "tab",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:90",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.24,
+        "novelty_auto": 0.42,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.101,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "X",
+      "keys_raw": "x",
+      "action": "Close tab",
+      "category": "tab-management",
+      "mode": "tab",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:91",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.45,
+        "novelty_auto": 0.7,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.315,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⇥",
+      "keys_raw": "tab",
+      "action": "Toggle to last tab",
+      "category": "tab-management",
+      "mode": "tab",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:92",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "description": "ToggleTab; zellij docs describe it only as \"change the tab focus\" — in practice the previously focused tab.",
+      "scoring": {
+        "usefulness": 0.337,
+        "novelty_auto": 0.1,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.034,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "←",
+      "keys_raw": "left",
+      "action": "Grow pane leftward",
+      "category": "pane-management",
+      "mode": "resize",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:95",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.268,
+        "novelty_auto": 0.1,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.027,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "↓",
+      "keys_raw": "down",
+      "action": "Grow pane downward",
+      "category": "pane-management",
+      "mode": "resize",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:96",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.268,
+        "novelty_auto": 0.1,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.027,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "↑",
+      "keys_raw": "up",
+      "action": "Grow pane upward",
+      "category": "pane-management",
+      "mode": "resize",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:97",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.268,
+        "novelty_auto": 0.1,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.027,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "→",
+      "keys_raw": "right",
+      "action": "Grow pane rightward",
+      "category": "pane-management",
+      "mode": "resize",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:98",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.268,
+        "novelty_auto": 0.1,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.027,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "+",
+      "keys_raw": "+",
+      "action": "Increase pane size",
+      "category": "pane-management",
+      "mode": "resize",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:99",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.268,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.188,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "-",
+      "keys_raw": "-",
+      "action": "Decrease pane size",
+      "category": "pane-management",
+      "mode": "resize",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:100",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.268,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.188,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "=",
+      "keys_raw": "=",
+      "action": "Increase pane size",
+      "category": "pane-management",
+      "mode": "resize",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:101",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.268,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.188,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⇧ H",
+      "keys_raw": "shift+h",
+      "action": "Shrink pane from left",
+      "category": "pane-management",
+      "mode": "resize",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:102",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.383,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.268,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⇧ J",
+      "keys_raw": "shift+j",
+      "action": "Shrink pane from below",
+      "category": "pane-management",
+      "mode": "resize",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:103",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.383,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.268,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⇧ K",
+      "keys_raw": "shift+k",
+      "action": "Shrink pane from above",
+      "category": "pane-management",
+      "mode": "resize",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:104",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.383,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.268,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⇧ L",
+      "keys_raw": "shift+l",
+      "action": "Shrink pane from right",
+      "category": "pane-management",
+      "mode": "resize",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:105",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.383,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.268,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "H",
+      "keys_raw": "h",
+      "action": "Grow pane leftward",
+      "category": "pane-management",
+      "mode": "resize",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:106",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.383,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.268,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "J",
+      "keys_raw": "j",
+      "action": "Grow pane downward",
+      "category": "pane-management",
+      "mode": "resize",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:107",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.383,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.268,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "K",
+      "keys_raw": "k",
+      "action": "Grow pane upward",
+      "category": "pane-management",
+      "mode": "resize",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:108",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.383,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.268,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "L",
+      "keys_raw": "l",
+      "action": "Grow pane rightward",
+      "category": "pane-management",
+      "mode": "resize",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:109",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.383,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.268,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌃ N",
+      "keys_raw": "ctrl+n",
+      "action": "Leave resize mode (to locked)",
+      "category": "misc",
+      "mode": "resize",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:110",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.24,
+        "novelty_auto": 0.7,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.168,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "←",
+      "keys_raw": "left",
+      "action": "Move pane left",
+      "category": "pane-management",
+      "mode": "move",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:113",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.268,
+        "novelty_auto": 0.1,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.027,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "↓",
+      "keys_raw": "down",
+      "action": "Move pane down",
+      "category": "pane-management",
+      "mode": "move",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:114",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.268,
+        "novelty_auto": 0.1,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.027,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "↑",
+      "keys_raw": "up",
+      "action": "Move pane up",
+      "category": "pane-management",
+      "mode": "move",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:115",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.268,
+        "novelty_auto": 0.1,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.027,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "→",
+      "keys_raw": "right",
+      "action": "Move pane right",
+      "category": "pane-management",
+      "mode": "move",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:116",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.268,
+        "novelty_auto": 0.1,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.027,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "H",
+      "keys_raw": "h",
+      "action": "Move pane left",
+      "category": "pane-management",
+      "mode": "move",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:117",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.383,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.268,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌃ H",
+      "keys_raw": "ctrl+h",
+      "action": "Leave move mode (to locked)",
+      "category": "misc",
+      "mode": "move",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:118",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.24,
+        "novelty_auto": 0.7,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.168,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "J",
+      "keys_raw": "j",
+      "action": "Move pane down",
+      "category": "pane-management",
+      "mode": "move",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:119",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.383,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.268,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "K",
+      "keys_raw": "k",
+      "action": "Move pane up",
+      "category": "pane-management",
+      "mode": "move",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:120",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.383,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.268,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "L",
+      "keys_raw": "l",
+      "action": "Move pane right",
+      "category": "pane-management",
+      "mode": "move",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:121",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.383,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.268,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "N",
+      "keys_raw": "n",
+      "action": "Move pane forwards",
+      "category": "pane-management",
+      "mode": "move",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:122",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.383,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.268,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "P",
+      "keys_raw": "p",
+      "action": "Move pane backwards",
+      "category": "pane-management",
+      "mode": "move",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:123",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.383,
+        "novelty_auto": 0.42,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.161,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⇥",
+      "keys_raw": "tab",
+      "action": "Move pane forwards",
+      "category": "pane-management",
+      "mode": "move",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:124",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.268,
+        "novelty_auto": 0.1,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.027,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌥ ←",
+      "keys_raw": "alt+left",
+      "action": "Focus pane left, then lock",
+      "category": "navigation",
+      "mode": "scroll",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:127",
+      "notes": "Deviation from stock: stock binds Alt nav globally with no mode change; the scroll block adds SwitchToMode \"locked\". Raw MoveFocus/MoveFocusOrTab, NOT the navigator plugin — inside scroll mode Alt+arrows will not forward into nvim.",
+      "scoring": {
+        "usefulness": 0.378,
+        "novelty_auto": 0.7,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.265,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌥ ↓",
+      "keys_raw": "alt+down",
+      "action": "Focus pane down, then lock",
+      "category": "navigation",
+      "mode": "scroll",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:128",
+      "notes": "Deviation from stock: stock binds Alt nav globally with no mode change; the scroll block adds SwitchToMode \"locked\". Raw MoveFocus/MoveFocusOrTab, NOT the navigator plugin — inside scroll mode Alt+arrows will not forward into nvim.",
+      "scoring": {
+        "usefulness": 0.378,
+        "novelty_auto": 0.7,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.265,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌥ ↑",
+      "keys_raw": "alt+up",
+      "action": "Focus pane up, then lock",
+      "category": "navigation",
+      "mode": "scroll",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:129",
+      "notes": "Deviation from stock: stock binds Alt nav globally with no mode change; the scroll block adds SwitchToMode \"locked\". Raw MoveFocus/MoveFocusOrTab, NOT the navigator plugin — inside scroll mode Alt+arrows will not forward into nvim.",
+      "scoring": {
+        "usefulness": 0.378,
+        "novelty_auto": 0.7,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.265,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌥ →",
+      "keys_raw": "alt+right",
+      "action": "Focus pane right, then lock",
+      "category": "navigation",
+      "mode": "scroll",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:130",
+      "notes": "Deviation from stock: stock binds Alt nav globally with no mode change; the scroll block adds SwitchToMode \"locked\". Raw MoveFocus/MoveFocusOrTab, NOT the navigator plugin — inside scroll mode Alt+arrows will not forward into nvim.",
+      "scoring": {
+        "usefulness": 0.378,
+        "novelty_auto": 0.7,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.265,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌥ H",
+      "keys_raw": "alt+h",
+      "action": "Focus pane left, then lock",
+      "category": "navigation",
+      "mode": "scroll",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:132",
+      "notes": "Deviation from stock: stock binds Alt nav globally with no mode change; the scroll block adds SwitchToMode \"locked\". Raw MoveFocus/MoveFocusOrTab, NOT the navigator plugin — inside scroll mode Alt+hjkl will not forward into nvim.",
+      "scoring": {
+        "usefulness": 0.54,
+        "novelty_auto": 0.7,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.378,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌥ J",
+      "keys_raw": "alt+j",
+      "action": "Focus pane down, then lock",
+      "category": "navigation",
+      "mode": "scroll",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:133",
+      "notes": "Deviation from stock: stock binds Alt nav globally with no mode change; the scroll block adds SwitchToMode \"locked\". Raw MoveFocus/MoveFocusOrTab, NOT the navigator plugin — inside scroll mode Alt+hjkl will not forward into nvim.",
+      "scoring": {
+        "usefulness": 0.54,
+        "novelty_auto": 0.7,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.378,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌥ K",
+      "keys_raw": "alt+k",
+      "action": "Focus pane up, then lock",
+      "category": "navigation",
+      "mode": "scroll",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:134",
+      "notes": "Deviation from stock: stock binds Alt nav globally with no mode change; the scroll block adds SwitchToMode \"locked\". Raw MoveFocus/MoveFocusOrTab, NOT the navigator plugin — inside scroll mode Alt+hjkl will not forward into nvim.",
+      "scoring": {
+        "usefulness": 0.54,
+        "novelty_auto": 0.7,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.378,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌥ L",
+      "keys_raw": "alt+l",
+      "action": "Focus pane right, then lock",
+      "category": "navigation",
+      "mode": "scroll",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:135",
+      "notes": "Deviation from stock: stock binds Alt nav globally with no mode change; the scroll block adds SwitchToMode \"locked\". Raw MoveFocus/MoveFocusOrTab, NOT the navigator plugin — inside scroll mode Alt+hjkl will not forward into nvim.",
+      "scoring": {
+        "usefulness": 0.54,
+        "novelty_auto": 0.42,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.227,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "E",
+      "keys_raw": "e",
+      "action": "Edit scrollback in $EDITOR",
+      "category": "editing",
+      "mode": "scroll",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:131",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.39,
+        "novelty_auto": 0.42,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.164,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "S",
+      "keys_raw": "s",
+      "action": "Start search in scrollback",
+      "category": "search",
+      "mode": "scroll",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:136",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.36,
+        "novelty_auto": 0.42,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.151,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "C",
+      "keys_raw": "c",
+      "action": "Toggle case sensitivity",
+      "category": "search",
+      "mode": "search",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:139",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.36,
+        "novelty_auto": 0.42,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.151,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "N",
+      "keys_raw": "n",
+      "action": "Next match (down)",
+      "category": "search",
+      "mode": "search",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:140",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.36,
+        "novelty_auto": 0.42,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.151,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "O",
+      "keys_raw": "o",
+      "action": "Toggle whole-word match",
+      "category": "search",
+      "mode": "search",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:141",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.36,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.252,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "P",
+      "keys_raw": "p",
+      "action": "Previous match (up)",
+      "category": "search",
+      "mode": "search",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:142",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.36,
+        "novelty_auto": 0.42,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.151,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "W",
+      "keys_raw": "w",
+      "action": "Toggle search wrap",
+      "category": "search",
+      "mode": "search",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:143",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.36,
+        "novelty_auto": 0.42,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.151,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "A",
+      "keys_raw": "a",
+      "action": "Open About plugin",
+      "category": "session",
+      "mode": "session",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:146",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.48,
+        "novelty_auto": 0.42,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.202,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "C",
+      "keys_raw": "c",
+      "action": "Open configuration plugin",
+      "category": "session",
+      "mode": "session",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:153",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.48,
+        "novelty_auto": 0.42,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.202,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "L",
+      "keys_raw": "l",
+      "action": "Open layout manager",
+      "category": "session",
+      "mode": "session",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:160",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.48,
+        "novelty_auto": 0.42,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.202,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌃ O",
+      "keys_raw": "ctrl+o",
+      "action": "Leave session mode (to locked)",
+      "category": "misc",
+      "mode": "session",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:167",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.24,
+        "novelty_auto": 0.7,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.168,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "P",
+      "keys_raw": "p",
+      "action": "Open plugin manager",
+      "category": "session",
+      "mode": "session",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:168",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.48,
+        "novelty_auto": 0.42,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.202,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "S",
+      "keys_raw": "s",
+      "action": "Open session sharing plugin",
+      "category": "session",
+      "mode": "session",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:175",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.48,
+        "novelty_auto": 0.42,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.202,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "W",
+      "keys_raw": "w",
+      "action": "Open session manager",
+      "category": "session",
+      "mode": "session",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:182",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.48,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.336,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "F1",
+      "keys_raw": "f1",
+      "action": "Toggle keybind tooltip",
+      "category": "misc",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:191",
+      "notes": "Not a stock binding; pairs with the tooltip \"F1\" argument on the compact-bar plugin alias (lines 345-347).",
+      "description": "Asks the compact-bar plugin to show/hide the keybinding tooltip; works in every mode including locked.",
+      "scoring": {
+        "usefulness": 0.4,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-22",
+        "known": null,
+        "score": 0.28,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌥ +",
+      "keys_raw": "alt++",
+      "action": "Increase pane size",
+      "category": "pane-management",
+      "mode": "all-except-locked",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:201",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.542,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.379,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌥ -",
+      "keys_raw": "alt+-",
+      "action": "Decrease pane size",
+      "category": "pane-management",
+      "mode": "all-except-locked",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:202",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.542,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.379,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌥ =",
+      "keys_raw": "alt+=",
+      "action": "Increase pane size",
+      "category": "pane-management",
+      "mode": "all-except-locked",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:203",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.379,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.265,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌥ [",
+      "keys_raw": "alt+[",
+      "action": "Previous swap layout",
+      "category": "pane-management",
+      "mode": "all-except-locked",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:204",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.542,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.379,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌥ ]",
+      "keys_raw": "alt+]",
+      "action": "Next swap layout",
+      "category": "pane-management",
+      "mode": "all-except-locked",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:205",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.542,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.379,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌥ F",
+      "keys_raw": "alt+f",
+      "action": "Toggle floating panes",
+      "category": "pane-management",
+      "mode": "all-except-locked",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:206",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.542,
+        "novelty_auto": 0.42,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.228,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌥ I",
+      "keys_raw": "alt+i",
+      "action": "Move tab left",
+      "category": "tab-management",
+      "mode": "all-except-locked",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:208",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.478,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.335,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌥ N",
+      "keys_raw": "alt+n",
+      "action": "New pane",
+      "category": "pane-management",
+      "mode": "all-except-locked",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:209",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.379,
+        "novelty_auto": 0.42,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.159,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌥ O",
+      "keys_raw": "alt+o",
+      "action": "Move tab right",
+      "category": "tab-management",
+      "mode": "all-except-locked",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:210",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.478,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.335,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌥ P",
+      "keys_raw": "alt+p",
+      "action": "Toggle pane in group",
+      "category": "pane-management",
+      "mode": "all-except-locked",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:211",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.542,
+        "novelty_auto": 0.42,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.228,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌥⇧ P",
+      "keys_raw": "alt+shift+p",
+      "action": "Toggle group marking",
+      "category": "pane-management",
+      "mode": "all-except-locked",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:212",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.542,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.379,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌃ Q",
+      "keys_raw": "ctrl+q",
+      "action": "Quit zellij session",
+      "category": "session",
+      "mode": "all-except-locked",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:213",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.51,
+        "novelty_auto": 0.42,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.214,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌃ G",
+      "keys_raw": "ctrl+g",
+      "action": "Re-lock zellij",
+      "category": "misc",
+      "mode": "all-except-locked",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:207",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "description": "Returns to locked mode from any unlocked mode.",
+      "scoring": {
+        "usefulness": 0.255,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.178,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌃ H",
+      "keys_raw": "ctrl+h",
+      "action": "Enter move mode",
+      "category": "misc",
+      "mode": "all-except-locked",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:216",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.255,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.178,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌃ O",
+      "keys_raw": "ctrl+o",
+      "action": "Enter session mode",
+      "category": "misc",
+      "mode": "all-except-locked",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:219",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.255,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.178,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌥ ←",
+      "keys_raw": "alt+left",
+      "action": "Focus pane left",
+      "category": "navigation",
+      "mode": "all-except-locked-and-scroll",
+      "origin": "plugin",
+      "source": "home/dot_config/zellij/config.kdl:222 (vim-zellij-navigator)",
+      "notes": "vim-zellij-navigator wasm plugin (hiasr 0.3.0, home/.chezmoiexternal.toml): if the focused pane runs nvim it forwards the keypress to nvim (smart-splits) using move_mod \"alt\" + use_arrow_keys \"true\", otherwise it performs the zellij move. macOS: Alt = Option (Ghostty sets macos-option-as-alt = true and unbinds option+left/right). Bound in every mode except locked and scroll; locked mode has its own identical copy (lines 11-42) and scroll mode has raw non-plugin bindings (lines 127-135).",
+      "description": "Plugin command move_focus_or_tab: focus pane left, or previous tab at the screen edge",
+      "scoring": {
+        "usefulness": 0.482,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.482,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌥ ↓",
+      "keys_raw": "alt+down",
+      "action": "Focus pane down",
+      "category": "navigation",
+      "mode": "all-except-locked-and-scroll",
+      "origin": "plugin",
+      "source": "home/dot_config/zellij/config.kdl:230 (vim-zellij-navigator)",
+      "notes": "vim-zellij-navigator wasm plugin (hiasr 0.3.0, home/.chezmoiexternal.toml): if the focused pane runs nvim it forwards the keypress to nvim (smart-splits) using move_mod \"alt\" + use_arrow_keys \"true\", otherwise it performs the zellij move. macOS: Alt = Option (Ghostty sets macos-option-as-alt = true and unbinds option+left/right). Bound in every mode except locked and scroll; locked mode has its own identical copy (lines 11-42) and scroll mode has raw non-plugin bindings (lines 127-135).",
+      "description": "Plugin command move_focus: focus pane down, no tab wrap",
+      "scoring": {
+        "usefulness": 0.482,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.482,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌥ ↑",
+      "keys_raw": "alt+up",
+      "action": "Focus pane up",
+      "category": "navigation",
+      "mode": "all-except-locked-and-scroll",
+      "origin": "plugin",
+      "source": "home/dot_config/zellij/config.kdl:238 (vim-zellij-navigator)",
+      "notes": "vim-zellij-navigator wasm plugin (hiasr 0.3.0, home/.chezmoiexternal.toml): if the focused pane runs nvim it forwards the keypress to nvim (smart-splits) using move_mod \"alt\" + use_arrow_keys \"true\", otherwise it performs the zellij move. macOS: Alt = Option (Ghostty sets macos-option-as-alt = true and unbinds option+left/right). Bound in every mode except locked and scroll; locked mode has its own identical copy (lines 11-42) and scroll mode has raw non-plugin bindings (lines 127-135).",
+      "description": "Plugin command move_focus: focus pane up, no tab wrap",
+      "scoring": {
+        "usefulness": 0.482,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.482,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌥ →",
+      "keys_raw": "alt+right",
+      "action": "Focus pane right",
+      "category": "navigation",
+      "mode": "all-except-locked-and-scroll",
+      "origin": "plugin",
+      "source": "home/dot_config/zellij/config.kdl:246 (vim-zellij-navigator)",
+      "notes": "vim-zellij-navigator wasm plugin (hiasr 0.3.0, home/.chezmoiexternal.toml): if the focused pane runs nvim it forwards the keypress to nvim (smart-splits) using move_mod \"alt\" + use_arrow_keys \"true\", otherwise it performs the zellij move. macOS: Alt = Option (Ghostty sets macos-option-as-alt = true and unbinds option+left/right). Bound in every mode except locked and scroll; locked mode has its own identical copy (lines 11-42) and scroll mode has raw non-plugin bindings (lines 127-135).",
+      "description": "Plugin command move_focus_or_tab: focus pane right, or next tab at the screen edge",
+      "scoring": {
+        "usefulness": 0.482,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.482,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌥ H",
+      "keys_raw": "alt+h",
+      "action": "Focus pane left or previous tab",
+      "category": "navigation",
+      "mode": "all-except-locked-and-scroll",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:254",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out). hjkl variants bypass the navigator plugin (raw MoveFocus), so they do not forward into nvim.",
+      "scoring": {
+        "usefulness": 0.574,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.402,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌥ J",
+      "keys_raw": "alt+j",
+      "action": "Focus pane down",
+      "category": "navigation",
+      "mode": "all-except-locked-and-scroll",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:255",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out). hjkl variants bypass the navigator plugin (raw MoveFocus), so they do not forward into nvim.",
+      "scoring": {
+        "usefulness": 0.402,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.281,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌥ K",
+      "keys_raw": "alt+k",
+      "action": "Focus pane up",
+      "category": "navigation",
+      "mode": "all-except-locked-and-scroll",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:256",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out). hjkl variants bypass the navigator plugin (raw MoveFocus), so they do not forward into nvim.",
+      "scoring": {
+        "usefulness": 0.402,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.281,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌥ L",
+      "keys_raw": "alt+l",
+      "action": "Focus pane right or next tab",
+      "category": "navigation",
+      "mode": "all-except-locked-and-scroll",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:257",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out). hjkl variants bypass the navigator plugin (raw MoveFocus), so they do not forward into nvim.",
+      "scoring": {
+        "usefulness": 0.574,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.402,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌃ B",
+      "keys_raw": "ctrl+b",
+      "action": "Enter tmux-compat mode",
+      "category": "misc",
+      "mode": "all-except-locked-scroll-search-tmux",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:260",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out). Stock scopes this as shared_except \"tmux\" \"locked\"; the extra \"scroll\" \"search\" exclusions here are redundant because both modes bind Ctrl+B to PageScrollUp anyway.",
+      "scoring": {
+        "usefulness": 0.255,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.178,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌃ S",
+      "keys_raw": "ctrl+s",
+      "action": "Enter scroll mode",
+      "category": "misc",
+      "mode": "all-except-locked-scroll-search",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:263",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.255,
+        "novelty_auto": 0.42,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.107,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌃ T",
+      "keys_raw": "ctrl+t",
+      "action": "Enter tab mode",
+      "category": "misc",
+      "mode": "all-except-locked-and-tab",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:266",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.255,
+        "novelty_auto": 0.42,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.107,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌃ P",
+      "keys_raw": "ctrl+p",
+      "action": "Enter pane mode",
+      "category": "misc",
+      "mode": "all-except-locked-and-pane",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:269",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.255,
+        "novelty_auto": 0.42,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.107,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌃ N",
+      "keys_raw": "ctrl+n",
+      "action": "Enter resize mode",
+      "category": "misc",
+      "mode": "all-except-locked-and-resize",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:272",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.255,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.178,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⏎",
+      "keys_raw": "enter",
+      "action": "Return to locked mode",
+      "category": "misc",
+      "mode": "all-except-normal-locked-entersearch",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:275",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "description": "Only action is SwitchToMode \"locked\" — bound in every mode except normal, locked and entersearch.",
+      "scoring": {
+        "usefulness": 0.238,
+        "novelty_auto": 0.1,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.024,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⎋",
+      "keys_raw": "esc",
+      "action": "Return to locked mode",
+      "category": "misc",
+      "mode": "all-except-normal-locked-entersearch-rename",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:278",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "description": "Only action is SwitchToMode \"locked\"; the rename modes are excluded, where Esc undoes the rename instead.",
+      "scoring": {
+        "usefulness": 0.34,
+        "novelty_auto": 0.1,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.034,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "X",
+      "keys_raw": "x",
+      "action": "Close focused pane",
+      "category": "pane-management",
+      "mode": "pane, tmux",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:281",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.51,
+        "novelty_auto": 0.7,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.357,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "PgDn",
+      "keys_raw": "pagedown",
+      "action": "Page down",
+      "category": "navigation",
+      "mode": "scroll, search",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:284",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.283,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.198,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "PgUp",
+      "keys_raw": "pageup",
+      "action": "Page up",
+      "category": "navigation",
+      "mode": "scroll, search",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:285",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.283,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.198,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "←",
+      "keys_raw": "left",
+      "action": "Page up",
+      "category": "navigation",
+      "mode": "scroll, search",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:286",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.283,
+        "novelty_auto": 0.1,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.028,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "↓",
+      "keys_raw": "down",
+      "action": "Scroll down one line",
+      "category": "navigation",
+      "mode": "scroll, search",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:287",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.283,
+        "novelty_auto": 0.1,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.028,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "↑",
+      "keys_raw": "up",
+      "action": "Scroll up one line",
+      "category": "navigation",
+      "mode": "scroll, search",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:288",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.283,
+        "novelty_auto": 0.1,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.028,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "→",
+      "keys_raw": "right",
+      "action": "Page down",
+      "category": "navigation",
+      "mode": "scroll, search",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:289",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.283,
+        "novelty_auto": 0.1,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.028,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌃ B",
+      "keys_raw": "ctrl+b",
+      "action": "Page up",
+      "category": "navigation",
+      "mode": "scroll, search",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:290",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.283,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.198,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌃ C",
+      "keys_raw": "ctrl+c",
+      "action": "Scroll to bottom and lock",
+      "category": "navigation",
+      "mode": "scroll, search",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:291",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.54,
+        "novelty_auto": 0.1,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.054,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "D",
+      "keys_raw": "d",
+      "action": "Half page down",
+      "category": "navigation",
+      "mode": "scroll, search",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:292",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.405,
+        "novelty_auto": 0.42,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.17,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌃ F",
+      "keys_raw": "ctrl+f",
+      "action": "Page down",
+      "category": "navigation",
+      "mode": "scroll, search",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:293",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.283,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.198,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "H",
+      "keys_raw": "h",
+      "action": "Page up",
+      "category": "navigation",
+      "mode": "scroll, search",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:294",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.405,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.283,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "J",
+      "keys_raw": "j",
+      "action": "Scroll down one line",
+      "category": "navigation",
+      "mode": "scroll, search",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:295",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.405,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.283,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "K",
+      "keys_raw": "k",
+      "action": "Scroll up one line",
+      "category": "navigation",
+      "mode": "scroll, search",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:296",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.405,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.283,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "L",
+      "keys_raw": "l",
+      "action": "Page down",
+      "category": "navigation",
+      "mode": "scroll, search",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:297",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.405,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.283,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌃ S",
+      "keys_raw": "ctrl+s",
+      "action": "Leave scroll/search mode (to locked)",
+      "category": "misc",
+      "mode": "scroll, search",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:298",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.24,
+        "novelty_auto": 0.42,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.101,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "U",
+      "keys_raw": "u",
+      "action": "Half page up",
+      "category": "navigation",
+      "mode": "scroll, search",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:299",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.405,
+        "novelty_auto": 0.42,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.17,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌃ C",
+      "keys_raw": "ctrl+c",
+      "action": "Back to scroll mode",
+      "category": "misc",
+      "mode": "entersearch",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:302",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.126,
+        "novelty_auto": 0.1,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.013,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⎋",
+      "keys_raw": "esc",
+      "action": "Back to scroll mode",
+      "category": "misc",
+      "mode": "entersearch",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:303",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.18,
+        "novelty_auto": 0.1,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.018,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⏎",
+      "keys_raw": "enter",
+      "action": "Submit term, enter search mode",
+      "category": "search",
+      "mode": "entersearch",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:304",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.36,
+        "novelty_auto": 0.1,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.036,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⎋",
+      "keys_raw": "esc",
+      "action": "Undo tab rename",
+      "category": "tab-management",
+      "mode": "renametab",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:307",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.337,
+        "novelty_auto": 0.1,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.034,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌃ C",
+      "keys_raw": "ctrl+c",
+      "action": "Keep new name, return to locked",
+      "category": "misc",
+      "mode": "renametab, renamepane",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:310",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "description": "Only action is SwitchToMode \"locked\": the name typed so far stays, unlike Esc which undoes it.",
+      "scoring": {
+        "usefulness": 0.24,
+        "novelty_auto": 0.1,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.024,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⎋",
+      "keys_raw": "esc",
+      "action": "Undo pane rename",
+      "category": "pane-management",
+      "mode": "renamepane",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:313",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.383,
+        "novelty_auto": 0.1,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.038,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "D",
+      "keys_raw": "d",
+      "action": "Detach from session",
+      "category": "session",
+      "mode": "session, tmux",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:316",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.36,
+        "novelty_auto": 0.42,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.151,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "←",
+      "keys_raw": "left",
+      "action": "Focus pane left",
+      "category": "navigation",
+      "mode": "tmux",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:319",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.032,
+        "novelty_auto": 0.1,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.003,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "↓",
+      "keys_raw": "down",
+      "action": "Focus pane down",
+      "category": "navigation",
+      "mode": "tmux",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:320",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.032,
+        "novelty_auto": 0.1,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.003,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "↑",
+      "keys_raw": "up",
+      "action": "Focus pane up",
+      "category": "navigation",
+      "mode": "tmux",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:321",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.032,
+        "novelty_auto": 0.1,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.003,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "→",
+      "keys_raw": "right",
+      "action": "Focus pane right",
+      "category": "navigation",
+      "mode": "tmux",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:322",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.032,
+        "novelty_auto": 0.1,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.003,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "␣",
+      "keys_raw": "space",
+      "action": "Next swap layout",
+      "category": "pane-management",
+      "mode": "tmux",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:323",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.022,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.015,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "\"",
+      "keys_raw": "\"",
+      "action": "New pane below",
+      "category": "pane-management",
+      "mode": "tmux",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:324",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.03,
+        "novelty_auto": 0.7,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.021,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "%",
+      "keys_raw": "%",
+      "action": "New pane right",
+      "category": "pane-management",
+      "mode": "tmux",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:325",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.03,
+        "novelty_auto": 0.7,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.021,
+        "tier": 3
+      }
+    },
+    {
+      "keys": ",",
+      "keys_raw": ",",
+      "action": "Rename tab",
+      "category": "tab-management",
+      "mode": "tmux",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:326",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.02,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.014,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "[",
+      "keys_raw": "[",
+      "action": "Enter scroll mode",
+      "category": "misc",
+      "mode": "tmux",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:327",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out).",
+      "scoring": {
+        "usefulness": 0.011,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.008,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌃ B",
+      "keys_raw": "ctrl+b",
+      "action": "Send literal Ctrl+B",
+      "category": "misc",
+      "mode": "tmux",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:328",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.02,
+        "novelty_auto": 0.42,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.008,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "C",
+      "keys_raw": "c",
+      "action": "New tab",
+      "category": "tab-management",
+      "mode": "tmux",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:329",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.026,
+        "novelty_auto": 0.7,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.018,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "H",
+      "keys_raw": "h",
+      "action": "Focus pane left",
+      "category": "navigation",
+      "mode": "tmux",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:330",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.032,
+        "novelty_auto": 0.7,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.022,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "J",
+      "keys_raw": "j",
+      "action": "Focus pane down",
+      "category": "navigation",
+      "mode": "tmux",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:331",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.032,
+        "novelty_auto": 0.7,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.022,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "K",
+      "keys_raw": "k",
+      "action": "Focus pane up",
+      "category": "navigation",
+      "mode": "tmux",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:332",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.032,
+        "novelty_auto": 0.7,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.022,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "L",
+      "keys_raw": "l",
+      "action": "Focus pane right",
+      "category": "navigation",
+      "mode": "tmux",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:333",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.032,
+        "novelty_auto": 0.7,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.022,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "N",
+      "keys_raw": "n",
+      "action": "Next tab",
+      "category": "tab-management",
+      "mode": "tmux",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:334",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.026,
+        "novelty_auto": 0.42,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.011,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "O",
+      "keys_raw": "o",
+      "action": "Focus next pane",
+      "category": "navigation",
+      "mode": "tmux",
+      "origin": "default",
+      "source": "home/dot_config/zellij/config.kdl:335",
+      "notes": "Stock zellij 0.44.3 default, replayed verbatim in the repo config (keybinds clear-defaults=true means every default must be written out). Docs: FocusNextPane order is \"not guaranteed\".",
+      "scoring": {
+        "usefulness": 0.034,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-21",
+        "known": null,
+        "score": 0.024,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "P",
+      "keys_raw": "p",
+      "action": "Previous tab",
+      "category": "tab-management",
+      "mode": "tmux",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:336",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.026,
+        "novelty_auto": 0.42,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.011,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Z",
+      "keys_raw": "z",
+      "action": "Toggle pane fullscreen",
+      "category": "pane-management",
+      "mode": "tmux",
+      "origin": "custom",
+      "source": "home/dot_config/zellij/config.kdl:337",
+      "notes": "Deviation from the stock default: stock ends in normal mode (SwitchToMode \"normal\"), here it drops all the way back to locked.",
+      "scoring": {
+        "usefulness": 0.03,
+        "novelty_auto": 0.7,
+        "line_date": "2026-07-11",
+        "known": null,
+        "score": 0.021,
+        "tier": 3
+      }
+    }
+  ]
+}

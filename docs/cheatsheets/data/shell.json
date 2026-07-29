@@ -1,0 +1,276 @@
+{
+  "tool": "shell",
+  "role": "Zsh line editor + fzf fuzzy pickers + modern CLI replacements; the keyboard layer inside every terminal pane",
+  "config_sources": [
+    "home/dot_zshrc",
+    "home/dot_zprofile",
+    "home/dot_aliases",
+    "home/bin/executable_zellij-sessionizer",
+    "home/dot_config/gh-dash/config.yml"
+  ],
+  "hotkeys": [
+    {
+      "keys": "⌃F",
+      "keys_raw": "ctrl+f",
+      "action": "Open zellij sessionizer",
+      "description": "bindkey -s macro that types and runs ~/bin/zellij-sessionizer, an fzf picker over ~/work, ~/personal, ~/.config/nvim and ~/.local/share/chezmoi; switches or creates a Zellij session for the chosen dir",
+      "category": "session",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_zshrc:151",
+      "notes": "Verified live. Shadows the emacs default ⌃F (forward-char), which zsh-autosuggestions treats as a FULL accept (forward-char is in ZSH_AUTOSUGGEST_ACCEPT_WIDGETS, not the partial list). Use → for full accept, ⌥F for partial.",
+      "scoring": {
+        "usefulness": 0.8,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-22",
+        "known": null,
+        "score": 0.56,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "↑",
+      "keys_raw": "up",
+      "action": "History substring search back",
+      "description": "Searches history for entries containing what is already typed, instead of plain previous-line",
+      "category": "search",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_zshrc:117",
+      "notes": "Widget comes from zsh-users/zsh-history-substring-search. The bindkey at line 117 runs BEFORE the turbo-loaded (`zinit wait lucid`) plugin defines the widget; zsh resolves widget names lazily at keypress time, by which point the plugin has loaded. Verified live in an interactive pty: ^[[A → history-substring-search-up. Overrides OMZ's up-line-or-beginning-search.",
+      "scoring": {
+        "usefulness": 0.8,
+        "novelty_auto": 0.1,
+        "line_date": "2026-01-01",
+        "known": null,
+        "score": 0.08,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "↓",
+      "keys_raw": "down",
+      "action": "History substring search forward",
+      "category": "search",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_zshrc:118",
+      "notes": "Same lazy-resolution caveat as ↑.",
+      "scoring": {
+        "usefulness": 0.8,
+        "novelty_auto": 0.1,
+        "line_date": "2026-01-01",
+        "known": null,
+        "score": 0.08,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌃R",
+      "keys_raw": "ctrl+r",
+      "action": "Fuzzy search shell history",
+      "description": "fzf-history-widget; replaces zsh's incremental reverse search",
+      "category": "search",
+      "mode": "global",
+      "origin": "default",
+      "source": "home/dot_zshrc:140",
+      "notes": "Enabled by `source <(fzf --zsh)` (fzf 0.74.1). Verified active. Also overrides OMZL::key-bindings.zsh, which had bound ^r to history-incremental-search-backward.",
+      "scoring": {
+        "usefulness": 0.6,
+        "novelty_auto": 0.1,
+        "line_date": "2026-04-18",
+        "known": null,
+        "score": 0.06,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌃T",
+      "keys_raw": "ctrl+t",
+      "action": "Fuzzy insert file path",
+      "description": "fzf-file-widget; pastes the selected path onto the command line",
+      "category": "search",
+      "mode": "global",
+      "origin": "default",
+      "source": "home/dot_zshrc:140",
+      "notes": "Verified active.",
+      "scoring": {
+        "usefulness": 0.6,
+        "novelty_auto": 0.45,
+        "line_date": "2026-04-18",
+        "known": null,
+        "score": 0.27,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌥C",
+      "keys_raw": "alt+c",
+      "action": "Fuzzy cd into subdirectory",
+      "description": "fzf-cd-widget; bound to the escape sequence ^[c",
+      "category": "navigation",
+      "mode": "global",
+      "origin": "default",
+      "source": "home/dot_zshrc:140",
+      "notes": "Reachable: Ghostty sets `macos-option-as-alt = true` (dot_config/ghostty/config:5) so ⌥C sends ESC c, and Zellij's locked mode only binds Alt+n and Alt+arrows, so ESC c passes through. Verified bound live (^[c → fzf-cd-widget). The widget sets `no_aliases` and runs `builtin cd`, so the `cd`→zoxide `z` alias is bypassed — ⌥C jumps do NOT get recorded in the zoxide database.",
+      "scoring": {
+        "usefulness": 0.675,
+        "novelty_auto": 0.27,
+        "line_date": "2026-04-18",
+        "known": null,
+        "score": 0.182,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⇥",
+      "keys_raw": "tab",
+      "action": "Fuzzy tab completion",
+      "description": "fzf-completion replaces the default completion widget; `**` before Tab forces the fzf picker for paths, hostnames, PIDs, env vars",
+      "category": "search",
+      "mode": "global",
+      "origin": "default",
+      "source": "home/dot_zshrc:140",
+      "notes": "Verified live (^I → fzf-completion). fzf falls back to whatever was bound to ^I at load time, so zstyle menu-select completion still works for non-** completions.",
+      "scoring": {
+        "usefulness": 0.6,
+        "novelty_auto": 0.1,
+        "line_date": "2026-04-18",
+        "known": null,
+        "score": 0.06,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌃X ⌃E",
+      "keys_raw": "ctrl+x+ctrl+e",
+      "action": "Edit command line in nvim",
+      "description": "edit-command-line widget; opens the current buffer in $EDITOR (nvim) and runs it on save+quit",
+      "category": "editing",
+      "mode": "global",
+      "origin": "plugin",
+      "source": "OMZL::key-bindings.zsh:123",
+      "notes": "Verified live. Not a zsh built-in — zsh does not bind ^X^E or autoload edit-command-line by default; the OMZ library snippet does both. Useful for long pipelines.",
+      "scoring": {
+        "usefulness": 0.585,
+        "novelty_auto": 0.12,
+        "line_date": "2026-01-01",
+        "known": null,
+        "score": 0.07,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "→",
+      "keys_raw": "right",
+      "action": "Accept full autosuggestion",
+      "description": "forward-char; listed in ZSH_AUTOSUGGEST_ACCEPT_WIDGETS, so at end-of-line it accepts the whole greyed-out suggestion",
+      "category": "editing",
+      "mode": "global",
+      "origin": "plugin",
+      "source": "zsh-users/zsh-autosuggestions",
+      "notes": "The primary accept key now that ⌃F is the sessionizer macro. Verified: ^[[C and ^[OC → forward-char, and 9 autosuggest widgets are loaded in an interactive shell.",
+      "scoring": {
+        "usefulness": 0.585,
+        "novelty_auto": 0.1,
+        "line_date": "2026-01-01",
+        "known": null,
+        "score": 0.058,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌃E",
+      "keys_raw": "ctrl+e",
+      "action": "Accept full autosuggestion",
+      "description": "end-of-line; zsh-autosuggestions wraps this widget so it accepts the greyed-out suggestion",
+      "category": "editing",
+      "mode": "global",
+      "origin": "plugin",
+      "source": "zsh-users/zsh-autosuggestions",
+      "notes": "Verified live (^E → end-of-line, with autosuggest wrappers installed). Equivalent to → for accepting; both are full accepts.",
+      "scoring": {
+        "usefulness": 0.41,
+        "novelty_auto": 0.2,
+        "line_date": "2026-01-01",
+        "known": null,
+        "score": 0.082,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌥F",
+      "keys_raw": "alt+f",
+      "action": "Accept autosuggestion one word",
+      "description": "forward-word; the only partial-accept widget actually bound here (ZSH_AUTOSUGGEST_PARTIAL_ACCEPT_WIDGETS contains forward-word plus vi/emacs variants)",
+      "category": "editing",
+      "mode": "global",
+      "origin": "plugin",
+      "source": "zsh-users/zsh-autosuggestions",
+      "notes": "Verified bound live (^[F → forward-word). Needs Ghostty's macos-option-as-alt. This is the correct replacement for the commonly-cited ⌃F partial accept — ⌃F was never a partial accept.",
+      "scoring": {
+        "usefulness": 0.585,
+        "novelty_auto": 0.2,
+        "line_date": "2026-01-01",
+        "known": null,
+        "score": 0.117,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌃U",
+      "keys_raw": "ctrl+u",
+      "action": "Kill whole line",
+      "category": "editing",
+      "mode": "global",
+      "origin": "default",
+      "source": "default",
+      "notes": "Verified live (^U → kill-whole-line). This is zsh's own emacs-mode default, NOT something OMZ sets — OMZL::key-bindings.zsh never binds ^U. backward-kill-line is the bash default, which is why the behaviour surprises people coming from bash.",
+      "scoring": {
+        "usefulness": 0.488,
+        "novelty_auto": 0.2,
+        "line_date": "2026-01-01",
+        "known": null,
+        "score": 0.098,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌃W",
+      "keys_raw": "ctrl+w",
+      "action": "Delete previous word",
+      "category": "editing",
+      "mode": "global",
+      "origin": "default",
+      "source": "default",
+      "notes": "Verified live (^W → backward-kill-word), a plain zsh emacs default; OMZ leaves it alone (its `bindkey '^W' kill-region` line is commented out).",
+      "scoring": {
+        "usefulness": 0.488,
+        "novelty_auto": 0.12,
+        "line_date": "2026-01-01",
+        "known": null,
+        "score": 0.059,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌥L",
+      "keys_raw": "alt+l",
+      "action": "Push line and run ls",
+      "description": "OMZ ships `bindkey -s '\\el' '^Q ls\\n'` — pushes the current buffer aside and runs `ls` (here the eza alias), then restores the buffer",
+      "category": "misc",
+      "mode": "global",
+      "origin": "plugin",
+      "source": "OMZL::key-bindings.zsh:115",
+      "notes": "Live but probably unintended: verified in the bindkey dump as a macro. Shadows the zsh default ⌥L (down-case-word). Only reachable because of macos-option-as-alt.",
+      "scoring": {
+        "usefulness": 0.36,
+        "novelty_auto": 0.12,
+        "line_date": "2026-01-01",
+        "known": null,
+        "score": 0.043,
+        "tier": 3
+      }
+    }
+  ]
+}

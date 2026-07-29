@@ -1,0 +1,522 @@
+{
+  "tool": "karabiner",
+  "role": "Keyboard remapping layer: creates the Hyper-3 (⌃⌥⌘) modifier tier, app launchers, and synthesizes multi-key sequences that OmniWM consumes",
+  "config_sources": [
+    "home/dot_config/private_karabiner/karabiner.json"
+  ],
+  "hotkeys": [
+    {
+      "keys": "Caps Lock (hold)",
+      "keys_raw": "caps_lock",
+      "action": "Produce Hyper-3 modifier",
+      "description": "Held Caps Lock emits ⌃⌥⌘ (left_command + left_control + left_option)",
+      "category": "misc",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/private_karabiner/karabiner.json:9",
+      "notes": "Foundation of the whole WM tier — every OmniWM ⌃⌥⌘ binding and every Karabiner launcher below is reachable through this key on the laptop's internal keyboard. On the Hillside D50 the same chord comes from a plain &kp LC(LA(LGUI)) on the outer key of both raised pairs (docs/keyboard-planning.md:24). from.modifiers.optional = [\"any\"], so the remap fires with any other modifier already held.",
+      "scoring": {
+        "usefulness": 0.4,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.4,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "Caps Lock (tap)",
+      "keys_raw": "caps_lock",
+      "action": "Send Escape",
+      "description": "to_if_alone on the same manipulator: tap = Escape, hold = Hyper-3. Escape is posted on release, and is cancelled if any other key is pressed meanwhile or the hold exceeds the 1000 ms default to_if_alone timeout",
+      "category": "editing",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/private_karabiner/karabiner.json:28",
+      "notes": "Caps Lock's original function is unreachable; there is no rule to restore it.",
+      "scoring": {
+        "usefulness": 0.65,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.65,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌘⇧ 1",
+      "keys_raw": "cmd+shift+1",
+      "action": "Move window to workspace 1, follow",
+      "description": "Synthesizes ⌘⇧1 then ⌘1 so OmniWM moves the window and then switches focus to that workspace",
+      "category": "workspace",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/private_karabiner/karabiner.json:39",
+      "notes": "Feeds OmniWM (home/dot_config/omniwm/settings.toml): OmniWM itself only knows 'move' (⌘⇧n) and 'focus' (⌘n) — the follow behaviour exists purely as this Karabiner two-event synthesis.",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.85,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌘⇧⌥ 1",
+      "keys_raw": "cmd+shift+alt+1",
+      "action": "Move window to workspace 1 silently",
+      "description": "Passes through only ⌘⇧1 — move without following",
+      "category": "workspace",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/private_karabiner/karabiner.json:66",
+      "notes": "Exists so the plain ⌘⇧n move (OmniWM's native binding, settings.toml:239-309) is still reachable after ⌘⇧n was hijacked for move+follow. The two manipulators do not collide: mandatory modifiers must match exactly and neither declares optional modifiers, so ⌘⇧⌥n cannot fall through to the ⌘⇧n manipulator.",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.85,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌘⇧ 2",
+      "keys_raw": "cmd+shift+2",
+      "action": "Move window to workspace 2, follow",
+      "category": "workspace",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/private_karabiner/karabiner.json:88",
+      "notes": "Synthesizes ⌘⇧2 + ⌘2 for OmniWM.",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.85,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌘⇧⌥ 2",
+      "keys_raw": "cmd+shift+alt+2",
+      "action": "Move window to workspace 2 silently",
+      "category": "workspace",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/private_karabiner/karabiner.json:115",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.85,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌘⇧ 3",
+      "keys_raw": "cmd+shift+3",
+      "action": "Move window to workspace 3, follow",
+      "category": "workspace",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/private_karabiner/karabiner.json:137",
+      "notes": "Synthesizes ⌘⇧3 + ⌘3 for OmniWM. Shadows the macOS 'screenshot whole screen' shortcut (⌘⇧3).",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.85,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌘⇧⌥ 3",
+      "keys_raw": "cmd+shift+alt+3",
+      "action": "Move window to workspace 3 silently",
+      "category": "workspace",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/private_karabiner/karabiner.json:164",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.85,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌘⇧ 4",
+      "keys_raw": "cmd+shift+4",
+      "action": "Move window to workspace 4, follow",
+      "category": "workspace",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/private_karabiner/karabiner.json:186",
+      "notes": "Synthesizes ⌘⇧4 + ⌘4 for OmniWM. Shadows the macOS 'screenshot selection' shortcut (⌘⇧4).",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.85,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌘⇧⌥ 4",
+      "keys_raw": "cmd+shift+alt+4",
+      "action": "Move window to workspace 4 silently",
+      "category": "workspace",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/private_karabiner/karabiner.json:213",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.85,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌘⇧ 5",
+      "keys_raw": "cmd+shift+5",
+      "action": "Move window to workspace 5, follow",
+      "category": "workspace",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/private_karabiner/karabiner.json:235",
+      "notes": "Synthesizes ⌘⇧5 + ⌘5 for OmniWM. Shadows the macOS screenshot/recording toolbar (⌘⇧5).",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.85,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌘⇧⌥ 5",
+      "keys_raw": "cmd+shift+alt+5",
+      "action": "Move window to workspace 5 silently",
+      "category": "workspace",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/private_karabiner/karabiner.json:262",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.85,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌘⇧ 6",
+      "keys_raw": "cmd+shift+6",
+      "action": "Move window to workspace 6, follow",
+      "category": "workspace",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/private_karabiner/karabiner.json:284",
+      "notes": "Synthesizes ⌘⇧6 + ⌘6 for OmniWM.",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.85,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌘⇧⌥ 6",
+      "keys_raw": "cmd+shift+alt+6",
+      "action": "Move window to workspace 6 silently",
+      "category": "workspace",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/private_karabiner/karabiner.json:311",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.85,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌘⇧ 7",
+      "keys_raw": "cmd+shift+7",
+      "action": "Move window to workspace 7, follow",
+      "category": "workspace",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/private_karabiner/karabiner.json:333",
+      "notes": "Synthesizes ⌘⇧7 + ⌘7 for OmniWM.",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.85,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌘⇧⌥ 7",
+      "keys_raw": "cmd+shift+alt+7",
+      "action": "Move window to workspace 7 silently",
+      "category": "workspace",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/private_karabiner/karabiner.json:360",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.85,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌘⇧ 8",
+      "keys_raw": "cmd+shift+8",
+      "action": "Move window to workspace 8, follow",
+      "category": "workspace",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/private_karabiner/karabiner.json:382",
+      "notes": "Synthesizes ⌘⇧8 + ⌘8 for OmniWM.",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.85,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌘⇧⌥ 8",
+      "keys_raw": "cmd+shift+alt+8",
+      "action": "Move window to workspace 8 silently",
+      "category": "workspace",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/private_karabiner/karabiner.json:409",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.85,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌘⇧ 9",
+      "keys_raw": "cmd+shift+9",
+      "action": "Move window to workspace 9, follow",
+      "category": "workspace",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/private_karabiner/karabiner.json:431",
+      "notes": "Synthesizes ⌘⇧9 + ⌘9 for OmniWM.",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.85,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌘⇧⌥ 9",
+      "keys_raw": "cmd+shift+alt+9",
+      "action": "Move window to workspace 9 silently",
+      "category": "workspace",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/private_karabiner/karabiner.json:458",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.85,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌥ ⏎",
+      "keys_raw": "alt+return",
+      "action": "Open new Ghostty window",
+      "description": "Runs `open -na Ghostty` — the -n flag forces a new instance rather than focusing the running one",
+      "category": "launcher",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/private_karabiner/karabiner.json:485",
+      "notes": "Lives inside the rule described as 'Hyper-3 app launchers' but is NOT on the Hyper-3 tier — plain ⌥⏎, a dwm/i3 habit. Added in 5746f73, replacing the removed quake-terminal binding. from.modifiers.mandatory is [\"option\"] with no optional list, so ⌃⌥⌘⏎ (Hyper-3 + Return) does NOT trigger it.",
+      "scoring": {
+        "usefulness": 0.8,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-28",
+        "known": null,
+        "score": 0.8,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌃⌥⌘ G",
+      "keys_raw": "ctrl+alt+cmd+g",
+      "action": "Focus or launch Ghostty",
+      "description": "Runs `open -a Ghostty` (no -n) so it activates the existing instance",
+      "category": "launcher",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/private_karabiner/karabiner.json:519",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.8,
+        "novelty_auto": 0.6,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.48,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌃⌥⌘ W",
+      "keys_raw": "ctrl+alt+cmd+w",
+      "action": "Focus or launch Safari",
+      "category": "launcher",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/private_karabiner/karabiner.json:537",
+      "notes": "W = 'web', not Safari's initial.",
+      "scoring": {
+        "usefulness": 0.8,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.8,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌃⌥⌘ B",
+      "keys_raw": "ctrl+alt+cmd+b",
+      "action": "Open new Firefox window",
+      "description": "Runs `open -na Firefox` — new instance, unlike the other launchers",
+      "category": "launcher",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/private_karabiner/karabiner.json:501",
+      "notes": "Inconsistent with W/S/D/G which use plain `open -a`.",
+      "scoring": {
+        "usefulness": 0.8,
+        "novelty_auto": 1.0,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.8,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "⌃⌥⌘ S",
+      "keys_raw": "ctrl+alt+cmd+s",
+      "action": "Focus or launch Slack",
+      "category": "launcher",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/private_karabiner/karabiner.json:555",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.8,
+        "novelty_auto": 0.6,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.48,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌃⌥⌘ D",
+      "keys_raw": "ctrl+alt+cmd+d",
+      "action": "Focus or launch Discord",
+      "category": "launcher",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/private_karabiner/karabiner.json:573",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.8,
+        "novelty_auto": 0.6,
+        "line_date": "2026-07-27",
+        "known": null,
+        "score": 0.48,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "⌥ (left)",
+      "keys_raw": "left_alt",
+      "action": "Make left Option a lazy modifier",
+      "description": "Remaps left_option to itself with lazy:true, so the Option key_down is not posted until another key is pressed with it",
+      "category": "misc",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/private_karabiner/karabiner.json:596",
+      "notes": "Not a hotkey. The enclosing rule is described as 'no special characters', but per the Karabiner docs `lazy` only defers the modifier's own key event — it does NOT stop macOS from composing ø/∂/˙ from Option+letter. What actually makes Alt+arrow reach Zellij/Neovim is Ghostty's `macos-option-as-alt = true` plus the option+left/right unbinds (home/dot_config/ghostty/config:5,11-12). Effect of this rule is limited to suppressing bare-Option key events.",
+      "scoring": {
+        "usefulness": 0.4,
+        "novelty_auto": 0.2,
+        "line_date": "2026-01-02",
+        "known": null,
+        "score": 0.08,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⌥ (right)",
+      "keys_raw": "right_alt",
+      "action": "Make right Option a lazy modifier",
+      "description": "Same lazy self-remap for right_option",
+      "category": "misc",
+      "mode": "global",
+      "origin": "custom",
+      "source": "home/dot_config/private_karabiner/karabiner.json:613",
+      "notes": "Not a hotkey. Right-Option still composes accented/special characters — `lazy` does not disable the layout's Option compositions.",
+      "scoring": {
+        "usefulness": 0.4,
+        "novelty_auto": 0.2,
+        "line_date": "2026-01-02",
+        "known": null,
+        "score": 0.08,
+        "tier": 3
+      }
+    }
+  ]
+}

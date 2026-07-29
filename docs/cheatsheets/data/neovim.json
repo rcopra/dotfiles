@@ -1,0 +1,2003 @@
+{
+  "tool": "neovim",
+  "role": "Primary editor: kickstart.nvim base with lazy.nvim, Telescope pickers, LSP/DAP, git tooling, and Alt+arrow splits that hand off to Zellij panes",
+  "config_sources": [
+    "~/.config/nvim/init.lua",
+    "~/.config/nvim/lua/custom/plugins/init.lua",
+    "~/.config/nvim/lua/custom/plugins/smart-splits.lua",
+    "~/.config/nvim/lua/custom/plugins/diffview.lua",
+    "~/.config/nvim/lua/custom/plugins/fugitive.lua",
+    "~/.config/nvim/lua/custom/plugins/octo-nvim.lua",
+    "~/.config/nvim/lua/kickstart/plugins/debug.lua",
+    "~/.config/nvim/lua/kickstart/plugins/neo-tree.lua",
+    "~/.config/nvim/lazy-lock.json"
+  ],
+  "hotkeys": [
+    {
+      "keys": "⎋",
+      "keys_raw": "<Esc>",
+      "action": "Clear search highlight",
+      "description": "Remapped to :nohlsearch",
+      "category": "search",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:212",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.8,
+        "novelty_auto": 0.2,
+        "line_date": "2024-02-26",
+        "known": null,
+        "score": 0.16,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space q",
+      "keys_raw": "<leader>q",
+      "action": "Open diagnostic quickfix list",
+      "description": "vim.diagnostic.setloclist",
+      "category": "lsp",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:246",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.7,
+        "novelty_auto": 0.12,
+        "line_date": "2024-02-26",
+        "known": null,
+        "score": 0.084,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⎋ ⎋",
+      "keys_raw": "<Esc><Esc>",
+      "action": "Exit terminal mode",
+      "description": "Easier alias for <C-\\><C-n> in :terminal buffers",
+      "category": "navigation",
+      "mode": "terminal",
+      "origin": "custom",
+      "source": "init.lua:254",
+      "notes": "May not survive all terminal emulators / multiplexers",
+      "scoring": {
+        "usefulness": 0.9,
+        "novelty_auto": 0.2,
+        "line_date": "2024-02-26",
+        "known": null,
+        "score": 0.18,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Ctrl h",
+      "keys_raw": "<C-h>",
+      "action": "Focus split left",
+      "description": "Wraps <C-w><C-h>",
+      "category": "pane-management",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:266",
+      "notes": "init.lua:271-273 claims Zellij shadows this, but config.kdl binds Ctrl h -> move mode under shared_except \"locked\" \"move\" — with Zellij locked-by-default it reaches nvim; only shadowed if you leave locked mode",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 0.2,
+        "line_date": "2024-02-26",
+        "known": null,
+        "score": 0.17,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Ctrl l",
+      "keys_raw": "<C-l>",
+      "action": "Focus split right",
+      "description": "Wraps <C-w><C-l>",
+      "category": "pane-management",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:267",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 0.2,
+        "line_date": "2024-02-26",
+        "known": null,
+        "score": 0.17,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Ctrl j",
+      "keys_raw": "<C-j>",
+      "action": "Focus split below",
+      "description": "Wraps <C-w><C-j>",
+      "category": "pane-management",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:268",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 0.2,
+        "line_date": "2024-02-26",
+        "known": null,
+        "score": 0.17,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Ctrl k",
+      "keys_raw": "<C-k>",
+      "action": "Focus split above",
+      "description": "Wraps <C-w><C-k>",
+      "category": "pane-management",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:269",
+      "notes": "No real conflict with blink.cmp <C-k> (insert mode only)",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 0.2,
+        "line_date": "2024-02-26",
+        "known": null,
+        "score": 0.17,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Ctrl d",
+      "keys_raw": "<C-d>",
+      "action": "Scroll down and center",
+      "description": "Remapped to <C-d>zz",
+      "category": "navigation",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:276",
+      "notes": "Remap of a stock motion",
+      "scoring": {
+        "usefulness": 0.9,
+        "novelty_auto": 0.12,
+        "line_date": "2026-01-16",
+        "known": null,
+        "score": 0.108,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Ctrl u",
+      "keys_raw": "<C-u>",
+      "action": "Scroll up and center",
+      "description": "Remapped to <C-u>zz",
+      "category": "navigation",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:277",
+      "notes": "Remap of a stock motion",
+      "scoring": {
+        "usefulness": 0.9,
+        "novelty_auto": 0.12,
+        "line_date": "2026-01-16",
+        "known": null,
+        "score": 0.108,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Page Down",
+      "keys_raw": "<PageDown>",
+      "action": "Scroll down and center",
+      "category": "navigation",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:278",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.63,
+        "novelty_auto": 0.2,
+        "line_date": "2026-01-19",
+        "known": null,
+        "score": 0.126,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Page Up",
+      "keys_raw": "<PageUp>",
+      "action": "Scroll up and center",
+      "category": "navigation",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:279",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.63,
+        "novelty_auto": 0.2,
+        "line_date": "2026-01-19",
+        "known": null,
+        "score": 0.126,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space c p",
+      "keys_raw": "<leader>cp",
+      "action": "Copy relative file path",
+      "description": "Writes the buffer's path relative to cwd into the + register and notifies",
+      "category": "editing",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:288",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.65,
+        "novelty_auto": 0.12,
+        "line_date": "2025-12-19",
+        "known": null,
+        "score": 0.078,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "] c",
+      "keys_raw": "]c",
+      "action": "Next git hunk",
+      "description": "Falls through to native ]c in diff mode",
+      "category": "git",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:397",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.7,
+        "novelty_auto": 0.45,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.315,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "[ c",
+      "keys_raw": "[c",
+      "action": "Previous git hunk",
+      "description": "Falls through to native [c in diff mode",
+      "category": "git",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:405",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.7,
+        "novelty_auto": 0.45,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.315,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "Space h s",
+      "keys_raw": "<leader>hs",
+      "action": "Stage hunk",
+      "category": "git",
+      "mode": "normal,visual",
+      "origin": "custom",
+      "source": "init.lua:418 (visual: 415)",
+      "notes": "Visual variant stages only the selected lines",
+      "scoring": {
+        "usefulness": 0.7,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.189,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space h r",
+      "keys_raw": "<leader>hr",
+      "action": "Reset hunk",
+      "category": "git",
+      "mode": "normal,visual",
+      "origin": "custom",
+      "source": "init.lua:419 (visual: 416)",
+      "notes": "Visual variant resets only the selected lines",
+      "scoring": {
+        "usefulness": 0.7,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.189,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space h S",
+      "keys_raw": "<leader>hS",
+      "action": "Stage buffer",
+      "category": "git",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:420",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.7,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.189,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space h u",
+      "keys_raw": "<leader>hu",
+      "action": "Stage hunk (mislabeled undo)",
+      "category": "git",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:421",
+      "notes": "Kickstart bug carried over: mapped to stage_hunk, not undo_stage_hunk",
+      "scoring": {
+        "usefulness": 0.7,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.189,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space h R",
+      "keys_raw": "<leader>hR",
+      "action": "Reset buffer",
+      "category": "git",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:422",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.7,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.189,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space h p",
+      "keys_raw": "<leader>hp",
+      "action": "Preview hunk",
+      "category": "git",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:423",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.7,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.189,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space h b",
+      "keys_raw": "<leader>hb",
+      "action": "Blame current line",
+      "category": "git",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:424",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.7,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.189,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space h d",
+      "keys_raw": "<leader>hd",
+      "action": "Diff against index",
+      "category": "git",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:425",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.7,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.189,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space h D",
+      "keys_raw": "<leader>hD",
+      "action": "Diff against last commit",
+      "category": "git",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:426",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.7,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-15",
+        "known": null,
+        "score": 0.189,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space t b",
+      "keys_raw": "<leader>tb",
+      "action": "Toggle inline blame",
+      "category": "git",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:428",
+      "notes": "Shares the <leader>t Toggle prefix with vim-test bindings",
+      "scoring": {
+        "usefulness": 0.7,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.189,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space t D",
+      "keys_raw": "<leader>tD",
+      "action": "Preview hunk inline",
+      "description": "gitsigns.preview_hunk_inline — shows the diff (incl. deleted lines) inline",
+      "category": "git",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:429",
+      "notes": "desc says [T]oggle show [D]eleted, but it is preview_hunk_inline, not toggle_deleted",
+      "scoring": {
+        "usefulness": 0.7,
+        "novelty_auto": 0.45,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.315,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "Space s h",
+      "keys_raw": "<leader>sh",
+      "action": "Search help tags",
+      "category": "search",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:585",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.8,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.216,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space s k",
+      "keys_raw": "<leader>sk",
+      "action": "Search keymaps",
+      "description": "Best discovery entry point for this config",
+      "category": "search",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:586",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.8,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.216,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space s f",
+      "keys_raw": "<leader>sf",
+      "action": "Find files",
+      "category": "search",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:587",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.8,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.216,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space s .",
+      "keys_raw": "<leader>s.",
+      "action": "Find hidden/ignored files",
+      "description": "fd with --hidden --no-ignore and a long project-noise exclude list (node_modules, vendor/bundle, public/packs, .cursor, …)",
+      "category": "search",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:588",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.8,
+        "novelty_auto": 0.45,
+        "line_date": "2026-03-15",
+        "known": null,
+        "score": 0.36,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "Space s s",
+      "keys_raw": "<leader>ss",
+      "action": "List Telescope pickers",
+      "category": "search",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:638",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.8,
+        "novelty_auto": 0.45,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.36,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "Space s w",
+      "keys_raw": "<leader>sw",
+      "action": "Grep word under cursor",
+      "category": "search",
+      "mode": "normal,visual",
+      "origin": "custom",
+      "source": "init.lua:639",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.8,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.216,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space s g",
+      "keys_raw": "<leader>sg",
+      "action": "Live grep project",
+      "category": "search",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:640",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.8,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.216,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space s d",
+      "keys_raw": "<leader>sd",
+      "action": "Search diagnostics",
+      "category": "lsp",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:641",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.7,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.189,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space s r",
+      "keys_raw": "<leader>sr",
+      "action": "Resume last picker",
+      "category": "search",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:642",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.8,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.216,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space s o",
+      "keys_raw": "<leader>so",
+      "action": "Search recent files",
+      "category": "search",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:643",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.8,
+        "novelty_auto": 0.45,
+        "line_date": "2026-03-09",
+        "known": null,
+        "score": 0.36,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "Space s c",
+      "keys_raw": "<leader>sc",
+      "action": "Search commands",
+      "category": "search",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:644",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.8,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.216,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space Space",
+      "keys_raw": "<leader><leader>",
+      "action": "Find open buffers",
+      "category": "search",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:645",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.8,
+        "novelty_auto": 0.45,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.36,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "Space g s",
+      "keys_raw": "<leader>gs",
+      "action": "Telescope git status",
+      "category": "git",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:646",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.7,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.189,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space /",
+      "keys_raw": "<leader>/",
+      "action": "Fuzzy find in buffer",
+      "description": "Dropdown theme, previewer off, winblend 10",
+      "category": "search",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:683",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.8,
+        "novelty_auto": 0.45,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.36,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "Space s /",
+      "keys_raw": "<leader>s/",
+      "action": "Live grep open files",
+      "category": "search",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:693",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.8,
+        "novelty_auto": 0.2,
+        "line_date": "2026-01-27",
+        "known": null,
+        "score": 0.16,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space s n",
+      "keys_raw": "<leader>sn",
+      "action": "Search Neovim config files",
+      "category": "search",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:706",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.8,
+        "novelty_auto": 0.12,
+        "line_date": "2026-01-27",
+        "known": null,
+        "score": 0.096,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "g r r",
+      "keys_raw": "grr",
+      "action": "Goto references",
+      "description": "Stock Neovim gr map overridden to use the Telescope lsp_references picker",
+      "category": "lsp",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:656",
+      "notes": "Buffer-local, set on LspAttach",
+      "scoring": {
+        "usefulness": 0.7,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.189,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "g r i",
+      "keys_raw": "gri",
+      "action": "Goto implementation",
+      "description": "Telescope lsp_implementations",
+      "category": "lsp",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:660",
+      "notes": "Buffer-local, set on LspAttach",
+      "scoring": {
+        "usefulness": 0.7,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.189,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "g r d",
+      "keys_raw": "grd",
+      "action": "Goto definition",
+      "description": "Telescope lsp_definitions; <C-t> jumps back",
+      "category": "lsp",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:665",
+      "notes": "Buffer-local, set on LspAttach",
+      "scoring": {
+        "usefulness": 0.7,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.189,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "g O",
+      "keys_raw": "gO",
+      "action": "Document symbols",
+      "description": "Telescope lsp_document_symbols",
+      "category": "lsp",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:669",
+      "notes": "Buffer-local, set on LspAttach",
+      "scoring": {
+        "usefulness": 0.7,
+        "novelty_auto": 0.45,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.315,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "g W",
+      "keys_raw": "gW",
+      "action": "Workspace symbols",
+      "description": "Telescope lsp_dynamic_workspace_symbols",
+      "category": "lsp",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:673",
+      "notes": "Buffer-local, set on LspAttach",
+      "scoring": {
+        "usefulness": 0.7,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.189,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "g r t",
+      "keys_raw": "grt",
+      "action": "Goto type definition",
+      "description": "Telescope lsp_type_definitions",
+      "category": "lsp",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:678",
+      "notes": "Buffer-local, set on LspAttach",
+      "scoring": {
+        "usefulness": 0.7,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.189,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "g r n",
+      "keys_raw": "grn",
+      "action": "Rename symbol",
+      "description": "vim.lsp.buf.rename",
+      "category": "lsp",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:777",
+      "notes": "Buffer-local, set on LspAttach",
+      "scoring": {
+        "usefulness": 0.7,
+        "novelty_auto": 0.45,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.315,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "g r a",
+      "keys_raw": "gra",
+      "action": "Code action",
+      "description": "vim.lsp.buf.code_action; UI routed through telescope-ui-select dropdown",
+      "category": "lsp",
+      "mode": "normal,visual",
+      "origin": "custom",
+      "source": "init.lua:781",
+      "notes": "Also mapped in x (visual block) mode",
+      "scoring": {
+        "usefulness": 0.7,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.189,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "g r D",
+      "keys_raw": "grD",
+      "action": "Goto declaration",
+      "description": "vim.lsp.buf.declaration (not definition)",
+      "category": "lsp",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:785",
+      "notes": "Buffer-local, set on LspAttach",
+      "scoring": {
+        "usefulness": 0.7,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.189,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space t h",
+      "keys_raw": "<leader>th",
+      "action": "Toggle inlay hints",
+      "category": "lsp",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "init.lua:821",
+      "notes": "Only mapped when the attached server supports textDocument/inlayHint",
+      "scoring": {
+        "usefulness": 0.7,
+        "novelty_auto": 0.12,
+        "line_date": "2026-01-27",
+        "known": null,
+        "score": 0.084,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "K",
+      "keys_raw": "K",
+      "action": "Hover documentation",
+      "category": "lsp",
+      "mode": "normal",
+      "origin": "default",
+      "source": "default",
+      "notes": "Neovim stock LSP default (runtime lua/vim/lsp.lua:871 on the installed nvim 0.12.4); set on LspAttach only if K is not already mapped. The config never references it.",
+      "scoring": {
+        "usefulness": 0.525,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-22",
+        "known": null,
+        "score": 0.367,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "Ctrl s",
+      "keys_raw": "<C-s>",
+      "action": "Signature help",
+      "category": "lsp",
+      "mode": "insert,select",
+      "origin": "default",
+      "source": "default",
+      "notes": "Neovim stock LSP default for i+s modes (runtime lua/vim/_core/defaults.lua:232 on the installed nvim 0.12.4); the config never references it. This is the working signature-help key since blink.cmp's own signature window is disabled (init.lua:1072).",
+      "scoring": {
+        "usefulness": 0.525,
+        "novelty_auto": 0.42,
+        "line_date": "2026-06-22",
+        "known": null,
+        "score": 0.221,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space f",
+      "keys_raw": "<leader>f",
+      "action": "Format buffer",
+      "description": "conform.nvim async format with LSP fallback; mode='' so it applies in normal/visual/operator-pending",
+      "category": "editing",
+      "mode": "normal,visual",
+      "origin": "custom",
+      "source": "init.lua:933",
+      "notes": "Format-on-save is also enabled (5s timeout); a project .nvim.lua can set vim.g.disable_autoformat",
+      "scoring": {
+        "usefulness": 0.65,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.176,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Ctrl y",
+      "keys_raw": "<C-y>",
+      "action": "Accept completion",
+      "description": "blink.cmp 'default' preset; auto-imports and expands snippets",
+      "category": "completion",
+      "mode": "insert",
+      "origin": "plugin",
+      "source": "blink.cmp (preset 'default', init.lua:1038)",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.54,
+        "novelty_auto": 0.45,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.243,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Ctrl Space",
+      "keys_raw": "<C-space>",
+      "action": "Open menu or docs",
+      "description": "Documentation auto_show is false, so <C-space> is the way to see docs",
+      "category": "completion",
+      "mode": "insert",
+      "origin": "plugin",
+      "source": "blink.cmp (preset 'default', init.lua:1038)",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.54,
+        "novelty_auto": 0.45,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.243,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Ctrl n",
+      "keys_raw": "<C-n>",
+      "action": "Next completion item",
+      "category": "completion",
+      "mode": "insert",
+      "origin": "plugin",
+      "source": "blink.cmp (preset 'default', init.lua:1038)",
+      "notes": "<Down> is equivalent",
+      "scoring": {
+        "usefulness": 0.54,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.146,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Ctrl p",
+      "keys_raw": "<C-p>",
+      "action": "Previous completion item",
+      "category": "completion",
+      "mode": "insert",
+      "origin": "plugin",
+      "source": "blink.cmp (preset 'default', init.lua:1038)",
+      "notes": "<Up> is equivalent",
+      "scoring": {
+        "usefulness": 0.378,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.102,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "↓",
+      "keys_raw": "<Down>",
+      "action": "Next completion item",
+      "category": "completion",
+      "mode": "insert",
+      "origin": "plugin",
+      "source": "blink.cmp (preset 'default', init.lua:1038)",
+      "notes": "Part of the 'default' preset alongside <C-n>; falls back to normal cursor motion when the menu is closed",
+      "scoring": {
+        "usefulness": 0.378,
+        "novelty_auto": 0.45,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.17,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "↑",
+      "keys_raw": "<Up>",
+      "action": "Previous completion item",
+      "category": "completion",
+      "mode": "insert",
+      "origin": "plugin",
+      "source": "blink.cmp (preset 'default', init.lua:1038)",
+      "notes": "Part of the 'default' preset alongside <C-p>",
+      "scoring": {
+        "usefulness": 0.54,
+        "novelty_auto": 0.45,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.243,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Ctrl e",
+      "keys_raw": "<C-e>",
+      "action": "Hide completion menu",
+      "category": "completion",
+      "mode": "insert",
+      "origin": "plugin",
+      "source": "blink.cmp (preset 'default', init.lua:1038)",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.54,
+        "novelty_auto": 0.45,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.243,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Ctrl k",
+      "keys_raw": "<C-k>",
+      "action": "Toggle signature help",
+      "category": "completion",
+      "mode": "insert",
+      "origin": "plugin",
+      "source": "blink.cmp (preset 'default', init.lua:1038)",
+      "notes": "Verified inert: signature.enabled = false (init.lua:1072), so show_signature/hide_signature both no-op and the mapping falls back to Vim's native <C-k> digraph insert",
+      "scoring": {
+        "usefulness": 0.54,
+        "novelty_auto": 0.45,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.243,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⇥",
+      "keys_raw": "<Tab>",
+      "action": "Jump to next snippet stop",
+      "category": "completion",
+      "mode": "insert",
+      "origin": "plugin",
+      "source": "blink.cmp (preset 'default', init.lua:1038)",
+      "notes": "Snippet engine is LuaSnip (snippets.preset at init.lua:1060)",
+      "scoring": {
+        "usefulness": 0.54,
+        "novelty_auto": 0.45,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.243,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "⇧⇥",
+      "keys_raw": "<S-Tab>",
+      "action": "Jump to previous snippet stop",
+      "category": "completion",
+      "mode": "insert",
+      "origin": "plugin",
+      "source": "blink.cmp (preset 'default', init.lua:1038)",
+      "notes": "Snippet engine is LuaSnip (snippets.preset at init.lua:1060)",
+      "scoring": {
+        "usefulness": 0.54,
+        "novelty_auto": 0.45,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.243,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Ctrl b",
+      "keys_raw": "<C-b>",
+      "action": "Scroll docs up",
+      "category": "completion",
+      "mode": "insert",
+      "origin": "plugin",
+      "source": "blink.cmp (preset 'default', init.lua:1038)",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.54,
+        "novelty_auto": 0.45,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.243,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Ctrl f",
+      "keys_raw": "<C-f>",
+      "action": "Scroll docs down",
+      "category": "completion",
+      "mode": "insert",
+      "origin": "plugin",
+      "source": "blink.cmp (preset 'default', init.lua:1038)",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.54,
+        "novelty_auto": 0.45,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.243,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Ctrl /",
+      "keys_raw": "<C-/>",
+      "action": "Show picker keymaps",
+      "description": "Inside any Telescope prompt; `?` does the same in normal mode",
+      "category": "search",
+      "mode": "insert",
+      "origin": "plugin",
+      "source": "telescope.nvim",
+      "notes": "Documented in init.lua:555 as the discovery key",
+      "scoring": {
+        "usefulness": 0.504,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-22",
+        "known": null,
+        "score": 0.353,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "?",
+      "keys_raw": "?",
+      "action": "Show picker keymaps",
+      "category": "search",
+      "mode": "normal",
+      "origin": "plugin",
+      "source": "telescope.nvim",
+      "notes": "Telescope picker normal mode",
+      "scoring": {
+        "usefulness": 0.72,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-22",
+        "known": null,
+        "score": 0.504,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "s a",
+      "keys_raw": "sa",
+      "action": "Add surrounding",
+      "description": "e.g. saiw) surrounds inner word with parens",
+      "category": "editing",
+      "mode": "normal,visual",
+      "origin": "plugin",
+      "source": "mini.surround (init.lua:1122)",
+      "notes": "nvim-surround is pinned in lazy-lock.json but has no spec anywhere in the config (stale lock entry), so mini.surround owns the s* prefix uncontested",
+      "scoring": {
+        "usefulness": 0.585,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.158,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "s d",
+      "keys_raw": "sd",
+      "action": "Delete surrounding",
+      "description": "e.g. sd' removes surrounding quotes",
+      "category": "editing",
+      "mode": "normal",
+      "origin": "plugin",
+      "source": "mini.surround (init.lua:1122)",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.585,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.158,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "s r",
+      "keys_raw": "sr",
+      "action": "Replace surrounding",
+      "description": "e.g. sr)' swaps parens for quotes",
+      "category": "editing",
+      "mode": "normal",
+      "origin": "plugin",
+      "source": "mini.surround (init.lua:1122)",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.585,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.158,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "s f",
+      "keys_raw": "sf",
+      "action": "Find surrounding right",
+      "category": "editing",
+      "mode": "normal",
+      "origin": "plugin",
+      "source": "mini.surround (init.lua:1122)",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.585,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.158,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "s F",
+      "keys_raw": "sF",
+      "action": "Find surrounding left",
+      "category": "editing",
+      "mode": "normal",
+      "origin": "plugin",
+      "source": "mini.surround (init.lua:1122)",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.585,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.158,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "s h",
+      "keys_raw": "sh",
+      "action": "Highlight surrounding",
+      "category": "editing",
+      "mode": "normal",
+      "origin": "plugin",
+      "source": "mini.surround (init.lua:1122)",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.585,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.158,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "a / i textobjects",
+      "keys_raw": "a<obj> / i<obj>",
+      "action": "Extended around/inside textobjects",
+      "description": "mini.ai (n_lines=500) adds next/last variants: va) visually select around paren, yinq yanks inside next quote, ci' changes inside quote",
+      "category": "editing",
+      "mode": "normal,visual",
+      "origin": "plugin",
+      "source": "mini.ai (init.lua:1115)",
+      "notes": "Supersedes stock a/i textobjects",
+      "scoring": {
+        "usefulness": 0.585,
+        "novelty_auto": 0.45,
+        "line_date": "2026-03-06",
+        "known": null,
+        "score": 0.263,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "Alt ←",
+      "keys_raw": "<M-Left>",
+      "action": "Focus split/pane left",
+      "description": "smart-splits.move_cursor_left",
+      "category": "pane-management",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "lua/custom/plugins/smart-splits.lua:12",
+      "notes": "ZELLIJ INTEGRATION: nvim side of the Alt+arrow handoff. At a split edge smart-splits shells out to `zellij action move-focus`; zellij_move_focus_or_tab=true (plugin default is false, set at smart-splits.lua:10) upgrades that to `move-focus-or-tab` for left/right ONLY — verified in mux/zellij.lua:79-81. Pairs with the vim-zellij-navigator wasm plugin bound to Alt+arrow in ~/.config/zellij/config.kdl",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-22",
+        "known": null,
+        "score": 0.595,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "Alt ↓",
+      "keys_raw": "<M-Down>",
+      "action": "Focus split/pane below",
+      "description": "smart-splits.move_cursor_down",
+      "category": "pane-management",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "lua/custom/plugins/smart-splits.lua:13",
+      "notes": "ZELLIJ INTEGRATION: hands off to the Zellij pane below at a split edge; plain `move-focus`, no tab fallback vertically (zellij_move_focus_or_tab is left/right only)",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-22",
+        "known": null,
+        "score": 0.595,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "Alt ↑",
+      "keys_raw": "<M-Up>",
+      "action": "Focus split/pane above",
+      "description": "smart-splits.move_cursor_up",
+      "category": "pane-management",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "lua/custom/plugins/smart-splits.lua:14",
+      "notes": "ZELLIJ INTEGRATION: hands off to the Zellij pane above at a split edge",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-22",
+        "known": null,
+        "score": 0.595,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "Alt →",
+      "keys_raw": "<M-Right>",
+      "action": "Focus split/pane right",
+      "description": "smart-splits.move_cursor_right",
+      "category": "pane-management",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "lua/custom/plugins/smart-splits.lua:15",
+      "notes": "ZELLIJ INTEGRATION: crosses into the adjacent Zellij pane, or the next tab if there is no pane (move-focus-or-tab)",
+      "scoring": {
+        "usefulness": 0.85,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-22",
+        "known": null,
+        "score": 0.595,
+        "tier": 1
+      }
+    },
+    {
+      "keys": "\\",
+      "keys_raw": "\\",
+      "action": "Reveal file in Neo-tree",
+      "description": ":Neotree reveal — netrw is disabled (vim.g.loaded_netrw=1), so this is the only tree",
+      "category": "navigation",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "lua/kickstart/plugins/neo-tree.lua:16",
+      "notes": "Window width overridden to 35",
+      "scoring": {
+        "usefulness": 0.9,
+        "novelty_auto": 0.2,
+        "line_date": "2024-08-26",
+        "known": null,
+        "score": 0.18,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "\\",
+      "keys_raw": "\\",
+      "action": "Close Neo-tree window",
+      "category": "navigation",
+      "mode": "neo-tree",
+      "origin": "custom",
+      "source": "lua/kickstart/plugins/neo-tree.lua:27",
+      "notes": "Same key toggles the tree closed from inside the filesystem source",
+      "scoring": {
+        "usefulness": 0.9,
+        "novelty_auto": 0.2,
+        "line_date": "2024-04-17",
+        "known": null,
+        "score": 0.18,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Ctrl ⇧ ↓",
+      "keys_raw": "<C-S-Down>",
+      "action": "Add cursor below",
+      "description": "vim-visual-multi, remapped off <C-Down> to avoid multiplexer navigation conflicts",
+      "category": "editing",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "lua/custom/plugins/init.lua:13",
+      "notes": "Comment says the remap was to dodge tmux nav; tmux is gone but the remap stayed",
+      "scoring": {
+        "usefulness": 0.65,
+        "novelty_auto": 0.2,
+        "line_date": "2026-01-25",
+        "known": null,
+        "score": 0.13,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Ctrl ⇧ ↑",
+      "keys_raw": "<C-S-Up>",
+      "action": "Add cursor above",
+      "category": "editing",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "lua/custom/plugins/init.lua:14",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.65,
+        "novelty_auto": 0.2,
+        "line_date": "2026-01-25",
+        "known": null,
+        "score": 0.13,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Ctrl n",
+      "keys_raw": "<C-n>",
+      "action": "Select word under cursor (multi-cursor)",
+      "category": "editing",
+      "mode": "normal,visual",
+      "origin": "plugin",
+      "source": "vim-visual-multi",
+      "notes": "Plugin default, left untouched; n/N find next/prev, q skips, Q removes a cursor",
+      "scoring": {
+        "usefulness": 0.585,
+        "novelty_auto": 0.7,
+        "line_date": "2026-06-22",
+        "known": null,
+        "score": 0.409,
+        "tier": 2
+      }
+    },
+    {
+      "keys": "Space t n",
+      "keys_raw": "<leader>tn",
+      "action": "Run nearest test",
+      "category": "test",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "lua/custom/plugins/init.lua:23",
+      "notes": "vim-test with strategy 'neovim' (terminal split); Ruby uses `bundle exec rspec`",
+      "scoring": {
+        "usefulness": 0.55,
+        "novelty_auto": 0.12,
+        "line_date": "2025-12-04",
+        "known": null,
+        "score": 0.066,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space t f",
+      "keys_raw": "<leader>tf",
+      "action": "Run tests in file",
+      "category": "test",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "lua/custom/plugins/init.lua:24",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.55,
+        "novelty_auto": 0.12,
+        "line_date": "2025-12-04",
+        "known": null,
+        "score": 0.066,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space t s",
+      "keys_raw": "<leader>ts",
+      "action": "Run full test suite",
+      "category": "test",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "lua/custom/plugins/init.lua:25",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.55,
+        "novelty_auto": 0.12,
+        "line_date": "2025-12-04",
+        "known": null,
+        "score": 0.066,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space t l",
+      "keys_raw": "<leader>tl",
+      "action": "Re-run last test",
+      "category": "test",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "lua/custom/plugins/init.lua:26",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.55,
+        "novelty_auto": 0.12,
+        "line_date": "2025-12-04",
+        "known": null,
+        "score": 0.066,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space t v",
+      "keys_raw": "<leader>tv",
+      "action": "Visit last test file",
+      "category": "test",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "lua/custom/plugins/init.lua:27",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.55,
+        "novelty_auto": 0.12,
+        "line_date": "2025-12-04",
+        "known": null,
+        "score": 0.066,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space g d",
+      "keys_raw": "<leader>gd",
+      "action": "Open Diffview",
+      "category": "git",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "lua/custom/plugins/diffview.lua:5",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.7,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-04",
+        "known": null,
+        "score": 0.189,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space g f",
+      "keys_raw": "<leader>gf",
+      "action": "File history (current file)",
+      "category": "git",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "lua/custom/plugins/diffview.lua:6",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.7,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-04",
+        "known": null,
+        "score": 0.189,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space g h",
+      "keys_raw": "<leader>gh",
+      "action": "Repo history",
+      "category": "git",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "lua/custom/plugins/diffview.lua:7",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.7,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-04",
+        "known": null,
+        "score": 0.189,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space g m",
+      "keys_raw": "<leader>gm",
+      "action": "Diff PR files vs main",
+      "description": "DiffviewOpen main...HEAD",
+      "category": "git",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "lua/custom/plugins/diffview.lua:8",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.7,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-04",
+        "known": null,
+        "score": 0.189,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space g c",
+      "keys_raw": "<leader>gc",
+      "action": "List PR commits vs main",
+      "description": "DiffviewFileHistory --range=main..HEAD",
+      "category": "git",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "lua/custom/plugins/diffview.lua:9",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.7,
+        "novelty_auto": 0.27,
+        "line_date": "2026-03-04",
+        "known": null,
+        "score": 0.189,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space g g",
+      "keys_raw": "<leader>gg",
+      "action": "Open Fugitive status",
+      "category": "git",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "lua/custom/plugins/fugitive.lua:6",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.7,
+        "novelty_auto": 0.2,
+        "line_date": "2026-01-28",
+        "known": null,
+        "score": 0.14,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space g b",
+      "keys_raw": "<leader>gb",
+      "action": "Fugitive git blame",
+      "category": "git",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "lua/custom/plugins/fugitive.lua:7",
+      "notes": "Second blame binding alongside gitsigns <leader>hb",
+      "scoring": {
+        "usefulness": 0.7,
+        "novelty_auto": 0.12,
+        "line_date": "2026-01-28",
+        "known": null,
+        "score": 0.084,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space o i",
+      "keys_raw": "<leader>oi",
+      "action": "List GitHub issues",
+      "category": "git",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "lua/custom/plugins/octo-nvim.lua:11",
+      "notes": "octo.nvim, telescope picker",
+      "scoring": {
+        "usefulness": 0.7,
+        "novelty_auto": 0.27,
+        "line_date": "2026-02-06",
+        "known": null,
+        "score": 0.189,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space o p",
+      "keys_raw": "<leader>op",
+      "action": "List GitHub pull requests",
+      "category": "git",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "lua/custom/plugins/octo-nvim.lua:16",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.7,
+        "novelty_auto": 0.27,
+        "line_date": "2026-02-06",
+        "known": null,
+        "score": 0.189,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space o d",
+      "keys_raw": "<leader>od",
+      "action": "List GitHub discussions",
+      "category": "git",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "lua/custom/plugins/octo-nvim.lua:21",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.7,
+        "novelty_auto": 0.27,
+        "line_date": "2026-02-06",
+        "known": null,
+        "score": 0.189,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space o n",
+      "keys_raw": "<leader>on",
+      "action": "List GitHub notifications",
+      "category": "git",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "lua/custom/plugins/octo-nvim.lua:26",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.7,
+        "novelty_auto": 0.27,
+        "line_date": "2026-02-06",
+        "known": null,
+        "score": 0.189,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space o s",
+      "keys_raw": "<leader>os",
+      "action": "Search GitHub",
+      "description": "Prefills an Octo search scoped to the current repo",
+      "category": "git",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "lua/custom/plugins/octo-nvim.lua:31",
+      "notes": "No which-key group registered for the <leader>o prefix",
+      "scoring": {
+        "usefulness": 0.7,
+        "novelty_auto": 0.27,
+        "line_date": "2026-02-06",
+        "known": null,
+        "score": 0.189,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "F5",
+      "keys_raw": "<F5>",
+      "action": "Start/continue debugging",
+      "category": "debug",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "lua/kickstart/plugins/debug.lua:31",
+      "notes": "nvim-dap; delve installed via mason-nvim-dap, Go config via nvim-dap-go",
+      "scoring": {
+        "usefulness": 0.5,
+        "novelty_auto": 0.45,
+        "line_date": "2026-02-28",
+        "known": null,
+        "score": 0.225,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "F1",
+      "keys_raw": "<F1>",
+      "action": "Step into",
+      "category": "debug",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "lua/kickstart/plugins/debug.lua:32",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.5,
+        "novelty_auto": 0.45,
+        "line_date": "2026-02-28",
+        "known": null,
+        "score": 0.225,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "F2",
+      "keys_raw": "<F2>",
+      "action": "Step over",
+      "category": "debug",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "lua/kickstart/plugins/debug.lua:33",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.5,
+        "novelty_auto": 0.45,
+        "line_date": "2026-02-28",
+        "known": null,
+        "score": 0.225,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "F3",
+      "keys_raw": "<F3>",
+      "action": "Step out",
+      "category": "debug",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "lua/kickstart/plugins/debug.lua:34",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.5,
+        "novelty_auto": 0.45,
+        "line_date": "2026-02-28",
+        "known": null,
+        "score": 0.225,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "F7",
+      "keys_raw": "<F7>",
+      "action": "Toggle DAP UI",
+      "category": "debug",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "lua/kickstart/plugins/debug.lua:38",
+      "notes": "Also how you see output from the last session",
+      "scoring": {
+        "usefulness": 0.5,
+        "novelty_auto": 0.45,
+        "line_date": "2026-02-28",
+        "known": null,
+        "score": 0.225,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space b",
+      "keys_raw": "<leader>b",
+      "action": "Toggle breakpoint",
+      "category": "debug",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "lua/kickstart/plugins/debug.lua:35",
+      "notes": "",
+      "scoring": {
+        "usefulness": 0.5,
+        "novelty_auto": 0.27,
+        "line_date": "2026-02-28",
+        "known": null,
+        "score": 0.135,
+        "tier": 3
+      }
+    },
+    {
+      "keys": "Space B",
+      "keys_raw": "<leader>B",
+      "action": "Set conditional breakpoint",
+      "category": "debug",
+      "mode": "normal",
+      "origin": "custom",
+      "source": "lua/kickstart/plugins/debug.lua:36",
+      "notes": "Prompts for the condition",
+      "scoring": {
+        "usefulness": 0.5,
+        "novelty_auto": 0.27,
+        "line_date": "2026-02-28",
+        "known": null,
+        "score": 0.135,
+        "tier": 3
+      }
+    }
+  ]
+}
