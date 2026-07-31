@@ -139,7 +139,7 @@ useWorkspaceId = false
 [workspaceBar]
 backgroundOpacity = 0.1
 deduplicateAppIcons = false
-enabled = true
+enabled = false
 excludedBundleIDs = []
 height = 24.0
 hideEmptyWorkspaces = false
@@ -858,7 +858,7 @@ type = "main"
 
 [[workspaces]]
 id = "248AA883-2261-4D45-943C-79C0E46A232B"
-layoutType = "niri"
+layoutType = "dwindle"
 name = "4"
 
 [workspaces.monitorAssignment]
@@ -866,7 +866,7 @@ type = "main"
 
 [[workspaces]]
 id = "8B8C45D6-CE9E-41D9-BD50-BE4989D5E3DE"
-layoutType = "niri"
+layoutType = "dwindle"
 name = "5"
 
 [workspaces.monitorAssignment]

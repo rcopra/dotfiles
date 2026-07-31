@@ -6,6 +6,28 @@ keybinds clear-defaults=true {
     locked {
         bind "Ctrl g" { SwitchToMode "normal"; }
         bind "Alt n" { NewPane; }
+        bind "Alt t" { NewTab; }
+        bind "Alt w" { CloseFocus; }
+        bind "Alt x" { CloseTab; }
+        bind "Alt f" { ToggleFloatingPanes; }
+        bind "Alt s" { Run "/Users/rickcopra/bin/zellij-sessionizer" { floating true; close_on_exit true; } }
+        bind "Alt Shift s" {
+            LaunchOrFocusPlugin "session-manager" {
+                floating true
+                move_to_focused_tab true
+            }
+        }
+        bind "Alt r" { NewPane "right"; }
+        bind "Alt d" { NewPane "down"; }
+        bind "Alt 1" { GoToTab 1; }
+        bind "Alt 2" { GoToTab 2; }
+        bind "Alt 3" { GoToTab 3; }
+        bind "Alt 4" { GoToTab 4; }
+        bind "Alt 5" { GoToTab 5; }
+        bind "Alt 6" { GoToTab 6; }
+        bind "Alt 7" { GoToTab 7; }
+        bind "Alt 8" { GoToTab 8; }
+        bind "Alt 9" { GoToTab 9; }
         // vim-zellij-navigator: nvim pane -> forwards Alt+arrow to nvim (smart-splits),
         // any other pane -> zellij MoveFocus. Config must be identical on every binding.
         bind "Alt left" {
