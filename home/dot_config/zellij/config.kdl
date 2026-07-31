@@ -10,7 +10,7 @@ keybinds clear-defaults=true {
         bind "Alt w" { CloseFocus; }
         bind "Alt x" { CloseTab; }
         bind "Alt f" { ToggleFloatingPanes; }
-        bind "Alt s" { Run "/Users/rickcopra/bin/zellij-sessionizer" { floating true; close_on_exit true; } }
+        bind "Alt s" { Run "/Users/rickcopra/bin/zellij-sessionizer" { floating true; close_on_exit true; }; }
         bind "Alt Shift s" {
             LaunchOrFocusPlugin "session-manager" {
                 floating true
