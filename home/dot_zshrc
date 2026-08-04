@@ -16,7 +16,7 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 export PYTHONBREAKPOINT=ipdb.set_trace
 
-# Node (fnm - Fast Node Manager)
+# Node (nvm)
 
 # ==============================================================================
 # PATH Configuration
@@ -67,8 +67,28 @@ if type -a pyenv-virtualenv-init > /dev/null 2>&1; then
   eval "$(pyenv virtualenv-init - zsh)"
 fi
 
-# fnm (Fast Node Manager) - auto-switches on .nvmrc/.node-version
-command -v fnm > /dev/null && eval "$(fnm env --use-on-cd --log-level=quiet)"
+# nvm - auto-switches on .nvmrc/.node-version
+export NVM_DIR="$HOME/.nvm"
+if [[ -s "/opt/homebrew/opt/nvm/nvm.sh" ]]; then
+  source "/opt/homebrew/opt/nvm/nvm.sh"
+
+  autoload -U add-zsh-hook
+  _nvm_auto_use() {
+    local version_file
+    version_file="$(nvm_find_up .nvmrc)"
+    [[ -n "$version_file" ]] || version_file="$(nvm_find_up .node-version)"
+
+    if [[ -n "$version_file" ]]; then
+      local requested_version
+      requested_version="$(<"$version_file")"
+      if [[ "$(nvm version)" != "$(nvm version "$requested_version")" ]]; then
+        nvm use --silent "$requested_version"
+      fi
+    fi
+  }
+  add-zsh-hook chpwd _nvm_auto_use
+  _nvm_auto_use
+fi
 
 # ==============================================================================
 # History (configured by OMZ lib/history.zsh)
