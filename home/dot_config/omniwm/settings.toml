@@ -237,7 +237,7 @@ minHeight = 320.0
 minWidth = 660.0
 
 [[hotkeys]]
-binding = "Command+1"
+binding = "Left Command+1"
 id = "switchWorkspace.0"
 
 [[hotkeys]]
@@ -245,7 +245,7 @@ binding = "Shift+Command+1"
 id = "moveToWorkspace.0"
 
 [[hotkeys]]
-binding = "Command+2"
+binding = "Left Command+2"
 id = "switchWorkspace.1"
 
 [[hotkeys]]
@@ -253,7 +253,7 @@ binding = "Shift+Command+2"
 id = "moveToWorkspace.1"
 
 [[hotkeys]]
-binding = "Command+3"
+binding = "Left Command+3"
 id = "switchWorkspace.2"
 
 [[hotkeys]]
@@ -261,7 +261,7 @@ binding = "Shift+Command+3"
 id = "moveToWorkspace.2"
 
 [[hotkeys]]
-binding = "Command+4"
+binding = "Left Command+4"
 id = "switchWorkspace.3"
 
 [[hotkeys]]
@@ -269,7 +269,7 @@ binding = "Shift+Command+4"
 id = "moveToWorkspace.3"
 
 [[hotkeys]]
-binding = "Command+5"
+binding = "Left Command+5"
 id = "switchWorkspace.4"
 
 [[hotkeys]]
@@ -277,7 +277,7 @@ binding = "Shift+Command+5"
 id = "moveToWorkspace.4"
 
 [[hotkeys]]
-binding = "Command+6"
+binding = "Left Command+6"
 id = "switchWorkspace.5"
 
 [[hotkeys]]
@@ -285,7 +285,7 @@ binding = "Shift+Command+6"
 id = "moveToWorkspace.5"
 
 [[hotkeys]]
-binding = "Command+7"
+binding = "Left Command+7"
 id = "switchWorkspace.6"
 
 [[hotkeys]]
@@ -293,7 +293,7 @@ binding = "Shift+Command+7"
 id = "moveToWorkspace.6"
 
 [[hotkeys]]
-binding = "Command+8"
+binding = "Left Command+8"
 id = "switchWorkspace.7"
 
 [[hotkeys]]
@@ -301,7 +301,7 @@ binding = "Shift+Command+8"
 id = "moveToWorkspace.7"
 
 [[hotkeys]]
-binding = "Command+9"
+binding = "Left Command+9"
 id = "switchWorkspace.8"
 
 [[hotkeys]]
