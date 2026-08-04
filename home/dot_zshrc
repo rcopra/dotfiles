@@ -150,6 +150,20 @@ command -v starship > /dev/null && eval "$(starship init zsh)"
 # Bind Ctrl+f to zellij-sessionizer for quick project navigation
 bindkey -s '^f' '~/bin/zellij-sessionizer\n'
 
+# Zellij's light/dark detection is a terminal query (CSI 2031 / DSR 997) that can
+# lose its race and fall back to the static dark `theme`. Use `zj` instead of bare
+# `zellij` to pin the theme from macOS appearance. Same fix lives in
+# ~/bin/zellij-sessionizer for the Ctrl+f path.
+zj() {
+    local theme
+    if [[ $(defaults read -g AppleInterfaceStyle 2>/dev/null) == Dark ]]; then
+        theme=catppuccin-mocha
+    else
+        theme=catppuccin-latte
+    fi
+    zellij "$@" options --theme "$theme" --theme-light "$theme" --theme-dark "$theme"
+}
+
 # ==============================================================================
 # Aliases & Local Config
 # ==============================================================================
