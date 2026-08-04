@@ -1,0 +1,165 @@
+/* Shared style for every desk-reference sheet in this dir.
+   Screen: gruvbox light. Print: B&W laser, one landscape letter page per sheet. */
+:root {
+  --bg: #f9f5d7;
+  --surface: #f4eecb;
+  --line: #cbb98f;
+  --line-soft: #e2d5ac;
+  --fg: #504038;
+  --muted: #8a7860;
+  --orange: #b94c07;
+  --green: #64712a;
+  --blue: #3e6b75;
+  --red: #b0403f;
+  --yellow: #9a6215;
+  --key-bg: #fdf9e8;
+  --key-shadow: #c2ad83;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: #e8e2c4;
+  font-family: "JetBrainsMono Nerd Font", "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  color: var(--fg);
+  font-size: 11.5px;
+  line-height: 1.45;
+  padding: 1.5rem 0.75rem;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+.sheet {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 26px 30px 20px;
+  box-shadow: 0 2px 14px rgba(80, 64, 56, 0.18);
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  border-bottom: 2px solid var(--fg);
+  padding-bottom: 8px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+}
+h1 { font-size: 17px; margin: 0; letter-spacing: -0.01em; }
+h1 .dim { color: var(--muted); font-weight: 400; }
+.tiers-inline { font-size: 10.5px; color: var(--muted); text-align: right; }
+.tiers-inline b { color: var(--fg); }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px 18px;
+}
+.grid.c4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 860px) { .grid, .grid.c4 { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 580px) { .grid, .grid.c4 { grid-template-columns: 1fr; } }
+
+section { break-inside: avoid; }
+h2 {
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  margin: 0 0 6px;
+  color: var(--orange);
+  display: flex; align-items: center; gap: 0.6em;
+}
+h2::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+h2.blue  { color: var(--blue); }
+h2.green { color: var(--green); }
+h2.red   { color: var(--red); }
+h2 .tag { font-size: 8.5px; letter-spacing: 0.05em; color: var(--muted); text-transform: none; }
+
+kbd {
+  display: inline-block;
+  font-family: inherit;
+  font-size: 10px;
+  background: var(--key-bg);
+  border: 1px solid var(--line);
+  border-bottom: 2px solid var(--key-shadow);
+  border-radius: 4px;
+  padding: 0 5px;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+kbd.hy { color: var(--orange); border-color: var(--orange); font-weight: 600; }
+kbd.op { color: var(--blue); border-color: var(--blue); }
+kbd.cm { color: var(--green); border-color: var(--green); }
+
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+td { padding: 2.5px 6px 2.5px 0; vertical-align: baseline; }
+td.k { white-space: nowrap; width: 1%; padding-right: 12px; }
+tr + tr td { border-top: 1px solid var(--line-soft); }
+.note { color: var(--muted); font-size: 10px; }
+
+.hyperbox {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 8px 10px;
+  margin-bottom: 10px;
+}
+.hyperbox table td { padding: 2px 6px 2px 0; }
+.hyperbox tr td { border-top: none; }
+
+footer {
+  margin-top: 14px;
+  padding-top: 7px;
+  border-top: 1px solid var(--line);
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  color: var(--muted);
+  font-size: 9.5px;
+  flex-wrap: wrap;
+}
+
+@page { size: letter landscape; margin: 7mm; }
+@media print {
+  /* B&W laser, no background printing: borders + weight carry everything */
+  :root {
+    --bg: #fff; --surface: transparent;
+    --line: #666; --line-soft: #bbb;
+    --fg: #000; --muted: #333;
+    --orange: #000; --green: #000; --blue: #000; --red: #000; --yellow: #000;
+    --key-bg: transparent; --key-shadow: #000;
+  }
+  html, body { height: auto; overflow: hidden; }
+  body { background: #fff; padding: 0; margin: 0; font-size: 9px; line-height: 1.32; }
+  /* Everything must land on one landscape page — rows and keycaps get tighter. */
+  h1 { font-size: 14px; }
+  .tiers-inline { font-size: 8.4px; }
+  h2 { font-size: 8.2px; letter-spacing: 0.14em; margin-bottom: 4px; }
+  h2 .tag { font-size: 7.4px; }
+  kbd { font-size: 7.4px; padding: 0 2.5px; border-bottom-width: 1px; line-height: 1.35; }
+  td { padding: 0.8px 4px 0.8px 0; }
+  td.k { padding-right: 8px; }
+  .note { font-size: 8px; }
+  .hyperbox { padding: 5px 7px; margin-bottom: 7px; border-radius: 4px; }
+  header { padding-bottom: 5px; }
+  footer { font-size: 7.8px; padding-top: 5px; }
+  .sheet {
+    border: none; box-shadow: none; background: #fff;
+    max-width: 100%; width: 100%; padding: 0;
+    page-break-after: avoid; page-break-inside: avoid;
+  }
+  kbd { border-color: #000; background: transparent; }
+  kbd.hy { border-width: 1.5px; }
+  .hyperbox { border-color: #000; background: transparent; }
+  header { border-bottom-color: #000; margin-bottom: 10px; }
+  /* Column counts restated: print media must not inherit the narrow-screen collapse. */
+  .grid { grid-template-columns: repeat(3, 1fr); gap: 7px 14px; }
+  .grid.c4 { grid-template-columns: repeat(4, 1fr); }
+  footer { margin-top: 8px; }
+  /* Last-mile fit. Print font-size alone doesn't shrink the grid enough to land on
+     one landscape page; zoom scales the whole sheet, layout included. Densest sheet
+     (ghostty+shell) sets the floor — verify with make-pdfs.sh after adding rows. */
+  .sheet { zoom: 0.86; }
+}

@@ -1,0 +1,177 @@
+<title>Ghostty + Shell · Desk Reference</title>
+<link rel="stylesheet" href="sheet.css">
+
+<div class="sheet">
+  <header>
+    <h1>GHOSTTY <span class="dim">⌘ tier</span> + SHELL <span class="dim">zsh · fzf · git</span></h1>
+    <div class="tiers-inline">
+      <b>⌘</b> Ghostty eats it — zellij never sees it &nbsp;·&nbsp; <b>⌥</b> = Alt, passes to zellij/nvim &nbsp;·&nbsp; <b>⌃</b> reaches the shell
+    </div>
+  </header>
+
+  <div class="hyperbox">
+    <table>
+      <tr>
+        <td class="k"><kbd class="cm">⌘</kbd></td>
+        <td>handled before the terminal app. Tabs/splits below are <b>Ghostty's</b> — inside zellij use the ⌥ tier.</td>
+        <td class="k"><kbd class="op">⌥</kbd></td>
+        <td><code>macos-option-as-alt = true</code>; <kbd class="op">⌥</kbd><kbd>←→</kbd> unbound so Alt+arrow reaches zellij/nvim.</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="grid c4">
+
+    <section>
+      <h2>Windows &amp; tabs</h2>
+      <table>
+        <tr><td class="k"><kbd class="cm">⌘</kbd><kbd>n</kbd></td><td>new window</td></tr>
+        <tr><td class="k"><kbd class="cm">⌘</kbd><kbd>t</kbd></td><td>new tab</td></tr>
+        <tr><td class="k"><kbd class="cm">⌘</kbd><kbd>w</kbd></td><td>close surface</td></tr>
+        <tr><td class="k"><kbd class="cm">⌘⌥</kbd><kbd>w</kbd> / <kbd class="cm">⌘⇧</kbd><kbd>w</kbd></td><td>close tab / window</td></tr>
+        <tr><td class="k"><kbd class="cm">⌘</kbd><kbd>1-8</kbd></td><td>go to tab</td></tr>
+        <tr><td class="k"><kbd class="cm">⌘</kbd><kbd>9</kbd></td><td>last tab</td></tr>
+        <tr><td class="k"><kbd class="cm">⌘⇧</kbd><kbd>[</kbd> <kbd>]</kbd></td><td>prev / next tab</td></tr>
+        <tr><td class="k"><kbd class="cm">⌘</kbd><kbd>⏎</kbd></td><td>fullscreen</td></tr>
+        <tr><td class="k"><kbd class="cm">⌘</kbd><kbd>q</kbd></td><td>quit Ghostty</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>Splits <span class="tag">prefer zellij</span></h2>
+      <table>
+        <tr><td class="k"><kbd class="cm">⌘</kbd><kbd>d</kbd></td><td>split right</td></tr>
+        <tr><td class="k"><kbd class="cm">⌘⇧</kbd><kbd>d</kbd></td><td>split down</td></tr>
+        <tr><td class="k"><kbd class="cm">⌘</kbd><kbd>[</kbd> <kbd>]</kbd></td><td>prev / next split</td></tr>
+        <tr><td class="k"><kbd class="cm">⌘⌥</kbd><kbd>←↓↑→</kbd></td><td>focus split</td></tr>
+        <tr><td class="k"><kbd class="cm">⌘⌃</kbd><kbd>←↓↑→</kbd></td><td>resize split</td></tr>
+        <tr><td class="k"><kbd class="cm">⌘⌃</kbd><kbd>=</kbd></td><td>equalize</td></tr>
+        <tr><td class="k"><kbd class="cm">⌘⇧</kbd><kbd>⏎</kbd></td><td>zoom split</td></tr>
+        <tr><td class="k">caveat</td><td>lost on detach</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>Text &amp; clipboard</h2>
+      <table>
+        <tr><td class="k"><kbd class="cm">⌘</kbd><kbd>c</kbd> <kbd>v</kbd></td><td>copy / paste</td></tr>
+        <tr><td class="k"><kbd class="cm">⌘</kbd><kbd>a</kbd></td><td>select all</td></tr>
+        <tr><td class="k"><kbd>⇧</kbd>+drag</td><td>native selection</td></tr>
+        <tr><td class="k"><kbd>⇧</kbd><kbd>←↓↑→</kbd></td><td>adjust selection</td></tr>
+        <tr><td class="k"><kbd class="cm">⌘</kbd><kbd>k</kbd></td><td>clear screen</td></tr>
+        <tr><td class="k"><kbd class="cm">⌘</kbd><kbd>f</kbd></td><td>search</td></tr>
+        <tr><td class="k"><kbd class="cm">⌘⇧</kbd><kbd>j</kbd></td><td>screen → file, paste</td></tr>
+        <tr><td class="k"><kbd class="cm">⌘⌃⇧</kbd><kbd>j</kbd></td><td>… copy path</td></tr>
+        <tr><td class="k"><kbd class="cm">⌘⌥⇧</kbd><kbd>j</kbd></td><td>… open it</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>Scroll &amp; view</h2>
+      <table>
+        <tr><td class="k"><kbd class="cm">⌘</kbd><kbd>↑</kbd> <kbd>↓</kbd></td><td>prev / next prompt</td></tr>
+        <tr><td class="k"><kbd class="cm">⌘</kbd><kbd>Home</kbd> <kbd>End</kbd></td><td>top / bottom</td></tr>
+        <tr><td class="k"><kbd class="cm">⌘</kbd><kbd>PgUp</kbd> <kbd>PgDn</kbd></td><td>page scroll</td></tr>
+        <tr><td class="k"><kbd class="cm">⌘</kbd><kbd>=</kbd> <kbd>-</kbd> <kbd>0</kbd></td><td>font ± / reset</td></tr>
+        <tr><td class="k"><kbd class="cm">⌘⇧</kbd><kbd>p</kbd></td><td>command palette</td></tr>
+        <tr><td class="k"><kbd class="cm">⌘</kbd><kbd>,</kbd></td><td>open config</td></tr>
+        <tr><td class="k"><kbd class="cm">⌘⇧</kbd><kbd>,</kbd></td><td>reload config</td></tr>
+        <tr><td class="k">in zellij</td><td>no-op — use <kbd>⌃s</kbd> / <kbd class="op">⌥</kbd><kbd>e</kbd></td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2 class="blue">zsh line editing</h2>
+      <table>
+        <tr><td class="k"><kbd>↑</kbd> <kbd>↓</kbd></td><td>substring history</td></tr>
+        <tr><td class="k"><kbd>⌃r</kbd></td><td>fzf history</td></tr>
+        <tr><td class="k"><kbd>⌃t</kbd></td><td>fzf file → path</td></tr>
+        <tr><td class="k"><kbd class="op">⌥</kbd><kbd>c</kbd></td><td>fzf cd subdir</td></tr>
+        <tr><td class="k"><kbd>⌃f</kbd></td><td><b>sessionizer</b></td></tr>
+        <tr><td class="k"><kbd>→</kbd> <kbd>⌃e</kbd></td><td>accept suggestion</td></tr>
+        <tr><td class="k"><kbd class="op">⌥</kbd><kbd>f</kbd> <kbd>d</kbd></td><td>word fwd / kill word</td></tr>
+        <tr><td class="k"><kbd>⌃a</kbd> <kbd>⌃k</kbd> <kbd>⌃u</kbd> <kbd>⌃w</kbd></td><td>start / EOL / line / word</td></tr>
+        <tr><td class="k"><kbd>**</kbd><kbd>⇥</kbd></td><td>fzf completion</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2 class="blue">Sessions</h2>
+      <table>
+        <tr><td class="k"><kbd>zj</kbd></td><td>zellij, theme pinned</td></tr>
+        <tr><td class="k"><kbd>tms</kbd></td><td>pick any project</td></tr>
+        <tr><td class="k"><kbd>tmd</kbd></td><td>dotfiles</td></tr>
+        <tr><td class="k"><kbd>tmw</kbd> <kbd>tmp</kbd></td><td>~/work · ~/personal</td></tr>
+        <tr><td class="k"><kbd>tmv</kbd></td><td>~/.config/nvim</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2 class="green">Files &amp; dirs</h2>
+      <table>
+        <tr><td class="k"><kbd>cd</kbd></td><td>zoxide <kbd>z</kbd>, frecency</td></tr>
+        <tr><td class="k"><kbd>zi</kbd></td><td>zoxide picker</td></tr>
+        <tr><td class="k"><kbd>ls</kbd> <kbd>la</kbd></td><td>eza · with dotfiles</td></tr>
+        <tr><td class="k"><kbd>ll</kbd> <kbd>lla</kbd></td><td>long+git · long+all</td></tr>
+        <tr><td class="k"><kbd>lt</kbd></td><td>tree, 2 levels</td></tr>
+        <tr><td class="k"><kbd>cd -</kbd></td><td>previous dir</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2 class="green">git <span class="tag">forgit, interactive</span></h2>
+      <table>
+        <tr><td class="k"><kbd>ga</kbd></td><td>stage hunks / files</td></tr>
+        <tr><td class="k"><kbd>gd</kbd> <kbd>gso</kbd></td><td>diff / show</td></tr>
+        <tr><td class="k"><kbd>glo</kbd> <kbd>grl</kbd></td><td>log / reflog</td></tr>
+        <tr><td class="k"><kbd>gcf</kbd> <kbd>grh</kbd></td><td>checkout file / reset</td></tr>
+        <tr><td class="k"><kbd>gcb</kbd> <kbd>gsw</kbd> <kbd>gbd</kbd></td><td>branch co / sw / del</td></tr>
+        <tr><td class="k"><kbd>gss</kbd> <kbd>gsp</kbd></td><td>stash show / push</td></tr>
+        <tr><td class="k"><kbd>gfu</kbd> <kbd>gsq</kbd> <kbd>grw</kbd></td><td>fixup / squash / reword</td></tr>
+        <tr><td class="k"><kbd>grb</kbd> <kbd>gcp</kbd> <kbd>grc</kbd></td><td>rebase / pick / revert</td></tr>
+        <tr><td class="k"><kbd>gclean</kbd> <kbd>gbl</kbd></td><td>clean / blame</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>Config <span class="tag">non-default only</span></h2>
+      <table>
+        <tr><td class="k">titlebar</td><td>hidden, OmniWM tiles</td></tr>
+        <tr><td class="k">theme</td><td>Latte / Mocha, live</td></tr>
+        <tr><td class="k">option</td><td>as alt = true</td></tr>
+        <tr><td class="k">unbound</td><td><kbd class="op">⌥</kbd><kbd>←</kbd> <kbd class="op">⌥</kbd><kbd>→</kbd></td></tr>
+        <tr><td class="k">quit</td><td>on last shell exit</td></tr>
+        <tr><td class="k">full list</td><td><code>ghostty +list-keybinds</code></td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2 class="red">Who owns the key</h2>
+      <table>
+        <tr><td class="k"><kbd class="cm">⌘</kbd></td><td>Ghostty</td></tr>
+        <tr><td class="k"><kbd class="cm">⌘</kbd><kbd>1-9</kbd></td><td>OmniWM workspaces</td></tr>
+        <tr><td class="k"><kbd class="op">⌥</kbd></td><td>zellij shared binds</td></tr>
+        <tr><td class="k"><kbd>⌃</kbd></td><td>shell <span class="note">not ⌃g ⌃s</span></td></tr>
+        <tr><td class="k"><kbd class="hy">⌃⌥⌘</kbd></td><td>OmniWM / Karabiner</td></tr>
+      </table>
+    </section>
+
+    <section>
+      <h2>Launchers <span class="tag">karabiner</span></h2>
+      <table>
+        <tr><td class="k"><kbd class="op">⌥</kbd><kbd>⏎</kbd></td><td>new Ghostty window</td></tr>
+        <tr><td class="k"><kbd class="hy">hyper</kbd><kbd>g</kbd></td><td>Ghostty, focus</td></tr>
+        <tr><td class="k"><kbd class="hy">hyper</kbd><kbd>w</kbd> <kbd>b</kbd></td><td>Safari · Firefox</td></tr>
+        <tr><td class="k"><kbd class="hy">hyper</kbd><kbd>s</kbd> <kbd>d</kbd></td><td>Slack · Discord</td></tr>
+        <tr><td class="k">hyper</td><td>hold Caps <span class="note">tap = Esc</span></td></tr>
+      </table>
+    </section>
+
+  </div>
+
+  <footer>
+    <span>rcopra · ghostty + zsh · chezmoi</span>
+    <span>sources: dot_config/ghostty/config · ~/.zshrc · ~/.aliases</span>
+    <span>2026-08-04</span>
+  </footer>
+</div>

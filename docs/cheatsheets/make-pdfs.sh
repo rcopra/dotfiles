@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Regenerate printable PDFs: Hyper-3 desk reference + Hillside D50 keymap.
+# Regenerate printable PDFs: Hyper-3 / Zellij / Ghostty+shell desk references
+# + Hillside D50 keymap.
 # Output: ~/Desktop/*.pdf
 set -euo pipefail
 
@@ -9,10 +10,12 @@ ZMK="$HOME/personal/zmk-config/zmk-workspace"
 TMP="$(mktemp -d)"
 trap 'rm -rf "$TMP"' EXIT
 
-# 1. Desk reference (source of truth: hyper-desk-reference.html in this dir)
-"$CHROME" --headless --disable-gpu --no-pdf-header-footer \
-  --print-to-pdf="$HOME/Desktop/hyper-desk-reference.pdf" \
-  "$HERE/hyper-desk-reference.html"
+# 1. Desk references (source of truth: *-desk-reference.html in this dir, shared sheet.css)
+for sheet in hyper zellij ghostty-shell; do
+  "$CHROME" --headless --disable-gpu --no-pdf-header-footer \
+    --print-to-pdf="$HOME/Desktop/${sheet}-desk-reference.pdf" \
+    "$HERE/${sheet}-desk-reference.html"
+done
 
 # 2. Keymap: one layer group per page, rendered fresh from the keymap
 cd "$ZMK"
@@ -42,4 +45,4 @@ HTML
   --print-to-pdf="$HOME/Desktop/hillside-d50-keymap.pdf" \
   "$TMP/keymap.html"
 
-echo "Done: ~/Desktop/hyper-desk-reference.pdf, ~/Desktop/hillside-d50-keymap.pdf"
+echo "Done: ~/Desktop/{hyper,zellij,ghostty-shell}-desk-reference.pdf, ~/Desktop/hillside-d50-keymap.pdf"

@@ -28,7 +28,7 @@ Catppuccin Latte/Mocha, following macOS appearance: Ghostty via `theme = light:�
 - **Packages** (`home/.chezmoiscripts/run_onchange_install-packages.sh`): Homebrew, re-runs on content change
 - **VS Code**: `~/Library/Application Support/Code/User/` symlinked to `home/vscode/` via relative paths
 - **Version managers**: rbenv, pyenv, fnm — configured in shell configs
-- **Docs**: `docs/keyboard-planning.md` (ZMK keymap + WM modifier plan), `docs/cheatsheets/` (printable Hyper-3 reference + `make-pdfs.sh`)
+- **Docs**: `docs/keyboard-planning.md` (ZMK keymap + WM modifier plan), `docs/cheatsheets/` — three printable sheets (`hyper`, `zellij`, `ghostty-shell`) sharing `sheet.css`, full text list in `keybinds.md`, PDFs via `make-pdfs.sh`. Each sheet must stay one landscape page; print CSS uses `zoom` to fit, so re-run `make-pdfs.sh` after adding rows
 
 ## Gotchas
 
