@@ -5,43 +5,67 @@ Sequences read left → right: `⌃g ⌃p f` = Ctrl+g, then Ctrl+p, then f.
 
 ## Zellij
 
+Every `⌥` bind below works in **any mode**, locked included — they live in the
+config's `shared` block. `F1` toggles a live tooltip of the real binds in-terminal.
+
 ### Panes
 | Action | Keys |
 |---|---|
 | Focus pane | `⌥ ←↓↑→` |
 | New pane | `⌥n` |
-| New right | `⌥r` |
-| New below | `⌥d` |
+| New right | `⌥⇧r` |
+| New below | `⌥⇧d` |
 | Close pane | `⌥w` |
-| Floating panes | `⌥f` |
-| Fullscreen | `⌃g ⌃p f` |
+| **Fullscreen** | `⌥z` |
+| Floating panes | `⌥⇧f` |
+| Float ⇄ embed this pane | `⌥⇧e` |
+| Resize ± | `⌥- ⌥=` |
 | Rename pane | `⌃g ⌃p c` |
 
 ### Tabs
 | Action | Keys |
 |---|---|
 | Go to tab | `⌥ 1-9` |
+| Prev / next tab | `⌥⇧ ← →` |
 | New tab | `⌥t` |
-| Close tab | `⌥x` |
+| **Rename tab** | `⌥⇧t` |
+| Move tab | `⌥i ⌥o` |
+| Close tab | `⌃g ⌃t x` |
 | Last tab | `⌃g ⌃t ⇥` |
-| Rename tab | `⌃g ⌃t r` |
 | Pane → own tab | `⌃g ⌃t b` |
+
+Close pane (`⌥w`) closes the tab too when it's the tab's last pane — that's the
+everyday path. `⌃g ⌃t x` is only for nuking a multi-pane tab in one shot.
 
 ### Sessions
 | Action | Keys |
 |---|---|
-| Sessionizer (new/switch) | `⌥s` |
-| Session manager | `⌥⇧s` |
-| Detach | `⌃g ⌃o d` |
-| Sessionizer (shell prompt) | `⌃f` |
+| Session manager | `⌥s` |
+| Sessionizer (new/switch) | `⌥⇧s` |
+| **Detach** | `⌥q` |
+| Sessionizer (shell prompt only) | `⌃f` |
 
-### Scroll / resize
+### Scroll / scrollback
 | Action | Keys |
 |---|---|
-| Scroll | `⌃g ⌃s` then `j k d u` |
-| Search scrollback | `⌃g ⌃s s` |
-| Scrollback in nvim | `⌃g ⌃s e` |
-| Resize pane | `⌃g ⌃n` then `←↓↑→` |
+| **Scroll mode** | `⌃s` then `j k d u` |
+| Search scrollback | `⌃s s` → `n`/`p` |
+| **Scrollback → nvim** | `⌥e` (or `⌃s e`) |
+| Leave scroll mode | `⏎` or `esc` |
+
+Mouse drag-select is capped to one viewport — zellij owns the scrollback, so
+Ghostty's own buffer is empty. To copy across scrollback use `⌥e`, then `V`/`y`
+in nvim. `⇧`+drag gives Ghostty-native selection of the visible screen.
+
+### Precision resize
+| Action | Keys |
+|---|---|
+| Resize mode | `⌃g ⌃n` then `←↓↑→` |
+| Swap layout | `⌃g ⌥[ ⌥]` |
+
+`⌃n` and `⌃o` are deliberately *not* bound in locked mode — they'd shadow nvim's
+`<C-n>` and jumplist `<C-o>`. Same reason `⌥f`/`⌥d` are unused: zsh
+`forward-word` / `kill-word`.
 
 ## OmniWM
 

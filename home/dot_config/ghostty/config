@@ -1,6 +1,7 @@
 macos-titlebar-style = hidden
 
-theme = Catppuccin Macchiato
+# Follows macOS appearance — switches live, no restart
+theme = light:Catppuccin Latte,dark:Catppuccin Mocha
 
 macos-option-as-alt = true
 

@@ -5,29 +5,11 @@
 keybinds clear-defaults=true {
     locked {
         bind "Ctrl g" { SwitchToMode "normal"; }
-        bind "Alt n" { NewPane; }
-        bind "Alt t" { NewTab; }
-        bind "Alt w" { CloseFocus; }
-        bind "Alt x" { CloseTab; }
-        bind "Alt f" { ToggleFloatingPanes; }
-        bind "Alt s" { Run "/Users/rickcopra/bin/zellij-sessionizer" { floating true; close_on_exit true; }; }
-        bind "Alt Shift s" {
-            LaunchOrFocusPlugin "session-manager" {
-                floating true
-                move_to_focused_tab true
-            }
-        }
-        bind "Alt r" { NewPane "right"; }
-        bind "Alt d" { NewPane "down"; }
-        bind "Alt 1" { GoToTab 1; }
-        bind "Alt 2" { GoToTab 2; }
-        bind "Alt 3" { GoToTab 3; }
-        bind "Alt 4" { GoToTab 4; }
-        bind "Alt 5" { GoToTab 5; }
-        bind "Alt 6" { GoToTab 6; }
-        bind "Alt 7" { GoToTab 7; }
-        bind "Alt 8" { GoToTab 8; }
-        bind "Alt 9" { GoToTab 9; }
+        // Scroll mode (nav / search / EditScrollback) is otherwise unreachable from
+        // locked -- Ctrl s only exists in shared_except "locked". Costs zsh's
+        // history-incremental-search-forward; ^R/fzf covers that. nvim binds no <C-s>.
+        bind "Ctrl s" { SwitchToMode "scroll"; }
+        // Pane/tab/session binds live in `shared` so they work in every mode.
         // vim-zellij-navigator: nvim pane -> forwards Alt+arrow to nvim (smart-splits),
         // any other pane -> zellij MoveFocus. Config must be identical on every binding.
         bind "Alt left" {
@@ -209,7 +191,57 @@ keybinds clear-defaults=true {
             SwitchToMode "locked"
         }
     }
+    // Global pane/tab/session management -- `shared` applies to EVERY mode,
+    // including locked (default_mode). No key here collides with a mode-specific
+    // bind, so precedence never comes into play.
+    //
+    // Alt f and Alt d are deliberately NOT used: they shadow zsh forward-word and
+    // kill-word. The shifted variants keep the mnemonic without the cost.
     shared {
+        // --- pane ---
+        bind "Alt n" { NewPane; }
+        bind "Alt Shift r" { NewPane "right"; }
+        bind "Alt Shift d" { NewPane "down"; }
+        bind "Alt w" { CloseFocus; }
+        bind "Alt z" { ToggleFocusFullscreen; }
+        bind "Alt Shift f" { ToggleFloatingPanes; }
+        bind "Alt Shift e" { TogglePaneEmbedOrFloating; }
+        // Coarse resize. Precision (directional) resize is Ctrl g -> Ctrl n;
+        // Ctrl n can't be taken in locked without shadowing nvim's <C-n>.
+        bind "Alt +" { Resize "Increase"; }
+        bind "Alt =" { Resize "Increase"; }
+        bind "Alt -" { Resize "Decrease"; }
+        // --- tab ---
+        bind "Alt t" { NewTab; }
+        bind "Alt Shift t" { SwitchToMode "renametab"; TabNameInput 0; }
+        bind "Alt Shift left" { GoToPreviousTab; }
+        bind "Alt Shift right" { GoToNextTab; }
+        bind "Alt i" { MoveTab "left"; }
+        bind "Alt o" { MoveTab "right"; }
+        bind "Alt 1" { GoToTab 1; }
+        bind "Alt 2" { GoToTab 2; }
+        bind "Alt 3" { GoToTab 3; }
+        bind "Alt 4" { GoToTab 4; }
+        bind "Alt 5" { GoToTab 5; }
+        bind "Alt 6" { GoToTab 6; }
+        bind "Alt 7" { GoToTab 7; }
+        bind "Alt 8" { GoToTab 8; }
+        bind "Alt 9" { GoToTab 9; }
+        // --- session ---
+        bind "Alt s" {
+            LaunchOrFocusPlugin "session-manager" {
+                floating true
+                move_to_focused_tab true
+            }
+        }
+        bind "Alt Shift s" { Run "/Users/rickcopra/bin/zellij-sessionizer" { floating true; close_on_exit true; }; }
+        // Detach was Ctrl g -> Ctrl o -> d from locked (Ctrl o is excluded from locked,
+        // and can't be added: nvim's <C-o> is the jumplist). Costs zsh push-line.
+        bind "Alt q" { Detach; }
+        // --- scrollback ---
+        // Dumps the pane's full scrollback into $EDITOR. One keystroke from any mode,
+        // and the only way to select/yank text spanning more than one viewport.
+        bind "Alt e" { EditScrollback; }
         bind "F1" {
             MessagePlugin "compact-bar" {
                 name "toggle_tooltip"
@@ -220,16 +252,11 @@ keybinds clear-defaults=true {
         }
     }
     shared_except "locked" {
-        bind "Alt +" { Resize "Increase"; }
-        bind "Alt -" { Resize "Decrease"; }
-        bind "Alt =" { Resize "Increase"; }
+        // Alt [ / Alt ] stay out of locked on purpose: in legacy encoding Alt+[ is
+        // indistinguishable from the CSI prefix (ESC [), which is ambiguous at a shell.
         bind "Alt [" { PreviousSwapLayout; }
         bind "Alt ]" { NextSwapLayout; }
-        bind "Alt f" { ToggleFloatingPanes; }
         bind "Ctrl g" { SwitchToMode "locked"; }
-        bind "Alt i" { MoveTab "left"; }
-        bind "Alt n" { NewPane; }
-        bind "Alt o" { MoveTab "right"; }
         bind "Alt p" { TogglePaneInGroup; }
         bind "Alt Shift p" { ToggleGroupMarking; }
         bind "Ctrl q" { Quit; }
@@ -408,17 +435,17 @@ web_client {
 // Choose the theme that is specified in the themes section.
 // Default: default
 // 
-theme "catppuccin-macchiato"
- 
+theme "catppuccin-mocha"
+
 // Theme to use when the host terminal reports a dark color palette.
 // Requires `theme_light` to also be set; otherwise `theme` is used.
-// 
-// theme_dark "dracula"
- 
+//
+theme_dark "catppuccin-mocha"
+
 // Theme to use when the host terminal reports a light color palette.
 // Requires `theme_dark` to also be set; otherwise `theme` is used.
-// 
-// theme_light "solarized-light"
+//
+theme_light "catppuccin-latte"
  
 // Choose the base input mode of zellij.
 // Default: normal
