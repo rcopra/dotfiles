@@ -1,0 +1,10 @@
+#!/bin/sh
+# Delta wrapper for forgit's fzf preview. Cannot use delta's
+# --detect-dark-light there: the OSC query reply races into fzf's
+# stdin and shows up as typed input. Ask macOS for the appearance
+# instead, per invocation.
+if [ "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" = "Dark" ]; then
+  exec delta --no-gitconfig --dark "$@"
+else
+  exec delta --no-gitconfig --light "$@"
+fi
