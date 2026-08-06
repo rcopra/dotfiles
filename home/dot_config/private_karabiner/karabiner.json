@@ -366,7 +366,7 @@
                 },
                 "to": [
                   {
-                    "shell_command": "open -na Firefox"
+                    "shell_command": "nohup /Applications/Firefox.app/Contents/MacOS/firefox --new-window >/dev/null 2>&1 &"
                   }
                 ]
               },
