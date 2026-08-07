@@ -1,4 +1,12 @@
 # ==============================================================================
+# Powerlevel10k instant prompt — must stay at the very top; anything that
+# prints to the console during startup must run before this block
+# ==============================================================================
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# ==============================================================================
 # Environment Variables
 # ==============================================================================
 export LANG=en_US.UTF-8
@@ -57,6 +65,9 @@ alias ...='cd ../..'
 # Completions
 # ==============================================================================
 setopt auto_menu complete_in_word always_to_end
+# (#q...) glob qualifiers in [[ ]] (compinit check below, gh-token cache in
+# .zshrc.local) are silently treated as literal text without this
+setopt extended_glob
 fpath+=(/opt/homebrew/share/zsh/site-functions)
 autoload -Uz compinit
 # Only regenerate completion cache once per day
@@ -69,6 +80,13 @@ zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 zstyle ':completion:*' use-cache yes
 zstyle ':completion:*' cache-path ~/.cache/zsh
+
+# byte-compile the dump in the background when stale (parses ~2x faster)
+{
+  if [[ -s ~/.zcompdump && (! -s ~/.zcompdump.zwc || ~/.zcompdump -nt ~/.zcompdump.zwc) ]]; then
+    zcompile ~/.zcompdump
+  fi
+} &!
 
 # ==============================================================================
 # Key Bindings
@@ -83,10 +101,32 @@ bindkey '^[[1;5C' forward-word       # Ctrl+Right
 bindkey '^[[1;5D' backward-word      # Ctrl+Left
 
 # ==============================================================================
+# Eval cache
+# ==============================================================================
+# eval "$(tool init)" output never changes between upgrades, but spawning each
+# tool costs 10-30ms. Cache the output to a file keyed by the binary's mtime —
+# upgrades invalidate automatically. Delete ~/.cache/zsh-evalcache to force.
+_evalcache() {
+  local cmd_path=${1:c} mtime cache key
+  zmodload -F zsh/stat b:zstat 2>/dev/null
+  mtime=$(zstat +mtime -- "$cmd_path" 2>/dev/null) || mtime=0
+  # key on the full command line — flags change a tool's init output
+  key=${(j.-.)@}
+  key=${key//[^A-Za-z0-9._-]/_}
+  cache=$HOME/.cache/zsh-evalcache/$key.$mtime.zsh
+  if [[ ! -r $cache ]]; then
+    command mkdir -p $HOME/.cache/zsh-evalcache
+    command rm -f $HOME/.cache/zsh-evalcache/$key.*.zsh
+    "$@" > "$cache"
+  fi
+  source "$cache"
+}
+
+# ==============================================================================
 # Version Managers
 # ==============================================================================
 # mise: ruby + node — auto-switches on .ruby-version/.nvmrc/.node-version/.tool-versions
-command -v mise > /dev/null && eval "$(mise activate zsh)"
+command -v mise > /dev/null && _evalcache mise activate zsh
 
 # ==============================================================================
 # Plugins (brew-installed, sourced directly — no plugin manager)
@@ -128,38 +168,27 @@ if command -v eza > /dev/null; then
 fi
 
 # zoxide (smarter cd)
-command -v zoxide > /dev/null && eval "$(zoxide init zsh)" && alias cd="z"
+command -v zoxide > /dev/null && _evalcache zoxide init zsh && alias cd="z"
 
 # direnv (directory-specific environment variables)
-command -v direnv > /dev/null && eval "$(direnv hook zsh)"
+command -v direnv > /dev/null && _evalcache direnv hook zsh
 
-# Set up fzf key bindings and fuzzy completion
-source <(fzf --zsh)
+# fzf key bindings and fuzzy completion
+_evalcache fzf --zsh
 
 # ==============================================================================
-# Prompt (Starship)
+# Prompt (Powerlevel10k)
 # ==============================================================================
-command -v starship > /dev/null && eval "$(starship init zsh)"
+# Resident zsh prompt with async git (gitstatusd) — ~1-10ms command lag vs
+# ~86ms for a spawned-binary prompt. Reconfigure with `p10k configure`.
+source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
+[[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
 # ==============================================================================
 # Zellij Sessionizer
 # ==============================================================================
 # Bind Ctrl+f to zellij-sessionizer for quick project navigation
 bindkey -s '^f' '~/bin/zellij-sessionizer\n'
-
-# Zellij's light/dark detection is a terminal query (CSI 2031 / DSR 997) that can
-# lose its race and fall back to the static dark `theme`. Use `zj` instead of bare
-# `zellij` to pin the theme from macOS appearance. Same fix lives in
-# ~/bin/zellij-sessionizer for the Ctrl+f path.
-zj() {
-    local theme
-    if [[ $(defaults read -g AppleInterfaceStyle 2>/dev/null) == Dark ]]; then
-        theme=catppuccin-mocha
-    else
-        theme=catppuccin-latte
-    fi
-    zellij "$@" options --theme "$theme" --theme-light "$theme" --theme-dark "$theme"
-}
 
 # ==============================================================================
 # Aliases & Local Config

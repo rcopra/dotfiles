@@ -8,20 +8,6 @@ extra_dirs=(
     ~/.local/share/chezmoi
 )
 
-# Zellij picks theme_light/theme_dark from a runtime terminal query (CSI 2031 /
-# DSR 997), not from Ghostty's config. Launching straight out of fzf, the reply
-# often misses Zellij's wait window and it silently falls back to the static
-# `theme` (dark), giving a dark status bar in a light terminal. Resolve the theme
-# from macOS appearance instead and pass it explicitly, overriding all three
-# options so the query result can't win.
-zj_theme() {
-    if [[ $(defaults read -g AppleInterfaceStyle 2>/dev/null) == Dark ]]; then
-        echo catppuccin-mocha
-    else
-        echo catppuccin-latte
-    fi
-}
-
 if [[ $# -eq 1 ]]; then
     selected=$1
 else
@@ -39,17 +25,12 @@ fi
 # Zellij session names can't contain dots
 selected_name=$(basename "$selected" | tr . _)
 
-theme=$(zj_theme)
-theme_opts=(options --theme "$theme" --theme-light "$theme" --theme-dark "$theme")
-
-# Inside a Zellij session: `switch-session` would create the session itself, but
-# it takes no options, so a session born that way is stuck with whatever the
-# theme query resolved to. Create it detached first (which does take options),
+# Inside a Zellij session: `switch-session` would create the session itself,
+# but a session born that way inherits the wrong cwd. Create it detached first,
 # then switch to a session that already exists. A new session takes its cwd from
-# the creating process, so cd in a subshell; existing sessions ignore both the
-# cwd and the options and keep their own, which is what we want.
+# the creating process, so cd in a subshell; existing sessions keep their own.
 if [[ -n $ZELLIJ ]]; then
-    (cd "$selected" && zellij attach --create-background "$selected_name" "${theme_opts[@]}") || exit 1
+    (cd "$selected" && zellij attach --create-background "$selected_name") || exit 1
     zellij action switch-session "$selected_name"
     exit 0
 fi
@@ -57,4 +38,4 @@ fi
 # Outside Zellij: attach to the session, creating it if needed. A new session
 # inherits its cwd from the current directory, so cd there first.
 cd "$selected" || exit 1
-zellij attach --create "$selected_name" "${theme_opts[@]}"
+zellij attach --create "$selected_name"

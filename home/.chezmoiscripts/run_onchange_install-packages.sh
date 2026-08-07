@@ -31,7 +31,6 @@ brew install \
     fd \
     bat \
     jq \
-    starship \
     direnv \
     rainfrog
 
@@ -40,7 +39,8 @@ brew install \
     zsh-autosuggestions \
     zsh-syntax-highlighting \
     zsh-history-substring-search \
-    forgit
+    forgit \
+    powerlevel10k
 
 echo "==> Installing version managers..."
 # mise: ruby + node (reads .ruby-version/.nvmrc/.node-version); uv: python

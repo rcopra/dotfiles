@@ -55,7 +55,6 @@ everyday path. `⌃g ⌃t x` is only for nuking a multi-pane tab in one shot.
 | **Detach** | `⌥q` |
 | Sessionizer (shell prompt only) | `⌃f` |
 | Quit session | `⌃g ⌃q` |
-| Start with theme pinned to macOS appearance | `zj` |
 
 Session-mode plugins (`⌃g ⌃o` then): `w` session manager · `d` detach ·
 `c` configuration · `p` plugin manager · `l` layout manager · `s` share · `a` about.
@@ -208,7 +207,7 @@ Latte,dark:Catppuccin Mocha` (live switch) · `macos-option-as-alt = true` ·
 | Line start / kill to end / kill line / kill word | `⌃a` / `⌃k` / `⌃u` / `⌃w` |
 | fzf fuzzy completion | `**` then `⇥` |
 
-Sessions: `zj` (theme-pinned zellij) · `tms` pick anywhere · `tmd` dotfiles ·
+Sessions: `tms` pick anywhere · `tmd` dotfiles ·
 `tmw` ~/work · `tmp` ~/personal · `tmv` ~/.config/nvim.
 
 Dirs/files: `cd` = zoxide `z` · `zi` interactive picker · `ls la ll lla lt` eza

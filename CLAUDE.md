@@ -15,12 +15,12 @@ Workflow: edit in `home/`, then `chezmoi diff <target>` → `chezmoi apply <targ
 - **Window manager**: OmniWM (Niri-style columns) — `dot_config/omniwm/settings.toml`; all hotkeys on the Hyper-3 (⌃⌥⌘) tier, workspaces on ⌘1-9
 - **Karabiner**: Caps→Hyper-3, app launchers, ⌘⇧ move+follow synthesis — `dot_config/private_karabiner/karabiner.json`
 - **Editor**: Neovim — `~/.config/nvim` intentionally unmanaged (separate kickstart clone)
-- **Prompt**: Starship, gruvbox-rainbow preset
+- **Prompt**: Powerlevel10k (brew), config in `home/dot_p10k.zsh`; instant-prompt block sits at the very top of `dot_zshrc` — nothing above it may print to the console
 - **Keyboard**: Hillside D50 (daily) + Temper, ZMK firmware ([zmk-config](https://github.com/rcopra/zmk-config)); Hyper-3 on raised keys
 
 ## Theme
 
-Catppuccin Latte/Mocha, following macOS appearance: Ghostty via `theme = light:…,dark:…`, Zellij via `theme_light`/`theme_dark` (Zellij reads the terminal's palette at session start, so it re-themes on new sessions only). Starship is gruvbox — deliberate mismatch, not drift. No centralized switching; each config is edited individually.
+Catppuccin Macchiato everywhere, hardcoded — light/dark auto-switching was removed deliberately (Ghostty `theme = Catppuccin Macchiato`, Zellij `theme "catppuccin-macchiato"`, delta pinned `--dark`/`dark = true`). The p10k prompt keeps its own palette — deliberate mismatch, not drift. No centralized switching; each config is edited individually.
 
 ## Architecture
 
@@ -36,4 +36,4 @@ Catppuccin Latte/Mocha, following macOS appearance: Ghostty via `theme = light:�
 - **`~/.config/chezmoi/chezmoi.toml` is the live config** — edit directly with Edit tool, never sed/Bash (sed has corrupted it before)
 - **Local drift**: on `has changed since chezmoi last wrote it`, keep the local copy with `chezmoi re-add <path>`
 - **OmniWM rewrites settings.toml from its GUI** — quit OmniWM, edit, relaunch, then `chezmoi re-add`
-- **Edit/Write strip powerline glyphs** (U+E0B0, U+E0BC) — inject via Python, or let a CLI write them. For Starship, regenerate with `starship preset gruvbox-rainbow -o ~/.config/starship.toml`, then patch the palette and `chezmoi re-add`
+- **Edit/Write strip powerline glyphs** (U+E0B0, U+E0BC) — inject via Python, or let a CLI write them. Never hand-edit `~/.p10k.zsh` with Edit/Write: rerun `p10k configure` (or patch via Python), then `chezmoi re-add ~/.p10k.zsh`
