@@ -16,7 +16,7 @@ export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 export PYENV_VIRTUALENV_DISABLE_PROMPT=1
 export PYTHONBREAKPOINT=ipdb.set_trace
 
-# Node (nvm)
+# Node (fnm)
 
 # ==============================================================================
 # PATH Configuration
@@ -67,36 +67,9 @@ if type -a pyenv-virtualenv-init > /dev/null 2>&1; then
   eval "$(pyenv virtualenv-init - zsh)"
 fi
 
-# nvm - auto-switches on .nvmrc/.node-version
-export NVM_DIR="$HOME/.nvm"
-if [[ -s "/opt/homebrew/opt/nvm/nvm.sh" ]]; then
-  # Nested shells inherit an nvm PATH segment buried behind the prepends
-  # above; nvm would replace it in place, leaving brew's node shadowing it.
-  # Strip it so nvm prepends fresh at the front.
-  path=(${(@)path:#${NVM_DIR}/versions/node/*})
-  source "/opt/homebrew/opt/nvm/nvm.sh"
-
-  autoload -U add-zsh-hook
-  _nvm_auto_use() {
-    local dir version_file
-    dir="$(nvm_find_up .nvmrc)"
-    if [[ -n "$dir" ]]; then
-      version_file="$dir/.nvmrc"
-    else
-      dir="$(nvm_find_up .node-version)"
-      [[ -n "$dir" ]] && version_file="$dir/.node-version"
-    fi
-
-    if [[ -n "$version_file" ]]; then
-      local requested_version
-      requested_version="$(<"$version_file")"
-      if [[ "$(nvm version)" != "$(nvm version "$requested_version")" ]]; then
-        nvm use --silent "$requested_version"
-      fi
-    fi
-  }
-  add-zsh-hook chpwd _nvm_auto_use
-  _nvm_auto_use
+# fnm - auto-switches node on .nvmrc/.node-version via built-in use-on-cd
+if command -v fnm > /dev/null; then
+  eval "$(fnm env --use-on-cd --version-file-strategy=recursive --shell zsh)"
 fi
 
 # ==============================================================================
