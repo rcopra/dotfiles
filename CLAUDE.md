@@ -27,7 +27,8 @@ Catppuccin Latte/Mocha, following macOS appearance: Ghostty via `theme = light:�
 - **Externals** (`home/.chezmoiexternal.toml`): vim-zellij-navigator wasm plugin
 - **Packages** (`home/.chezmoiscripts/run_onchange_install-packages.sh`): Homebrew, re-runs on content change
 - **VS Code**: `~/Library/Application Support/Code/User/` symlinked to `home/vscode/` via relative paths
-- **Version managers**: rbenv, pyenv, fnm (`fnm env --use-on-cd`, reads `.nvmrc`/`.node-version` recursively; brew node stays as gemini-cli dep) — configured in shell configs
+- **Version managers**: mise for ruby + node (reads `.ruby-version`/`.nvmrc`/`.node-version`; brew node stays as gemini-cli dep), uv for python — no rbenv/pyenv/fnm/nvm
+- **Zsh plugins**: brew-installed, sourced directly in `dot_zshrc` — no zinit/OMZ; git aliases are inlined (only the handful history showed in use)
 - **Docs**: `docs/keyboard-planning.md` (ZMK keymap + WM modifier plan), `docs/cheatsheets/` — three printable sheets (`hyper`, `zellij`, `ghostty-shell`) sharing `sheet.css`, full text list in `keybinds.md`, PDFs via `make-pdfs.sh`. Each sheet must stay one landscape page; print CSS uses `zoom` to fit, so re-run `make-pdfs.sh` after adding rows
 
 ## Gotchas

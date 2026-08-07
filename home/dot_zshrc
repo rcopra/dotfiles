@@ -12,11 +12,8 @@ export MENUCONFIG_STYLE=monochrome
 export DISABLE_SPRING=true
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
 
-# Python
-export PYENV_VIRTUALENV_DISABLE_PROMPT=1
+# Python (uv manages versions/venvs/tools — no shell hook needed)
 export PYTHONBREAKPOINT=ipdb.set_trace
-
-# Node (fnm)
 
 # ==============================================================================
 # PATH Configuration
@@ -26,8 +23,6 @@ export PATH="/opt/homebrew/bin:${PATH}"
 export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
 
 # Local binaries
-export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
-export PATH="${HOME}/.rbenv/bin:${PATH}"
 export PATH="$HOME/bin:$HOME/.local/bin:$HOME/go/bin:$PATH"
 
 # Project-local binaries (Rails binstubs, node_modules)
@@ -36,9 +31,33 @@ export PATH="./bin:./node_modules/.bin:${PATH}:/usr/local/sbin"
 # Play Date SDK builder
 export PLAYDATE_SDK_PATH="$HOME/Developer/PlaydateSDK"
 export PATH="$PLAYDATE_SDK_PATH/bin:$PATH"
+
 # ==============================================================================
-# Zsh Options & Completions
+# History
 # ==============================================================================
+HISTFILE=$HOME/.zhistory
+HISTSIZE=10000
+SAVEHIST=10000
+setopt extended_history       # timestamp + duration per entry
+setopt hist_expire_dups_first
+setopt hist_ignore_dups
+setopt hist_ignore_space
+setopt hist_verify
+setopt inc_append_history
+setopt share_history
+
+# ==============================================================================
+# Directories
+# ==============================================================================
+setopt auto_cd auto_pushd pushd_ignore_dups
+alias ..='cd ..'
+alias ...='cd ../..'
+
+# ==============================================================================
+# Completions
+# ==============================================================================
+setopt auto_menu complete_in_word always_to_end
+fpath+=(/opt/homebrew/share/zsh/site-functions)
 autoload -Uz compinit
 # Only regenerate completion cache once per day
 if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
@@ -48,78 +67,52 @@ else
 fi
 zstyle ':completion:*' menu select
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+zstyle ':completion:*' use-cache yes
+zstyle ':completion:*' cache-path ~/.cache/zsh
+
+# ==============================================================================
+# Key Bindings
+# ==============================================================================
+bindkey -e                           # emacs mode
+bindkey '^[[H'    beginning-of-line  # Home
+bindkey '^[[1~'   beginning-of-line
+bindkey '^[[F'    end-of-line        # End
+bindkey '^[[4~'   end-of-line
+bindkey '^[[3~'   delete-char        # Fn+Delete
+bindkey '^[[1;5C' forward-word       # Ctrl+Right
+bindkey '^[[1;5D' backward-word      # Ctrl+Left
 
 # ==============================================================================
 # Version Managers
 # ==============================================================================
-# rbenv (Ruby)
-if type -a rbenv > /dev/null; then
-  eval "$(rbenv init - zsh)"
-fi
-
-# pyenv (Python) - shell integration
-if type -a pyenv > /dev/null; then
-  eval "$(pyenv init - zsh)"
-fi
-
-# pyenv-virtualenv (optional - auto-activates virtualenvs)
-if type -a pyenv-virtualenv-init > /dev/null 2>&1; then
-  eval "$(pyenv virtualenv-init - zsh)"
-fi
-
-# fnm - auto-switches node on .nvmrc/.node-version via built-in use-on-cd
-if command -v fnm > /dev/null; then
-  eval "$(fnm env --use-on-cd --version-file-strategy=recursive --shell zsh)"
-fi
+# mise: ruby + node — auto-switches on .ruby-version/.nvmrc/.node-version/.tool-versions
+command -v mise > /dev/null && eval "$(mise activate zsh)"
 
 # ==============================================================================
-# History (configured by OMZ lib/history.zsh)
+# Plugins (brew-installed, sourced directly — no plugin manager)
 # ==============================================================================
-# OMZ handles this, but we override a few settings
-HISTFILE=$HOME/.zhistory
-HISTSIZE=10000
-SAVEHIST=10000
-
-# ==============================================================================
-# Zinit Plugin Manager
-# ==============================================================================
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-
-# Install zinit if not present
-if [[ ! -d "$ZINIT_HOME" ]]; then
-  mkdir -p "$(dirname $ZINIT_HOME)"
-  git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-fi
-
-source "${ZINIT_HOME}/zinit.zsh"
-
-# Load OMZ library components (provides key bindings, completions, etc.)
-zinit snippet OMZL::key-bindings.zsh
-zinit snippet OMZL::completion.zsh
-zinit snippet OMZL::history.zsh
-zinit snippet OMZL::directories.zsh
-
-# OMZ plugins
-zinit snippet OMZP::git
+source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# must come after syntax-highlighting
+source /opt/homebrew/share/zsh-history-substring-search/zsh-history-substring-search.zsh
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
 
 # Forgit: use delta without side-by-side in narrow preview.
 # Wrapper picks --light/--dark from macOS appearance; delta's own
 # detection would leak the OSC query reply into fzf's input.
 export FORGIT_DIFF_PAGER="delta-forgit"
-
-# Zsh plugins (turbo mode - load after prompt renders)
-zinit wait lucid for \
-  zsh-users/zsh-autosuggestions \
-  zsh-users/zsh-history-substring-search \
-  zsh-users/zsh-syntax-highlighting \
-  wfxr/forgit
+source /opt/homebrew/share/forgit/forgit.plugin.zsh
 
 # ==============================================================================
-# Key Bindings (OMZ lib/key-bindings.zsh handles basics)
+# Git aliases (only the ones history says get used)
 # ==============================================================================
-# History substring search (up/down arrows) - bind after plugin loads
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
+alias gst='git status'
+alias ga='git add'
+alias gcmsg='git commit --message'
+alias gco='git checkout'
+alias gcb='git checkout -b'
+alias gd='git diff'
 
 # ==============================================================================
 # Modern CLI Tools
@@ -183,17 +176,3 @@ zj() {
 #   4. Keep changes: 'chezmoi add ~/.zshrc' (incorporates into dotfiles)
 #   5. Discard changes: 'chezmoi apply' (reverts to tracked version)
 [[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"
-
-# ==============================================================================
-# Try - Ephemeral workspace manager
-# ==============================================================================
-# Initialize try.rb for quick throwaway projects/experiments
-# Usage: try { code here }  # Creates temporary workspace, auto-deletes on exit
-if command -v ruby >/dev/null && [[ -f ~/.local/try.rb ]]; then
-  export TRY_PATH=~/personal/tries
-  eval "$(~/.local/try.rb init)"
-fi
-
-
-# Added by Antigravity CLI installer
-export PATH="/Users/rickcopra/.local/bin:$PATH"

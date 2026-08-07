@@ -35,8 +35,16 @@ brew install \
     direnv \
     rainfrog
 
+echo "==> Installing zsh plugins..."
+brew install \
+    zsh-autosuggestions \
+    zsh-syntax-highlighting \
+    zsh-history-substring-search \
+    forgit
+
 echo "==> Installing version managers..."
-brew install rbenv pyenv nvm
+# mise: ruby + node (reads .ruby-version/.nvmrc/.node-version); uv: python
+brew install mise uv
 
 echo "==> Installing applications..."
 # NOTE: Ghostty is installed manually (direct .app), not via brew
