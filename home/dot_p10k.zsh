@@ -50,24 +50,17 @@
     command_execution_time  # duration of the last command
     background_jobs         # presence of background jobs
     direnv                  # direnv status (https://direnv.net/)
-    asdf                    # asdf version manager (https://github.com/asdf-vm/asdf)
+    mise                    # tool versions from mise (https://mise.jdx.dev)
     virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
     anaconda                # conda environment (https://conda.io/)
-    pyenv                   # python environment (https://github.com/pyenv/pyenv)
-    goenv                   # go environment (https://github.com/syndbg/goenv)
-    nodenv                  # node.js version from nodenv (https://github.com/nodenv/nodenv)
-    nvm                     # node.js version from nvm (https://github.com/nvm-sh/nvm)
-    nodeenv                 # node.js environment (https://github.com/ekalinin/nodeenv)
     # node_version          # node.js version
-    # go_version            # go version (https://golang.org)
+    go_version              # go version (https://golang.org)
     # rust_version          # rustc version (https://www.rust-lang.org)
     # dotnet_version        # .NET version (https://dotnet.microsoft.com)
     # php_version           # php version (https://www.php.net/)
     # laravel_version       # laravel php framework version (https://laravel.com/)
     # java_version          # java version (https://www.java.com/)
     # package               # name@version from package.json (https://docs.npmjs.com/files/package.json)
-    rbenv                   # ruby version from rbenv (https://github.com/rbenv/rbenv)
-    rvm                     # ruby version from rvm (https://rvm.io)
     fvm                     # flutter version management (https://github.com/leoafarias/fvm)
     luaenv                  # lua version from luaenv (https://github.com/cehoffman/luaenv)
     jenv                    # java version from jenv (https://github.com/jenv/jenv)
@@ -1103,6 +1096,24 @@
   # typeset -g POWERLEVEL9K_PACKAGE_CONTENT_EXPANSION='${P9K_PACKAGE_NAME//\%/%%}@${P9K_PACKAGE_VERSION//\%/%%}'
   # Custom icon.
   # typeset -g POWERLEVEL9K_PACKAGE_VISUAL_IDENTIFIER_EXPANSION='⭐'
+
+  ###############[ mise: tool versions from mise (https://mise.jdx.dev) ]###############
+  # Shows tools whose version comes from a project-local config; versions set globally
+  # (~/.config/mise or ~/.tool-versions) stay hidden, matching asdf/rbenv defaults.
+  function prompt_mise() {
+    local line parts
+    for line in ${(f)"$(mise ls --current 2>/dev/null)"}; do
+      parts=(${(z)line})
+      (( $#parts >= 3 )) || continue
+      [[ $parts[3] == ('~/.config/mise/'*|'~/.tool-versions') ]] && continue
+      p10k segment -r -i "${(U)parts[1]}_ICON" -s ${(U)parts[1]} -t "$parts[2]"
+    done
+  }
+  typeset -g POWERLEVEL9K_MISE_FOREGROUND=66
+  typeset -g POWERLEVEL9K_MISE_RUBY_FOREGROUND=168
+  typeset -g POWERLEVEL9K_MISE_NODE_FOREGROUND=70
+  typeset -g POWERLEVEL9K_MISE_PYTHON_FOREGROUND=37
+  typeset -g POWERLEVEL9K_MISE_GO_FOREGROUND=37
 
   #############[ rbenv: ruby version from rbenv (https://github.com/rbenv/rbenv) ]##############
   # Rbenv color.
