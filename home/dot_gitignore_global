@@ -18,3 +18,8 @@ Thumbs.db
 # Environment/secrets
 .env.local
 .env.*.local
+
+# ripgrep/fd ignore overrides (per-repo search whitelists)
+.ignore
+.rgignore
+.fdignore
