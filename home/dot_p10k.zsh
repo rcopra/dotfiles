@@ -1039,7 +1039,7 @@
 
   #######################[ go_version: go version (https://golang.org) ]########################
   # Go version color.
-  typeset -g POWERLEVEL9K_GO_VERSION_FOREGROUND=37
+  typeset -g POWERLEVEL9K_GO_VERSION_FOREGROUND='#8bd5ca'
   # Show go version only when in a go project subdirectory.
   typeset -g POWERLEVEL9K_GO_VERSION_PROJECT_ONLY=true
   # Custom icon.
@@ -1113,7 +1113,7 @@
   typeset -g POWERLEVEL9K_MISE_RUBY_FOREGROUND=168
   typeset -g POWERLEVEL9K_MISE_NODE_FOREGROUND=70
   typeset -g POWERLEVEL9K_MISE_PYTHON_FOREGROUND=37
-  typeset -g POWERLEVEL9K_MISE_GO_FOREGROUND=37
+  typeset -g POWERLEVEL9K_MISE_GO_FOREGROUND='#8bd5ca'
 
   #############[ rbenv: ruby version from rbenv (https://github.com/rbenv/rbenv) ]##############
   # Rbenv color.
