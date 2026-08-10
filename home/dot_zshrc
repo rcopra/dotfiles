@@ -146,13 +146,10 @@ source /opt/homebrew/share/forgit/forgit.plugin.zsh
 
 # ==============================================================================
 # Git aliases (only the ones history says get used)
+# ga/gco/gcb/gd come from forgit: bare = fzf picker, with args = plain git
 # ==============================================================================
 alias gst='git status'
-alias ga='git add'
 alias gcmsg='git commit --message'
-alias gco='git checkout'
-alias gcb='git checkout -b'
-alias gd='git diff'
 
 # ==============================================================================
 # Modern CLI Tools

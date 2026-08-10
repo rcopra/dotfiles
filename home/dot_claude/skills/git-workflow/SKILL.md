@@ -66,32 +66,24 @@ Only read what's relevant. Don't read everything for a simple question.
 
 ### Layer 2: Shell (zsh)
 
-**OMZ git aliases** (most useful subset):
+**Plain aliases** (only two — no OMZ):
 - `gst` — `git status`
-- `ga` / `gaa` — `git add` / `git add --all`
-- `gc` — `git commit --verbose`
-- `gc!` — `git commit --amend`
-- `gcam "msg"` — `git commit -am "msg"`
-- `gco` — `git checkout`
-- `gcb` — `git checkout -b`
-- `gd` — `git diff`
-- `gds` — `git diff --staged`
-- `gl` — `git pull`
-- `gp` — `git push`
-- `gpf!` — `git push --force-with-lease`
-- `grb` — `git rebase`
-- `grbi` — `git rebase --interactive`
-- `grhh` — `git reset --hard HEAD`
-- `glog` — `git log --oneline --decorate --graph`
-- `gloga` — `git log --all --oneline --decorate --graph`
-- `gsta` / `gstp` — `git stash push` / `git stash pop`
+- `gcmsg "msg"` — `git commit --message`
 
-**Forgit** (interactive fzf-powered git):
-- `forgit::log` (or `glo`) — Interactive log with preview
-- `forgit::diff` (or `gd`) — Interactive diff with preview
-- `forgit::add` (or `ga`) — Interactive staging with diff preview
-- `forgit::checkout::branch` — Fuzzy branch switcher
-- `forgit::stash::show` — Browse stashes interactively
+**Forgit aliases** (full default set; bare = fzf picker with preview, with args = passthrough to plain git):
+- `ga` — interactive staging with diff preview; `ga file` = `git add file`
+- `gd` — interactive diff; `gd HEAD~1` = `git diff HEAD~1`
+- `glo` — interactive log with preview
+- `gcb` — fuzzy branch switcher; `gcb name` switches, or creates if missing
+- `gco` — checkout commit picker; `gco ref` = `git checkout ref`
+- `gcf` — checkout file (discard working changes, per-file picker)
+- `grh` — reset HEAD (unstage picker)
+- `gbd` — delete branches
+- `gsp` / `gss` — stash push / browse stashes
+- `grb` / `gfu` — interactive rebase / fixup commit picker
+- Also: `gclean`, `gcp` (cherry-pick), `grc` (revert), `gbl` (blame), `gso` (show), `gi` (gitignore)
+
+Everything else is plain `git` spelled out: `git push`, `git pull`, `git commit --amend`, `git diff --staged`.
 
 **Delta** — configured as diff pager (better diffs everywhere)
 
@@ -111,36 +103,36 @@ This is the core coaching framework. Use it to guide answers:
 | **See what changed in current file** | nvim: `<Space>hd` or `]c`/`[c` | You're already looking at the file |
 | **Stage specific hunks/lines** | nvim: `<Space>hs` (visual for lines) | Surgical precision, see context |
 | **Stage whole files selectively** | nvim: `<Space>gg` then `s` on each file | Visual feedback, toggle with `u` |
-| **Stage interactively with diff preview** | shell: `forgit::add` | Best UI for reviewing many files |
-| **Stage everything** | shell: `gaa` | Fastest, no UI needed |
-| **Quick commit** | shell: `gcam "message"` | Fastest for simple commits |
+| **Stage interactively with diff preview** | shell: `ga` (bare) | Best UI for reviewing many files |
+| **Stage everything** | shell: `git add -A` | Fastest, no UI needed |
+| **Quick commit** | shell: `git commit -am "message"` | Fastest for simple commits |
 | **Commit with review** | nvim: `<Space>gg` then `cc` | See staged changes while writing message |
-| **Amend last commit** | shell: `gc!` | Quick, no UI needed |
-| **View log** | shell: `forgit::log` | Fuzzy search + preview = best exploration |
+| **Amend last commit** | shell: `git commit --amend` | Quick, no UI needed |
+| **View log** | shell: `glo` | Fuzzy search + preview = best exploration |
 | **View file history** | nvim: `<Space>gb` (blame) | See who changed what, in context |
-| **Diff staged changes** | shell: `gds` (with delta) | Better rendering than nvim diff |
-| **Branch switching** | shell: `forgit::checkout::branch` | Fuzzy find beats typing names |
+| **Diff staged changes** | shell: `git diff --staged` (with delta) | Better rendering than nvim diff |
+| **Branch switching** | shell: `gcb` (bare) | Fuzzy find beats typing names |
 | **Create feature branch** | shell: `gcb feature-name` | One command |
-| **Rebase interactively** | shell: `grbi HEAD~n` (opens in nvim) | Git opens nvim as editor — best of both |
+| **Rebase interactively** | shell: `git rebase -i HEAD~n` (opens in nvim) | Git opens nvim as editor — best of both |
 | **Resolve merge conflicts** | nvim: `<Space>gg` then `dv` on conflicted file | Three-way diff in nvim |
 | **PR management** | shell: `gh dash` | Dashboard view, quick actions |
-| **Push** | shell: `gp` or `gpf!` | Always from shell |
+| **Push** | shell: `git push` (`--force-with-lease` when needed) | Always from shell |
 
 ## Common Coaching Scenarios
 
 | They're doing this | Suggest this |
 |---|---|
-| `git add .` then `git commit` for everything | Stage hunks selectively: `<Space>hs` in nvim or `forgit::add` in shell |
+| `git add .` then `git commit` for everything | Stage hunks selectively: `<Space>hs` in nvim or `ga` in shell |
 | Switching to terminal to run `git status` | `<Space>gg` in nvim (Fugitive) — shows status without leaving editor |
-| `git log` wall of text | `forgit::log` — fuzzy searchable with commit preview |
+| `git log` wall of text | `glo` — fuzzy searchable with commit preview |
 | `git diff` in terminal while editing | `<Space>hd` in nvim — diff the file you're already looking at |
-| Typing full branch names | `forgit::checkout::branch` — fuzzy find |
-| `git stash` and forgetting what's in there | `forgit::stash::show` — browse stashes with preview |
+| Typing full branch names | `gcb` bare — fuzzy find |
+| `git stash` and forgetting what's in there | `gss` — browse stashes with preview |
 | Manually checking GitHub for PR status | `gh dash` — everything in terminal |
-| Committing then realizing they missed a file | `gc!` (amend) after staging the missed file |
+| Committing then realizing they missed a file | `git commit --amend` after staging the missed file |
 | `git add -p` for partial staging | `<Space>hs` in nvim (visual select for line-level) — you see the actual code, not patch hunks |
 | Opening browser to create a PR | `gh pr create` — stays in terminal |
-| Losing track of changes across branches | `glog` or `forgit::log` for visual history |
+| Losing track of changes across branches | `glo` for visual history |
 
 ## Workflow Patterns to Teach
 
@@ -148,10 +140,10 @@ This is the core coaching framework. Use it to guide answers:
 For small, focused changes: `]c` to review hunks → `<Space>hs` to stage → `<Space>gg` → `cc` to commit → back to editing. Push later from shell.
 
 ### The "Review Everything" Flow
-For end-of-session commits: shell `forgit::add` to interactively review and stage → `gc` to commit with verbose diff → `gp` to push.
+For end-of-session commits: shell `ga` to interactively review and stage → `gcmsg "msg"` (or `git commit --verbose`) → `git push`.
 
 ### The "PR Workflow"
-`gcb feature-name` → work in nvim → stage/commit (either flow above) → `gp` → `gh pr create` → track with `gh dash`.
+`gcb feature-name` → work in nvim → stage/commit (either flow above) → `git push` → `gh pr create` → track with `gh dash`.
 
 ### The "Rebase Cleanup"
-`grbi HEAD~n` → nvim opens as rebase editor → squash/reword/reorder → save → resolve any conflicts with `<Space>gg` + `dv`.
+`git rebase -i HEAD~n` (or `grb` bare for fzf commit pick) → nvim opens as rebase editor → squash/reword/reorder → save → resolve any conflicts with `<Space>gg` + `dv`.
