@@ -50,8 +50,11 @@ echo "==> Installing applications..."
 # NOTE: Ghostty is installed manually (direct .app), not via brew
 # OmniWM (tiling WM) from its author's tap
 brew install --cask barutsrb/tap/omniwm
-# Karabiner: caps->Hyper-3, app launchers, workspace move+follow (installer needs sudo)
+# Karabiner: caps->Hyper-3 + option-lazy, built-in keyboard only — must ignore
+# the ZMK dongle (it reorders ZMK mod-morph HID reports). Installer needs sudo.
 brew install --cask karabiner-elements
+# Hammerspoon: hyper app launchers + OmniWM workspace move-follow (~/.hammerspoon)
+brew install --cask hammerspoon
 
 echo "==> Installing fonts..."
 brew install --cask font-jetbrains-mono-nerd-font
