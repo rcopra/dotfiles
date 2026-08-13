@@ -2,6 +2,9 @@
 # Powerlevel10k instant prompt — must stay at the very top; anything that
 # prints to the console during startup must run before this block
 # ==============================================================================
+# direnv's first sync can print (e.g. "direnv: unloading"), so it runs pre-preamble
+command -v direnv > /dev/null && emulate zsh -c "$(direnv export zsh)"
+
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
