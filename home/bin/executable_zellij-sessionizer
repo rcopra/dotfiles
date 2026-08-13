@@ -25,12 +25,53 @@ fi
 # Zellij session names can't contain dots
 selected_name=$(basename "$selected" | tr . _)
 
+# macOS has no timeout(1), and the zellij client shrugs off SIGALRM,
+# so poll the child and SIGKILL it past the deadline.
+with_deadline() {
+    local t=$1 pid i
+    shift
+    "$@" &
+    pid=$!
+    for ((i = 0; i < t * 10; i++)); do
+        kill -0 "$pid" 2>/dev/null || { wait "$pid"; return $?; }
+        sleep 0.1
+    done
+    kill -9 "$pid" 2>/dev/null
+    wait "$pid" 2>/dev/null
+    return 124
+}
+
+# One wedged session server blocks every zellij CLI command, including
+# `attach` to healthy sessions — so a completed list-sessions doubles as
+# proof that all servers respond and it is safe to attach/switch.
+sessions=$(with_deadline 3 zellij list-sessions -n 2>/dev/null)
+if (($? == 124)); then
+    echo "zellij CLI is not responding — a wedged session server blocks every zellij command." >&2
+    server_pids=$(pgrep -f 'zellij --server')
+    if [[ -n $server_pids ]]; then
+        echo "running servers (STAT 'T' = stopped):" >&2
+        ps -o pid,stat,lstart,command -p $server_pids >&2
+    fi
+    echo "kill the wedged one with: kill -9 <pid>, then retry" >&2
+    exit 1
+fi
+
+state=$(awk -v n="$selected_name" \
+    '$1 == n { print (/EXITED/ ? "exited" : "running"); exit }' <<<"$sessions")
+
 # Inside a Zellij session: `switch-session` would create the session itself,
 # but a session born that way inherits the wrong cwd. Create it detached first,
 # then switch to a session that already exists. A new session takes its cwd from
 # the creating process, so cd in a subshell; existing sessions keep their own.
+# `attach --create-background` exits 1 if the session already exists, so only
+# create when there is no session with this name.
 if [[ -n $ZELLIJ ]]; then
-    (cd "$selected" && zellij attach --create-background "$selected_name") || exit 1
+    if [[ $selected_name == "$ZELLIJ_SESSION_NAME" ]]; then
+        exit 0
+    fi
+    if [[ -z $state ]]; then
+        (cd "$selected" && zellij attach --create-background "$selected_name") || exit 1
+    fi
     zellij action switch-session "$selected_name"
     exit 0
 fi
@@ -38,4 +79,5 @@ fi
 # Outside Zellij: attach to the session, creating it if needed. A new session
 # inherits its cwd from the current directory, so cd there first.
 cd "$selected" || exit 1
-zellij attach --create "$selected_name"
+echo "attaching to zellij session '$selected_name' (${state:-new})..."
+exec zellij attach --create "$selected_name"
