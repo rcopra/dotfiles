@@ -123,7 +123,7 @@ ambiguous with the CSI prefix at a shell.
 |---|---|
 | Focus | `Caps n e u i` |
 | Move window | `⇧ Caps n e u i` |
-| Last window | `` Caps ` `` |
+| Last window | `⌥ Tab` |
 | Column in / out | `Caps ← →` |
 | Reorder within column | `Caps ↑ ↓` |
 | Move column | `Caps [ ]` |

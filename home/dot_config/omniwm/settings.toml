@@ -341,7 +341,7 @@ binding = "Control+Option+Command+I"
 id = "focus.right"
 
 [[hotkeys]]
-binding = "Control+Option+Command+Grave"
+binding = "Option+Tab"
 id = "focusPrevious"
 
 [[hotkeys]]
