@@ -1,6 +1,5 @@
 monitorBarOverrides = []
 monitorDwindleOverrides = []
-monitorGapOverrides = []
 monitorNiriOverrides = []
 monitorOrientationOverrides = []
 monitorRoutingOverrides = []
@@ -41,13 +40,13 @@ moveCrossesMonitorAtEdge = false
 moveMouseToFocusedWindow = false
 
 [gaps]
-size = 16.0
+size = 6.0
 
 [gaps.outer]
-bottom = 8.0
-left = 16.0
-right = 16.0
-top = 8.0
+bottom = 6.0
+left = 6.0
+right = 6.0
+top = 6.0
 
 [general]
 animationsEnabled = true
@@ -161,6 +160,17 @@ xOffset = 0.0
 yOffset = 0.0
 
 [workspaceBar.iconOverrides]
+
+[[monitorGapOverrides]]
+id = "4C5F63BF-2714-4F26-A791-BA1093ADDF17"
+monitorName = "BenQ MA270S"
+monitorDisplayUUID = "18E18DD1-CD92-4F1B-9FE2-C2B2B16DFCA2"
+monitorDisplayId = 3
+innerGap = 10.0
+outerGapLeft = 10.0
+outerGapRight = 10.0
+outerGapTop = 8.0
+outerGapBottom = 8.0
 
 [[appRules]]
 bundleId = "com.openai.codex"
