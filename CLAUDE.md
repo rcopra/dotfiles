@@ -24,7 +24,7 @@ Catppuccin Macchiato everywhere, hardcoded — light/dark auto-switching was rem
 
 ## Architecture
 
-- **Externals** (`home/.chezmoiexternal.toml`): vim-zellij-navigator wasm plugin
+- **Zellij plugin**: vim-zellij-navigator wasm vendored at `home/dot_config/zellij/plugins/` — local build of upstream PR #35 (fixes double-move from orphaned plugin instances after client detach); drop back to a release URL in `.chezmoiexternal.toml` once upstream ships the fix
 - **Packages** (`home/.chezmoiscripts/run_onchange_install-packages.sh`): Homebrew, re-runs on content change
 - **VS Code**: `~/Library/Application Support/Code/User/` symlinked to `home/vscode/` via relative paths
 - **Version managers**: mise for ruby + node (reads `.ruby-version`/`.nvmrc`/`.node-version`; brew node stays as gemini-cli dep), uv for python — no rbenv/pyenv/fnm/nvm
