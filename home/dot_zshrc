@@ -102,6 +102,8 @@ bindkey '^[[4~'   end-of-line
 bindkey '^[[3~'   delete-char        # Fn+Delete
 bindkey '^[[1;5C' forward-word       # Ctrl+Right
 bindkey '^[[1;5D' backward-word      # Ctrl+Left
+bindkey '^[w'     forward-word       # Alt+w = Alt+f; adjacent on Colemak, fat-finger safe
+bindkey '^[W'     forward-word
 
 # ==============================================================================
 # Eval cache

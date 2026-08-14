@@ -195,14 +195,15 @@ keybinds clear-defaults=true {
     // including locked (default_mode). No key here collides with a mode-specific
     // bind, so precedence never comes into play.
     //
-    // Alt f and Alt d are deliberately NOT used: they shadow zsh forward-word and
-    // kill-word. The shifted variants keep the mnemonic without the cost.
+    // Alt f, Alt d and Alt w are deliberately NOT used: they shadow zsh forward-word,
+    // kill-word, and the Alt w = forward-word alias (w neighbors f on Colemak).
+    // The shifted variants keep the mnemonic without the cost.
     shared {
         // --- pane ---
         bind "Alt n" { NewPane; }
         bind "Alt Shift r" { NewPane "right"; }
         bind "Alt Shift d" { NewPane "down"; }
-        bind "Alt w" { CloseFocus; }
+        bind "Alt Shift w" { CloseFocus; }
         bind "Alt z" { ToggleFocusFullscreen; }
         bind "Alt Shift f" { ToggleFloatingPanes; }
         bind "Alt Shift e" { TogglePaneEmbedOrFloating; }
