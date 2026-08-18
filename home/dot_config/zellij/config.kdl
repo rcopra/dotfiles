@@ -235,7 +235,7 @@ keybinds clear-defaults=true {
                 move_to_focused_tab true
             }
         }
-        bind "Alt Shift s" { Run "/Users/rickcopra/bin/zellij-sessionizer" { floating true; close_on_exit true; }; }
+        bind "Alt Shift s" { Run "zellij-sessionizer" { floating true; close_on_exit true; }; }
         // Detach was Ctrl g -> Ctrl o -> d from locked (Ctrl o is excluded from locked,
         // and can't be added: nvim's <C-o> is the jumplist). Costs zsh push-line.
         bind "Alt q" { Detach; }
