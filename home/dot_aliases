@@ -8,9 +8,9 @@ alias serve='ruby -run -e httpd . -p 8000' # Or python -m SimpleHTTPServer :)
 # NOTE: On Q3 2021, Le Wagon decided to change the Web Dev curriculum default text editor
 alias stt="echo 'Launching VS Code instead of Sublime Text... (cf ~/.aliases)' && code ."
 
-# Zellij sessionizer shortcuts
-alias tms="~/bin/zellij-sessionizer"
-alias tmd="~/bin/zellij-sessionizer ~/.local/share/chezmoi/home"
-alias tmw="~/bin/zellij-sessionizer ~/work"
-alias tmp="~/bin/zellij-sessionizer ~/personal"
-alias tmv="~/bin/zellij-sessionizer ~/.config/nvim"
+# Herdr sessionizer shortcuts (names retained for muscle memory)
+alias tms="~/bin/herdr-sessionizer"
+alias tmd="~/bin/herdr-sessionizer ~/.local/share/chezmoi/home"
+alias tmw="~/bin/herdr-sessionizer ~/work"
+alias tmp="~/bin/herdr-sessionizer ~/personal"
+alias tmv="~/bin/herdr-sessionizer ~/.config/nvim"

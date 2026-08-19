@@ -1,0 +1,120 @@
+#!/usr/bin/env bash
+# ThePrimeagen-style project picker, adapted for Herdr workspaces.
+
+extra_dirs=(
+    ~/.config/nvim
+    ~/.local/share/chezmoi
+)
+
+if [[ $# -eq 1 ]]; then
+    selected=$1
+else
+    selected=$({
+        find ~/work ~/personal -mindepth 1 -maxdepth 1 -type d 2>/dev/null
+        printf '%s\n' "${extra_dirs[@]}"
+    } | fzf)
+fi
+
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+# Normalize the path so restored workspaces and symlinked picker entries match.
+selected=$(cd "$selected" 2>/dev/null && pwd -P) || {
+    echo "not a directory: $selected" >&2
+    exit 1
+}
+selected_name=$(basename "$selected")
+
+herdr_bin=${HERDR_BIN_PATH:-}
+if [[ -z $herdr_bin ]]; then
+    herdr_bin=$(command -v herdr)
+fi
+if [[ -z $herdr_bin ]]; then
+    echo "herdr is not installed or not on PATH" >&2
+    exit 1
+fi
+if ! command -v jq >/dev/null 2>&1; then
+    echo "jq is required by herdr-sessionizer" >&2
+    exit 1
+fi
+
+snapshot_session() {
+    "$herdr_bin" api snapshot 2>/dev/null
+}
+
+find_workspace() {
+    jq -r --arg path "$selected" '
+        .result.snapshot as $snapshot
+        | [
+            $snapshot.workspaces[] as $workspace
+            | select(
+                $workspace.tokens.sessionizer_path? == $path
+                or $workspace.worktree.checkout_path? == $path
+                or $workspace.worktree.repo_root? == $path
+                or any(
+                    $snapshot.panes[]?;
+                    .workspace_id == $workspace.workspace_id
+                    and (.cwd == $path or .foreground_cwd == $path)
+                )
+            )
+            | $workspace.workspace_id
+        ][0] // empty
+    '
+}
+
+remember_workspace_path() {
+    local workspace_id=$1
+    "$herdr_bin" workspace report-metadata "$workspace_id" \
+        --source sessionizer \
+        --token "sessionizer_path=$selected" >/dev/null 2>&1 || true
+}
+
+focus_or_create_workspace() {
+    local snapshot=$1 workspace_id created
+
+    workspace_id=$(find_workspace <<<"$snapshot") || return 1
+    if [[ -n $workspace_id ]]; then
+        "$herdr_bin" workspace focus "$workspace_id" >/dev/null || return 1
+        remember_workspace_path "$workspace_id"
+        return 0
+    fi
+
+    created=$("$herdr_bin" workspace create \
+        --cwd "$selected" \
+        --label "$selected_name" \
+        --focus) || return 1
+    workspace_id=$(jq -r '.result.workspace.workspace_id // empty' <<<"$created")
+    if [[ -n $workspace_id ]]; then
+        remember_workspace_path "$workspace_id"
+    fi
+}
+
+# Inside a Herdr pane or custom-command popup, the injected binary/socket
+# context targets this exact session. Outside Herdr, target the default session
+# and attach after selecting a project.
+snapshot=$(snapshot_session)
+if [[ -z $snapshot ]]; then
+    # Start the persistent server in the selected directory. This also makes the
+    # first automatically-created workspace open in the requested project.
+    (cd "$selected" && nohup "$herdr_bin" server </dev/null >/dev/null 2>&1) &
+    server_pid=$!
+    for ((attempt = 0; attempt < 50; attempt++)); do
+        snapshot=$(snapshot_session)
+        [[ -n $snapshot ]] && break
+        kill -0 "$server_pid" 2>/dev/null || break
+        sleep 0.1
+    done
+fi
+
+if [[ -z $snapshot ]]; then
+    echo "herdr server did not become ready" >&2
+    exit 1
+fi
+
+focus_or_create_workspace "$snapshot" || exit 1
+
+if [[ ${HERDR_ENV:-} != 1 && -z ${HERDR_SOCKET_PATH:-} ]]; then
+    cd "$selected" || exit 1
+    exec "$herdr_bin"
+fi

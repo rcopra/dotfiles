@@ -1,0 +1,132 @@
+# Herdr keymap: preserve the direct Option-key workflow from the old Zellij
+# config, with the tmux-shaped prefix bindings retained as fallbacks.
+
+[keys]
+prefix = "ctrl+a"
+
+# Session/workspace navigation. Zellij's session manager maps most closely to
+# Herdr's workspace picker.
+detach = ["alt+q", "prefix+d", "prefix+q"]
+workspace_picker = ["alt+s", "prefix+s"]
+goto = ["prefix+w", "prefix+g"]
+settings = "prefix+shift+s"
+
+# Tabs. These direct bindings match the old Zellij shared keymap.
+new_tab = ["alt+t", "prefix+c"]
+rename_tab = ["alt+shift+t", "prefix+comma", "prefix+shift+t"]
+previous_tab = ["alt+shift+left", "prefix+p"]
+next_tab = ["alt+shift+right", "prefix+n"]
+move_tab_previous = "alt+i"
+move_tab_next = "alt+o"
+switch_tab = ["alt+1..9", "prefix+1..9"]
+close_tab = ["prefix+ampersand", "prefix+shift+x"]
+
+# Panes. Herdr has no direction-neutral NewPane action, so Alt+n uses the same
+# right-hand split as Zellij's explicit Alt+Shift+r binding.
+split_vertical = ["alt+n", "alt+shift+r", "prefix+shift+backslash"]
+split_horizontal = ["alt+shift+d", "prefix+minus"]
+cycle_pane_next = "prefix+o"
+last_pane = "prefix+semicolon"
+close_pane = ["alt+shift+w", "prefix+x"]
+zoom = ["alt+z", "prefix+m", "prefix+z"]
+edit_scrollback = ["alt+e", "prefix+e"]
+
+# Match tmux's prefix+arrow resizing. Herdr's resize mode remains available on
+# Shift-r for longer adjustments.
+resize_pane_left = "prefix+left"
+resize_pane_down = "prefix+down"
+resize_pane_up = "prefix+up"
+resize_pane_right = "prefix+right"
+resize_mode = "prefix+shift+r"
+reload_config = "prefix+r"
+
+# Seamless pane navigation. The Herdr plugin forwards these chords into Neovim
+# while an inner split is available, then crosses the pane boundary at an edge.
+[[keys.command]]
+key = "alt+left"
+type = "plugin_action"
+command = "herdr-splits.nav-left"
+description = "navigate left across Neovim and Herdr"
+
+[[keys.command]]
+key = "alt+down"
+type = "plugin_action"
+command = "herdr-splits.nav-down"
+description = "navigate down across Neovim and Herdr"
+
+[[keys.command]]
+key = "alt+up"
+type = "plugin_action"
+command = "herdr-splits.nav-up"
+description = "navigate up across Neovim and Herdr"
+
+[[keys.command]]
+key = "alt+right"
+type = "plugin_action"
+command = "herdr-splits.nav-right"
+description = "navigate right across Neovim and Herdr"
+
+# The old Zellij sessionizer binding creates or focuses Herdr workspaces.
+[[keys.command]]
+key = "alt+shift+s"
+type = "popup"
+command = "\"$HOME/bin/herdr-sessionizer\""
+description = "project workspace picker"
+width = "80%"
+height = "60%"
+
+# Keep the former tmux sessionizer binding as a fallback.
+[[keys.command]]
+key = "prefix+f"
+type = "popup"
+command = "\"$HOME/bin/herdr-sessionizer\""
+description = "project workspace picker"
+width = "80%"
+height = "60%"
+
+[[keys.command]]
+key = "prefix+ctrl+d"
+type = "popup"
+command = "\"$HOME/bin/herdr-sessionizer\" \"$HOME/.local/share/chezmoi/home\""
+description = "open dotfiles workspace"
+width = "80%"
+height = "60%"
+
+[[keys.command]]
+key = "prefix+ctrl+n"
+type = "popup"
+command = "\"$HOME/bin/herdr-sessionizer\" \"$HOME/.config/nvim\""
+description = "open Neovim workspace"
+width = "80%"
+height = "60%"
+
+[[keys.command]]
+key = "prefix+ctrl+w"
+type = "popup"
+command = "\"$HOME/bin/herdr-sessionizer\" \"$HOME/work\""
+description = "open work workspace"
+width = "80%"
+height = "60%"
+
+[[keys.command]]
+key = "prefix+ctrl+p"
+type = "popup"
+command = "\"$HOME/bin/herdr-sessionizer\" \"$HOME/personal\""
+description = "open personal workspace"
+width = "80%"
+height = "60%"
+
+[[keys.command]]
+key = "prefix+ctrl+s"
+type = "popup"
+command = "\"$HOME/bin/herdr-sessionizer\" \"$HOME/personal/ssh\""
+description = "open SSH workspace"
+width = "80%"
+height = "60%"
+
+[ui]
+sidebar_collapsed_mode ="hidden"
+show_agent_labels_on_pane_borders = true
+agent_panel_sort = "spaces"
+# Match Zellij's immediate NewTab behavior; Alt+Shift+t handles renaming.
+prompt_new_tab_name = false
