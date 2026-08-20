@@ -144,3 +144,11 @@ rows = [
   ["state_icon", "workspace", "tab"],
   ["terminal_title_stripped"],
 ]
+
+# Herdr draws tab bar entries in the active theme's colors; they carry no styling.
+[[ui.tab_bar_right]]
+type = "zoom"
+
+[[ui.tab_bar_right]]
+type = "datetime"
+format = "%H:%M"
