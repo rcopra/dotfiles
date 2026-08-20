@@ -25,6 +25,12 @@ move_tab_next = "alt+o"
 switch_tab = ["alt+1..9", "prefix+1..9"]
 close_tab = ["prefix+ampersand", "prefix+shift+x"]
 
+# Agents. Vertical axis mirrors the tabs' alt+shift+left/right, matching the
+# sidebar list direction and staying clear of the unshifted alt+arrow nvim nav.
+previous_agent = ["alt+shift+up", "prefix+["]
+next_agent = ["alt+shift+down", "prefix+]"]
+focus_agent = "prefix+alt+1..9"
+
 # Panes. Herdr has no direction-neutral NewPane action, so Alt+n uses the same
 # right-hand split as Zellij's explicit Alt+Shift+r binding.
 split_vertical = ["alt+n", "alt+shift+r", "prefix+shift+backslash"]
