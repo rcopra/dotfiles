@@ -23,7 +23,6 @@ fi
 echo "==> Installing CLI tools..."
 brew install \
     git \
-    zellij \
     fzf \
     eza \
     zoxide \
@@ -48,6 +47,9 @@ brew install mise uv
 
 echo "==> Installing applications..."
 # NOTE: Ghostty is installed manually (direct .app), not via brew
+# NOTE: Herdr (terminal multiplexer, replaced Zellij) is installed by
+# run_onchange_after_install-herdr.sh — it ships its own updater and installs to
+# ~/.local/bin, which precedes Homebrew on PATH.
 # OmniWM (tiling WM) from its author's tap
 brew install --cask barutsrb/tap/omniwm
 # Karabiner: caps->Hyper-3 + option-lazy, built-in keyboard only — must ignore

@@ -72,6 +72,8 @@ setopt auto_menu complete_in_word always_to_end
 # .zshrc.local) are silently treated as literal text without this
 setopt extended_glob
 fpath+=(/opt/homebrew/share/zsh/site-functions)
+# Completions for tools installed outside Homebrew (herdr)
+fpath+=("${XDG_DATA_HOME:-$HOME/.local/share}/zsh/site-functions")
 autoload -Uz compinit
 # Only regenerate completion cache once per day
 if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then

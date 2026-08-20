@@ -1,0 +1,43 @@
+#!/bin/bash
+# vim: set ft=bash:
+
+set -euo pipefail
+
+# Hashing the config in makes chezmoi re-run this script whenever the keymap
+# changes, so a newly referenced plugin action is installed and the running
+# server reloads.
+# config.toml hash: {{ include "dot_config/herdr/config.toml" | sha256sum }}
+
+if [[ "$(uname)" != "Darwin" ]]; then
+    echo "==> Skipping Herdr setup (not macOS)"
+    exit 0
+fi
+
+export PATH="$HOME/.local/bin:$PATH"
+
+if ! command -v herdr &> /dev/null; then
+    echo "==> Installing Herdr..."
+    curl -fsSL https://herdr.dev/install.sh | sh
+fi
+
+echo "==> Installing Herdr plugins..."
+# herdr-splits backs the herdr-splits.nav-* plugin_action bindings in
+# config.toml. Without it Alt+arrow navigation silently does nothing.
+# Capture before matching: `grep -q` exits on its first hit, and the SIGPIPE
+# that sends back through a pipe reads as failure under `pipefail`.
+installed_plugins=$(herdr plugin list)
+if ! grep -q '^- herdr-splits ' <<<"$installed_plugins"; then
+    herdr plugin install lmilojevicc/herdr-splits.nvim --yes
+fi
+
+echo "==> Installing Herdr zsh completions..."
+completions_dir="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/site-functions"
+mkdir -p "$completions_dir"
+herdr completion zsh > "$completions_dir/_herdr"
+
+if herdr status server &> /dev/null; then
+    echo "==> Reloading Herdr config..."
+    herdr server reload-config
+fi
+
+echo "==> Herdr setup complete!"

@@ -8,6 +8,6 @@ macos-option-as-alt = true
 # Exiting the last shell quits the instance — no windowless zombie apps in dock/cmd-tab
 quit-after-last-window-closed = true
 
-# Drop Ghostty's default alt+arrow_left/right=esc:b/f word-motion so Option+arrows send real Alt+arrow CSI for Zellij/nvim nav
+# Drop Ghostty's default alt+arrow_left/right=esc:b/f word-motion so Option+arrows send real Alt+arrow CSI for Herdr/nvim nav
 keybind = option+left=unbind
 keybind = option+right=unbind

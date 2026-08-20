@@ -1,0 +1,5 @@
+# Removed by the Zellij -> Herdr migration. Deleting the source files leaves
+# already-deployed copies behind on every other machine; these entries clean
+# them up on the next apply.
+.config/zellij
+bin/zellij-sessionizer

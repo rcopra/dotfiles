@@ -4,11 +4,12 @@
 [keys]
 prefix = "ctrl+a"
 
-# Session/workspace navigation. Zellij's session manager maps most closely to
-# Herdr's workspace picker.
+# Session/workspace navigation. Alt+s opens the session navigator, the surface
+# closest to the Zellij session-manager it used to open floating; the narrower
+# workspace picker keeps the prefix binding.
 detach = ["alt+q", "prefix+d", "prefix+q"]
-workspace_picker = ["alt+s", "prefix+s"]
-goto = ["prefix+w", "prefix+g"]
+goto = ["alt+s", "prefix+w", "prefix+g"]
+workspace_picker = "prefix+s"
 settings = "prefix+shift+s"
 
 # Tabs. These direct bindings match the old Zellij shared keymap.
