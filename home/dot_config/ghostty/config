@@ -17,3 +17,9 @@ keybind = option+right=unbind
 # Left/right stay on goto_split — nothing needs them yet.
 keybind = super+alt+arrow_up=unbind
 keybind = super+alt+arrow_down=unbind
+
+# Drop Ghostty's cmd+d/cmd+shift+d=new_split so the pair reaches Herdr's own
+# split_vertical/split_horizontal. Global, so bare Ghostty windows lose their
+# splits too — fine when every window hosts a Herdr session.
+keybind = super+d=unbind
+keybind = super+shift+d=unbind

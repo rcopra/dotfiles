@@ -42,10 +42,14 @@ previous_agent = ["alt+shift+up", "prefix+["]
 next_agent = ["alt+shift+down", "prefix+]"]
 focus_agent = "prefix+alt+1..9"
 
-# Panes. Herdr has no direction-neutral NewPane action, so Alt+n uses the same
-# right-hand split as Zellij's explicit Alt+Shift+r binding.
-split_vertical = ["alt+n", "alt+shift+r", "prefix+shift+backslash"]
-split_horizontal = ["alt+shift+d", "prefix+minus"]
+# Panes. Cmd+d/cmd+shift+d carry Ghostty's split rule — one letter, shift picks
+# the axis — so they lead; the Zellij-inherited alt+n/alt+shift+d stay as aliases
+# despite encoding no such rule. Ghostty's super+d/super+shift+d=new_split are
+# unbound in its config so these reach Herdr, which owns pane layout here. Herdr
+# has no direction-neutral NewPane action, so alt+n splits right like Zellij's
+# explicit alt+shift+r.
+split_vertical = ["cmd+d", "alt+n", "alt+shift+r", "prefix+shift+backslash"]
+split_horizontal = ["cmd+shift+d", "alt+shift+d", "prefix+minus"]
 cycle_pane_next = "prefix+o"
 last_pane = "prefix+semicolon"
 close_pane = ["alt+shift+w", "prefix+x"]
@@ -149,8 +153,14 @@ height = "60%"
 sidebar_collapsed_mode ="hidden"
 show_agent_labels_on_pane_borders = true
 agent_panel_sort = "spaces"
-# Match Zellij's immediate NewTab behavior; Alt+Shift+t handles renaming.
 prompt_new_tab_name = false
+hide_tab_bar_when_single_tab = true
+
+# tmux/zellij-style splitting: one shared line between panes, no frame around the
+# outside. pane_borders stays on — the shared divider is drawn from it, and the
+# agent labels below ride on it.
+pane_outer_borders = false
+pane_gaps = false
 
 # The agent row was a constant "claude" on every entry. Claude Code publishes a
 # summary of what it is working on as its OSC terminal title, which Herdr tracks
