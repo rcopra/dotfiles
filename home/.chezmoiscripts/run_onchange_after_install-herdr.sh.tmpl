@@ -21,14 +21,24 @@ if ! command -v herdr &> /dev/null; then
 fi
 
 echo "==> Installing Herdr plugins..."
+# Capture before matching: `grep -q` exits on its first hit, and the SIGPIPE
+# that sends back through a pipe reads as failure under `pipefail`. Comparing
+# awk fields also keeps a dotted plugin id from being read as a regex.
+installed_plugins=$(herdr plugin list)
+plugin_installed() {
+    awk -v id="$1" '$1 == "-" && $2 == id { found = 1 } END { exit !found }' <<<"$installed_plugins"
+}
+
 # herdr-splits backs the herdr-splits.nav-* plugin_action bindings in
 # config.toml. Without it Alt+arrow navigation silently does nothing.
-# Capture before matching: `grep -q` exits on its first hit, and the SIGPIPE
-# that sends back through a pipe reads as failure under `pipefail`.
-installed_plugins=$(herdr plugin list)
-if ! grep -q '^- herdr-splits ' <<<"$installed_plugins"; then
+plugin_installed herdr-splits ||
     herdr plugin install lmilojevicc/herdr-splits.nvim --yes
-fi
+
+# Herdr has no built-in tab naming, so tabs stay "1", "2". This names each agent
+# pane, and its tab, after the topic the agent publishes as its terminal title.
+# Needs bun, which run_onchange_install-packages.sh installs first.
+plugin_installed dan.pane-topic-sync ||
+    herdr plugin install danbuhler/herdr-pane-topic-sync --yes
 
 echo "==> Installing Herdr zsh completions..."
 completions_dir="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/site-functions"
