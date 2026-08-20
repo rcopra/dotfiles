@@ -11,3 +11,9 @@ quit-after-last-window-closed = true
 # Drop Ghostty's default alt+arrow_left/right=esc:b/f word-motion so Option+arrows send real Alt+arrow CSI for Herdr/nvim nav
 keybind = option+left=unbind
 keybind = option+right=unbind
+
+# Drop Ghostty's cmd+alt+arrow_up/down=goto_split so the chord reaches Herdr for
+# workspace stepping. Herdr owns pane layout here, so Ghostty's own splits are unused.
+# Left/right stay on goto_split — nothing needs them yet.
+keybind = super+alt+arrow_up=unbind
+keybind = super+alt+arrow_down=unbind

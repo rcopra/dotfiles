@@ -15,6 +15,17 @@ goto = ["alt+s", "prefix+w", "prefix+g"]
 workspace_picker = "prefix+s"
 settings = "prefix+shift+s"
 
+# Stepping between workspaces is unbound in Herdr's defaults, not just unset
+# here, so without these the picker is the only way across. Vertical axis
+# matches the sidebar list direction and Herdr's own navigate_workspace_up/down;
+# against alt+shift's agent stepping the heavier modifier reads as the coarser
+# jump on the same axis. Cmd is listed first for the macOS-native reach; ctrl+alt
+# stays as the portable fallback, since cmd does not survive `herdr --remote` to a
+# Linux server. Ghostty's cmd+alt+arrow_up/down=goto_split is unbound in its config
+# so these reach Herdr at all.
+previous_workspace = ["cmd+alt+up", "ctrl+alt+up"]
+next_workspace = ["cmd+alt+down", "ctrl+alt+down"]
+
 # Tabs. These direct bindings match the old Zellij shared keymap.
 new_tab = ["alt+t", "prefix+c"]
 rename_tab = ["alt+shift+t", "prefix+comma", "prefix+shift+t"]
