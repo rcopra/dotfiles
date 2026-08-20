@@ -1,3 +1,6 @@
+# Herdr writes this key itself, so chezmoi has to own it or they fight.
+onboarding = false
+
 # Herdr keymap: preserve the direct Option-key workflow from the old Zellij
 # config, with the tmux-shaped prefix bindings retained as fallbacks.
 
