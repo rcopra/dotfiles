@@ -1,10 +1,6 @@
 #!/bin/sh
-# Delta wrapper for forgit's fzf preview. Cannot use delta's terminal
-# background query here: the reply races into fzf's stdin and shows up
-# as typed input. Read macOS appearance instead — Ghostty's
-# theme = dark:...,light:... follows the same signal.
-case "$(defaults read -g AppleInterfaceStyle 2>/dev/null)" in
-  Dark) mode=--dark ;;
-  *)    mode=--light ;;
-esac
-exec delta --no-gitconfig --detect-dark-light=never "$mode" "$@"
+# Delta wrapper for forgit's fzf preview. Cannot use delta's
+# --detect-dark-light here: the OSC query reply races into fzf's
+# stdin and shows up as typed input. Theme is always Catppuccin
+# Mocha now, so pin dark.
+exec delta --no-gitconfig --dark "$@"

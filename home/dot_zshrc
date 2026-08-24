@@ -146,7 +146,7 @@ bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 
 # Forgit: use delta without side-by-side in narrow preview.
-# Wrapper picks --light/--dark from macOS appearance; delta's own
+# Wrapper pins --dark (theme is always Catppuccin Mocha); delta's own
 # detection would leak the OSC query reply into fzf's input.
 export FORGIT_DIFF_PAGER="delta-forgit"
 source /opt/homebrew/share/forgit/forgit.plugin.zsh

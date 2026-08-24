@@ -20,6 +20,7 @@
 [delta]
     navigate = true
     side-by-side = true
+    dark = true
 
 [delta "inline"]
     side-by-side = false
