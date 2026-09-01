@@ -34,11 +34,9 @@ plugin_installed() {
 plugin_installed herdr-splits ||
     herdr plugin install lmilojevicc/herdr-splits.nvim --yes
 
-# Herdr has no built-in tab naming, so tabs stay "1", "2". This names each agent
-# pane, and its tab, after the topic the agent publishes as its terminal title.
-# Needs bun, which run_onchange_install-packages.sh installs first.
-plugin_installed dan.pane-topic-sync ||
-    herdr plugin install danbuhler/herdr-pane-topic-sync --yes
+# Native tab names replace pane-topic-sync's event-driven Bun processes.
+plugin_installed dan.pane-topic-sync &&
+    herdr plugin uninstall dan.pane-topic-sync
 
 echo "==> Installing Herdr zsh completions..."
 completions_dir="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/site-functions"

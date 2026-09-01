@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:www.chezmoi.io)",
+      "WebFetch(domain:ohmyposh.dev)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(aerospace list-windows:*)",
+      "Bash(aerospace list-workspaces:*)"
+    ]
+  }
+}

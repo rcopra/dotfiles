@@ -31,10 +31,7 @@ brew install \
     bat \
     jq \
     direnv \
-    rainfrog \
-    bun
-
-# bun runs the dan.pane-topic-sync Herdr plugin's event commands.
+    rainfrog
 
 echo "==> Installing zsh plugins..."
 brew install \
