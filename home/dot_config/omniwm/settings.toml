@@ -2,6 +2,7 @@ monitorDwindleOverrides = []
 monitorNiriOverrides = []
 monitorOrientationOverrides = []
 monitorRoutingOverrides = []
+schemaVersion = 1
 
 [appearance]
 mode = "dark"
@@ -37,8 +38,10 @@ followsWindowToMonitor = true
 lockModifier = "off"
 moveCrossesMonitorAtEdge = false
 moveMouseToFocusedWindow = false
+raiseOnMouseFocus = true
 
 [gaps]
+fullscreenUsesOuterGaps = false
 size = 6.0
 
 [gaps.outer]
@@ -133,6 +136,10 @@ widthPercent = 38.0
 [routing]
 mode = "macOS"
 
+[scratchpads]
+
+[scratchpads.labels]
+
 [statusBar]
 showAppNames = false
 showWorkspaceName = true
@@ -145,6 +152,7 @@ enabled = true
 excludedBundleIDs = []
 height = 24.0
 hideEmptyWorkspaces = false
+hideInNativeFullscreen = false
 notchActiveZoneWidth = 180.0
 notchMode = "off"
 position = "overlappingMenuBar"
@@ -159,13 +167,6 @@ xOffset = 0.0
 yOffset = 0.0
 
 [workspaceBar.iconOverrides]
-
-[[monitorBarOverrides]]
-id = "C2AA2943-73D3-49C2-9C31-EB0E8CBEA186"
-monitorName = "Built-in Retina Display"
-monitorDisplayUUID = "37D8832A-2D66-02CA-B9F7-8F30A301B230"
-monitorDisplayId = 1
-enabled = false
 
 [[appRules]]
 bundleId = "com.openai.codex"
@@ -255,6 +256,86 @@ id = "C35C0970-48FE-4FDB-B236-B1E222E244AC"
 assignToWorkspace = "6"
 bundleId = "md.obsidian"
 id = "964A6CAD-6BD6-4CF9-AA8D-000F7E443567"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "toggleScratchpad.1"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "assignFocusedWindowToScratchpad.1"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "toggleScratchpad.2"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "assignFocusedWindowToScratchpad.2"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "toggleScratchpad.3"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "assignFocusedWindowToScratchpad.3"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "toggleScratchpad.4"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "assignFocusedWindowToScratchpad.4"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "toggleScratchpad.5"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "assignFocusedWindowToScratchpad.5"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "toggleScratchpad.6"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "assignFocusedWindowToScratchpad.6"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "toggleScratchpad.7"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "assignFocusedWindowToScratchpad.7"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "toggleScratchpad.8"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "assignFocusedWindowToScratchpad.8"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "toggleScratchpad.9"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "assignFocusedWindowToScratchpad.9"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "toggleScratchpad.10"
+
+[[hotkeys]]
+binding = "Unassigned"
+id = "assignFocusedWindowToScratchpad.10"
 
 [[hotkeys]]
 binding = "Left Command+1"
@@ -483,14 +564,6 @@ id = "moveWindowDownOrToWorkspaceDown"
 [[hotkeys]]
 binding = "Unassigned"
 id = "moveWindowUpOrToWorkspaceUp"
-
-[[hotkeys]]
-binding = "Control+Option+Command+Left Arrow"
-id = "consumeOrExpelWindowLeft"
-
-[[hotkeys]]
-binding = "Control+Option+Command+Right Arrow"
-id = "consumeOrExpelWindowRight"
 
 [[hotkeys]]
 binding = "Unassigned"
@@ -833,14 +906,6 @@ binding = "Control+Option+Command+V"
 id = "toggleFocusedWindowFloating"
 
 [[hotkeys]]
-binding = "Unassigned"
-id = "assignFocusedWindowToScratchpad"
-
-[[hotkeys]]
-binding = "Unassigned"
-id = "toggleScratchpadWindow"
-
-[[hotkeys]]
 binding = "Control+Option+M"
 id = "openMenuAnywhere"
 
@@ -867,6 +932,13 @@ id = "toggleOverview"
 [[hotkeys]]
 binding = "Unassigned"
 id = "toggleSystemStats"
+
+[[monitorBarOverrides]]
+enabled = false
+id = "C2AA2943-73D3-49C2-9C31-EB0E8CBEA186"
+monitorDisplayId = 1
+monitorDisplayUUID = "37D8832A-2D66-02CA-B9F7-8F30A301B230"
+monitorName = "Built-in Retina Display"
 
 [[monitorGapOverrides]]
 id = "4C5F63BF-2714-4F26-A791-BA1093ADDF17"
