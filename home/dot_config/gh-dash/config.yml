@@ -30,8 +30,8 @@ notificationsSections:
   - title: Team Mentioned
     filters: reason:team-mention
 repo:
-  branchesRefetchIntervalSeconds: 30
-  prsRefetchIntervalSeconds: 60
+  branchesRefetchIntervalSeconds: 300
+  prsRefetchIntervalSeconds: 300
 defaults:
   preview:
     open: true

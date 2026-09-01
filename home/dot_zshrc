@@ -29,6 +29,8 @@ export PYTHONBREAKPOINT=ipdb.set_trace
 # ==============================================================================
 # PATH Configuration
 # ==============================================================================
+typeset -U path PATH
+
 # Homebrew (Apple Silicon)
 export PATH="/opt/homebrew/bin:${PATH}"
 export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
@@ -36,8 +38,7 @@ export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
 # Local binaries
 export PATH="$HOME/bin:$HOME/.local/bin:$HOME/go/bin:$PATH"
 
-# Project-local binaries (Rails binstubs, node_modules)
-export PATH="./bin:./node_modules/.bin:${PATH}:/usr/local/sbin"
+export PATH="${PATH}:/usr/local/sbin"
 
 # Play Date SDK builder
 export PLAYDATE_SDK_PATH="$HOME/Developer/PlaydateSDK"
@@ -77,7 +78,7 @@ fpath+=("${XDG_DATA_HOME:-$HOME/.local/share}/zsh/site-functions")
 autoload -Uz compinit
 # Only regenerate completion cache once per day
 if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then
-  compinit
+  compinit && touch ~/.zcompdump
 else
   compinit -C
 fi
@@ -132,8 +133,8 @@ _evalcache() {
 # ==============================================================================
 # Version Managers
 # ==============================================================================
-# mise: ruby + node — auto-switches on .ruby-version/.nvmrc/.node-version/.tool-versions
-command -v mise > /dev/null && _evalcache mise activate zsh
+# mise shims select the configured ruby/node version without a shell hook.
+path=("${XDG_DATA_HOME:-$HOME/.local/share}/mise/shims" $path)
 
 # ==============================================================================
 # Plugins (brew-installed, sourced directly — no plugin manager)

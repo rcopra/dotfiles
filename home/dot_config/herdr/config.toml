@@ -95,3 +95,6 @@ hide_tab_bar_when_single_tab = true
 pane_outer_borders = false
 pane_gaps = false
 status_indicators = "symbols"
+
+[session]
+resume_agents_on_restore = false

@@ -1,11 +1,13 @@
 <title>Hyper-3 · Desk Reference</title>
-<link rel="stylesheet" href="sheet.css">
+<link rel="stylesheet" href="sheet.css" />
 
 <div class="sheet">
   <header>
     <h1>HYPER-3 <span class="dim">⌃⌥⌘ · OmniWM window management</span></h1>
     <div class="tiers-inline">
-      <b>⌃⌥⌘</b> windows &nbsp;·&nbsp; <b>⌘1-9</b> workspaces &nbsp;·&nbsp; <b>⌃⌥</b> columns &amp; sizing &nbsp;·&nbsp; <b>⌥</b>+arrows zellij/nvim panes &nbsp;·&nbsp; plain keys never stolen
+      <b>⌃⌥⌘</b> windows &nbsp;·&nbsp; <b>⌘1-9</b> workspaces &nbsp;·&nbsp;
+      <b>⌃⌥</b> columns &amp; sizing &nbsp;·&nbsp; <b>⌥</b>+arrows zellij/nvim
+      panes &nbsp;·&nbsp; plain keys never stolen
     </div>
   </header>
 
@@ -13,7 +15,10 @@
     <table>
       <tr>
         <td class="k"><kbd class="hy">Hillside D50</kbd></td>
-        <td>outer key of <b>either raised pair</b> — mirrored both hands. Hold one, tap with the other hand.</td>
+        <td>
+          outer key of <b>either raised pair</b> — mirrored both hands. Hold
+          one, tap with the other hand.
+        </td>
         <td class="k"><kbd class="hy">MacBook</kbd></td>
         <td>hold <b>Caps Lock</b> (tap = Esc)</td>
         <td class="k"><kbd class="hy">Temper</kbd></td>
@@ -23,117 +28,282 @@
   </div>
 
   <div class="grid">
-
     <section>
       <h2>Focus &amp; move · hyper +</h2>
       <table>
-        <tr><td class="k"><kbd>N</kbd> <kbd>E</kbd> <kbd>U</kbd> <kbd>I</kbd></td><td>focus ← ↓ ↑ →</td></tr>
-        <tr><td class="k"><kbd>⇧</kbd><kbd>N E U I</kbd></td><td>move window ← ↓ ↑ →</td></tr>
-        <tr><td class="k"><kbd>←</kbd> <kbd>→</kbd></td><td>stack window into / pop out of column</td></tr>
-        <tr><td class="k"><kbd>↑</kbd> <kbd>↓</kbd></td><td>reorder window within column</td></tr>
-        <tr><td class="k"><kbd>[</kbd> <kbd>]</kbd></td><td>move whole column ← →</td></tr>
-        <tr><td class="k"><kbd>⌥</kbd><kbd>⇥</kbd></td><td>previous window (no hyper)</td></tr>
-        <tr><td class="k"><kbd>M</kbd></td><td>focus next monitor</td></tr>
-        <tr><td class="k"><kbd>⌃⌘</kbd><kbd>`</kbd></td><td>focus last monitor</td></tr>
+        <tr>
+          <td class="k"><kbd>N</kbd> <kbd>E</kbd> <kbd>U</kbd> <kbd>I</kbd></td>
+          <td>focus ← ↓ ↑ →</td>
+        </tr>
+        <tr>
+          <td class="k"><kbd>⇧</kbd><kbd>N E U I</kbd></td>
+          <td>move window ← ↓ ↑ →</td>
+        </tr>
+        <tr>
+          <td class="k"><kbd>←</kbd> <kbd>→</kbd></td>
+          <td>stack window into / pop out of column</td>
+        </tr>
+        <tr>
+          <td class="k"><kbd>↑</kbd> <kbd>↓</kbd></td>
+          <td>reorder window within column</td>
+        </tr>
+        <tr>
+          <td class="k"><kbd>[</kbd> <kbd>]</kbd></td>
+          <td>move whole column ← →</td>
+        </tr>
+        <tr>
+          <td class="k"><kbd>⌥</kbd><kbd>⇥</kbd></td>
+          <td>previous window (no hyper)</td>
+        </tr>
+        <tr>
+          <td class="k"><kbd>M</kbd></td>
+          <td>focus next monitor</td>
+        </tr>
+        <tr>
+          <td class="k"><kbd>⌃⌘</kbd><kbd>`</kbd></td>
+          <td>focus last monitor</td>
+        </tr>
       </table>
     </section>
 
     <section>
       <h2>Columns · ⌃⌥ +</h2>
       <table>
-        <tr><td class="k"><kbd>⌃⌥</kbd><kbd>1-9</kbd></td><td>focus column by index</td></tr>
-        <tr><td class="k"><kbd class="hy">hyper</kbd><kbd>[</kbd> <kbd>]</kbd></td><td>move column ← →</td></tr>
-        <tr><td class="k"><kbd>⌃⌥</kbd><kbd>Home</kbd> <kbd>End</kbd></td><td>column → first / last</td></tr>
-        <tr><td class="k"><kbd class="hy">hyper</kbd><kbd>T</kbd></td><td>tabbed column toggle</td></tr>
-        <tr><td class="k"><kbd>⌃⌥⇧</kbd><kbd>PgUp</kbd> <kbd>PgDn</kbd></td><td>send whole column to workspace ↑ ↓</td></tr>
+        <tr>
+          <td class="k"><kbd>⌃⌥</kbd><kbd>1-9</kbd></td>
+          <td>focus column by index</td>
+        </tr>
+        <tr>
+          <td class="k">
+            <kbd class="hy">hyper</kbd><kbd>[</kbd> <kbd>]</kbd>
+          </td>
+          <td>move column ← →</td>
+        </tr>
+        <tr>
+          <td class="k"><kbd>⌃⌥</kbd><kbd>Home</kbd> <kbd>End</kbd></td>
+          <td>column → first / last</td>
+        </tr>
+        <tr>
+          <td class="k"><kbd class="hy">hyper</kbd><kbd>T</kbd></td>
+          <td>tabbed column toggle</td>
+        </tr>
+        <tr>
+          <td class="k"><kbd>⌃⌥⇧</kbd><kbd>PgUp</kbd> <kbd>PgDn</kbd></td>
+          <td>send whole column to workspace ↑ ↓</td>
+        </tr>
       </table>
     </section>
 
     <section>
       <h2>Workspaces</h2>
       <table>
-        <tr><td class="k"><kbd>⌘</kbd><kbd>1-9</kbd></td><td>switch <span class="note">1-5 main · 6-9 secondary</span></td></tr>
-        <tr><td class="k"><kbd>⌘⇧</kbd><kbd>1-9</kbd></td><td>move window + follow</td></tr>
-        <tr><td class="k"><kbd>⌘⇧⌥</kbd><kbd>1-9</kbd></td><td>move window silently</td></tr>
-        <tr><td class="k"><kbd>⌃⌥⇧</kbd><kbd>↑</kbd> <kbd>↓</kbd></td><td>send window to workspace ↑ ↓</td></tr>
-        <tr><td class="k"><kbd class="hy">hyper</kbd><kbd>Tab</kbd></td><td>last workspace (back-and-forth)</td></tr>
-        <tr><td class="k"><kbd class="hy">hyper</kbd><kbd>O</kbd></td><td>overview (all windows)</td></tr>
-        <tr><td class="k"><kbd class="hy">hyper</kbd><kbd>L</kbd></td><td>niri ⇄ dwindle layout</td></tr>
+        <tr>
+          <td class="k"><kbd>⌘</kbd><kbd>1-9</kbd></td>
+          <td>switch <span class="note">1-5 main · 6-9 secondary</span></td>
+        </tr>
+        <tr>
+          <td class="k"><kbd>⌘⇧</kbd><kbd>1-9</kbd></td>
+          <td>move window + follow</td>
+        </tr>
+        <tr>
+          <td class="k"><kbd>⌘⇧⌥</kbd><kbd>1-9</kbd></td>
+          <td>move window silently</td>
+        </tr>
+        <tr>
+          <td class="k"><kbd>⌃⌥⇧</kbd><kbd>↑</kbd> <kbd>↓</kbd></td>
+          <td>send window to workspace ↑ ↓</td>
+        </tr>
+        <tr>
+          <td class="k"><kbd class="hy">hyper</kbd><kbd>Tab</kbd></td>
+          <td>last workspace (back-and-forth)</td>
+        </tr>
+        <tr>
+          <td class="k"><kbd class="hy">hyper</kbd><kbd>O</kbd></td>
+          <td>overview (all windows)</td>
+        </tr>
+        <tr>
+          <td class="k"><kbd class="hy">hyper</kbd><kbd>L</kbd></td>
+          <td>niri ⇄ dwindle layout</td>
+        </tr>
       </table>
     </section>
 
     <section>
       <h2>Size · hyper + <span class="tag">⌃⌥ variants noted</span></h2>
       <table>
-        <tr><td class="k"><kbd>F</kbd></td><td>fullscreen</td></tr>
-        <tr><td class="k"><kbd>⇧F</kbd></td><td>window fills the column's full width</td></tr>
-        <tr><td class="k"><kbd>⌃⌥</kbd><kbd>F</kbd></td><td>expand column into free space</td></tr>
-        <tr><td class="k"><kbd>,</kbd> <kbd>.</kbd></td><td>cycle column width presets</td></tr>
-        <tr><td class="k"><kbd>-</kbd> <kbd>=</kbd></td><td>column ∓ 10%</td></tr>
-        <tr><td class="k"><kbd>⇧-</kbd> <kbd>⇧=</kbd></td><td>window height ∓ 10%</td></tr>
-        <tr><td class="k"><kbd>⌃⌥</kbd><kbd>R</kbd></td><td>reset window height</td></tr>
-        <tr><td class="k"><kbd>⇧B</kbd></td><td>balance sizes</td></tr>
+        <tr>
+          <td class="k"><kbd>F</kbd></td>
+          <td>fullscreen</td>
+        </tr>
+        <tr>
+          <td class="k"><kbd>⇧F</kbd></td>
+          <td>window fills the column's full width</td>
+        </tr>
+        <tr>
+          <td class="k"><kbd>⌃⌥</kbd><kbd>F</kbd></td>
+          <td>expand column into free space</td>
+        </tr>
+        <tr>
+          <td class="k"><kbd>,</kbd> <kbd>.</kbd></td>
+          <td>cycle column width presets</td>
+        </tr>
+        <tr>
+          <td class="k"><kbd>-</kbd> <kbd>=</kbd></td>
+          <td>column ∓ 10%</td>
+        </tr>
+        <tr>
+          <td class="k"><kbd>⇧-</kbd> <kbd>⇧=</kbd></td>
+          <td>window height ∓ 10%</td>
+        </tr>
+        <tr>
+          <td class="k"><kbd>⌃⌥</kbd><kbd>R</kbd></td>
+          <td>reset window height</td>
+        </tr>
+        <tr>
+          <td class="k"><kbd>⇧B</kbd></td>
+          <td>balance sizes</td>
+        </tr>
       </table>
     </section>
 
     <section>
       <h2>Launch · hyper +</h2>
       <table>
-        <tr><td class="k"><kbd class="op">⌥</kbd>+<kbd>Return</kbd></td><td>Ghostty (new window, existing process)</td></tr>
-        <tr><td class="k"><kbd>G</kbd></td><td>Ghostty main session (focus/open)</td></tr>
-        <tr><td class="k"><kbd>W</kbd></td><td>Safari</td></tr>
-        <tr><td class="k"><kbd>B</kbd></td><td>Firefox (new window)</td></tr>
-        <tr><td class="k"><kbd>S</kbd></td><td>Slack</td></tr>
-        <tr><td class="k"><kbd>D</kbd></td><td>Discord</td></tr>
+        <tr>
+          <td class="k"><kbd class="op">⌥</kbd>+<kbd>Return</kbd></td>
+          <td>Ghostty (new window, existing process)</td>
+        </tr>
+        <tr>
+          <td class="k"><kbd>G</kbd></td>
+          <td>Ghostty main session (focus/open)</td>
+        </tr>
+        <tr>
+          <td class="k"><kbd>W</kbd></td>
+          <td>Safari</td>
+        </tr>
+        <tr>
+          <td class="k"><kbd>B</kbd></td>
+          <td>Firefox (new window)</td>
+        </tr>
+        <tr>
+          <td class="k"><kbd>D</kbd></td>
+          <td>Discord</td>
+        </tr>
       </table>
     </section>
 
     <section>
       <h2>Floating &amp; menus</h2>
       <table>
-        <tr><td class="k"><kbd class="hy">hyper</kbd><kbd>V</kbd></td><td>float ⇄ tile focused window</td></tr>
-        <tr><td class="k"><kbd class="hy">hyper</kbd><kbd>⇧R</kbd></td><td>raise all floating windows</td></tr>
-        <tr><td class="k"><kbd>⌃⌥</kbd><kbd>Space</kbd></td><td><b>command palette</b> — every action, searchable</td></tr>
-        <tr><td class="k"><kbd>⌃⌥</kbd><kbd>M</kbd></td><td>menu anywhere <span class="note">focused app's menu bar</span></td></tr>
+        <tr>
+          <td class="k"><kbd class="hy">hyper</kbd><kbd>V</kbd></td>
+          <td>float ⇄ tile focused window</td>
+        </tr>
+        <tr>
+          <td class="k"><kbd class="hy">hyper</kbd><kbd>⇧R</kbd></td>
+          <td>raise all floating windows</td>
+        </tr>
+        <tr>
+          <td class="k"><kbd>⌃⌥</kbd><kbd>Space</kbd></td>
+          <td><b>command palette</b> — every action, searchable</td>
+        </tr>
+        <tr>
+          <td class="k"><kbd>⌃⌥</kbd><kbd>M</kbd></td>
+          <td>
+            menu anywhere <span class="note">focused app's menu bar</span>
+          </td>
+        </tr>
       </table>
     </section>
 
     <section>
       <h2 class="blue">Terminal panes · ⌥</h2>
       <table>
-        <tr><td class="k"><kbd class="op">⌥</kbd> + <kbd>arrows</kbd></td><td>zellij ⇄ neovim pane focus <span class="note">(works in locked mode)</span></td></tr>
-        <tr><td class="k"><kbd>⌃</kbd> + <kbd>g</kbd></td><td>zellij lock ⇄ normal mode</td></tr>
-        <tr><td class="k"><kbd class="op">⌥</kbd> + <kbd>n</kbd></td><td>new pane (any mode)</td></tr>
-        <tr><td class="k"><kbd class="op">⌥</kbd> + <kbd>q</kbd></td><td>detach session</td></tr>
-        <tr><td class="k"><kbd class="cm">⌘</kbd> + key</td><td>Ghostty's own tier — see the Ghostty sheet</td></tr>
+        <tr>
+          <td class="k"><kbd class="op">⌥</kbd> + <kbd>arrows</kbd></td>
+          <td>
+            zellij ⇄ neovim pane focus
+            <span class="note">(works in locked mode)</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="k"><kbd>⌃</kbd> + <kbd>g</kbd></td>
+          <td>zellij lock ⇄ normal mode</td>
+        </tr>
+        <tr>
+          <td class="k"><kbd class="op">⌥</kbd> + <kbd>n</kbd></td>
+          <td>new pane (any mode)</td>
+        </tr>
+        <tr>
+          <td class="k"><kbd class="op">⌥</kbd> + <kbd>q</kbd></td>
+          <td>detach session</td>
+        </tr>
+        <tr>
+          <td class="k"><kbd class="cm">⌘</kbd> + key</td>
+          <td>Ghostty's own tier — see the Ghostty sheet</td>
+        </tr>
       </table>
     </section>
 
     <section>
       <h2 class="green">Hand pairing (D50)</h2>
       <table>
-        <tr><td class="k"><b>L hyper</b> →</td><td>focus <kbd>N E U I</kbd> · <kbd>O</kbd> <kbd>M</kbd> <kbd>Tab</kbd> <kbd>Return</kbd></td></tr>
-        <tr><td class="k"><b>R hyper</b> →</td><td>launch <kbd>G W B S D</kbd> · <kbd>F</kbd> <kbd>T</kbd> <kbd>⇧B</kbd></td></tr>
-        <tr><td class="k">digits</td><td>⌘ = hold <kbd>S</kbd> HRM + numword + digit <span class="note">laptop: plain ⌘1-9</span></td></tr>
-        <tr><td class="k">anything else</td><td><kbd>⌃⌥</kbd>+<kbd>Space</kbd> palette has every action</td></tr>
+        <tr>
+          <td class="k"><b>L hyper</b> →</td>
+          <td>
+            focus <kbd>N E U I</kbd> · <kbd>O</kbd> <kbd>M</kbd> <kbd>Tab</kbd>
+            <kbd>Return</kbd>
+          </td>
+        </tr>
+        <tr>
+          <td class="k"><b>R hyper</b> →</td>
+          <td>
+            launch <kbd>G W B D</kbd> · <kbd>F</kbd> <kbd>T</kbd> <kbd>⇧B</kbd>
+          </td>
+        </tr>
+        <tr>
+          <td class="k">digits</td>
+          <td>
+            ⌘ = hold <kbd>S</kbd> HRM + numword + digit
+            <span class="note">laptop: plain ⌘1-9</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="k">anything else</td>
+          <td><kbd>⌃⌥</kbd>+<kbd>Space</kbd> palette has every action</td>
+        </tr>
       </table>
     </section>
 
     <section>
       <h2 class="red">Tier discipline</h2>
       <table>
-        <tr><td class="k"><kbd class="hy">⌃⌥⌘</kbd></td><td>windows — never reaches apps</td></tr>
-        <tr><td class="k"><kbd>⌃⌥</kbd></td><td>columns, sizing, palette</td></tr>
-        <tr><td class="k"><kbd>⌘</kbd><kbd>1-9</kbd></td><td>workspaces — the one app-tier key OmniWM takes</td></tr>
-        <tr><td class="k"><kbd class="op">⌥</kbd> / <kbd>⌃</kbd></td><td>left to the terminal: zellij, zsh, nvim</td></tr>
+        <tr>
+          <td class="k"><kbd class="hy">⌃⌥⌘</kbd></td>
+          <td>windows — never reaches apps</td>
+        </tr>
+        <tr>
+          <td class="k"><kbd>⌃⌥</kbd></td>
+          <td>columns, sizing, palette</td>
+        </tr>
+        <tr>
+          <td class="k"><kbd>⌘</kbd><kbd>1-9</kbd></td>
+          <td>workspaces — the one app-tier key OmniWM takes</td>
+        </tr>
+        <tr>
+          <td class="k"><kbd class="op">⌥</kbd> / <kbd>⌃</kbd></td>
+          <td>left to the terminal: zellij, zsh, nvim</td>
+        </tr>
       </table>
     </section>
-
   </div>
 
   <footer>
     <span>rcopra · OmniWM · chezmoi</span>
-    <span>Slack→ws5 · Discord→ws4 via Settings › App Rules · keymap SVG: <b>just draw-d50</b></span>
+    <span
+      >Discord→ws4 via Settings › App Rules · keymap SVG:
+      <b>just draw-d50</b></span
+    >
     <span>2026-08-04</span>
   </footer>
 </div>

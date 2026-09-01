@@ -3,3 +3,4 @@
 # them up on the next apply.
 .config/zellij
 bin/zellij-sessionizer
+tree-sitter

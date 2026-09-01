@@ -48,7 +48,7 @@ right = 6.0
 top = 6.0
 
 [general]
-animationsEnabled = true
+animationsEnabled = false
 defaultLayoutType = "niri"
 hotkeysEnabled = true
 hyperKeyModifiers = "Control+Option+Shift+Command"
@@ -71,7 +71,7 @@ workspaceSwipeEnabled = false
 workspaceSwipeFingerCount = 3
 
 [hiddenBar]
-enabled = true
+enabled = false
 hiddenBundleIDs = []
 rehideIntervalSeconds = 5.0
 

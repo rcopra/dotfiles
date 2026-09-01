@@ -153,7 +153,7 @@ ambiguous with the CSI prefix at a shell.
 | Action | Keys |
 |---|---|
 | Ghostty, new window | `⌥ ⏎` |
-| Ghostty / Safari / Firefox / Slack / Discord | `Caps g w b s d` |
+| Ghostty / Safari / Firefox / Discord | `Caps g w b d` |
 | Hyper itself | hold Caps Lock (tap = Esc) |
 
 ## Ghostty
