@@ -15,9 +15,7 @@ fi
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 export EDITOR=nvim
-export BUNDLER_EDITOR=nvim
 export HOMEBREW_NO_ANALYTICS=1
-export MENUCONFIG_STYLE=monochrome
 
 # Ruby
 export DISABLE_SPRING=true
@@ -202,11 +200,4 @@ bindkey -s '^f' '~/bin/herdr-sessionizer\n'
 [[ -f "$HOME/.aliases" ]] && source "$HOME/.aliases"
 
 # Local environment variables (secrets, tokens, etc.) - not tracked in git
-#
-# TIP: For low-friction experimentation:
-#   1. Paste new config/commands into ~/.zshrc or ~/.zshrc.local directly
-#   2. Test them (reload with: source ~/.zshrc)
-#   3. Run 'chezmoi diff' to see what changed vs tracked version
-#   4. Keep changes: 'chezmoi add ~/.zshrc' (incorporates into dotfiles)
-#   5. Discard changes: 'chezmoi apply' (reverts to tracked version)
 [[ -f "$HOME/.zshrc.local" ]] && source "$HOME/.zshrc.local"

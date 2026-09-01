@@ -1,12 +1,4 @@
 # ==============================================================================
-# VS Code settings (managed via symlinks, not direct copies)
-# ==============================================================================
-# These source files live under home/vscode/ and are symlinked to Library/
-# Ignore the whole directory so chezmoi doesn't manage ~/vscode in targets
-vscode
-vscode/**
-
-# ==============================================================================
 # Neovim configuration (managed separately, not via chezmoi)
 # ==============================================================================
 .config/nvim
@@ -19,11 +11,9 @@ vscode/**
 .ssh/**
 
 # ==============================================================================
-# Claude Code (keep local except skills)
+# Claude Code (keep local)
 # ==============================================================================
 .claude/*
-!.claude/skills
-!.claude/skills/**
 
 # ==============================================================================
 # Opencode (keep skills local, only manage config)

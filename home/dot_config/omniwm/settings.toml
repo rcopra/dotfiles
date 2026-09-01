@@ -936,7 +936,6 @@ id = "toggleSystemStats"
 [[monitorBarOverrides]]
 enabled = false
 id = "C2AA2943-73D3-49C2-9C31-EB0E8CBEA186"
-monitorDisplayId = 1
 monitorDisplayUUID = "37D8832A-2D66-02CA-B9F7-8F30A301B230"
 monitorName = "Built-in Retina Display"
 
