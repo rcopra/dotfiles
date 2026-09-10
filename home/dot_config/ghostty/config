@@ -6,18 +6,14 @@ macos-option-as-alt = true
 
 quit-after-last-window-closed = true
 
-# Drop Ghostty's default alt+arrow_left/right=esc:b/f word-motion so Option+arrows send real Alt+arrow CSI for Herdr/nvim nav
+# Send Alt+arrows through to tmux/Neovim pane navigation.
 keybind = option+left=unbind
 keybind = option+right=unbind
 
-# Drop Ghostty's cmd+alt+arrow_up/down=goto_split so the chord reaches Herdr for
-# workspace stepping. Herdr owns pane layout here, so Ghostty's own splits are unused.
-# Left/right stay on goto_split — nothing needs them yet.
-keybind = super+alt+arrow_up=unbind
-keybind = super+alt+arrow_down=unbind
+# Translate Cmd+Alt+up/down to tmux's Ctrl+Alt session shortcuts.
+keybind = super+alt+arrow_up=csi:1;7A
+keybind = super+alt+arrow_down=csi:1;7B
 
-# Drop Ghostty's cmd+d/cmd+shift+d=new_split so the pair reaches Herdr's own
-# split_vertical/split_horizontal. Global, so bare Ghostty windows lose their
-# splits too — fine when every window hosts a Herdr session.
-keybind = super+d=unbind
-keybind = super+shift+d=unbind
+# Send the tmux prefix followed by its right/down split binding.
+keybind = super+d=text:\x01|
+keybind = super+shift+d=text:\x01-

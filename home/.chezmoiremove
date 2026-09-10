@@ -1,0 +1,4 @@
+# Retired Herdr integration; leave the binary and running sessions alone.
+.config/herdr/config.toml
+bin/herdr-sessionizer
+.local/share/zsh/site-functions/_herdr

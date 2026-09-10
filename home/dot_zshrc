@@ -71,7 +71,7 @@ setopt auto_menu complete_in_word always_to_end
 # .zshrc.local) are silently treated as literal text without this
 setopt extended_glob
 fpath+=(/opt/homebrew/share/zsh/site-functions)
-# Completions for tools installed outside Homebrew (herdr)
+# Completions for tools installed outside Homebrew
 fpath+=("${XDG_DATA_HOME:-$HOME/.local/share}/zsh/site-functions")
 autoload -Uz compinit
 # Only regenerate completion cache once per day
@@ -104,7 +104,7 @@ bindkey '^[[3~'   delete-char        # Fn+Delete
 bindkey '^[[1;5C' forward-word       # Ctrl+Right
 bindkey '^[[1;5D' backward-word      # Ctrl+Left
 bindkey '^[w'     forward-word       # Alt+w = Alt+f; adjacent on Colemak, fat-finger safe
-bindkey '^[W'     forward-word
+bindkey -r '^[W'                    # Alt+Shift+w is reserved for tmux pane close
 
 # ==============================================================================
 # Eval cache
@@ -188,10 +188,10 @@ source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 [[ -f ~/.p10k.zsh ]] && source ~/.p10k.zsh
 
 # ==============================================================================
-# Herdr Sessionizer
+# Tmux Sessionizer
 # ==============================================================================
-# Bind Ctrl+f at the shell prompt for quick project workspace navigation.
-bindkey -s '^f' '~/bin/herdr-sessionizer\n'
+# Bind Ctrl+f at the shell prompt for quick project session navigation.
+bindkey -s '^f' '~/bin/tmux-sessionizer\n'
 
 # ==============================================================================
 # Aliases & Local Config

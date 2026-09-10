@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# Pick a project, then attach to or switch to its tmux session.
+set -euo pipefail
+
+if [[ $# -eq 1 ]]; then
+    selected=$1
+else
+    selected=$({
+        find ~/work ~/personal -mindepth 1 -maxdepth 1 -type d 2>/dev/null || true
+        printf '%s\n' ~/.config/nvim ~/.local/share/chezmoi
+    } | fzf) || exit 0
+fi
+
+[[ -n $selected ]] || exit 0
+selected=$(cd "$selected" && pwd -P) || exit 1
+
+# The path suffix keeps identically named projects distinct; symlinks reuse
+# the same session because the path above is canonical.
+selected_name=$(basename "$selected" | tr '.:' '__')
+path_id=$(printf '%s' "$selected" | shasum -a 256 | cut -c 1-12)
+session_name="${selected_name}-${path_id}"
+
+if ! tmux has-session -t "=$session_name" 2>/dev/null; then
+    tmux new-session -d -s "$session_name" -c "$selected"
+fi
+
+if [[ -n ${TMUX:-} ]]; then
+    exec tmux switch-client -t "=$session_name"
+else
+    exec tmux attach-session -t "=$session_name"
+fi
