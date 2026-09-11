@@ -129,10 +129,13 @@ _evalcache() {
 }
 
 # ==============================================================================
-# Version Managers
+# Node
 # ==============================================================================
-# mise shims select the configured ruby/node version without a shell hook.
-path=("${XDG_DATA_HOME:-$HOME/.local/share}/mise/shims" $path)
+# brew's node@24 is a keg-only formula, so it needs an explicit path entry. It
+# must come after the /opt/homebrew/bin export above: brew's own `node` formula
+# is linked there and stays installed only because mongosh, opencode and
+# backlog-md depend on it. This keeps node/npm/npx on 24 LTS.
+path=("/opt/homebrew/opt/node@24/bin" $path)
 
 # ==============================================================================
 # Plugins (brew-installed, sourced directly — no plugin manager)

@@ -42,9 +42,9 @@ brew install \
     forgit \
     powerlevel10k
 
-echo "==> Installing version managers..."
-# mise: ruby + node (reads .ruby-version/.nvmrc/.node-version); uv: python
-brew install mise uv
+echo "==> Installing language runtimes..."
+# node@24: JS/TS runtime, keg-only LTS (PATH-wired in dot_zshrc); uv: python
+brew install node@24 uv
 
 echo "==> Installing applications..."
 # NOTE: Ghostty is installed manually (direct .app), not via brew

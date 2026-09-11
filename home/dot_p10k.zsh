@@ -50,7 +50,6 @@
     command_execution_time  # duration of the last command
     background_jobs         # presence of background jobs
     direnv                  # direnv status (https://direnv.net/)
-    mise                    # tool versions from mise (https://mise.jdx.dev)
     virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
     anaconda                # conda environment (https://conda.io/)
     # node_version          # node.js version
@@ -1096,24 +1095,6 @@
   # typeset -g POWERLEVEL9K_PACKAGE_CONTENT_EXPANSION='${P9K_PACKAGE_NAME//\%/%%}@${P9K_PACKAGE_VERSION//\%/%%}'
   # Custom icon.
   # typeset -g POWERLEVEL9K_PACKAGE_VISUAL_IDENTIFIER_EXPANSION='⭐'
-
-  ###############[ mise: tool versions from mise (https://mise.jdx.dev) ]###############
-  # Shows tools whose version comes from a project-local config; versions set globally
-  # (~/.config/mise or ~/.tool-versions) stay hidden, matching asdf/rbenv defaults.
-  function prompt_mise() {
-    local line parts
-    for line in ${(f)"$(mise ls --current 2>/dev/null)"}; do
-      parts=(${(z)line})
-      (( $#parts >= 3 )) || continue
-      [[ $parts[3] == ('~/.config/mise/'*|'~/.tool-versions') ]] && continue
-      p10k segment -r -i "${(U)parts[1]}_ICON" -s ${(U)parts[1]} -t "$parts[2]"
-    done
-  }
-  typeset -g POWERLEVEL9K_MISE_FOREGROUND=66
-  typeset -g POWERLEVEL9K_MISE_RUBY_FOREGROUND=168
-  typeset -g POWERLEVEL9K_MISE_NODE_FOREGROUND=70
-  typeset -g POWERLEVEL9K_MISE_PYTHON_FOREGROUND=37
-  typeset -g POWERLEVEL9K_MISE_GO_FOREGROUND='#8bd5ca'
 
   #############[ rbenv: ruby version from rbenv (https://github.com/rbenv/rbenv) ]##############
   # Rbenv color.
