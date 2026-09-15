@@ -30,9 +30,15 @@ hs.hotkey.bind(hyper, "w", function()
 	end
 end)
 
--- Firefox intentionally launches a new window.
+-- Launching Firefox's inner executable on macOS 27 prevents it from reading
+-- its profile, so use LaunchServices and the existing process's menu instead.
 hs.hotkey.bind(hyper, "b", function()
-	hs.task.new("/Applications/Firefox.app/Contents/MacOS/firefox", nil, { "--new-window" }):start()
+	local firefox = hs.application.get("Firefox")
+	if firefox then
+		firefox:selectMenuItem({ "File", "New Window" })
+	else
+		hs.application.launchOrFocus("Firefox")
+	end
 end)
 
 hs.hotkey.bind({ "alt" }, "return", function()

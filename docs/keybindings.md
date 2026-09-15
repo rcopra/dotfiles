@@ -131,7 +131,7 @@ modifier ownership with keyboard commands but are separate input events.
 | H3+G | Launch/focus Ghostty |
 | H3+D | Launch/focus Discord |
 | H3+W | New Safari window, or launch Safari if absent |
-| H3+B | Launch Firefox with `--new-window` |
+| H3+B | New Firefox window, or launch Firefox if absent |
 | Alt+Enter | New Ghostty window, or launch Ghostty if absent |
 
 The exact `Left Command` spelling on workspace focus is preserved above.
