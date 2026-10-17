@@ -45,6 +45,8 @@ brew install \
 echo "==> Installing language runtimes..."
 # node@24: JS/TS runtime, keg-only LTS (PATH-wired in dot_zshrc); uv: python
 brew install node@24 uv
+# Clojure CLI and Leiningen for CIDER jack-in; clojure-lsp for Doom's (clojure +lsp)
+brew install clojure leiningen clojure-lsp
 
 echo "==> Installing applications..."
 # NOTE: Ghostty is installed manually (direct .app), not via brew
@@ -55,6 +57,18 @@ brew install --cask barutsrb/tap/omniwm
 brew install --cask karabiner-elements
 # Hammerspoon: hyper app launchers + OmniWM workspace move-follow (~/.hammerspoon)
 brew install --cask hammerspoon
+# Emacs for Doom (~/.config/doom); Homebrew 7 requires trusting third-party taps
+brew tap d12frosted/emacs-plus
+brew trust d12frosted/emacs-plus
+brew install --cask emacs-plus-app
+
+# Doom core is a plain clone (not chezmoi-managed); its modules are a submodule
+if [[ ! -d "$HOME/.config/emacs" ]]; then
+    echo "==> Installing Doom Emacs..."
+    git clone --depth 1 --recurse-submodules --shallow-submodules \
+        https://github.com/doomemacs/doomemacs "$HOME/.config/emacs"
+    echo "==> After chezmoi applies ~/.config/doom, run: ~/.config/emacs/bin/doom install --no-config"
+fi
 
 echo "==> Installing fonts..."
 brew install --cask font-jetbrains-mono-nerd-font

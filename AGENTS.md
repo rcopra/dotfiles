@@ -58,6 +58,7 @@ workspaces above those. Prefer consistent directional actions across tools.
 | --- | --- | --- |
 | Shell text movement | Ctrl+Left/Right | Zsh backward/forward word |
 | Terminal pane / editor split focus | Alt+arrows | Ghostty passes through; tmux and Neovim coordinate focus across split edges |
+| Doom Emacs window / workspace focus | Alt+arrows; Alt+Shift+Left/Right; Alt+1–9 | Normal state only. GUI Emacs, so no tmux handoff; leave it with Hyper-3+N/E/U/I |
 | Terminal tab (tmux window) focus | Alt+Shift+Left/Right; Alt+1–9 | Previous/next tab; select numbered tab |
 | Terminal session focus | Ctrl+Alt+Up/Down | tmux previous/next session; Ghostty also translates Cmd+Alt+Up/Down to these chords |
 | Project / session picker | Ctrl+f at shell; Alt+Shift+s in tmux | Project picker; Alt+s opens the session/window tree |
@@ -66,6 +67,7 @@ workspaces above those. Prefer consistent directional actions across tools.
 | Desktop window move | Hyper-3+Shift+N/E/U/I | OmniWM moves in the corresponding direction |
 | Desktop workspace focus / move | Cmd+1–9 / Cmd+Shift+1–9 | OmniWM switches workspace / sends the window there |
 | Desktop monitor focus | Hyper-3+M | OmniWM focuses the next monitor |
+| New terminal window | Hyper-3+Enter | Hammerspoon opens a Ghostty window, launching Ghostty if needed |
 
 Alt means macOS Option; Ghostty is configured to send Option as Alt. Desktop
 shortcuts can intercept application bindings (for example Cmd+digits), so check
@@ -90,6 +92,9 @@ reach on QWERTY; retain that tradeoff in planning.
   active multiplexer when working on a different setup.
 - Editor split handoff: `~/.config/nvim/lua/custom/plugins/splits.lua`, managed
   outside this repo. Detailed tmux actions are in `docs/tmux-cheatsheet.md`.
+- Doom Emacs (GUI, for Clojure): `home/dot_config/doom/config.el` holds the
+  keymaps. Doom core in `~/.config/emacs` is an unmanaged clone. Clojure keys
+  mirror Neovim's Conjure and nvim-paredit; see `docs/keybindings.md`.
 
 When a ZMK binding changes, check whether the workflow table above moves with
 it. When a handler binding changes, check the physical origin in the zmk map

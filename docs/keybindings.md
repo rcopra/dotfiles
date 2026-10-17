@@ -18,6 +18,7 @@ reproduced. This is not an inventory of every GUI application's preferences.
 | Multiplexer | [tmux](../home/dot_tmux.conf) | Projects/sessions, windows/tabs, panes, copy mode |
 | Shell | [zsh](../home/dot_zshrc), [aliases](../home/dot_aliases) | Prompt editing, history, fuzzy pickers |
 | Editor | `~/.config/nvim/init.lua`, `lua/custom/plugins/`, `lua/kickstart/plugins/` | Editing, search, Git, tests, debugging |
+| Clojure editor | [Doom Emacs](../home/dot_config/doom/config.el) (GUI) | Clojure REPL work; mirrors Neovim's Conjure and nvim-paredit keys |
 
 The deployed Karabiner, Hammerspoon, OmniWM, Ghostty, and tmux files matched
 their source files. Deployed `.zshrc` differed, but its explicit `bindkey` lines
@@ -132,7 +133,7 @@ modifier ownership with keyboard commands but are separate input events.
 | H3+D | Launch/focus Discord |
 | H3+W | New Safari window, or launch Safari if absent |
 | H3+B | New Firefox window, or launch Firefox if absent |
-| Alt+Enter | New Ghostty window, or launch Ghostty if absent |
+| H3+Enter | New Ghostty window, or launch Ghostty if absent |
 
 The exact `Left Command` spelling on workspace focus is preserved above.
 Confirm right-Cmd behavior in OmniWM before treating it as interchangeable.
@@ -322,6 +323,53 @@ Tests and debugging (N):
 `mini.surround` uses its default mappings. Blink completion explicitly selects
 the `super-tab` preset. These plugins introduce further contextual bindings;
 inspect their installed help and `:verbose map` before reclaiming keys.
+
+## Doom Emacs
+
+GUI Emacs (emacs-plus) running Doom, used for Clojure. Checked 2026-10-17
+against a running Doom daemon with a live CIDER REPL. Only explicit config is
+listed; Doom's own Space-leader menus and the `SPC m` CIDER menu are unchanged.
+Both Options are Meta (Doom's default leaves right Option typing characters).
+
+| Shortcut | State | Action |
+| --- | --- | --- |
+| Alt+arrows | Normal | Focus window (windmove); no tmux handoff in GUI Emacs |
+| Alt+Shift+Left/Right | Normal | Previous/next Doom workspace |
+| Alt+1–9 | Any | Select Doom workspace (Doom default) |
+
+Clojure buffers mirror Neovim's Conjure keys (Neovim localleader is Space).
+`SPC e` is otherwise unbound in Doom, so these apply only where CIDER is active:
+
+| Shortcut | Action |
+| --- | --- |
+| SPC e e / e r / e w | Evaluate form under cursor / root form / element |
+| SPC e b / e f | Evaluate buffer / load file |
+| SPC e ! | Replace form with its value |
+| SPC e c r | Evaluate root form into a comment |
+| SPC e i | Interrupt evaluation |
+| SPC E (visual) | Evaluate selection |
+
+Conjure's other groups are not mirrored: most collide with Doom menus (`SPC c`
+code, `SPC s` search, `SPC t` toggle, `SPC g` git, `SPC x` scratch), and log/view
+(`l`, `v`) have no direct CIDER counterpart. Use Doom's `SPC m` equivalents, e.g.
+`SPC m c` connect, `SPC m '` jack-in, `SPC m t n` namespace tests.
+
+Clojure buffers also mirror nvim-paredit's defaults (normal state unless noted):
+
+| Shortcut | Action |
+| --- | --- |
+| >) / <) | Slurp / barf forward |
+| <( / >( | Slurp / barf backward |
+| >e / <e | Drag element right / left |
+| >f / <f | Drag enclosing form right / left |
+| W / B / E / gE | Next element head / previous head / next tail / previous tail (N/V/O) |
+| ( / ) | Enclosing form start / end (N/V/O) |
+| if / af, iF / aF, ie / ae | Form, top-level form, element text objects (V/O) |
+| SPC m o / SPC m O / SPC m @ | Raise form / raise element / splice (Neovim: Leader o/O/@; `SPC o` is Doom's open menu) |
+
+Binding `>)` and friends makes `>` and `<` prefixes in Clojure normal state:
+`>>` and `<<` are rebound, but `>` and `<` with other motions (such as `>ip`)
+are unavailable there. nvim-paredit's `>p` / `<p` (drag pairs) is not mirrored.
 
 ## Firmware interactions
 

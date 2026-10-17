@@ -41,12 +41,12 @@ hs.hotkey.bind(hyper, "b", function()
 	end
 end)
 
-hs.hotkey.bind({ "alt" }, "return", function()
-	local ghostty = hs.application.get("Ghostty")
-	if ghostty then
-		ghostty:selectMenuItem({ "File", "New Window" })
-	else
-		hs.application.launchOrFocus("Ghostty")
+-- Hyper-Return opens a new Ghostty window. Fall back to launching when the menu
+-- item fails too, e.g. while Ghostty quits after its last window closes.
+hs.hotkey.bind(hyper, "return", function()
+	local ghostty = hs.application.get("com.mitchellh.ghostty")
+	if not (ghostty and ghostty:selectMenuItem({ "File", "New Window" })) then
+		hs.application.launchOrFocusByBundleID("com.mitchellh.ghostty")
 	end
 end)
 
