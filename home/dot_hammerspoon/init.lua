@@ -8,10 +8,11 @@ require("hs.ipc")
 
 local hyper = { "ctrl", "alt", "cmd" }
 
--- Hyper app switchers (G=Ghostty D=Discord)
+-- Hyper app switchers (G=Ghostty D=Discord X=Emacs)
 local applications = {
 	g = "Ghostty",
 	d = "Discord",
+	x = "Emacs",
 }
 
 for key, application in pairs(applications) do

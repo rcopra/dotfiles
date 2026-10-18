@@ -89,7 +89,7 @@ alone does not establish that Option symbols are disabled in every macOS app.
 
 OmniWM has **67 assigned hotkey entries and 102 unassigned entries**. Ranges in
 this table group individual assignments. Action IDs disambiguate layout-specific
-operations. Hammerspoon's five shortcuts are listed afterward.
+operations. Hammerspoon's six shortcuts are listed afterward.
 
 | Shortcut | OmniWM action |
 | --- | --- |
@@ -131,6 +131,7 @@ modifier ownership with keyboard commands but are separate input events.
 | --- | --- |
 | H3+G | Launch/focus Ghostty |
 | H3+D | Launch/focus Discord |
+| H3+X | Launch/focus Emacs |
 | H3+W | New Safari window, or launch Safari if absent |
 | H3+B | New Firefox window, or launch Firefox if absent |
 | H3+Enter | New Ghostty window, or launch Ghostty if absent |
