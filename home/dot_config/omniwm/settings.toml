@@ -288,7 +288,6 @@ id = "964A6CAD-6BD6-4CF9-AA8D-000F7E443567"
 assignToWorkspace = "2"
 bundleId = "org.gnu.Emacs"
 id = "95C9C9D4-5817-4C94-8194-5347BDF7A456"
-initialContainerPrimarySpan = 1.0
 
 [[hotkeys]]
 binding = "Unassigned"
