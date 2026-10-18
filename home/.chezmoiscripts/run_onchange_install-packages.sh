@@ -45,8 +45,11 @@ brew install \
 echo "==> Installing language runtimes..."
 # node@24: JS/TS runtime, keg-only LTS (PATH-wired in dot_zshrc); uv: python
 brew install node@24 uv
-# Clojure CLI and Leiningen for CIDER jack-in; clojure-lsp for Doom's (clojure +lsp)
-brew install clojure leiningen clojure-lsp
+# Clojure CLI (official clojure/tools tap; core's `clojure` conflicts with it) and
+# Leiningen for CIDER jack-in; clojure-lsp for Doom's (clojure +lsp)
+brew tap clojure/tools
+brew trust --formula clojure/tools/clojure
+brew install clojure/tools/clojure leiningen clojure-lsp
 # lein repl fails ("Permission denied ... ~/.lein/repl-port") when this is missing
 mkdir -p "$HOME/.lein"
 
