@@ -93,8 +93,10 @@ reach on QWERTY; retain that tradeoff in planning.
 - Editor split handoff: `~/.config/nvim/lua/custom/plugins/splits.lua`, managed
   outside this repo. Detailed tmux actions are in `docs/tmux-cheatsheet.md`.
 - Doom Emacs (GUI, for Clojure): `home/dot_config/doom/config.el` holds the
-  keymaps. Doom core in `~/.config/emacs` is an unmanaged clone. Clojure keys
-  mirror Neovim's Conjure and nvim-paredit; see `docs/keybindings.md`.
+  keymaps. Doom core in `~/.config/emacs` is an unmanaged clone. Keys mirror
+  the Neovim config 1:1 where possible (Telescope, LSP, git, tests, Conjure,
+  nvim-paredit), overriding Doom defaults; when a Neovim binding changes, update
+  the matching Doom key. See `docs/keybindings.md`.
 
 When a ZMK binding changes, check whether the workflow table above moves with
 it. When a handler binding changes, check the physical origin in the zmk map

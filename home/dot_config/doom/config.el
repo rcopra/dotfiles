@@ -32,7 +32,8 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+(setq doom-theme 'catppuccin
+      catppuccin-flavor 'mocha)  ; matches Ghostty's Catppuccin Mocha
 ;; Specify both a dark and light theme, like so and Doom will choose which one
 ;; to load based on your system light/dark setting:
 ;;
@@ -91,6 +92,9 @@
 
 ;;; Navigation (see AGENTS.md in chezmoi for the cross-tool map)
 
+;; PageUp/PageDown move to the first/last line once a full page can't scroll.
+(setq scroll-error-top-bottom t)
+
 ;; Alt+arrows focus windows, like Neovim splits; Alt+Shift+Left/Right cycle
 ;; workspaces, like tmux tabs (Doom already selects them with Alt+1-9).
 (map! :n "M-<left>"    #'windmove-left
@@ -99,6 +103,166 @@
       :n "M-<right>"   #'windmove-right
       :n "M-S-<left>"  #'+workspace/switch-left
       :n "M-S-<right>" #'+workspace/switch-right)
+
+;; \ toggles a file tree sidebar at the current file, like Neo-tree in Neovim.
+(map! :n "\\" #'dirvish-side)
+(after! dirvish-side (dirvish-side-follow-mode))
+
+
+
+;;; Neovim keymap parity
+
+;; Keys mirror ~/.config/nvim so muscle memory carries over, replacing Doom's
+;; binding where they collide. Kept as Doom's on purpose: SPC h (help, where
+;; Neovim has gitsigns hunks), SPC q (quit menu; Neovim's diagnostics list is
+;; also on SPC s d) and PageUp/PageDown (no recentering, set above).
+
+(setq evil-vsplit-window-right t        ; splitright
+      evil-split-window-below t         ; splitbelow
+      scroll-margin 10                  ; scrolloff
+      which-key-idle-delay 0.3)         ; timeoutlen
+
+(defun +nvim/format ()
+  "Format the selection or buffer with the language server, like <leader>f."
+  (interactive)
+  (if (use-region-p)
+      (eglot-format (region-beginning) (region-end))
+    (eglot-format-buffer)))
+
+(defun +nvim/diff-or-definition ()
+  "<leader>gd: Conjure's go-to-definition in Clojure, Diffview elsewhere."
+  (interactive)
+  (if (derived-mode-p 'clojure-mode)
+      (call-interactively #'+lookup/definition)
+    (call-interactively #'magit-diff-working-tree)))
+
+(defun +nvim/diff-vs-main ()
+  "What this branch changes, like DiffviewOpen main...HEAD."
+  (interactive)
+  (magit-diff-range "main...HEAD"))
+
+(defun +nvim/log-vs-main ()
+  "This branch's commits, like DiffviewFileHistory --range=main..HEAD."
+  (interactive)
+  (magit-log-other '("main..HEAD")))
+
+(defun +nvim/repl-split (&optional vertical)
+  "Show the REPL in a split below, or beside with VERTICAL, like Conjure's log."
+  (interactive)
+  (let ((repl (cider-current-repl nil 'ensure)))
+    (select-window (split-window nil nil (if vertical 'right 'below)))
+    (set-window-buffer (selected-window) repl)))
+
+(defun +nvim/repl-connect ()
+  "Get a REPL for this project, like Conjure's <localleader>cf.
+Connect to the running REPL named in .nrepl-port (or lein/shadow-cljs's port
+file), or start one with jack-in."
+  (interactive)
+  (require 'cider)
+  (let* ((root (clojure-project-dir))
+         (port (and root (car (nrepl-extract-ports root)))))
+    (cond
+     ((cider-current-repl)
+      (message "Already connected: %s" (buffer-name (cider-current-repl))))
+     (port
+      (condition-case err
+          (cider-connect-clj (list :host "localhost" :port port :project-dir root))
+        (error
+         (message "No REPL at .nrepl-port %s (%s); starting one" port
+                  (error-message-string err))
+         (cider-jack-in-clj nil))))
+     (t (cider-jack-in-clj nil)))))
+
+(defun +nvim/repl-close ()
+  "Close every window showing a REPL, like Conjure's <localleader>lq."
+  (interactive)
+  (dolist (w (window-list))
+    (when (with-current-buffer (window-buffer w) (derived-mode-p 'cider-repl-mode))
+      (ignore-errors (delete-window w)))))
+
+(map! :n  "C-h" #'evil-window-left
+      :n  "C-j" #'evil-window-down
+      :n  "C-k" #'evil-window-up
+      :n  "C-l" #'evil-window-right
+      :n  "]c"  #'+vc-gutter/next-hunk
+      :n  "[c"  #'+vc-gutter/previous-hunk
+      ;; Neovim's LSP defaults (Doom's gr is an eval operator; SPC e covers that)
+      :n  "grn" #'eglot-rename
+      :nv "gra" #'eglot-code-actions
+      :n  "grr" #'+lookup/references
+      :n  "gri" #'eglot-find-implementation
+      :n  "grd" #'+lookup/definition
+      :n  "grD" #'eglot-find-declaration
+      :n  "grt" #'eglot-find-type-definition
+      :n  "gO"  #'consult-imenu
+      :n  "gW"  #'xref-find-apropos)
+
+(map! :leader
+      :desc "Find buffer"          "SPC" #'+vertico/switch-workspace-buffer
+      :desc "Search buffer"        "/"   #'+default/search-buffer
+      :desc "Format"               "f"   #'+nvim/format
+      :desc "Copy relative path"   "c p" #'+default/yank-buffer-path-relative-to-project
+      :desc "Connect or start REPL" "c f" #'+nvim/repl-connect
+      :desc "Quit REPL"            "c d" #'cider-quit
+      ;; Telescope
+      :desc "Help"                 "s h" #'helpful-symbol
+      :desc "Keymaps"              "s k" #'embark-bindings
+      :desc "Find file in project" "s f" #'projectile-find-file
+      :desc "Grep word"            "s w" #'+default/search-project-for-symbol-at-point
+      :desc "Grep project"         "s g" #'+default/search-project
+      :desc "Diagnostics"          "s d" #'+default/diagnostics
+      :desc "Resume search"        "s r" #'vertico-repeat
+      :desc "Recent files"         "s o" #'consult-recent-file
+      :desc "Commands"             "s c" #'execute-extended-command
+      :desc "Emacs config files"   "s n" #'doom/find-file-in-private-config
+      ;; Fugitive, Diffview and gitsigns toggles
+      :desc "Git status"           "g s" #'magit-status
+      :desc "Git blame"            "g b" #'magit-blame-addition
+      :desc "Diff / definition"    "g d" #'+nvim/diff-or-definition
+      :desc "File history"         "g f" #'magit-log-buffer-file
+      :desc "Repo history"         "g h" #'magit-log-head
+      :desc "Diff vs main"         "g m" #'+nvim/diff-vs-main
+      :desc "Commits vs main"      "g c" #'+nvim/log-vs-main
+      :desc "Blame"                "t b" #'magit-blame-addition
+      :desc "Preview hunk"         "t D" #'diff-hl-show-hunk
+      :desc "Inlay hints"          "t h" #'eglot-inlay-hints-mode
+      ;; Tests: Conjure's keys (tn tc ta) won in Clojure buffers, plus vim-test's
+      :desc "Test namespace"       "t n" #'cider-test-run-ns-tests
+      :desc "Test at cursor"       "t c" #'cider-test-run-test
+      :desc "Test loaded"          "t a" #'cider-test-run-loaded-tests
+      :desc "Test file"            "t f" #'cider-test-run-ns-tests
+      :desc "Test suite"           "t s" #'cider-test-run-project-tests
+      :desc "Test last"            "t l" #'cider-test-rerun-test
+      :desc "Test file <-> source" "t v" #'projectile-toggle-between-implementation-and-test
+      ;; Conjure's log windows and namespace refresh
+      :desc "REPL split below"     "l s" #'+nvim/repl-split
+      :desc "REPL split right"     "l v" (cmd! (+nvim/repl-split t))
+      :desc "Close REPL windows"   "l q" #'+nvim/repl-close
+      :desc "Refresh changed nses" "r r" #'cider-ns-refresh
+      :desc "Refresh all nses"     "r a" (cmd! (cider-ns-refresh 'refresh-all)))
+
+
+;;; Projects
+
+;; SPC p p discovers git repos in the same folders tmux-sessionizer scans.
+(setq projectile-project-search-path '(("~/work" . 1) ("~/personal" . 1)))
+
+
+;;; Lisp
+
+;; Colour nested parens by depth.
+(add-hook! '(clojure-mode-hook emacs-lisp-mode-hook) #'rainbow-delimiters-mode)
+
+;; eglot renders clojure-lsp's hover docs as Markdown. For each code block,
+;; markdown-mode searches disk for a tree-sitter grammar (~37 ms without one),
+;; which froze typing whenever the cursor paused. Look each language up once.
+;; Fixed upstream in jrblevin/markdown-mode#956; drop this once Doom's pin of
+;; markdown-mode includes it.
+(defvar +markdown--lang-mode-cache (make-hash-table :test #'equal))
+(defadvice! +markdown-cache-lang-mode-a (fn lang)
+  :around #'markdown-get-lang-mode
+  (with-memoization (gethash lang +markdown--lang-mode-cache)
+    (funcall fn lang)))
 
 
 ;;; Clojure: Conjure-style eval keys
@@ -137,7 +301,10 @@
       :n "SPC e !"   #'+clojure/eval-list-and-replace
       :n "SPC e c r" #'cider-eval-defun-to-comment
       :n "SPC e i"   #'cider-interrupt
-      :v "SPC E"     #'cider-eval-region)
+      :v "SPC E"     #'cider-eval-region
+      ;; Enter in normal state evaluates too (insert-state Enter is a newline)
+      :n "RET"       #'+clojure/eval-list-at-point
+      :n [return]    #'+clojure/eval-list-at-point)
 
 
 ;;; Clojure: nvim-paredit keys

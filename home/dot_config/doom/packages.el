@@ -55,3 +55,9 @@
 ;; Evil-aware drag commands, text objects and motions for the nvim-paredit
 ;; key mirror in config.el; its own mode and keymap are not enabled.
 (package! evil-cleverparens)
+
+;; Colour nested parens by depth in Lisp buffers (enabled in config.el).
+(package! rainbow-delimiters)
+
+;; Catppuccin themes; config.el selects Mocha to match Ghostty.
+(package! catppuccin-theme)

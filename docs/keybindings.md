@@ -327,9 +327,20 @@ inspect their installed help and `:verbose map` before reclaiming keys.
 ## Doom Emacs
 
 GUI Emacs (emacs-plus) running Doom, used for Clojure. Checked 2026-10-17
-against a running Doom daemon with a live CIDER REPL. Only explicit config is
-listed; Doom's own Space-leader menus and the `SPC m` CIDER menu are unchanged.
-Both Options are Meta (Doom's default leaves right Option typing characters).
+against a running Doom daemon with a live CIDER REPL. Both Options are Meta
+(Doom's default leaves right Option typing characters).
+
+Keys mirror the Neovim config 1:1 where possible, replacing Doom's binding on
+collision: Telescope's `SPC s` keys, `SPC SPC` buffers, `SPC /` buffer search,
+`SPC f` format, Neovim's `gr*` LSP keys, `]c` / `[c` hunks, `C-h/j/k/l` window
+focus, Fugitive/Diffview `SPC g` keys, vim-test and Conjure `SPC t` keys, and
+Conjure's `SPC c f` (connect to the project's running REPL, else jack in),
+`SPC c d` (quit), `SPC l s/v/q` and `SPC r r/a`. Kept as Doom's: `SPC h`
+(help, where Neovim has gitsigns hunks), `SPC q` (quit menu), Page Up/Down
+(no recentering), and evil-snipe on `s`/`S` (two-character jump), so surround
+is vim-surround's `ys` / `ds` / `cs` rather than mini.surround's `sa` / `sd` /
+`sr`. `config.el` has the full list; the user-facing reference is `EMACS.md` in
+`~/personal/clojure-challenges`.
 
 | Shortcut | State | Action |
 | --- | --- | --- |

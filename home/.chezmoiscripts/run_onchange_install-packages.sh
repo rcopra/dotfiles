@@ -47,6 +47,8 @@ echo "==> Installing language runtimes..."
 brew install node@24 uv
 # Clojure CLI and Leiningen for CIDER jack-in; clojure-lsp for Doom's (clojure +lsp)
 brew install clojure leiningen clojure-lsp
+# lein repl fails ("Permission denied ... ~/.lein/repl-port") when this is missing
+mkdir -p "$HOME/.lein"
 
 echo "==> Installing applications..."
 # NOTE: Ghostty is installed manually (direct .app), not via brew
@@ -67,7 +69,10 @@ if [[ ! -d "$HOME/.config/emacs" ]]; then
     echo "==> Installing Doom Emacs..."
     git clone --depth 1 --recurse-submodules --shallow-submodules \
         https://github.com/doomemacs/doomemacs "$HOME/.config/emacs"
-    echo "==> After chezmoi applies ~/.config/doom, run: ~/.config/emacs/bin/doom install --no-config"
+    echo "==> After chezmoi applies ~/.config/doom, run: ~/.config/emacs/bin/doom install --no-config --no-env"
+    # GUI Emacs doesn't inherit the shell PATH. Doom's envvar file fixes that; deny
+    # secret-looking vars so they aren't copied into it (doom sync keeps the rules).
+    echo "==> Then: doom env -d KEY -d TOKEN -d SECRET -d PASSWORD -d MCP_URL ~/.config/emacs/.local/etc/init.d/05-doom-env.load.el && doom sync"
 fi
 
 echo "==> Installing fonts..."
