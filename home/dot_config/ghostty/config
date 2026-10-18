@@ -6,14 +6,17 @@ macos-option-as-alt = true
 
 quit-after-last-window-closed = true
 
-# Send Alt+arrows through to tmux/Neovim pane navigation.
+# Send Alt+arrows through to Herdr/Neovim pane navigation.
 keybind = option+left=unbind
 keybind = option+right=unbind
 
-# Translate Cmd+Alt+up/down to tmux's Ctrl+Alt session shortcuts.
+# Translate Cmd+Alt+up/down to Ctrl+Alt, which steps Herdr workspaces (and tmux
+# sessions, when falling back to it).
 keybind = super+alt+arrow_up=csi:1;7A
 keybind = super+alt+arrow_down=csi:1;7B
 
-# Send the tmux prefix followed by its right/down split binding.
-keybind = super+d=text:\x01|
-keybind = super+shift+d=text:\x01-
+# Drop Ghostty's cmd+d/cmd+shift+d=new_split so the pair reaches Herdr's own
+# split_vertical/split_horizontal. Global, so bare Ghostty windows lose their
+# splits too — fine when every window hosts a Herdr session.
+keybind = super+d=unbind
+keybind = super+shift+d=unbind

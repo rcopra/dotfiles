@@ -5,9 +5,9 @@ alias speedtest="curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/m
 # Quickly serve the current directory as HTTP
 alias serve='python3 -m http.server 8000'
 
-# Tmux sessionizer shortcuts
-alias tms="~/bin/tmux-sessionizer"
-alias tmd="~/bin/tmux-sessionizer ~/.local/share/chezmoi/home"
-alias tmw="~/bin/tmux-sessionizer ~/work"
-alias tmp="~/bin/tmux-sessionizer ~/personal"
-alias tmv="~/bin/tmux-sessionizer ~/.config/nvim"
+# Herdr sessionizer shortcuts (names retained for muscle memory)
+alias tms="~/bin/herdr-sessionizer"
+alias tmd="~/bin/herdr-sessionizer ~/.local/share/chezmoi/home"
+alias tmw="~/bin/herdr-sessionizer ~/work"
+alias tmp="~/bin/herdr-sessionizer ~/personal"
+alias tmv="~/bin/herdr-sessionizer ~/.config/nvim"

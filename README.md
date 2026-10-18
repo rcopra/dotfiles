@@ -16,8 +16,8 @@ exec zsh                    # Reload shell
 
 Neovim is intentionally managed outside this repo (separate kickstart clone).
 
-Terminal workflow: Ghostty + tmux. Run `tms` to pick a project; see the
-[tmux shortcuts](docs/tmux-cheatsheet.md).
+Terminal workflow: Ghostty + Herdr. Run `tms` to pick a project. tmux stays
+installed as a fallback; see the [tmux shortcuts](docs/tmux-cheatsheet.md).
 
 ## Cheat Sheet
 

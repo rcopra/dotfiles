@@ -1,6 +1,6 @@
 # Keybinding inventory
 
-Checked 2026-09-10. This reference includes the source cleanup below; deployment
+Checked 2026-09-10; multiplexer sections updated 2026-10-18 for Herdr. This reference includes the source cleanup below; deployment
 status is recorded separately. It covers explicit bindings in this dotfiles repo, the separately
 managed Neovim configuration, and the D50 firmware's cross-application bindings.
 Application and plugin defaults are identified separately, not exhaustively
@@ -15,7 +15,7 @@ reproduced. This is not an inventory of every GUI application's preferences.
 | Desktop | [OmniWM](../home/dot_config/omniwm/settings.toml) | Workspaces, windows, columns, monitors |
 | Application launch | [Hammerspoon](../home/dot_hammerspoon/init.lua) | Launch/focus applications, new application windows |
 | Terminal | [Ghostty](../home/dot_config/ghostty/config) | macOS chords and terminal translation |
-| Multiplexer | [tmux](../home/dot_tmux.conf) | Projects/sessions, windows/tabs, panes, copy mode |
+| Multiplexer | [Herdr](../home/dot_config/herdr/config.toml); [tmux](../home/dot_tmux.conf) as fallback | Projects/workspaces, tabs, panes, agents |
 | Shell | [zsh](../home/dot_zshrc), [aliases](../home/dot_aliases) | Prompt editing, history, fuzzy pickers |
 | Editor | `~/.config/nvim/init.lua`, `lua/custom/plugins/`, `lua/kickstart/plugins/` | Editing, search, Git, tests, debugging |
 | Clojure editor | [Doom Emacs](../home/dot_config/doom/config.el) (GUI) | Clojure REPL work; mirrors Neovim's Conjure and nvim-paredit keys |
@@ -49,7 +49,7 @@ fzf without its own `--bind` options.
 - **Alt** means Option. Ghostty sets `macos-option-as-alt = true`.
 - **H3** means Ctrl+Alt+Cmd. **H4** means Ctrl+Alt+Shift+Cmd.
   OmniWM spells H4 `Hyper`; Hammerspoon's variable `hyper` means H3.
-- **P** means press Ctrl+a, release, then press the following key (tmux prefix).
+- **P** means press Ctrl+a, release, then press the following key (Herdr prefix; tmux uses the same).
 - **Leader** in Neovim means Space. Uppercase letters require Shift.
 - **N/V/X/T** below mean Neovim normal/visual/visual/terminal modes; X excludes
   Select mode. Buffer-specific bindings require the relevant plugin/LSP attachment.
@@ -146,13 +146,10 @@ All six explicit Ghostty keybind entries:
 | Input | Result |
 | --- | --- |
 | Alt+Left/Right | Remove Ghostty's bindings so terminal applications receive the keys |
-| Cmd+Alt+Up/Down | CSI `1;7A` / `1;7B`, tmux Ctrl+Alt+Up/Down |
-| Cmd+D | Bytes Ctrl+a then `|`, tmux split right |
-| Cmd+Shift+D | Bytes Ctrl+a then `-`, tmux split down |
+| Cmd+Alt+Up/Down | CSI `1;7A` / `1;7B` (Ctrl+Alt+Up/Down): Herdr workspace, or tmux session |
+| Cmd+D / Cmd+Shift+D | Remove Ghostty's split bindings so Herdr receives the chords |
 
-These split translations run regardless of whether a tmux session is attached.
-Outside tmux, their bytes reach the current program. Cmd+Alt session translations
-also rely on tmux being the consumer.
+Without Herdr, Cmd+D does nothing: Ghostty's own splits are unbound globally.
 
 Inherited Ghostty bindings relevant to ownership, verified with
 `ghostty +list-keybinds`:
@@ -172,10 +169,45 @@ Inherited Ghostty bindings relevant to ownership, verified with
 | Cmd+Alt+Shift+W | Close all Ghostty windows |
 | Cmd+Shift+P | Ghostty command palette |
 
-This leaves two tab systems available: Ghostty tabs and tmux windows. The
-current project workflow uses tmux windows as tabs.
+This leaves two tab systems available: Ghostty tabs and Herdr tabs. The
+current project workflow uses Herdr tabs.
 
-## tmux
+## Herdr
+
+Herdr is the active multiplexer. This lists every explicit binding in
+[`config.toml`](../home/dot_config/herdr/config.toml); `herdr config check`
+validates it. Direct bindings are intercepted before the shell/editor; prefix
+bindings apply after P.
+
+| Shortcut | Action |
+| --- | --- |
+| Alt+arrows | Navigate panes across Neovim splits (herdr-splits plugin) |
+| Cmd+D / Alt+n / Alt+Shift+r / P, \| | Split right |
+| Cmd+Shift+D / Alt+Shift+d / P, - | Split down |
+| P, o / P, ; | Next pane / last pane |
+| P, arrows / P, Shift+r | Resize pane / resize mode |
+| Alt+z / P, m / P, z | Zoom/unzoom |
+| Alt+Shift+w / P, x | Close pane |
+| Alt+e / P, e | Edit scrollback |
+| Alt+t / P, c | New tab |
+| Alt+Shift+t / P, comma / P, Shift+t | Rename tab |
+| Alt+Shift+Left/Right / P, p / P, n | Previous/next tab |
+| Alt+i/o | Move tab left/right |
+| Alt+1–9 / P, 1–9 | Select tab 1–9 |
+| P, & / P, Shift+x | Close tab |
+| Alt+Shift+Up/Down / P, [ / P, ] | Previous/next agent |
+| P, Alt+1–9 | Focus agent 1–9 |
+| Cmd+Alt+Up/Down / Ctrl+Alt+Up/Down | Previous/next workspace |
+| Alt+s / P, w / P, g | Go-to picker |
+| P, s | Workspace picker |
+| Alt+Shift+s | Project picker popup (`herdr-sessionizer`) |
+| Alt+q / P, d / P, q | Detach |
+| P, Shift+s / P, r | Settings / reload config |
+
+## tmux (fallback)
+
+tmux stays installed with its config, but no shell entry point starts it; run
+`tmux` directly. The chords match Herdr's where both have the action.
 
 The [daily tmux cheat sheet](tmux-cheatsheet.md) includes useful inherited prefix
 bindings. This inventory lists every explicit keyboard binding in `.tmux.conf`.
@@ -230,19 +262,19 @@ Zsh selects Emacs editing mode, then applies these custom bindings:
 | Ctrl+Left/Right | Backward/forward word |
 | Alt+w | Forward word; Colemak neighbor alias for Alt+f |
 | Up/Down | History substring search up/down |
-| Ctrl+f | Insert `~/bin/tmux-sessionizer` plus newline via `bindkey -s` |
+| Ctrl+f | Insert `~/bin/herdr-sessionizer` plus newline via `bindkey -s` |
 
 Ctrl+f is a string macro, not a ZLE widget that saves/clears the current editing
 buffer. Its interaction with a partially typed command deserves checking before
 treating it as a context-independent launcher. It replaces Emacs forward-char;
-inside tmux, Ctrl+a is also intercepted as the prefix.
+inside Herdr, Ctrl+a is also intercepted as the prefix.
 
 Installed `fzf --zsh` adds Ctrl+t (file picker), Ctrl+r (history), Alt+c
 (directory picker), and Tab (fzf completion). Within its history picker,
 Ctrl+r toggles sort and Alt+r toggles raw display. Its shared picker options
 ignore Ctrl+z. These are integration defaults, not explicit custom bindings.
 
-The session aliases are commands, not chords: `tms` picker, `tmd` dotfiles,
+The Herdr workspace aliases are commands, not chords: `tms` picker, `tmd` dotfiles,
 `tmv` Neovim, `tmw` work root, and `tmp` personal root.
 
 ## Neovim
@@ -257,7 +289,7 @@ is **not loaded**; the active Gitsigns mappings are in `init.lua`.
 | Esc | N | Clear search highlight |
 | Esc Esc | T | Exit terminal mode |
 | Ctrl+h/j/k/l | N | Focus Neovim split left/down/up/right |
-| Alt+arrows | N | Smart-splits navigation, including tmux edge handoff |
+| Alt+arrows | N | Split navigation with edge handoff: herdr-splits in Herdr, smart-splits in tmux |
 | Ctrl+d/u or PageDown/PageUp | N | Half-page down/up and center |
 | Leader cp | N | Copy relative file path |
 | Leader q | N | Diagnostics location list (description calls it quickfix) |
@@ -345,7 +377,7 @@ is vim-surround's `ys` / `ds` / `cs` rather than mini.surround's `sa` / `sd` /
 
 | Shortcut | State | Action |
 | --- | --- | --- |
-| Alt+arrows | Normal | Focus window (windmove); no tmux handoff in GUI Emacs |
+| Alt+arrows | Normal | Focus window (windmove); no multiplexer handoff in GUI Emacs |
 | Alt+Shift+Left/Right | Normal | Previous/next Doom workspace |
 | Alt+1–9 | Any | Select Doom workspace (Doom default) |
 
@@ -411,12 +443,12 @@ before reassigning KP_DIVIDE.
 
 | Priority | Finding | Proposed next step |
 | --- | --- | --- |
-| 1 | NAV C/D reaches Ghostty tabs, while the navigation plan uses tmux windows | Decide whether NAV should address native tabs or tmux windows; then change one handler/emitter and update both repos' docs |
+| 1 | NAV C/D reaches Ghostty tabs, while the navigation plan uses Herdr tabs | Decide whether NAV should address native tabs or Herdr tabs; then change one handler/emitter and update both repos' docs |
 | 1 | Firmware source assigns Cmd+arrow on hold; actual behavior is disputed/unverified | Compare flashed firmware and emitted events before proposing any change |
 | 2 | Cmd+digits is claimed by both OmniWM and Ghostty | Preserve desktop ownership if intentional; make the terminal reference explicitly favor Alt+digits |
 | Done in source | Alt+Shift+w was shell forward-word outside tmux, pane kill inside tmux | Removed the uppercase shell typo alias; Alt+w and Ctrl+arrows remain |
 | Done in source | Splits had three additional Alt aliases | Kept Cmd+d / Cmd+Shift+d and prefix pipe / minus; removed Alt+n, Alt+Shift+r, Alt+Shift+d |
-| 2 | Ghostty retains native tabs/splits alongside translated tmux controls | Decide whether native tabs/splits remain part of the workflow before changing defaults |
+| 2 | Ghostty retains native tabs alongside Herdr's (its splits are unbound) | Decide whether native tabs/splits remain part of the workflow before changing defaults |
 | 2 | Neovim Alt+arrows only maps normal mode | Document normal-mode scope, or deliberately extend mode support |
 | 3 | Neovim Leader+t group is called Toggle but includes tests | Separate the group naming or prefixes; preserve existing actions until a choice is made |
 | 3 | OmniWM `Hyper` and Hammerspoon `hyper` denote different modifier sets | Use Hyper-3/Hyper-4 consistently in documentation and comments |
@@ -437,10 +469,11 @@ setup. Preserve generated/application-owned formats such as OmniWM's TOML.
 
 For later changes, verify the whole chain:
 
-`physical key/layer → emitted chord → global interception → Ghostty translation → tmux table → shell/editor mode → action`
+`physical key/layer → emitted chord → global interception → Ghostty translation → multiplexer binding → shell/editor mode → action`
 
 Check source/deployed diffs first, then use `ghostty +list-keybinds`,
-`tmux list-keys -T root`, `tmux list-keys -T prefix`, and
+`herdr config check`,
+and for the tmux fallback `tmux list-keys -T root`, `tmux list-keys -T prefix`, and
 `tmux list-keys -T copy-mode-vi`. In an existing shell, `bindkey -M emacs` shows
 the effective editing map. In Neovim, Leader sk and `:verbose nmap` / `:verbose
 imap` / `:verbose tmap` show effective mappings for the current context.

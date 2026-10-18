@@ -58,6 +58,9 @@ mkdir -p "$HOME/.lein"
 
 echo "==> Installing applications..."
 # NOTE: Ghostty is installed manually (direct .app), not via brew
+# NOTE: Herdr (terminal multiplexer) is installed by
+# run_onchange_after_install-herdr.sh — it ships its own updater and installs to
+# ~/.local/bin, which precedes Homebrew on PATH. tmux stays installed as a fallback.
 # OmniWM (tiling WM) from its author's tap
 brew install --cask barutsrb/tap/omniwm
 # Karabiner: caps->Hyper-3 + option-lazy, built-in keyboard only — must ignore

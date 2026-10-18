@@ -37,7 +37,7 @@ Snapshot of the local ZMK and Karabiner configuration, checked 2026-09-10:
   `A/R/S/T` positions become sticky Ctrl/Alt/Cmd/Shift. Holding a NAV arrow emits
   Cmd+arrow, so tapping and holding are distinct when planning shortcuts.
 - Dedicated raised keys on both halves emit Ctrl+Alt+Cmd. Upper thumb keys on
-  both halves include one tmux-prefix key, Ctrl+a (the other emits F24 / KP_DIVIDE
+  both halves include one multiplexer-prefix key, Ctrl+a (the other emits F24 / KP_DIVIDE
   for the dongle screen).
 - Laptop Caps Lock taps Escape and holds Ctrl+Alt+Cmd through Karabiner.
   Call this three-modifier chord **Hyper-3** here. OmniWM's configured `Hyper`
@@ -57,12 +57,13 @@ workspaces above those. Prefer consistent directional actions across tools.
 | Scope / intent | Current chord | Handler / meaning |
 | --- | --- | --- |
 | Shell text movement | Ctrl+Left/Right | Zsh backward/forward word |
-| Terminal pane / editor split focus | Alt+arrows | Ghostty passes through; tmux and Neovim coordinate focus across split edges |
-| Doom Emacs window / workspace focus | Alt+arrows; Alt+Shift+Left/Right; Alt+1–9 | Normal state only. GUI Emacs, so no tmux handoff; leave it with Hyper-3+N/E/U/I |
-| Terminal tab (tmux window) focus | Alt+Shift+Left/Right; Alt+1–9 | Previous/next tab; select numbered tab |
-| Terminal session focus | Ctrl+Alt+Up/Down | tmux previous/next session; Ghostty also translates Cmd+Alt+Up/Down to these chords |
-| Project / session picker | Ctrl+f at shell; Alt+Shift+s in tmux | Project picker; Alt+s opens the session/window tree |
-| Terminal pane resize | Ctrl+a, then arrows | tmux prefix followed by a direction |
+| Terminal pane / editor split focus | Alt+arrows | Ghostty passes through; Herdr and Neovim coordinate focus across split edges (herdr-splits) |
+| Doom Emacs window / workspace focus | Alt+arrows; Alt+Shift+Left/Right; Alt+1–9 | Normal state only. GUI Emacs, so no multiplexer handoff; leave it with Hyper-3+N/E/U/I |
+| Terminal tab (Herdr tab) focus | Alt+Shift+Left/Right; Alt+1–9 | Previous/next tab; select numbered tab |
+| Agent pane focus | Alt+Shift+Up/Down | Herdr previous/next agent |
+| Terminal workspace focus | Ctrl+Alt+Up/Down | Herdr previous/next workspace; Ghostty also translates Cmd+Alt+Up/Down to these chords |
+| Project / workspace picker | Ctrl+f at shell; Alt+Shift+s in Herdr | Project picker (`herdr-sessionizer`); Alt+s opens Herdr's goto |
+| Terminal pane resize | Ctrl+a, then arrows | Herdr prefix followed by a direction |
 | Desktop window focus | Hyper-3+N/E/U/I | OmniWM left/down/up/right; Alt+Tab focuses the previous window |
 | Desktop window move | Hyper-3+Shift+N/E/U/I | OmniWM moves in the corresponding direction |
 | Desktop workspace focus / move | Cmd+1–9 / Cmd+Shift+1–9 | OmniWM switches workspace / sends the window there |
@@ -88,10 +89,12 @@ reach on QWERTY; retain that tradeoff in planning.
   `home/dot_config/omniwm/settings.toml`; also check relevant macOS/app global
   shortcuts when assessing collisions.
 - Terminal and shell: `home/dot_config/ghostty/config`, `home/dot_zshrc`, and
-  `home/dot_tmux.conf`. The current repo workflow is Ghostty + tmux; check the
-  active multiplexer when working on a different setup.
+  `home/dot_config/herdr/config.toml`. The current repo workflow is Ghostty +
+  Herdr. tmux (`home/dot_tmux.conf`) stays installed as a fallback with the same
+  chords; check the active multiplexer when diagnosing behavior.
 - Editor split handoff: `~/.config/nvim/lua/custom/plugins/splits.lua`, managed
-  outside this repo. Detailed tmux actions are in `docs/tmux-cheatsheet.md`.
+  outside this repo; it uses herdr-splits.nvim inside Herdr and smart-splits.nvim
+  elsewhere. Fallback tmux actions are in `docs/tmux-cheatsheet.md`.
 - Doom Emacs (GUI, for Clojure): `home/dot_config/doom/config.el` holds the
   keymaps. Doom core in `~/.config/emacs` is an unmanaged clone. Keys mirror
   the Neovim config 1:1 where possible (Telescope, LSP, git, tests, Conjure,
