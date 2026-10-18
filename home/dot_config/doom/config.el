@@ -180,6 +180,14 @@ file), or start one with jack-in."
     (when (with-current-buffer (window-buffer w) (derived-mode-p 'cider-repl-mode))
       (ignore-errors (delete-window w)))))
 
+(defun +eglot/rename-prefilled ()
+  "Rename the symbol at point, starting the prompt with its current name.
+Neovim's grn prefills it; eglot only offers it as the M-n default."
+  (interactive)
+  (minibuffer-with-setup-hook
+      (lambda () (when (stringp minibuffer-default) (insert minibuffer-default)))
+    (call-interactively #'eglot-rename)))
+
 (map! :n  "C-h" #'evil-window-left
       :n  "C-j" #'evil-window-down
       :n  "C-k" #'evil-window-up
@@ -187,7 +195,7 @@ file), or start one with jack-in."
       :n  "]c"  #'+vc-gutter/next-hunk
       :n  "[c"  #'+vc-gutter/previous-hunk
       ;; Neovim's LSP defaults (Doom's gr is an eval operator; SPC e covers that)
-      :n  "grn" #'eglot-rename
+      :n  "grn" #'+eglot/rename-prefilled
       :nv "gra" #'eglot-code-actions
       :n  "grr" #'+lookup/references
       :n  "gri" #'eglot-find-implementation
@@ -291,6 +299,24 @@ file), or start one with jack-in."
   (goto-char (1- (cadr (cider-list-at-point 'bounds))))
   (cider-eval-last-sexp-and-replace))
 
+(defun +clojure/eval-list-and-copy (&optional with-form)
+  "Evaluate the form under the cursor and copy its value to the clipboard.
+With WITH-FORM, copy \"form => value\" instead."
+  (interactive)
+  (let* ((form (cider-list-at-point))
+         (value (nrepl-dict-get (cider-nrepl-sync-request:eval
+                                 form nil (cider-current-ns))
+                                "value")))
+    (if (not value)
+        (message "Evaluation failed; nothing copied")
+      (let ((text (if with-form (format "%s => %s" form value) value)))
+        (kill-new text)
+        (message "Copied: %s" text)))))
+
+;; SPC e b / SPC e f save a modified buffer before loading it instead of asking.
+(after! cider
+  (setq cider-save-file-on-load t))
+
 (map! :after cider
       :map cider-mode-map
       :n "SPC e e"   #'+clojure/eval-list-at-point
@@ -300,6 +326,8 @@ file), or start one with jack-in."
       :n "SPC e f"   #'cider-load-buffer
       :n "SPC e !"   #'+clojure/eval-list-and-replace
       :n "SPC e c r" #'cider-eval-defun-to-comment
+      :n "SPC e y"   #'+clojure/eval-list-and-copy
+      :n "SPC e Y"   (cmd! (+clojure/eval-list-and-copy t))
       :n "SPC e i"   #'cider-interrupt
       :v "SPC E"     #'cider-eval-region
       ;; Enter in normal state evaluates too (insert-state Enter is a newline)
