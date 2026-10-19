@@ -28,6 +28,7 @@
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
 ;; refresh your font settings. If Emacs still can't find your font, it likely
 ;; wasn't installed correctly. Font issues are rarely Doom issues!
+(setq doom-font (font-spec :family "FiraCode Nerd Font" :size 13))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -271,6 +272,12 @@ Neovim's grn prefills it; eglot only offers it as the M-n default."
   :around #'markdown-get-lang-mode
   (with-memoization (gethash lang +markdown--lang-mode-cache)
     (funcall fn lang)))
+
+;; Keep the echo area quiet so workspace tabs stay visible: one-line eldoc
+;; signatures (K shows full docs), and no "SPC c a: ... more actions" hint.
+(setq eldoc-echo-area-use-multiline-p nil)
+(after! eglot
+  (setq eglot-code-action-indications nil))
 
 
 ;;; Clojure: Conjure-style eval keys
