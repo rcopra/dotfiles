@@ -10,10 +10,12 @@ quit-after-last-window-closed = true
 keybind = option+left=unbind
 keybind = option+right=unbind
 
-# Translate Cmd+Alt+up/down to Ctrl+Alt, which steps Herdr workspaces (and tmux
-# sessions, when falling back to it).
-keybind = super+alt+arrow_up=csi:1;7A
-keybind = super+alt+arrow_down=csi:1;7B
+# Unbind Ghostty's cmd+shift+up/down=jump_to_prompt and cmd+alt+up/down=goto_split
+# so Ghostty passes the chords through to Herdr, which binds them directly.
+keybind = super+shift+arrow_up=unbind
+keybind = super+shift+arrow_down=unbind
+keybind = super+alt+arrow_up=unbind
+keybind = super+alt+arrow_down=unbind
 
 # Drop Ghostty's cmd+d/cmd+shift+d=new_split so the pair reaches Herdr's own
 # split_vertical/split_horizontal. Global, so bare Ghostty windows lose their
