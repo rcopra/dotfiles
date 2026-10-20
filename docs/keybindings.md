@@ -141,19 +141,19 @@ Confirm right-Cmd behavior in OmniWM before treating it as interchangeable.
 
 ## Terminal passthrough
 
-All eight explicit Ghostty keybind entries:
+All six explicit Ghostty keybind entries:
 
 | Input | Result |
 | --- | --- |
 | Alt+Left/Right | Remove Ghostty's bindings so terminal applications receive the keys |
-| Cmd+Shift+Up/Down | Remove Ghostty's `jump_to_prompt` bindings so Herdr receives Shift+Super+Up/Down |
 | Cmd+Alt+Up/Down | Remove Ghostty's `goto_split` bindings so Herdr receives Alt+Super+Up/Down |
 | Cmd+D / Cmd+Shift+D | Remove Ghostty's split bindings so Herdr receives the chords |
 
-Herdr requests enhanced keyboard reporting, so the unbound Cmd chords arrive with
-Super intact and match its `cmd+...` bindings directly. tmux has no Super
-modifier binding, so its session navigation remains on Ctrl+Alt+Up/Down. Without
-Herdr, Cmd+D does nothing: Ghostty's own splits are unbound globally.
+Herdr requests enhanced keyboard reporting, so the unbound Cmd+Alt chord arrives
+with Super intact and matches its `cmd+alt` binding directly. Cmd+Shift+Up/Down
+remains Ghostty's `jump_to_prompt`. tmux has no Super modifier binding, so its
+session navigation remains on Ctrl+Alt+Up/Down. Without Herdr, Cmd+D does
+nothing: Ghostty's own splits are unbound globally.
 
 Inherited Ghostty bindings relevant to ownership, verified with
 `ghostty +list-keybinds`:
@@ -201,7 +201,7 @@ bindings apply after P.
 | P, & / P, Shift+x | Close tab |
 | Cmd+Alt+Up/Down / P, [ / P, ] | Previous/next agent |
 | P, Alt+1–9 | Focus agent 1–9 |
-| Cmd+Shift+Up/Down / Ctrl+Alt+Up/Down | Previous/next workspace |
+| Alt+Shift+Up/Down / Ctrl+Alt+Up/Down | Previous/next workspace |
 | Alt+s / P, w / P, g | Go-to picker |
 | P, s | Workspace picker |
 | Alt+Shift+s | Project picker popup (`herdr-sessionizer`) |

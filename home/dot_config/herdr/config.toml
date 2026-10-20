@@ -15,8 +15,8 @@ detach = ["alt+q", "prefix+d", "prefix+q"]
 goto = ["alt+s", "prefix+w", "prefix+g"]
 workspace_picker = "prefix+s"
 settings = "prefix+shift+s"
-previous_workspace = ["cmd+shift+up", "ctrl+alt+up"]
-next_workspace = ["cmd+shift+down", "ctrl+alt+down"]
+previous_workspace = ["alt+shift+up", "ctrl+alt+up"]
+next_workspace = ["alt+shift+down", "ctrl+alt+down"]
 
 # Tabs
 new_tab = ["alt+t", "prefix+c"]

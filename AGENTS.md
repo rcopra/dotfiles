@@ -61,7 +61,7 @@ workspaces above those. Prefer consistent directional actions across tools.
 | Doom Emacs window / workspace focus | Alt+arrows; Alt+Shift+Left/Right; Alt+1–9 | Normal state only. GUI Emacs, so no multiplexer handoff; leave it with Hyper-3+N/E/U/I |
 | Terminal tab (Herdr tab) focus | Alt+Shift+Left/Right; Alt+1–9 | Previous/next tab; select numbered tab |
 | Agent pane focus | Cmd+Option+Up/Down | Herdr previous/next agent |
-| Terminal workspace focus | Cmd+Shift+Up/Down | Herdr previous/next workspace; Ctrl+Alt+Up/Down remains an alias (and the tmux session chord) |
+| Terminal workspace focus | Alt+Shift+Up/Down | Herdr previous/next workspace; Ctrl+Alt+Up/Down remains an alias (and the tmux session chord) |
 | Project / workspace picker | Ctrl+f at shell; Alt+Shift+s in Herdr | Project picker (`herdr-sessionizer`); Alt+s opens Herdr's goto |
 | Terminal pane resize | Ctrl+a, then arrows | Herdr prefix followed by a direction |
 | Desktop window focus | Hyper-3+N/E/U/I | OmniWM left/down/up/right; Alt+Tab focuses the previous window |
