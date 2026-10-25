@@ -96,10 +96,14 @@ reach on QWERTY; retain that tradeoff in planning.
   outside this repo; it uses herdr-splits.nvim inside Herdr and smart-splits.nvim
   elsewhere. Fallback tmux actions are in `docs/tmux-cheatsheet.md`.
 - Doom Emacs (GUI, for Clojure): `home/dot_config/doom/config.el` holds the
-  keymaps. Doom core in `~/.config/emacs` is an unmanaged clone. Keys mirror
-  the Neovim config 1:1 where possible (Telescope, LSP, git, tests, Conjure,
-  nvim-paredit), overriding Doom defaults; when a Neovim binding changes, update
-  the matching Doom key. See `docs/keybindings.md`.
+  keymaps. Doom core in `~/.config/emacs` is an unmanaged clone. The config is
+  a thin layer over Doom defaults (modelled on Eric Dallo's) with lsp-mode,
+  treemacs and Doom workspaces. Actions used in both editors (Telescope search,
+  LSP `gr*`, git, splits, the `\` tree toggle) mirror Neovim; when one of those
+  Neovim bindings changes, update the matching Doom key. Clojure-only work
+  (CIDER eval, tests, REPL) lives under Doom's `,` localleader, and structural
+  editing uses evil-cleverparens' default keys, so neither tracks Neovim's
+  Conjure or nvim-paredit maps. See `docs/keybindings.md`.
 
 When a ZMK binding changes, check whether the workflow table above moves with
 it. When a handler binding changes, check the physical origin in the zmk map

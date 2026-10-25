@@ -18,7 +18,7 @@ reproduced. This is not an inventory of every GUI application's preferences.
 | Multiplexer | [Herdr](../home/dot_config/herdr/config.toml); [tmux](../home/dot_tmux.conf) as fallback | Projects/workspaces, tabs, panes, agents |
 | Shell | [zsh](../home/dot_zshrc), [aliases](../home/dot_aliases) | Prompt editing, history, fuzzy pickers |
 | Editor | `~/.config/nvim/init.lua`, `lua/custom/plugins/`, `lua/kickstart/plugins/` | Editing, search, Git, tests, debugging |
-| Clojure editor | [Doom Emacs](../home/dot_config/doom/config.el) (GUI) | Clojure REPL work; mirrors Neovim's Conjure and nvim-paredit keys |
+| Clojure editor | [Doom Emacs](../home/dot_config/doom/config.el) (GUI) | Clojure REPL work; mirrors Neovim for shared actions, Doom's `,` localleader for Clojure |
 
 The deployed Karabiner, Hammerspoon, OmniWM, Ghostty, and tmux files matched
 their source files. Deployed `.zshrc` differed, but its explicit `bindkey` lines
@@ -363,16 +363,17 @@ inspect their installed help and `:verbose map` before reclaiming keys.
 
 ## Doom Emacs
 
-GUI Emacs (emacs-plus) running Doom, used for Clojure. Checked 2026-10-17
-against a running Doom daemon with a live CIDER REPL. Both Options are Meta
-(Doom's default leaves right Option typing characters).
+GUI Emacs (emacs-plus) running Doom, used for Clojure. Checked 2026-10-23
+against a test Doom daemon with clojure-lsp (lsp-mode) and a live CIDER REPL.
+Both Options are Meta (Doom's default leaves right Option typing characters).
 
-Keys mirror the Neovim config 1:1 where possible, replacing Doom's binding on
-collision: Telescope's `SPC s` keys, `SPC SPC` buffers, `SPC /` buffer search,
-`SPC f` format, Neovim's `gr*` LSP keys, `]c` / `[c` hunks, `C-h/j/k/l` window
-focus, Fugitive/Diffview `SPC g` keys, vim-test and Conjure `SPC t` keys, and
-Conjure's `SPC c f` (connect to the project's running REPL, else jack in),
-`SPC c d` (quit), `SPC l s/v/q` and `SPC r r/a`. Kept as Doom's: `SPC h`
+The config is a thin layer over Doom's defaults, modelled on Eric Dallo's
+(clojure-lsp's author). Actions used in both editors mirror Neovim, replacing
+Doom's binding on collision: Telescope's `SPC s` keys, `SPC SPC` buffers,
+`SPC /` buffer search, `SPC f` format, Neovim's `gr*` LSP keys, `]c` / `[c`
+hunks, `C-h/j/k/l` window focus, Fugitive/Diffview `SPC g` keys, and `\` for
+the file tree. Clojure-only work follows Doom under the `,` localleader, and
+structural editing uses evil-cleverparens' own keys. Kept as Doom's: `SPC h`
 (help, where Neovim has gitsigns hunks), `SPC q` (quit menu), Page Up/Down
 (no recentering), and evil-snipe on `s`/`S` (two-character jump), so surround
 is vim-surround's `ys` / `ds` / `cs` rather than mini.surround's `sa` / `sd` /
@@ -384,40 +385,58 @@ is vim-surround's `ys` / `ds` / `cs` rather than mini.surround's `sa` / `sd` /
 | Alt+arrows | Normal | Focus window (windmove); no multiplexer handoff in GUI Emacs |
 | Alt+Shift+Left/Right | Normal | Previous/next Doom workspace |
 | Alt+1–9 | Any | Select Doom workspace (Doom default) |
+| Backslash | Normal | Toggle the treemacs project tree (also `SPC o p`; `SPC o P` reveals the current file) |
+| SPC p p | Normal | Switch project, opening it in its own workspace |
 
-Clojure buffers mirror Neovim's Conjure keys (Neovim localleader is Space).
-`SPC e` is otherwise unbound in Doom, so these apply only where CIDER is active:
+### Clojure
 
-| Shortcut | Action |
-| --- | --- |
-| SPC e e / e r / e w | Evaluate form under cursor / root form / element |
-| SPC e b / e f | Evaluate buffer / load file |
-| SPC e ! | Replace form with its value |
-| SPC e c r | Evaluate root form into a comment |
-| SPC e i | Interrupt evaluation |
-| SPC E (visual) | Evaluate selection |
-
-Conjure's other groups are not mirrored: most collide with Doom menus (`SPC c`
-code, `SPC s` search, `SPC t` toggle, `SPC g` git, `SPC x` scratch), and log/view
-(`l`, `v`) have no direct CIDER counterpart. Use Doom's `SPC m` equivalents, e.g.
-`SPC m c` connect, `SPC m '` jack-in, `SPC m t n` namespace tests.
-
-Clojure buffers also mirror nvim-paredit's defaults (normal state unless noted):
+`,` is the localleader in place of Doom's `SPC m`. evil-snipe no longer takes
+`,` and `;`, so outside localleader buffers `,` repeats `f`/`t` backwards as in
+Vim; in Clojure buffers repeat a find by pressing `f`/`F`/`t`/`T` again.
+Doom's localleader map covers jack-in (`, '`), tests (`, t t` at point, `, t n`
+namespace, `, t p` project, `, t l` loaded, `, t r` rerun failures), the REPL
+(`, r b` buffer, `, r q` quit, `, r r` refresh changed namespaces; `SPC u , r r`
+refreshes all) and the debugger (`, d d`). The REPL opens as a bottom popup that
+ESC leaves open; the test report opens on the right. Overrides and additions:
 
 | Shortcut | Action |
 | --- | --- |
-| >) / <) | Slurp / barf forward |
-| <( / >( | Slurp / barf backward |
-| >e / <e | Drag element right / left |
-| >f / <f | Drag enclosing form right / left |
-| W / B / E / gE | Next element head / previous head / next tail / previous tail (N/V/O) |
+| , c | Connect to the project's running REPL (`.nrepl-port`), else jack in (replaces Doom's connect) |
+| , e e / e r / e w | Evaluate form under cursor / root form / element (Conjure's letters; replaces Doom's `e e` / `e r`) |
+| , e b / e f | Evaluate buffer / load file (saves first) |
+| , e ! | Replace form with its value |
+| , e c r | Evaluate root form into a comment |
+| , e y / e Y | Copy the form's value / "form => value" |
+| , e i | Interrupt evaluation |
+| , E (visual) | Evaluate selection |
+| RET | Evaluate form under cursor (normal state) |
+| , t v | Toggle between test and source file |
+
+Forms inside `(comment ...)` count as top level, so `, e r` evaluates the form
+under the cursor in a rich comment block. clojure-lsp owns navigation, rename,
+completion and diagnostics; CIDER's go-to-definition is off. Renames and code
+actions save the files they change; formatting does not.
+
+Structural editing is evil-cleverparens with its default keys (normal state
+unless noted):
+
+| Shortcut | Action |
+| --- | --- |
+| < / > | Slurp or barf, depending on whether the cursor is on an opening or closing paren |
+| M-j / M-k | Drag element forward / backward |
+| M-r / M-R | Raise element / raise enclosing form |
+| M-s / M-S / M-J | Splice / split / join |
+| H / L | Previous / next form (N/V/O) |
 | ( / ) | Enclosing form start / end (N/V/O) |
-| if / af, iF / aF, ie / ae | Form, top-level form, element text objects (V/O) |
-| SPC m o / SPC m O / SPC m @ | Raise form / raise element / splice (Neovim: Leader o/O/@; `SPC o` is Doom's open menu) |
+| W / B / E / gE | Next symbol start / previous symbol start / symbol end / previous symbol end |
+| af / if, ad / id, ie / ae | Form, top-level form, element text objects (V/O); element is kept from nvim-paredit |
+| M-( / M-{ / M-[ | Wrap the next element in parens / braces / brackets |
 
-Binding `>)` and friends makes `>` and `<` prefixes in Clojure normal state:
-`>>` and `<<` are rebound, but `>` and `<` with other motions (such as `>ip`)
-are unavailable there. nvim-paredit's `>p` / `<p` (drag pairs) is not mirrored.
+`d`, `c`, `y`, `x` and `D` keep parens balanced. Because `<` and `>` slurp and
+barf, `>>`, `<<` and `>ip` don't indent in Clojure buffers; formatting (`SPC f`)
+covers indentation. cleverparens' `[` / `]` paren motions are unbound so
+`]c` / `[c` and Doom's other bracket pairs keep working; `s` / `S` stay
+evil-snipe's.
 
 ## Firmware interactions
 
