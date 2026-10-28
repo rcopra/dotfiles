@@ -85,7 +85,8 @@ if [[ ! -d "$HOME/.config/emacs" ]]; then
 fi
 
 echo "==> Installing fonts..."
-brew install --cask font-jetbrains-mono-nerd-font
+brew install --cask font-meslo-lg-nerd-font
+brew install --cask font-fira-code-nerd-font
 brew install --cask font-symbols-only-nerd-font
 
 echo "==> Package installation complete!"
