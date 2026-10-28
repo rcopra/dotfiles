@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+# ThePrimeagen-style project picker for Rex: one session per project, named
+# after its directory. Shows the existing session or creates it.
+
+extra_dirs=(
+    ~/.config/nvim
+    ~/.local/share/chezmoi
+)
+
+if [[ $# -eq 1 ]]; then
+    selected=$1
+else
+    selected=$({
+        find ~/work ~/personal -mindepth 1 -maxdepth 1 -type d 2>/dev/null
+        printf '%s\n' "${extra_dirs[@]}"
+    } | fzf)
+fi
+
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+selected=$(cd "$selected" 2>/dev/null && pwd -P) || {
+    echo "not a directory: $selected" >&2
+    exit 1
+}
+selected_name=$(basename "$selected")
+
+session_id=$(rex ls --json | jq -r --arg name "$selected_name" \
+    'first(.sessions[] | select(.label == $name) | .session_id) // empty')
+if [[ -z $session_id ]]; then
+    session_id=$(rex new "$selected_name" -c "$selected" --json | jq -er '.session_id') || exit 1
+fi
+
+rex do session.select session_id="$session_id"

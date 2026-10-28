@@ -57,13 +57,12 @@ workspaces above those. Prefer consistent directional actions across tools.
 | Scope / intent | Current chord | Handler / meaning |
 | --- | --- | --- |
 | Shell text movement | Ctrl+Left/Right | Zsh backward/forward word |
-| Terminal pane / editor split focus | Alt+arrows | Ghostty passes through; Herdr and Neovim coordinate focus across split edges (herdr-splits) |
+| Terminal pane / editor split focus | Cmd+Alt+arrows | Rex's default chord; in a Neovim pane Rex forwards Alt+arrow and smart-splits hands back at an edge (smart-splits-backend-rex). Herdr and tmux keep Alt+arrows |
 | Doom Emacs window / workspace focus | Alt+arrows; Alt+Shift+Left/Right; Alt+1–9 | Normal state only. GUI Emacs, so no multiplexer handoff; leave it with Hyper-3+N/E/U/I |
-| Terminal tab (Herdr tab) focus | Alt+Shift+Left/Right; Alt+1–9 | Previous/next tab; select numbered tab |
-| Agent pane focus | Cmd+Option+Up/Down | Herdr previous/next agent |
-| Terminal workspace focus | Alt+Shift+Up/Down | Herdr previous/next workspace; Ctrl+Alt+Up/Down remains an alias (and the tmux session chord) |
-| Project / workspace picker | Ctrl+f at shell; Alt+Shift+s in Herdr | Project picker (`herdr-sessionizer`); Alt+s opens Herdr's goto |
-| Terminal pane resize | Ctrl+a, then arrows | Herdr prefix followed by a direction |
+| Terminal tab focus | Ctrl+Tab / Ctrl+Shift+Tab; Alt+Shift+Left/Right | Rex next/previous tab (default, and an added alias); Cmd+1–9 reaches Rex only with Right Cmd because OmniWM takes Left Cmd+digits |
+| Terminal session focus | Alt+Shift+Up/Down; Cmd+K picker | Rex previous/next session (added) and session switcher (default) |
+| Project / session picker | Ctrl+f at shell; Alt+Shift+s in Rex | Project picker (`rex-sessionizer`), floating in Rex; outside Rex, Ctrl+f runs `herdr-sessionizer` |
+| Terminal pane resize | Drag dividers | Rex has no default resize chord and none is added |
 | Desktop window focus | Hyper-3+N/E/U/I | OmniWM left/down/up/right; Alt+Tab focuses the previous window |
 | Desktop window move | Hyper-3+Shift+N/E/U/I | OmniWM moves in the corresponding direction |
 | Desktop workspace focus / move | Cmd+1–9 / Cmd+Shift+1–9 | OmniWM switches workspace / sends the window there |
@@ -88,13 +87,18 @@ reach on QWERTY; retain that tradeoff in planning.
   `home/dot_config/private_karabiner/karabiner.json` and
   `home/dot_config/omniwm/settings.toml`; also check relevant macOS/app global
   shortcuts when assessing collisions.
-- Terminal and shell: `home/dot_config/ghostty/config`, `home/dot_zshrc`, and
-  `home/dot_config/herdr/config.toml`. The current repo workflow is Ghostty +
-  Herdr. tmux (`home/dot_tmux.conf`) stays installed as a fallback with the same
-  chords; check the active multiplexer when diagnosing behavior.
+- Terminal and shell: `home/dot_config/rex/init.lua`, `home/dot_zshrc`, and
+  `home/dot_config/ghostty/config` + `home/dot_config/herdr/config.toml`. The
+  current repo workflow is Rex, which adds a few chords on top of its built-in
+  shortcuts and overrides none. Its defaults aren't documented; `rex keymap`
+  lists only the config file's bindings, and the app's resolved keymap is cached
+  in `~/Library/Caches/com.superlogical.rex/Keymap/`. Ghostty + Herdr and tmux
+  (`home/dot_tmux.conf`) stay installed; check the active multiplexer when
+  diagnosing behavior.
 - Editor split handoff: `~/.config/nvim/lua/custom/plugins/splits.lua`, managed
   outside this repo; it uses herdr-splits.nvim inside Herdr and smart-splits.nvim
-  elsewhere. Fallback tmux actions are in `docs/tmux-cheatsheet.md`.
+  v3 elsewhere, with the tmux and Rex backends. Rex's `init.lua` loads the Rex
+  half of the backend from Neovim's vim.pack directory. Fallback tmux actions are in `docs/tmux-cheatsheet.md`.
 - Doom Emacs (GUI, for Clojure): `home/dot_config/doom/config.el` holds the
   keymaps. Doom core in `~/.config/emacs` is an unmanaged clone. The config is
   a thin layer over Doom defaults (modelled on Eric Dallo's) with lsp-mode,

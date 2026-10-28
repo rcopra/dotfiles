@@ -194,7 +194,11 @@ source /opt/homebrew/share/powerlevel10k/powerlevel10k.zsh-theme
 # Herdr Sessionizer
 # ==============================================================================
 # Bind Ctrl+f at the shell prompt for quick project workspace navigation.
-bindkey -s '^f' '~/bin/herdr-sessionizer\n'
+if [[ -n $REX_SESSION ]]; then
+  bindkey -s '^f' '~/bin/rex-sessionizer\n'
+else
+  bindkey -s '^f' '~/bin/herdr-sessionizer\n'
+fi
 
 # ==============================================================================
 # Aliases & Local Config

@@ -1,6 +1,6 @@
 # Keybinding inventory
 
-Checked 2026-09-10; multiplexer sections updated 2026-10-20 for Herdr. This reference includes the source cleanup below; deployment
+Checked 2026-09-10; multiplexer sections updated 2026-10-20 for Herdr and 2026-10-28 for Rex. This reference includes the source cleanup below; deployment
 status is recorded separately. It covers explicit bindings in this dotfiles repo, the separately
 managed Neovim configuration, and the D50 firmware's cross-application bindings.
 Application and plugin defaults are identified separately, not exhaustively
@@ -15,7 +15,7 @@ reproduced. This is not an inventory of every GUI application's preferences.
 | Desktop | [OmniWM](../home/dot_config/omniwm/settings.toml) | Workspaces, windows, columns, monitors |
 | Application launch | [Hammerspoon](../home/dot_hammerspoon/init.lua) | Launch/focus applications, new application windows |
 | Terminal | [Ghostty](../home/dot_config/ghostty/config) | macOS chords and terminal translation |
-| Multiplexer | [Herdr](../home/dot_config/herdr/config.toml); [tmux](../home/dot_tmux.conf) as fallback | Projects/workspaces, tabs, panes, agents |
+| Multiplexer | [Rex](../home/dot_config/rex/init.lua); [Herdr](../home/dot_config/herdr/config.toml) and [tmux](../home/dot_tmux.conf) still configured | Projects/sessions, tabs, panes |
 | Shell | [zsh](../home/dot_zshrc), [aliases](../home/dot_aliases) | Prompt editing, history, fuzzy pickers |
 | Editor | `~/.config/nvim/init.lua`, `lua/custom/plugins/`, `lua/kickstart/plugins/` | Editing, search, Git, tests, debugging |
 | Clojure editor | [Doom Emacs](../home/dot_config/doom/config.el) (GUI) | Clojure REPL work; mirrors Neovim for shared actions, Doom's `,` localleader for Clojure |
@@ -176,9 +176,46 @@ Inherited Ghostty bindings relevant to ownership, verified with
 This leaves two tab systems available: Ghostty tabs and Herdr tabs. The
 current project workflow uses Herdr tabs.
 
+## Rex
+
+Rex is the active multiplexer. [`init.lua`](../home/dot_config/rex/init.lua)
+adds chords on top of Rex's built-in shortcuts and overrides none of them.
+`rex config check` validates it; `rex keymap` lists what it loaded. Sessions
+hold tabs, which hold panes.
+
+Added in `init.lua`:
+
+| Shortcut | Action |
+| --- | --- |
+| Cmd+Alt+arrows | Focus pane; in Neovim, forwards Alt+arrow to smart-splits (smart-splits-backend-rex), which hands back at an edge |
+| Alt+Shift+Left/Right | Previous/next tab |
+| Alt+Shift+Up/Down | Previous/next session |
+| Alt+Shift+s | Project picker in a floating pane (`rex-sessionizer`) |
+
+Rex defaults in use (not reproduced exhaustively):
+
+| Shortcut | Action |
+| --- | --- |
+| Ctrl+Tab / Ctrl+Shift+Tab; Cmd+Shift+] / [ | Next/previous tab |
+| Cmd+T / Cmd+Alt+W | New tab / close tab |
+| Cmd+1–9 | Select tab (Right Cmd only; OmniWM owns Left Cmd+digits) |
+| Ctrl+Shift+PageUp/PageDown | Move tab |
+| Cmd+D / Cmd+Shift+D | Split right / down |
+| Cmd+Shift+arrows | Split in that direction |
+| Cmd+Alt+Shift+arrows | Move pane |
+| Cmd+] / Cmd+[ | Next/previous pane |
+| Cmd+Shift+Enter / Cmd+Alt+Enter | Zoom / float pane |
+| Cmd+W | Close pane |
+| Cmd+K / Cmd+Shift+N | Session picker / new session |
+| Cmd+Shift+P | Command palette |
+| Cmd+Left/Right, Cmd+Backspace | Send Ctrl+a / Ctrl+e / Ctrl+u |
+| Alt+Left/Right | Send Alt+b / Alt+f |
+
+Pane resize is by dragging dividers.
+
 ## Herdr
 
-Herdr is the active multiplexer. This lists every explicit binding in
+Herdr stays configured but is no longer the active multiplexer. This lists every explicit binding in
 [`config.toml`](../home/dot_config/herdr/config.toml); `herdr config check`
 validates it. Direct bindings are intercepted before the shell/editor; prefix
 bindings apply after P.
@@ -266,7 +303,7 @@ Zsh selects Emacs editing mode, then applies these custom bindings:
 | Ctrl+Left/Right | Backward/forward word |
 | Alt+w | Forward word; Colemak neighbor alias for Alt+f |
 | Up/Down | History substring search up/down |
-| Ctrl+f | Insert `~/bin/herdr-sessionizer` plus newline via `bindkey -s` |
+| Ctrl+f | Insert `~/bin/rex-sessionizer` (inside Rex) or `~/bin/herdr-sessionizer` plus newline via `bindkey -s` |
 
 Ctrl+f is a string macro, not a ZLE widget that saves/clears the current editing
 buffer. Its interaction with a partially typed command deserves checking before
@@ -293,7 +330,7 @@ is **not loaded**; the active Gitsigns mappings are in `init.lua`.
 | Esc | N | Clear search highlight |
 | Esc Esc | T | Exit terminal mode |
 | Ctrl+h/j/k/l | N | Focus Neovim split left/down/up/right |
-| Alt+arrows | N | Split navigation with edge handoff: herdr-splits in Herdr, smart-splits in tmux |
+| Alt+arrows | N | Split navigation with edge handoff: herdr-splits in Herdr, smart-splits v3 in tmux and Rex (Rex sends these for Cmd+Alt+arrows) |
 | Ctrl+d/u or PageDown/PageUp | N | Half-page down/up and center |
 | Leader cp | N | Copy relative file path |
 | Leader q | N | Diagnostics location list (description calls it quickfix) |
