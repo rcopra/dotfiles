@@ -21,6 +21,12 @@ for key, application in pairs(applications) do
 	end)
 end
 
+-- Hyper-R focuses Rex, launching it if needed. The bundle ID survives the
+-- app's "Rex Beta" name changing.
+hs.hotkey.bind(hyper, "r", function()
+	hs.application.launchOrFocusByBundleID("com.superlogical.rex")
+end)
+
 -- Safari opens a new window in its existing process.
 hs.hotkey.bind(hyper, "w", function()
 	local safari = hs.application.get("Safari")
