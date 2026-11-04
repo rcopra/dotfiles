@@ -289,6 +289,11 @@ assignToWorkspace = "2"
 bundleId = "org.gnu.Emacs"
 id = "95C9C9D4-5817-4C94-8194-5347BDF7A456"
 
+[[appRules]]
+assignToWorkspace = "3"
+bundleId = "com.superlogical.rex"
+id = "0F99FCB8-5312-47ED-A8F3-C5B136ACDD1E"
+
 [[hotkeys]]
 binding = "Unassigned"
 id = "toggleScratchpad.1"
@@ -1095,7 +1100,7 @@ type = "main"
 
 [[workspaces]]
 id = "248AA883-2261-4D45-943C-79C0E46A232B"
-layoutType = "dwindle"
+layoutType = "niri"
 name = "4"
 
 [workspaces.monitorAssignment]
