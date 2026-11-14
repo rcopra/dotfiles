@@ -1,0 +1,3 @@
+profile = "default"
+
+profiles.default.trailing = ["menu-icons", "media", "notifications", "volume", "wifi", "battery-details", "control-center", "system-stats", "clock"]

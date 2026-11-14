@@ -68,6 +68,7 @@ workspaces above those. Prefer consistent directional actions across tools.
 | Desktop workspace focus / move | Cmd+1–9 / Cmd+Shift+1–9 | OmniWM switches workspace / sends the window there |
 | Desktop monitor focus | Hyper-3+M | OmniWM focuses the next monitor |
 | New terminal window | Hyper-3+Enter | Hammerspoon opens a Ghostty window, launching Ghostty if needed |
+| Menu-bar icons drawer | Hyper-3+H | OmniWM Hidden Bar drawer; the same icons sit inline in the workspace bar (`menu-icons` widget) because the bar overlays the menu bar |
 
 Alt means macOS Option; Ghostty is configured to send Option as Alt. Desktop
 shortcuts can intercept application bindings (for example Cmd+digits), so check
